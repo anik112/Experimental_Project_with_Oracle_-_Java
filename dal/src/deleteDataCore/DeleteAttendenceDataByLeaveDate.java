@@ -13,7 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -58,13 +60,13 @@ public class DeleteAttendenceDataByLeaveDate {
                 userInfo.add(user);
             }
             
-            JOptionPane.showMessageDialog(null, "Data Initialize Successful" ,
+            JOptionPane.showMessageDialog(null, "Data Initialazation Successful" ,
                     ":: Successful Init :: ", JOptionPane.INFORMATION_MESSAGE);
             
             //System.out.println("=== Length: " + count + " ===");
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Data Not Initialize, DeleteAttendenceDataByLeaveDate.getAllLeaveEmployee()",
-                    ":: SQL Error :: ", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getClass() + " :: Code: " + e.getErrorCode(),
+                    ":: Application Error :: ", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
@@ -123,9 +125,8 @@ public class DeleteAttendenceDataByLeaveDate {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Data Not Delete, "
-                    + "DeleteAttendenceDataByLeaveDate.deleteAttendenceOfLeaveEmployee()",
-                    ":: SQL Error :: ", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getClass() + " :: Massage: Data not Delete",
+                    ":: Application Error :: ", JOptionPane.INFORMATION_MESSAGE);
         }
         
         JOptionPane.showMessageDialog(null, "Data Delete == Successful" ,

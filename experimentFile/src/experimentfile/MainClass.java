@@ -5,22 +5,24 @@
  */
 package experimentfile;
 
-import deleteDataCore.DeleteAttendenceDataByLeaveDate;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  *
  * @author VSIANIK
  */
-public class MainClass {
+public class MainClass extends Application{
     
     public static void main(String[] args) throws Throwable {
-        
-//        deleteDataCore.DeleteAttendenceDataByLeaveDate delAttData=new DeleteAttendenceDataByLeaveDate();
-//        
-//        delAttData.getAllLeaveEmployee(2019,"January");
-//        delAttData.deleteAttendeceOfLeaveEmployee();
-        
-        new deleteDataView.DeleteAttendenceOfLeaveEmp().setVisible(true);
+        Application.launch(args);
     }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+       new deleteDataView.DeleteAttendenceOfLeaveEmp().setVisible(true);
+    }
+    
+    
     
 }
