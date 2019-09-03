@@ -24,8 +24,9 @@ public class OraDbConnection {
             //System.out.println("::: It's Works ---> Oracle :::");
             return connOra;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null," Please Check Database and User Name/Password",
-                    ":: Connection Error :: ", JOptionPane.INFORMATION_MESSAGE);
+//            JOptionPane.showMessageDialog(null," Please Check Database and User Name/Password",
+//                    ":: Connection Error :: ", JOptionPane.INFORMATION_MESSAGE);
+            e.printStackTrace();
         }
         
         return null;
