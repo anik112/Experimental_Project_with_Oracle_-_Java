@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="daleteAttendenceData.jnlp">
+  <information>
+    <title>daleteAttendenceData</title>
+    <vendor>VSIANIK</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="daleteAttendenceData.jar" size="10102" download="eager" />
+    <jar href="lib\ojdbc6.jar" size="2739670" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="deleteAttendenceData.MainClass"  name="daleteAttendenceData" />
+  <update check="always"/>
+</jnlp>
