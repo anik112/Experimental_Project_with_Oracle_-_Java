@@ -40,34 +40,37 @@ public class OtHoursDuct {
         int temp = 1;
         str = 0;
         end = 200;
-        dataConnect = databaseConnection.OraDbConnection.connection();
 
         System.out.println("data ==========>" + modelData.size());
         if (ductAmountOfHours > 0) {
+            OtHoursDuctModelLib otLib = new OtHoursDuctModelLib();
             // this loop control data limit
             outerLoop:
             while (temp != 0) {
-                OtHoursDuctModelLib otLib = new OtHoursDuctModelLib();
+                try {
+                    dataConnect = databaseConnection.OraDbConnection.connection();
+                    //  this loop control single person data
+                    for (int i = str; i < end; i++) {
+                        System.out.println("==================================================== " + i + " cardno: "
+                                + modelData.get(i).getCardno());
 
-                //  this loop control single person data
-                for (int i = str; i < end; i++) {
+                        otLib.updateAttendence(ductAmountOfHours, finYear, finMonth, modelData.get(i).getCardno(), dataConnect);
 
-                    otLib.updateAttendence(ductAmountOfHours, finYear, finMonth, modelData.get(i).getCardno(), dataConnect);
-
-                    if (i == (modelData.size() - 1)) {
-                        break outerLoop;
+                        if (i == (modelData.size() - 1)) {
+                            break outerLoop;
+                        }
                     }
+                    str = end;
+                    end += 200;
+                    dataConnect.close();
 
-                    System.out.println("========================================== " + i + " cardno: "
-                            + modelData.get(i).getCardno());
-
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-                str = end;
-                end += 200;
             }
         }
 
-        JOptionPane.showMessageDialog(null, " Data Process Successfully ",
+        JOptionPane.showMessageDialog(null, " Ot " + ductAmountOfHours + " Hours Dusuction Successfully ",
                 ":: Successfull :: ", JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -75,9 +78,10 @@ public class OtHoursDuct {
      * This method store card no from database using section name filter
      *
      * @param sectionNm
+     * @param lineNo
      * @exception sql exception
      */
-    public void setData(String sectionNm) {
+    public void setData(String sectionNm, String lineNo) {
         try {
 
             ResultSet rs = null;
@@ -85,8 +89,9 @@ public class OtHoursDuct {
 
             PreparedStatement statement = dataConnect.prepareStatement(""
                     + "SELECT CARDNO,SECRETENO,EMPID FROM TB_PERSONAL_INFO "
-                    + "WHERE OTORG='Y' AND ACTIVE=0 AND SECTIONNM=?");
+                    + "WHERE OTORG='Y' AND ACTIVE=0 AND SECTIONNM=? AND LINENO=?");
             statement.setString(1, sectionNm);
+            statement.setString(2, lineNo);
             rs = statement.executeQuery();
             int count = 0;
             try {
@@ -133,6 +138,26 @@ public class OtHoursDuct {
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, " No Section In Database",
+                    ":: Class: OtHoursDuct :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+        return null;
+    }
+
+    /**
+     * This method helps us to get all section name from database and push
+     * result in view class.
+     *
+     * @return set of section name
+     */
+    public ResultSet getLineNo() {
+        try {
+            dataConnect = OraDbConnection.connection();
+            PreparedStatement statement = dataConnect.prepareStatement("SELECT DISTINCT LINENO FROM TB_PERSONAL_INFO");
+            ResultSet rs = statement.executeQuery();
+            return rs;
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, " No Line no In Database",
                     ":: Class: OtHoursDuct :: ", JOptionPane.INFORMATION_MESSAGE);
         }
         return null;
