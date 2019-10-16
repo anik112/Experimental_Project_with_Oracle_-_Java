@@ -59,7 +59,7 @@ public class ConverterView extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
-        txtToDate.setToolTipText("flowing the date format");
+        txtToDate.setToolTipText("Type Date & Press Enter");
         txtToDate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtToDateFocusGained(evt);
@@ -82,7 +82,7 @@ public class ConverterView extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Start Date:");
 
-        txtFromDate.setToolTipText("flowing the date format");
+        txtFromDate.setToolTipText("Type Date & Press Enter");
         txtFromDate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtFromDateFocusGained(evt);
@@ -171,12 +171,25 @@ public class ConverterView extends javax.swing.JFrame {
                 txtDeleteDayActionPerformed(evt);
             }
         });
+        txtDeleteDay.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDeleteDayKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDeleteDayKeyTyped(evt);
+            }
+        });
 
         txtDeleteMonth.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtDeleteMonth.setToolTipText("00");
         txtDeleteMonth.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDeleteMonthActionPerformed(evt);
+            }
+        });
+        txtDeleteMonth.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDeleteMonthKeyTyped(evt);
             }
         });
 
@@ -263,18 +276,18 @@ public class ConverterView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtFromDate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtFromDate))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtToDate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtToDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                         .addComponent(lblMsg)
                         .addGap(0, 0, 0)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnProcessStart, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -371,7 +384,7 @@ public class ConverterView extends javax.swing.JFrame {
             new ConverterCore().txtConverter(txtFromDate.getText(), txtToDate.getText());
         } else {
             JOptionPane.showMessageDialog(null, "Date Format Not Match",
-                ":: Date Error :: ", JOptionPane.INFORMATION_MESSAGE);
+                    ":: Date Error :: ", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnProcessStartActionPerformed
 
@@ -389,13 +402,31 @@ public class ConverterView extends javax.swing.JFrame {
 
     private void btnDeleteAttendenceDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAttendenceDataActionPerformed
         // TODO add your handling code here:
-        
-       String date=txtDeleteMonth.getText()+"/"+txtDeleteDay.getText()+"/"+txtDeleteYear.getText();
-        System.out.println(date+" "+date.length());
-       DataDelete core=new DataDelete();
-       core.deleteAttendenceDataInAccessDb(date);
-        
+
+        String date = txtDeleteMonth.getText() + "/" + txtDeleteDay.getText() + "/" + txtDeleteYear.getText();
+        System.out.println(date + " " + date.length());
+        DataDelete core = new DataDelete();
+        core.deleteAttendenceDataInAccessDb(date);
+
     }//GEN-LAST:event_btnDeleteAttendenceDataActionPerformed
+
+    private void txtDeleteDayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDeleteDayKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDeleteDayKeyPressed
+
+    private void txtDeleteDayKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDeleteDayKeyTyped
+        // TODO add your handling code here:
+        if (txtDeleteDay.getText().length() == 1) {
+            txtDeleteMonth.requestFocus();
+        }
+    }//GEN-LAST:event_txtDeleteDayKeyTyped
+
+    private void txtDeleteMonthKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDeleteMonthKeyTyped
+        // TODO add your handling code here:
+        if (txtDeleteMonth.getText().length() == 1) {
+            txtDeleteYear.requestFocus();
+        }
+    }//GEN-LAST:event_txtDeleteMonthKeyTyped
 
     /**
      * @param args the command line arguments
