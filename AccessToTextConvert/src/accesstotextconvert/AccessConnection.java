@@ -7,6 +7,7 @@ package accesstotextconvert;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,14 +21,18 @@ public class AccessConnection {
 
         try {
             //C:\\Users\\carev\\Desktop 
+            //C:\\Users\\carev\\Documents 
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            connAccess = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\carev\\Documents\\att20000.mdb");
+            connAccess = DriverManager.getConnection("jdbc:ucanaccess://D:\\ZKT\\att2000.mdb");
 
             System.out.println("== Connected ==");
             return connAccess;
 
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(
+                    null, e.getMessage(),
+                    ":: Connection Error :: ", JOptionPane.INFORMATION_MESSAGE);
         }
 
         return null;

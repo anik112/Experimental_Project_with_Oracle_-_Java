@@ -59,6 +59,7 @@ public class ConverterView extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
+        txtToDate.setToolTipText("flowing the date format");
         txtToDate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtToDateFocusGained(evt);
@@ -81,6 +82,7 @@ public class ConverterView extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Start Date:");
 
+        txtFromDate.setToolTipText("flowing the date format");
         txtFromDate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtFromDateFocusGained(evt);
@@ -92,10 +94,10 @@ public class ConverterView extends javax.swing.JFrame {
             }
         });
         txtFromDate.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 txtFromDateInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         txtFromDate.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -133,7 +135,7 @@ public class ConverterView extends javax.swing.JFrame {
         jLabel5.setText("Vistasoft IT Bangladesh Ltd.");
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Delete Date:");
+        jLabel6.setText("Date:");
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -163,7 +165,7 @@ public class ConverterView extends javax.swing.JFrame {
         jLabel9.setText("YYYY");
 
         txtDeleteDay.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtDeleteDay.setToolTipText("");
+        txtDeleteDay.setToolTipText("00");
         txtDeleteDay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDeleteDayActionPerformed(evt);
@@ -171,6 +173,7 @@ public class ConverterView extends javax.swing.JFrame {
         });
 
         txtDeleteMonth.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDeleteMonth.setToolTipText("00");
         txtDeleteMonth.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDeleteMonthActionPerformed(evt);
@@ -178,6 +181,7 @@ public class ConverterView extends javax.swing.JFrame {
         });
 
         txtDeleteYear.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDeleteYear.setToolTipText("0000");
         txtDeleteYear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDeleteYearActionPerformed(evt);
