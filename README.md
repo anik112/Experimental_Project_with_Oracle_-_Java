@@ -2,4 +2,4 @@
 Try to solve some payroll problem in java ( Office Work )
 
 
-There have all Java work which done with Vistasoft IT bangladesh.
+There have all Java work which done with Vistasoft IT bangladesh Ltd.
