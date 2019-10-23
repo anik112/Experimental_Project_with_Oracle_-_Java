@@ -22,17 +22,19 @@ import javax.swing.JOptionPane;
  * @author VSI-ANIK
  */
 public class ConverterCore {
+    
+    private int rowCount=0;
+    private int maxSize=0;
 
     //005:0001090025:20190918:074957:BLANK !!:11
     //"00"+STRING(NODE_NO)+":"+CARD_NO+":"+D_CARD+":"+T_CARD+":"+"BLANK !!"+":"+"11"
     public void txtConverter(String fromDate, String toDate) {
-
+        
         Connection getConn = AccessConnection.dbConnection(); // get connection from access database
         Random random = new Random(); // generat random number
         String filePath = "D:\\DATA\\"; // file location
         String dateForFileName = toDate.replace("/", ""); // resize date
         String fileName = dateForFileName + random.nextInt(9) + ".txt"; // file name
-        int rowCount = 0; // count row
         
         // get data from access database
         try {
@@ -50,6 +52,9 @@ public class ConverterCore {
             try {
                 FileWriter fileWriter = new FileWriter(filePath + fileName); // call fileWriter for get file or create file in system
                 PrintWriter printWriter = new PrintWriter(fileWriter); // call printWriter for write text in file
+                
+                maxSize=rs.getRow();
+                
                 // loop for push data in txt file
                 while (rs.next()) {
                     Date date = rs.getTimestamp(1); // get date/time form result sheet
@@ -64,14 +69,15 @@ public class ConverterCore {
                     System.out.println(onlyTime);
                     
                     // Make string format
-                    String finalText = (rs.getString(2) + ":" + rs.getString(3) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
+                    String finalText = (rs.getString(2) + ":00" + rs.getString(4) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
                     printWriter.println(finalText); // write text in file
 
-                    System.out.println(rs.getString(2) + ":" + rs.getString(3) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
+                    System.out.println(rs.getString(2) + ":" + rs.getString(4) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
                     rowCount++; // row count
                 }
                 printWriter.close(); // close
                 fileWriter.close(); // close
+                
 
                 JOptionPane.showMessageDialog(
                         null, rowCount + " Data Sucessfully Generate ",
@@ -89,6 +95,24 @@ public class ConverterCore {
                     ":: SQL Error :: ", JOptionPane.INFORMATION_MESSAGE);
         } 
     }
+
+    public int getRowCount() {
+        return rowCount;
+    }
+
+    public void setRowCount(int rowCount) {
+        this.rowCount = rowCount;
+    }
+
+    public int getMaxSize() {
+        return maxSize;
+    }
+
+    public void setMaxSize(int maxSize) {
+        this.maxSize = maxSize;
+    }
+    
+    
 
 
 }
