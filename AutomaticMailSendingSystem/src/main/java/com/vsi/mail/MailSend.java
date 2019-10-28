@@ -5,6 +5,9 @@
  */
 package com.vsi.mail;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -26,56 +29,133 @@ import javax.mail.internet.MimeMultipart;
  */
 public class MailSend {
 
+    /**
+     * Set user Mail & Password.
+     * note: please ensure that your mail account security events must be
+     * active [ Access allowed for less secure apps ]
+     * 
+     * for active this option you go to your google account then
+     * goto => security then
+     * goto => Recent security events then
+     * goto => Less secure app access
+     *         See in down [ Turn on it ].
+     * Otherwise you can get a error is
+     * [ javax.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. ]
+     */
     private static final String username = "engr.mahitul.cse1@gmail.com";
     private static final String password = "VSI_19@12";
+    private static final String reciverMailAddress="care.vistasoft@gmail.com";
 
-    public static void main(String[] args) {
-
+    // Main Function throws InterruptedException
+    public static void main(String[] args) throws InterruptedException {
+        
+        /**
+         * Properties class helps us to set properties of mail server
+         * like as mail STMP server name "smtp.gmail.com"
+         * like as mail STMP server port number "587"
+         * like as active mail STMP server authentication system
+         * like as active TLS.
+         */
         Properties props = new Properties();
-        props.put("mail.smtp.auth", true);
-        props.put("mail.smtp.starttls.enable", true);
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
-
-        Session session = Session.getInstance(props,
+        props.put("mail.smtp.auth", true); // put server authentication system active
+        props.put("mail.smtp.starttls.enable", true); // put Transport Layer Security active
+        props.put("mail.smtp.host", "smtp.gmail.com"); // put STMP server host address
+        props.put("mail.smtp.port", "587"); // put STMP server port number
+        
+        /**
+         * Session object helps us connection with java mail API
+         * and it provide mail configuration setting and authentication.
+         * 
+         * getInstance(Properties,Authentication)
+         * this method helps us to get user_defied mail session and
+         * authentication.
+         */
+        Session session = Session.getInstance(
+                props, // set mail propertices
+                // get aunthenticator object
                 new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
+                /**
+                 * Override getPasswordAuthentication() method and
+                 * we put our mail address with password for get
+                 * Authentication from mail server.
+                 */
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
         });
+        
+        String folderPath="D:\\MailSendingFile\\"; // write file folder path
+        File connectFolder = new File(folderPath); // connect with folder location
+        File[] fileList = connectFolder.listFiles(); // get file list from folder.
+        // date formater for format the date using given format 
+        SimpleDateFormat format = new SimpleDateFormat("MMddyyyy");
+        // get system current date
+        Date date = new Date(System.currentTimeMillis());
+        // formated curren date
+        String systemDate = format.format(date);
+        System.out.println("System Date: " + systemDate);
+        
+        /**
+         * This loop check file name and try to match file
+         * modified date with system date.
+         * 
+         * loop will working until find match file or end of file list.
+         */
+        for (File singleFile : fileList) {
+            // get selected file modified date
+            date = new Date(singleFile.lastModified());
+            // format the file modefied date
+            String fileModifiedDate = format.format(date);
+            System.out.println("File Date: " + fileModifiedDate);
+            
+            /**
+             * Check weather for match any file with current date.
+             * if any file match with current date then send mail.
+             */
+            if (systemDate.equals(fileModifiedDate)) {
+                // Make file name with location
+                String fileName=singleFile.getName();
+                System.out.println("Found File Name Is: "+fileName);
+                try {
+                    // create a message box
+                    Message message = new MimeMessage(session);
+                    // set sender mail address
+                    message.setFrom(new InternetAddress(username));
+                    // set reciver mail address
+                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(reciverMailAddress));
+                    // set the subject of mail
+                    message.setSubject("Testing Subject");
+                    // set the mail body text
+                    message.setText("PFA");
+                    
+                    MimeBodyPart messageBodyPart = new MimeBodyPart();
+                    Multipart multipart = new MimeMultipart();
 
-        try {
+                    messageBodyPart = new MimeBodyPart();
+                    String filePath = folderPath+fileName;
+                    DataSource source = new FileDataSource(filePath);
+                    messageBodyPart.setDataHandler(new DataHandler(source));
+                    messageBodyPart.setFileName(fileName);
+                    multipart.addBodyPart(messageBodyPart);
 
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("engr.mahitul.cse1@gmail.com"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("care.vistasoft@gmail.com"));
-            message.setSubject("Testing Subject");
-            message.setText("PFA");
+                    message.setContent(multipart);
 
-            MimeBodyPart messageBodyPart = new MimeBodyPart();
+                    System.out.println("Sending");
 
-            Multipart multipart = new MimeMultipart();
+                    Transport.send(message);
 
-            messageBodyPart = new MimeBodyPart();
-            String file = "C:\\Users\\carev\\Desktop\\font.png";
-            String fileName = "font.png";
-            DataSource source = new FileDataSource(file);
-            messageBodyPart.setDataHandler(new DataHandler(source));
-            messageBodyPart.setFileName(fileName);
-            multipart.addBodyPart(messageBodyPart);
-
-            message.setContent(multipart);
-
-            System.out.println("Sending");
-
-            Transport.send(message);
-
-            System.out.println("Done");
-
-        } catch (MessagingException e) {
-            e.printStackTrace();
+                    System.out.println("Done");
+                    
+                    singleFile.deleteOnExit();
+                    break;
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+            }else{
+                System.out.println("No data in today.");
+            }
         }
-
     }
 
 }
