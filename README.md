@@ -7,7 +7,7 @@ There have all Java work which done with Vistasoft IT bangladesh Ltd.
 
 ### Run jar file using CMD
 Open CMD and type
->java -jar location\[file-name].jar
+>java -jar location/[file-name].jar
 
 > if you want to run your jar file using exe file here i write some C code which help's
 to run jar file using cmd mode.
