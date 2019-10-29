@@ -16,12 +16,12 @@ to run jar file using cmd mode.
 #include<windows.h> // call header file
 // main function
 int main(){
-  	HWND window; // call window object
-	AllocConsole(); // find console
-	window = FindWindowA("ConsoleWindowClass", NULL); // get current console
-	ShowWindow(window, 0); // hide console
-  	// run jar file using CMD
-	system("java -jar DeleteTrcFileFromOracleDatabase.jar");
+  HWND window; // call window object
+  AllocConsole(); // find console
+  window = FindWindowA("ConsoleWindowClass", NULL); // get current console
+  ShowWindow(window, 0); // hide console
+  // run jar file using CMD
+  system("java -jar DeleteTrcFileFromOracleDatabase.jar");
   return 0; // return
 }
 ```
