@@ -13,18 +13,18 @@ Open CMD and type
 to run jar file using cmd mode.
 
 <code>
-#include<windows.h> // call header file
-// main function
-int main(){
-  HWND window; // call window object
-	AllocConsole(); // find console
-	window = FindWindowA("ConsoleWindowClass", NULL); // get current console
-	ShowWindow(window, 0); // hide console
-  // run jar file using CMD
-	system("java -jar DeleteTrcFileFromOracleDatabase.jar");
-  return 0; // return
-}
+#include<windows.h> // call header file\n
+// main function\n
+int main(){\n
+  	HWND window; // call window object\n
+	AllocConsole(); // find console\n
+	window = FindWindowA("ConsoleWindowClass", NULL); // get current console\n
+	ShowWindow(window, 0); // hide console\n
+  	// run jar file using CMD\n
+	system("java -jar DeleteTrcFileFromOracleDatabase.jar");\n
+  return 0; // return\n
+}\n
 </code>
 
-Now you compile your program and run 
+> Now you compile your program and run 
 > myApp.exe
