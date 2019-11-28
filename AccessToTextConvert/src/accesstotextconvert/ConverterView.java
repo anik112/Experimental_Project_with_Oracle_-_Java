@@ -6,6 +6,9 @@
 package accesstotextconvert;
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +23,9 @@ public class ConverterView extends javax.swing.JFrame {
     public ConverterView() {
         initComponents();
     }
+
+    private String fromDate;
+    private String toDate;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -85,12 +91,16 @@ public class ConverterView extends javax.swing.JFrame {
         jLabel1.setText("Start Date:");
 
         txtFromDate.setToolTipText("Type Date & Press Enter");
+        txtFromDate.setSelectionEnd(10);
         txtFromDate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtFromDateFocusGained(evt);
             }
         });
         txtFromDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtFromDateMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtFromDateMouseEntered(evt);
             }
@@ -357,14 +367,16 @@ public class ConverterView extends javax.swing.JFrame {
 
     private void txtToDateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtToDateKeyPressed
         // TODO add your handling code here:
+        // if user press enter then
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-            String toDate = txtToDate.getText();
+            toDate = txtToDate.getText(); // get to date
+            // make final string
             String finToDate = toDate.substring(2, 4) + "/" + toDate.substring(0, 2) + "/" + toDate.substring(4, toDate.length());
             System.out.println(finToDate);
-            txtToDate.setText(finToDate);
+            txtToDate.setText(finToDate); // set the date
 
-            btnProcessStart.requestFocus();
+            btnProcessStart.requestFocus(); // request next work
         }
     }//GEN-LAST:event_txtToDateKeyPressed
 
@@ -382,10 +394,8 @@ public class ConverterView extends javax.swing.JFrame {
 
     private void txtFromDateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFromDateKeyPressed
         // TODO add your handling code here:
-
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-
-            String fromDate = txtFromDate.getText();
+            fromDate = txtFromDate.getText();
             String finFromDate = fromDate.substring(2, 4) + "/" + fromDate.substring(0, 2) + "/" + fromDate.substring(4, fromDate.length());
             System.out.println(finFromDate);
             txtFromDate.setText(finFromDate);
@@ -400,12 +410,19 @@ public class ConverterView extends javax.swing.JFrame {
 
     private void btnProcessStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessStartActionPerformed
         // TODO add your handling code here:
-        
-        ConverterCore converterCore=new ConverterCore();
+
+        ConverterCore converterCore = new ConverterCore();
+        String rtaFromDate = fromDate.substring(4, fromDate.length()) + fromDate.substring(2, 4) + fromDate.substring(0, 2);
+        toDate = txtToDate.getText(); // get to date
+        String rtaToDate = toDate.substring(4, toDate.length()) + toDate.substring(2, 4) + toDate.substring(0, 2);
 
         if (txtFromDate.getText().length() == 10 && txtToDate.getText().length() == 10) {
-            converterCore.txtConverter(txtFromDate.getText(), txtToDate.getText());
-           // lblProgressBar.setText(" ");
+            try {
+                converterCore.txtConverter(txtFromDate.getText(), txtToDate.getText(), rtaFromDate, rtaToDate);
+                // lblProgressBar.setText(" ");
+            } catch (IOException ex) {
+                Logger.getLogger(ConverterView.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Date Format Not Match",
                     ":: Date Error :: ", JOptionPane.INFORMATION_MESSAGE);
@@ -425,8 +442,7 @@ public class ConverterView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDeleteYearActionPerformed
 
     private void btnDeleteAttendenceDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAttendenceDataActionPerformed
-        // TODO add your handling code here:
-
+        // TODO add your handling code here:        
         String date = txtDeleteMonth.getText() + "/" + txtDeleteDay.getText() + "/" + txtDeleteYear.getText();
         System.out.println(date + " " + date.length());
         DataDelete core = new DataDelete();
@@ -454,8 +470,12 @@ public class ConverterView extends javax.swing.JFrame {
 
     private void btnProcessStartMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProcessStartMousePressed
         // TODO add your handling code here:
-       // lblProgressBar.setText("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+        // lblProgressBar.setText("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
     }//GEN-LAST:event_btnProcessStartMousePressed
+
+    private void txtFromDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFromDateMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFromDateMouseClicked
 
     /**
      * @param args the command line arguments
