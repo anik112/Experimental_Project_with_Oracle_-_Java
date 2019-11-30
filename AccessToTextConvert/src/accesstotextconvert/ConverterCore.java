@@ -55,7 +55,7 @@ public class ConverterCore {
             PreparedStatement statement = getConn.prepareStatement(sql02); // statement create
             ResultSet rs = statement.executeQuery(); // statement execute
 
-            String sql03 = "SELECT NODE_NO,CARD_NO,D_CARD,T_CARD FROM DATA_CARD WHERE D_CARD BETWEEN '20190730' AND '20190731';";
+            String sql03 = "SELECT NODE_NO,CARD_NO,D_CARD,T_CARD FROM DATA_CARD WHERE D_CARD >='"+rtaFromDate+"' AND D_CARD <='"+rtaToDate+"';";
 
             PreparedStatement rtaStatement = getRtaConn.prepareStatement(sql03); // statement create
             ResultSet rtaSet = rtaStatement.executeQuery(); // statement execute
@@ -149,4 +149,5 @@ public class ConverterCore {
 //                    + "(CHECKINOUT.CHECKTIME) between (#" + fromDate + " 7:00:00 AM#) and (#" + toDate + " 7:00:00 AM#)"
 //                    + "AND USERINFO.USERID=CHECKINOUT.USERID";
 //SELECT NODE_NO,CARD_NO,D_CARD,T_CARD FROM DATA_CARD WHERE D_CARD BETWEEN '20191126' AND '20191127';
-
+// delete from data_card where d_card between '20190101' and '20190530'
+// delete from checkinout where DateValue(checktime) BETWEEN  #01/01/2018#  AND  #12/30/2018#
