@@ -46,7 +46,7 @@ public class AccessConnection {
             //C:\\Users\\carev\\Desktop 
             //C:\\Users\\carev\\Documents 
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            connAccess = DriverManager.getConnection("jdbc:ucanaccess://D:\\RMS_A.mdb");
+            connAccess = DriverManager.getConnection("jdbc:ucanaccess://C:\\RMS\\RMS_A.mdb");
 
             System.out.println("== Connected with RMS server ==");
             return connAccess;

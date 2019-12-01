@@ -36,9 +36,6 @@ public class ConverterCore {
     //"00"+STRING(NODE_NO)+":"+CARD_NO+":"+D_CARD+":"+T_CARD+":"+"BLANK !!"+":"+"11"
     public void txtConverter(String fromDate, String toDate, String rtaFromDate, String rtaToDate) throws IOException {
 
-        Connection getConn = AccessConnection.dbConnection(); // get connection from access database
-        Connection getRtaConn = AccessConnection.dbRTAConnection(); // get RMS server connection
-
         Random random = new Random(); // generat random number
         filePath = "D:\\DATA\\"; // file location
         dateForFileName = toDate.replace("/", ""); // resize date
@@ -46,6 +43,7 @@ public class ConverterCore {
 
         // get data from access database
         try {
+            Connection getConn = AccessConnection.dbConnection(); // get connection from access database
             // write SQL for pull data from database
             String sql02 = "SELECT CHECKINOUT.CHECKTIME,CHECKINOUT.SENSORID,CHECKINOUT.USERID,USERINFO.Badgenumber "
                     + "FROM CHECKINOUT,USERINFO WHERE "
@@ -54,13 +52,14 @@ public class ConverterCore {
 
             PreparedStatement statement = getConn.prepareStatement(sql02); // statement create
             ResultSet rs = statement.executeQuery(); // statement execute
-
-            String sql03 = "SELECT NODE_NO,CARD_NO,D_CARD,T_CARD FROM DATA_CARD WHERE D_CARD >='"+rtaFromDate+"' AND D_CARD <='"+rtaToDate+"';";
-
-            PreparedStatement rtaStatement = getRtaConn.prepareStatement(sql03); // statement create
-            ResultSet rtaSet = rtaStatement.executeQuery(); // statement execute
-
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss a"); // get formatter for format date
+            
+            // ========== RMS ============
+            Connection getRtaConn = AccessConnection.dbRTAConnection(); // get RMS server connection
+            String sql03 = "SELECT NODE_NO,CARD_NO,D_CARD,T_CARD FROM DATA_CARD WHERE D_CARD >='" + rtaFromDate + "' AND D_CARD <='" + rtaToDate + "';";
+            PreparedStatement rtaStatement = getRtaConn.prepareStatement(sql03); // statement create
+            ResultSet rtaSet = rtaStatement.executeQuery(); // statement execute           
+            //System.exit(0);
 
             // wite data in txt file
             try {
@@ -92,6 +91,7 @@ public class ConverterCore {
 
                 // "00"+STRING(NODE_NO)+":"+CARD_NO+":"+D_CARD+":"+T_CARD+":"+"BLANK !!"+":"+"11"
                 while (rtaSet.next()) {
+                    System.out.println("----------- in ");
                     // Make string format
                     String finalText = ("00" + rtaSet.getString(1) + ":" + rtaSet.getString(2) + ":" + rtaSet.getString(3) + ":" + rtaSet.getString(4) + ":" + "BLANK !!:11");
                     printWriter.println(finalText); // write text in file
@@ -104,6 +104,7 @@ public class ConverterCore {
                 JOptionPane.showMessageDialog(null, "ConverterCore.java | " + e.getMessage(),
                         ":: File Error ZKT server :: ", JOptionPane.INFORMATION_MESSAGE);
             }
+
             statement.close();
             rs.close();
             getConn.close();
