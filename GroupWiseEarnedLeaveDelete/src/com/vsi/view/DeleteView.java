@@ -81,15 +81,17 @@ public class DeleteView extends javax.swing.JFrame {
         setLocation(new java.awt.Point(300, 100));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 224));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setBackground(new java.awt.Color(255, 255, 192));
+        jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 62, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Group Wise Eran Leave Delete");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
 
-        btnProcessStart.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnProcessStart.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnProcessStart.setText("Process Start");
         btnProcessStart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -102,7 +104,7 @@ public class DeleteView extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Department:");
 
@@ -122,27 +124,27 @@ public class DeleteView extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Section:");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setForeground(new java.awt.Color(255, 0, 0));
         jLabel10.setText("Vistasoft IT Bangladesh Ltd.");
 
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Year:");
 
         comboYear.setEditable(true);
 
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Month:");
 
         comboMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 192));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
         txtMOnth.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -163,23 +165,23 @@ public class DeleteView extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Type a date which date equal to leave START date OR ");
 
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("MM");
 
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("DD");
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText(" leave END date OR between Start date and End date");
 
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("YYYY");
 
@@ -191,15 +193,15 @@ public class DeleteView extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDay, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMOnth, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtMOnth, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -222,15 +224,17 @@ public class DeleteView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        lblMsg.setForeground(new java.awt.Color(0, 255, 0));
+        lblMsg.setForeground(new java.awt.Color(255, 0, 0));
         lblMsg.setText(" ");
 
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        checkBoxLaveType.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Uncheck - Earn Leave");
         jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 0)));
 
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Check - Compensation");
         jLabel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 51)));
@@ -240,7 +244,6 @@ public class DeleteView extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -254,7 +257,7 @@ public class DeleteView extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(comBoxDepartmentName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -286,6 +289,7 @@ public class DeleteView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

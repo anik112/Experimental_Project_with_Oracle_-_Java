@@ -32,4 +32,17 @@ public class OraDbConnection {
         return null;
     }
     
+    public static Connection accessConnection(){
+        
+        try{
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            Connection conn=DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\VSIANIK\\Desktop\\att2000.mdb");
+            System.out.println("Connected");
+            return conn;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
 }

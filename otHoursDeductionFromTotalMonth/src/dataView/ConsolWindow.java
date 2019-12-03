@@ -19,7 +19,7 @@ public class ConsolWindow extends javax.swing.JFrame {
     public ConsolWindow() {
         initComponents();
         txtConsol.setText("Program Start :: VSI (paulanik.wb@gmail.com) \n"
-                + ":: == :: == :: == :: == :: == :: == :: == :: == ::\n");
+                + ":: == :: == :: == :: == :: == :: == :: == :: == :: == :: == :: == ::\n");
         this.setVisible(true);
     }
 
@@ -53,9 +53,8 @@ public class ConsolWindow extends javax.swing.JFrame {
 
         txtConsol.setBackground(new java.awt.Color(0, 0, 0));
         txtConsol.setColumns(20);
-        txtConsol.setForeground(new java.awt.Color(255, 255, 51));
+        txtConsol.setForeground(new java.awt.Color(0, 255, 255));
         txtConsol.setRows(5);
-        txtConsol.setText("Initilized Program .....................\n===============================================================");
         txtConsol.setBorder(null);
         txtConsol.setMargin(new java.awt.Insets(10, 10, 5, 5));
         jScrollPane1.setViewportView(txtConsol);

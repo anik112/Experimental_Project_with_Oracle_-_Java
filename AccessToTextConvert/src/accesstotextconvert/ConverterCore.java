@@ -53,7 +53,7 @@ public class ConverterCore {
             PreparedStatement statement = getConn.prepareStatement(sql02); // statement create
             ResultSet rs = statement.executeQuery(); // statement execute
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss a"); // get formatter for format date
-            
+
             // ========== RMS ============
             Connection getRtaConn = AccessConnection.dbRTAConnection(); // get RMS server connection
             String sql03 = "SELECT NODE_NO,CARD_NO,D_CARD,T_CARD FROM DATA_CARD WHERE D_CARD >='" + rtaFromDate + "' AND D_CARD <='" + rtaToDate + "';";

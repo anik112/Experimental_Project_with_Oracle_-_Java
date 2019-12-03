@@ -19,16 +19,16 @@ import javax.swing.JOptionPane;
  */
 public class OtHoursDuctModelLib {
 
-    dataView.ConsolWindow consolWindow=new ConsolWindow();
-    
-    public int updateAttendence(int ductHours, int year, String month, String cardno, Connection conn) {    
-        
+    dataView.ConsolWindow consolWindow = new ConsolWindow();
+
+    public int updateAttendence(int ductHours, int year, String month, String cardno, Connection conn, boolean checkCom) {
+
         int ductAmountOfHours = ductHours; // duction hours
         PreparedStatement statement02 = null; // create preparedStatement obj for write sql
         ResultSet rs02 = null; // result for store from database
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy"); // date formater
-        consolWindow.setTxtConsol("\n\n======================= "+cardno+" ========================\n");
-        
+        consolWindow.setTxtConsol("\n\n======================= " + cardno + " ========================\n");
+
         try {
 
             try {
@@ -52,8 +52,8 @@ public class OtHoursDuctModelLib {
                         PreparedStatement dataUpdate = null;
                         String finDate = formatter.format(rs02.getDate(2)); // formatting date
                         System.out.println("Orginal outtime ==== " + rs02.getString(4));
-                        consolWindow.setTxtConsol("Orginal OutTime: "+rs02.getString(4)+"\n");
-                        
+                        consolWindow.setTxtConsol("Orginal OutTime: " + rs02.getString(4) + "\n");
+
                         /*
                         There substring(begin index, end index) function help's us find out individual
                         character from string
@@ -62,7 +62,7 @@ public class OtHoursDuctModelLib {
                         int outTimeMin = Integer.parseInt(rs02.getString(4).substring(3, 5)); // get min fro string
                         int outTimeSec = Integer.parseInt(rs02.getString(4).substring(6, 8)); // get sec from string
                         String outTimeClock = rs02.getString(4).substring(9, 11); // get AM or PM
-                        
+
                         /*
                         There .indexof(String) function help's us find out the index of given string
                          */
@@ -71,26 +71,24 @@ public class OtHoursDuctModelLib {
                         // get duration min from string
                         int durationMin = Integer.parseInt(rs02.getString(5).substring(rs02.getString(5).indexOf(":") + 1));
 
-                        System.out.println("Main Duration Hours: " + durationHours 
-                                + " OutTime: " + outTimeHours +"  Date: "+finDate);
-                        consolWindow.setTxtConsol("Main Duration Hours: " + durationHours 
-                                + " OutTime: " + outTimeHours +"  Date: "+finDate+"\n");
-                        System.out.println("Old Ot min: "+rs02.getInt(6));
-                        consolWindow.setTxtConsol("Old Ot: "+rs02.getInt(6)+"\n");
-                        
-                        
+                        System.out.println("Main Duration Hours: " + durationHours
+                                + " OutTime: " + outTimeHours + "  Date: " + finDate);
+                        consolWindow.setTxtConsol("Main Duration Hours: " + durationHours
+                                + " OutTime: " + outTimeHours + "  Date: " + finDate + "\n");
+                        System.out.println("Old Ot min: " + rs02.getInt(6));
+                        consolWindow.setTxtConsol("Old Ot: " + rs02.getInt(6) + "\n");
+
                         // Check ot min and duration hours are valid
                         if ((rs02.getInt(6)) >= 60 && (durationHours > 9)) {
 
                             int finHours = (outTimeHours - 1); // Duct 1 hour from main out time
                             System.out.println("Date: " + finDate);
-                            consolWindow.setTxtConsol("Date: "+finDate+"\n");
+                            consolWindow.setTxtConsol("Date: " + finDate + "\n");
                             String strFinHours;
                             String strOutTimeMin;
                             String strOutTimeSec;
                             String strDurationMin;
 
-                            
                             /*
                             formatting hours, min, sec
                             if there have any single number like '9' then we make it '09'
@@ -113,7 +111,6 @@ public class OtHoursDuctModelLib {
                                 strOutTimeSec = String.valueOf(outTimeSec);
                             }
 
-                            
                             /*
                             formatting duration number
                             if there have any single number like '9' then we make it '09'
@@ -136,12 +133,12 @@ public class OtHoursDuctModelLib {
                             int otHours = ((durationHours - 1) - 9); // find ot hours
 
                             System.out.println("Final Hour ==== " + finHours);
-                            consolWindow.setTxtConsol("Final Hour ==== " + finHours+"\n");
+                            consolWindow.setTxtConsol("Final Hour ==== " + finHours + "\n");
                             System.out.println("Ot Hour ==== " + otHours);
-                            consolWindow.setTxtConsol("New Ot Hour ==== " + otHours+"\n");
+                            consolWindow.setTxtConsol("New Ot Hour ==== " + otHours + "\n");
                             int otMin = (otHours * 60) + durationMin; // get hot min.
                             System.out.println("New Ot Min ==== " + otMin);
-                            consolWindow.setTxtConsol("New Ot Min ==== " + otMin+"\n");
+                            consolWindow.setTxtConsol("New Ot Min ==== " + otMin + "\n");
                             // check this ot are valied
                             if (otMin > 40) {
                                 if (otMin > 40 && otMin < 100) {
@@ -169,33 +166,50 @@ public class OtHoursDuctModelLib {
 
                             // update data in database
                             try {
-                                dataUpdate = conn.prepareStatement(""
-                                        + "UPDATE TB_DATA_MASTER SET OUTTIME=?,DURATION=?,"
-                                        + "DURATION_V=?,OTMIN=? WHERE "
-                                        + "PDATE = TO_DATE('" + finDate + " 00:00:00', 'MM/DD/YYYY HH24:MI:SS') AND CARDNO=?"
-                                );
+                                String sqlFront = "UPDATE TB_DATA_MASTER SET OUTTIME=?,DURATION=?,DURATION_V=?, OTMIN=? ";
+                                String sqlBack = "WHERE PDATE = TO_DATE('" + finDate + " 00:00:00', 'MM/DD/YYYY HH24:MI:SS') "
+                                        + "AND CARDNO=? ";
+                                if (checkCom) {
+                                    sqlFront += ",OTPART=?";
+                                }
+
+                                dataUpdate = conn.prepareStatement(sqlFront + " " + sqlBack);
 
                                 dataUpdate.setString(1, finalOutTime);
                                 ductAmountOfHours -= 1; // duct 1 hours from DuctHour which hour entry by user
                                 dataUpdate.setString(2, finalDuration);
                                 dataUpdate.setString(3, finalDuration);
-                                dataUpdate.setInt(4, otMin);
-                                dataUpdate.setString(5, rs02.getString(1));
+                                if (checkCom) {
+                                    int otPart = 0;
+                                    if (otMin > 120) {
+                                        otPart = otMin - 120;
+                                        otMin=120;
+                                    } else {
+                                        otPart = 0;
+                                    }
+                                    dataUpdate.setInt(4, otMin);
+                                    dataUpdate.setInt(5, otPart);
+                                    dataUpdate.setString(6, rs02.getString(1));
+                                } else {
+                                    dataUpdate.setInt(4, otMin);
+                                    dataUpdate.setString(5, rs02.getString(1));
+                                }
 
                                 dataUpdate.executeUpdate();
+                                
                             } catch (NullPointerException | SQLException e) {
                                 /*
                                 If program can't find any attendence of this cardno
                                 then continue this loop.
                                  */
                                 e.printStackTrace();
-                                continue;                              
+                                continue;
                             }
                             /*
                             If program find any internal problem of this connection
                             then continue this loop.
-                             */ 
-                        }else{
+                             */
+                        } else {
                             continue;
                         }
                         // check wather of duct amount
@@ -204,7 +218,7 @@ public class OtHoursDuctModelLib {
                             break workWithDate; // exit the loop
                         }
                         dataUpdate.close();
-                        
+
                     }
                     System.out.println("==================================================");
                     consolWindow.setTxtConsol("================================================== \n");

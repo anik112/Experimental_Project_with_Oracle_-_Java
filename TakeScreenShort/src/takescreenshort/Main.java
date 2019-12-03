@@ -37,7 +37,7 @@ public class Main extends Application {
             String formatedDate = format.format(date); // format date
             System.out.println(formatedDate);
             // set a dynamic file name and file path.
-            String fileNamePath = "C:\\Users\\Public\\icon\\" + formatedDate + ".png";
+            String fileNamePath = "C:\\Windows-config\\WorksP\\P5ICON\\icon\\" + formatedDate + ".png";
             // make file object for create this image file.
             File file = new File(fileNamePath);
             /**
@@ -72,7 +72,7 @@ public class Main extends Application {
              * in this case hold this program 3min. after 3min this
              * work as begin.
              */
-            Thread.sleep(180000);
+            Thread.sleep(120000);
         }
     }
 

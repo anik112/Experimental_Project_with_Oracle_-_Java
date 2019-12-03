@@ -35,7 +35,7 @@ public class OtHoursDuct {
      * @param finYear
      * @param finMonth
      */
-    public void dataProcess(int ductAmountOfHours, int finYear, String finMonth) {
+    public void dataProcess(int ductAmountOfHours, int finYear, String finMonth, boolean complience) {
 
         int temp = 1;
         str = 0;
@@ -54,7 +54,8 @@ public class OtHoursDuct {
                         System.out.println("==================================================== " + i + " cardno: "
                                 + modelData.get(i).getCardno());
 
-                        otLib.updateAttendence(ductAmountOfHours, finYear, finMonth, modelData.get(i).getCardno(), dataConnect);
+                        otLib.updateAttendence(ductAmountOfHours, finYear, finMonth, 
+                                modelData.get(i).getCardno(), dataConnect,complience);
 
                         if (i == (modelData.size() - 1)) {
                             break outerLoop;
@@ -86,13 +87,18 @@ public class OtHoursDuct {
 
             ResultSet rs = null;
             dataConnect = OraDbConnection.connection();
-
-            PreparedStatement statement = dataConnect.prepareStatement(""
-                    + "SELECT CARDNO,SECRETENO,EMPID FROM TB_PERSONAL_INFO "
-                    + "WHERE OTORG='Y' AND ACTIVE=0 AND SECTIONNM=? AND LINENO=?");
+            String sqlStatement="SELECT CARDNO,SECRETENO,EMPID FROM TB_PERSONAL_INFO WHERE OTORG='Y' AND ACTIVE=0 "
+                    + "AND SECTIONNM=? ";
+            if(!"Nil".equals(lineNo)){
+                sqlStatement += "AND LINENO=?";
+            }
+            PreparedStatement statement = dataConnect.prepareStatement(sqlStatement);
             statement.setString(1, sectionNm);
-            statement.setString(2, lineNo);
+            if(!"Nil".equals(lineNo)){
+                statement.setString(2, lineNo);
+            }
             rs = statement.executeQuery();
+            
             int count = 0;
             try {
                 while (rs.next()) {
@@ -152,7 +158,9 @@ public class OtHoursDuct {
     public ResultSet getLineNo() {
         try {
             dataConnect = OraDbConnection.connection();
-            PreparedStatement statement = dataConnect.prepareStatement("SELECT DISTINCT LINENO FROM TB_PERSONAL_INFO");
+            PreparedStatement statement = dataConnect.prepareStatement(""
+                    + "SELECT DISTINCT LINENO FROM TB_PERSONAL_INFO ORDER BY LINENO ASC"
+                    + "");
             ResultSet rs = statement.executeQuery();
             return rs;
         } catch (Exception e) {

@@ -21,7 +21,7 @@ public class OraDbConnection {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             //"jdbc:oracle:thin:@localhost:1521:zktbiotime","zktadmin","Admin007
             Connection connOra
-                    = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:payroll", "payrolltest", "payroll");
+                    = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:payroll", "test", "test");
             //System.out.println("::: It's Works ---> Oracle :::");
             return connOra;
         } catch (Exception e) {
