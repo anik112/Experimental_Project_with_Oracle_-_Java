@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 public class DataDelete {
 
     public void deleteAttendenceDataInAccessDb(String fromDate, String toDate) {
+        
+        System.out.println(fromDate+"  ==  "+toDate);
         Connection connAccess = AccessConnection.dbConnection();
 
         try {
@@ -58,6 +60,9 @@ public class DataDelete {
                     ":: Date Delete :: ", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(DataDelete.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(
+                    null, " => Check Date Format and Date SQL :) ",
+                    ":: Date Error :: ", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }

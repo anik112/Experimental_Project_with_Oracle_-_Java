@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,25 +18,64 @@ import java.sql.ResultSet;
 public class DBconnection {
 
     public static Connection getConnection(String connectionName) {
-        try {
-            Connection connAccess=null, connOra=null;
+        Connection connAccess = null, connOra = null;
 
-            if (connectionName == "access") {
+        if (connectionName.equals("ZKT")) {
+
+            try {
+                //C:\\Users\\carev\\Desktop 
+                //C:\\Users\\carev\\Documents 
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-                connAccess = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\carev\\Desktop\\att2000.mdb");
-                System.out.println("Connected---");
+                connAccess = DriverManager.getConnection("jdbc:ucanaccess://D:\\ZKT\\att2000.mdb");
+
+                System.out.println("== Connected with ZKT server ==");
                 return connAccess;
-            } else if (connectionName == "oracle") {
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(
+                        null, e.getMessage(),
+                        ":: Connection Error ZKT server :: ", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else if (connectionName.equals("ORA")) {
+            try {
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 connOra = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:payroll", "payroll", "payroll");
-                return connOra;
-            } 
 
-            //"jdbc:oracle:thin:@localhost:1521:zktbiotime","zktadmin","Admin007
-            
+                System.out.println("== Connected with ORACLE server ==");
+                return connOra;
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(
+                        null, e.getMessage(),
+                        ":: Connection Error ORACLE server :: ", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else if (connectionName.equals("RTA")) {
+
+            try {
+                //C:\\Users\\carev\\Desktop 
+                //C:\\Users\\carev\\Documents 
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+                connAccess = DriverManager.getConnection("jdbc:ucanaccess://C:\\RMS\\RMS_A.mdb");
+
+                System.out.println("== Connected with ZKT server ==");
+                return connAccess;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(
+                        null, e.getMessage(),
+                        ":: Connection Error RTA server :: ", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        return null;
+    }
+
+}
+
+//"jdbc:oracle:thin:@localhost:1521:zktbiotime","zktadmin","Admin007
 //            PreparedStatement statement = connOra.prepareStatement("select * from INOUT");
 //            ResultSet rs1 = statement.executeQuery();
-
 //            PreparedStatement statement2 = connAccess.prepareStatement("select * from checkinout");
 //            ResultSet rs2 = statement2.executeQuery();
 //
@@ -43,7 +83,6 @@ public class DBconnection {
 //                System.out.print(rs2.getString(1));
 //                //System.out.println("----- " + rs2.getString(2));
 //            }
-
 //            String insertOraDataBaseIntime = "insert into (in_time) values (";
 //            String insertOraDataBaseOuttime = "insert into (out_time) values (";
 //            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");
@@ -57,11 +96,3 @@ public class DBconnection {
 //                String onlyTime = strDate.substring(11, 22);
 //                System.out.println(onlyTime + "--" + onlyTime.substring(9, 11))
 //            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-}

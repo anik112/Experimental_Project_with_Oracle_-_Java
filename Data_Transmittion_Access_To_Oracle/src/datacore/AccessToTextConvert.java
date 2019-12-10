@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package data_transmittion_access_to_oracle;
+package datacore;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -12,18 +12,20 @@ import javafx.stage.Stage;
  *
  * @author VSI-ANIK
  */
-public class MainClass extends Application {
-
+public class AccessToTextConvert extends Application {
+    
     @Override
     public void start(Stage primaryStage) {
-       new datacore.ConverterView().setVisible(true);
+        new ConverterView().setVisible(true);
+        
+        //new DataDelete().deleteAttendenceDataInAccessDb("10/10/2019");
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Application.launch(args);
+        launch(args);
     }
-
+    
 }

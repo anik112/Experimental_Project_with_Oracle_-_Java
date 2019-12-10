@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package accesstotextconvert;
+package datacore;
 
+import connection.DBconnection;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,27 +26,15 @@ public class ConverterCore {
     private int rowCount = 0;
     private int maxSize = 0;
 
-    private String filePath;
-    private String dateForFileName;
-    private String fileName;
-    private FileWriter fileWriter;
-    private PrintWriter printWriter;
-
     //005:0001090025:20190918:074957:BLANK !!:11
     //"00"+STRING(NODE_NO)+":"+CARD_NO+":"+D_CARD+":"+T_CARD+":"+"BLANK !!"+":"+"11"
     public void txtConverter(String fromDate, String toDate, String rtaFromDate, String rtaToDate) throws IOException {
 
-        System.out.println(rtaFromDate+"  ==  "+rtaToDate);
-        
-        
-        Random random = new Random(); // generat random number
-        filePath = "D:\\DATA\\"; // file location
-        dateForFileName = toDate.replace("/", ""); // resize date
-        fileName = dateForFileName + random.nextInt(9) + ".txt"; // file name
+        System.out.println(rtaFromDate + "  ==  " + rtaToDate);
 
         // get data from access database
         try {
-            Connection getConn = AccessConnection.dbConnection(); // get connection from access database
+            Connection getConn = DBconnection.getConnection("ZKT"); // get connection from access database
             // write SQL for pull data from database
             String sql02 = "SELECT CHECKINOUT.CHECKTIME,CHECKINOUT.SENSORID,CHECKINOUT.USERID,USERINFO.Badgenumber "
                     + "FROM CHECKINOUT,USERINFO WHERE "
@@ -58,19 +46,18 @@ public class ConverterCore {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss a"); // get formatter for format date
 
             // ========== RMS ============
-            Connection getRtaConn = AccessConnection.dbRTAConnection(); // get RMS server connection
-            String sql03 = "SELECT NODE_NO,CARD_NO,D_CARD,T_CARD FROM DATA_CARD WHERE (((data_card.d_card)='"+rtaFromDate+"')) OR (((data_card.d_card)='"+rtaToDate+"'));";
+            Connection getRtaConn = DBconnection.getConnection("RTA"); // get RMS server connection
+            String sql03 = "SELECT NODE_NO,CARD_NO,D_CARD,T_CARD FROM DATA_CARD WHERE (((data_card.d_card)='" + rtaFromDate + "')) OR (((data_card.d_card)='" + rtaToDate + "'));";
             PreparedStatement rtaStatement = getRtaConn.prepareStatement(sql03); // statement create
             ResultSet rtaSet = rtaStatement.executeQuery(); // statement execute           
             //System.exit(0);
 
-            // wite data in txt file
+            // ========== ORACLE ===========
+            Connection getOraConnection = DBconnection.getConnection("ORA");
+            String sqlOra = "INSERT INTO TB_DATA_LOAD (MACHINENO,SECRETENO,DATADATE,DATATIME,STATUS)VALUES (?,?,?,?,'BLANK !!:11')";
+
+            // wite data in Oracle table
             try {
-                fileWriter = new FileWriter(filePath + fileName); // call fileWriter for get file or create file in system
-                printWriter = new PrintWriter(fileWriter); // call printWriter for write text in file
-
-                maxSize = rs.getRow();
-
                 // loop for push data in txt file
                 while (rs.next()) {
                     Date date = rs.getTimestamp(1); // get date/time form result sheet
@@ -84,9 +71,14 @@ public class ConverterCore {
                     onlyTime = onlyTime.replace(":", ""); // remove ':' from time
                     System.out.println(onlyTime);
 
-                    // Make string format
-                    String finalText = (rs.getString(2) + ":00" + rs.getString(4) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
-                    printWriter.println(finalText); // write text in file
+                    // INSERT data in TB_DATA_LOAD table
+                    PreparedStatement oraStatement = getOraConnection.prepareStatement(sqlOra);
+                    oraStatement.setString(1, rs.getString(2));
+                    oraStatement.setString(2, "00" + rs.getString(4));
+                    oraStatement.setString(3, onlyDate);
+                    oraStatement.setString(4, onlyTime);
+                    oraStatement.executeUpdate();
+                    oraStatement.close();
 
                     System.out.println(rs.getString(2) + ":" + rs.getString(4) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
                     rowCount++; // row count
@@ -95,15 +87,22 @@ public class ConverterCore {
                 // "00"+STRING(NODE_NO)+":"+CARD_NO+":"+D_CARD+":"+T_CARD+":"+"BLANK !!"+":"+"11"
                 while (rtaSet.next()) {
                     System.out.println("----------- in ");
-                    // Make string format
-                    String finalText = ("0" + rtaSet.getString(1) + ":" + rtaSet.getString(2) + ":" + rtaSet.getString(3) + ":" + rtaSet.getString(4) + ":" + "BLANK !!:11");
-                    printWriter.println(finalText); // write text in file
 
+                    // INSERT data in TB_DATA_LOAD table
+                    PreparedStatement oraStatement = getOraConnection.prepareStatement(sqlOra);
+                    oraStatement.setString(1, "0" + rtaSet.getString(1));
+                    oraStatement.setString(2, rtaSet.getString(2));
+                    oraStatement.setString(3, rtaSet.getString(3));
+                    oraStatement.setString(4, rtaSet.getString(4));
+                    oraStatement.executeUpdate();
+                    oraStatement.close();
+
+                    // Make string format
                     System.out.println("0" + rtaSet.getString(1) + ":" + rtaSet.getString(2) + ":" + rtaSet.getString(3) + ":" + rtaSet.getString(4) + ":" + "BLANK !!:11");
                     rowCount++; // row count
                 }
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ConverterCore.java | " + e.getMessage(),
                         ":: File Error ZKT server :: ", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -114,8 +113,7 @@ public class ConverterCore {
             rtaStatement.close(); // close
             rtaSet.close(); // close
             getRtaConn.close(); // close
-            printWriter.close(); // close
-            fileWriter.close(); // close
+            getOraConnection.close();
 
             JOptionPane.showMessageDialog(
                     null, rowCount + " Data Sucessfully Generate ",
