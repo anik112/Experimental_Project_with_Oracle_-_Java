@@ -60,5 +60,38 @@ public class AccessConnection {
 
         return null;
     }
+    
+    
+    public static Connection dbNITGENconnection(){
+        
+        Connection connNitgen;
+        try{
+            
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String serverName="DESKTOP-NSLL7T5\\SQLEXPRESS";
+            int portNumber=1433;
+            String database="NitgenAccessManager";
+            String userName="admin";
+            String password="admin";
+            
+            // jdbc:sqlserver://DESKTOP-NSLL7T5\\SQLEXPRESS:1433;databaseName=NitgenAccessManager;user=admin;password=admin
+            String conntectionURL="jdbc:sqlserver://"+serverName+":"+portNumber+";databaseName="+database+";user="+userName+";password="+password;
+            connNitgen=DriverManager.getConnection(conntectionURL);
+            
+            // connNitgen=DriverManager.getConnection(url, userName, password);
+            System.out.println("== Connected with NITGEN server ==");
+            return connNitgen;
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(
+                    null, e.getMessage(),
+                    ":: Connection Error NITGEN server :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        
+        return null;
+    }
+    
 
 }

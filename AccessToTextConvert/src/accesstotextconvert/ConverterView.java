@@ -51,6 +51,9 @@ public class ConverterView extends javax.swing.JFrame {
         lblMsg = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnProcessStart = new javax.swing.JButton();
+        jCheckZKTserver = new javax.swing.JCheckBox();
+        jCheckRTAserver = new javax.swing.JCheckBox();
+        jCheckNitgenServer = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         btnDeleteAttendenceData = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
@@ -59,6 +62,7 @@ public class ConverterView extends javax.swing.JFrame {
         txtToDateDelete = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtFromDateDelete = new javax.swing.JTextField();
+        radioBtnRta1 = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -134,6 +138,18 @@ public class ConverterView extends javax.swing.JFrame {
             }
         });
 
+        jCheckZKTserver.setBackground(new java.awt.Color(255, 255, 192));
+        jCheckZKTserver.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jCheckZKTserver.setText("ZKT");
+
+        jCheckRTAserver.setBackground(new java.awt.Color(255, 255, 192));
+        jCheckRTAserver.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jCheckRTAserver.setText("RTA");
+
+        jCheckNitgenServer.setBackground(new java.awt.Color(255, 255, 192));
+        jCheckNitgenServer.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jCheckNitgenServer.setText("NITGEN");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -152,9 +168,16 @@ public class ConverterView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtFromDate, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckZKTserver))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtToDate, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtToDate, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jCheckRTAserver)
+                                        .addGap(33, 33, 33)
+                                        .addComponent(jCheckNitgenServer)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(10, 10, 10))
         );
@@ -171,7 +194,12 @@ public class ConverterView extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtToDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckZKTserver)
+                    .addComponent(jCheckRTAserver)
+                    .addComponent(jCheckNitgenServer))
+                .addGap(18, 21, Short.MAX_VALUE)
                 .addComponent(lblMsg)
                 .addGap(1, 1, 1)
                 .addComponent(jLabel4)
@@ -199,13 +227,12 @@ public class ConverterView extends javax.swing.JFrame {
 
         radioBtnZkt.setBackground(new java.awt.Color(255, 255, 192));
         buttonGroup1.add(radioBtnZkt);
-        radioBtnZkt.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        radioBtnZkt.setSelected(true);
+        radioBtnZkt.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         radioBtnZkt.setText("ZKT");
 
         radioBtnRta.setBackground(new java.awt.Color(255, 255, 192));
         buttonGroup1.add(radioBtnRta);
-        radioBtnRta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        radioBtnRta.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         radioBtnRta.setText("RTA");
 
         txtToDateDelete.setToolTipText("Type Date & Press Enter");
@@ -228,32 +255,30 @@ public class ConverterView extends javax.swing.JFrame {
             }
         });
 
+        radioBtnRta1.setBackground(new java.awt.Color(255, 255, 192));
+        buttonGroup1.add(radioBtnRta1);
+        radioBtnRta1.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        radioBtnRta1.setText("NITGEN");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDeleteAttendenceData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtFromDateDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtToDateDelete, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(radioBtnRta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(radioBtnZkt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDeleteAttendenceData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(txtFromDateDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtToDateDelete, javax.swing.GroupLayout.Alignment.TRAILING))))
+                    .addComponent(radioBtnZkt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(radioBtnRta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(radioBtnRta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -267,11 +292,13 @@ public class ConverterView extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addGap(0, 0, 0)
                 .addComponent(txtToDateDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(9, 9, 9)
                 .addComponent(radioBtnZkt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(radioBtnRta)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(radioBtnRta1)
+                .addGap(18, 18, 18)
                 .addComponent(btnDeleteAttendenceData, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -293,11 +320,11 @@ public class ConverterView extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -368,24 +395,46 @@ public class ConverterView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFromDateKeyPressed
 
     private void btnProcessStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessStartActionPerformed
-        // TODO add your handling code here:
-        // create object
-        ConverterCore converterCore = new ConverterCore();
-        // make final date format for RTA
-        String rtaFromDate = fromDate.substring(4, fromDate.length()) + fromDate.substring(2, 4) + fromDate.substring(0, 2);
-        // make final date format for RTA
-        String rtaToDate = toDate.substring(4, toDate.length()) + toDate.substring(2, 4) + toDate.substring(0, 2);
-        // check the date is valied
-        if (txtFromDate.getText().length() == 10 && txtToDate.getText().length() == 10) {
-            try {
-                converterCore.txtConverter(txtFromDate.getText(), txtToDate.getText(), rtaFromDate, rtaToDate);
-                // lblProgressBar.setText(" ");
-            } catch (IOException ex) {
-                Logger.getLogger(ConverterView.class.getName()).log(Level.SEVERE, null, ex);
+        if (jCheckNitgenServer.isSelected() || jCheckRTAserver.isSelected() || jCheckZKTserver.isSelected()) {
+            // TODO add your handling code here:
+            // create object
+            ConverterCore converterCore = new ConverterCore();
+            // make final date format for RTA
+            String rtaFromDate = fromDate.substring(4, fromDate.length()) + fromDate.substring(2, 4) + fromDate.substring(0, 2);
+            // make final date format for RTA
+            String rtaToDate = toDate.substring(4, toDate.length()) + toDate.substring(2, 4) + toDate.substring(0, 2);
+            // make final date for nitgen
+            String nitgenFromDate = fromDate.substring(4, fromDate.length()) + "-" + fromDate.substring(2, 4) + "-" + fromDate.substring(0, 2);
+            // make final date for nitgen
+            String nitgenToDate = toDate.substring(4, toDate.length()) + "-" + toDate.substring(2, 4) + "-" + toDate.substring(0, 2);
+
+            // check the date is valied
+            if (txtFromDate.getText().length() == 10 && txtToDate.getText().length() == 10) {
+
+                try {
+                    converterCore.txtConverter(
+                            txtFromDate.getText(),
+                            txtToDate.getText(),
+                            rtaFromDate,
+                            rtaToDate,
+                            nitgenFromDate,
+                            nitgenToDate,
+                            jCheckZKTserver.isSelected(),
+                            jCheckRTAserver.isSelected(),
+                            jCheckNitgenServer.isSelected()
+                    );
+
+                    // lblProgressBar.setText(" ");
+                } catch (IOException ex) {
+                    Logger.getLogger(ConverterView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Date Format Not Match",
+                        ":: Date Error :: ", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Date Format Not Match",
-                    ":: Date Error :: ", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please Select Any Option",
+                    "Select Option", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnProcessStartActionPerformed
 
@@ -474,6 +523,9 @@ public class ConverterView extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteAttendenceData;
     private javax.swing.JButton btnProcessStart;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JCheckBox jCheckNitgenServer;
+    private javax.swing.JCheckBox jCheckRTAserver;
+    private javax.swing.JCheckBox jCheckZKTserver;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -489,6 +541,7 @@ public class ConverterView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblMsg;
     private javax.swing.JRadioButton radioBtnRta;
+    private javax.swing.JRadioButton radioBtnRta1;
     private javax.swing.JRadioButton radioBtnZkt;
     private javax.swing.JTextField txtFromDate;
     private javax.swing.JTextField txtFromDateDelete;

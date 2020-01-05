@@ -34,11 +34,11 @@ public class ConverterCore {
 
     //005:0001090025:20190918:074957:BLANK !!:11
     //"00"+STRING(NODE_NO)+":"+CARD_NO+":"+D_CARD+":"+T_CARD+":"+"BLANK !!"+":"+"11"
-    public void txtConverter(String fromDate, String toDate, String rtaFromDate, String rtaToDate) throws IOException {
+    public void txtConverter(String fromDate, String toDate, String rtaFromDate, String rtaToDate, String nitgenFromDate, String nitgenToDate,
+            boolean stateZKT, boolean stateRTA, boolean stateNITGEN) throws IOException {
 
-        System.out.println(rtaFromDate+"  ==  "+rtaToDate);
-        
-        
+        System.out.println(rtaFromDate + "  ==  " + rtaToDate);
+
         Random random = new Random(); // generat random number
         filePath = "D:\\DATA\\"; // file location
         dateForFileName = toDate.replace("/", ""); // resize date
@@ -46,61 +46,124 @@ public class ConverterCore {
 
         // get data from access database
         try {
-            Connection getConn = AccessConnection.dbConnection(); // get connection from access database
-            // write SQL for pull data from database
-            String sql02 = "SELECT CHECKINOUT.CHECKTIME,CHECKINOUT.SENSORID,CHECKINOUT.USERID,USERINFO.Badgenumber "
-                    + "FROM CHECKINOUT,USERINFO WHERE "
-                    + "DateValue(checktime) BETWEEN  #" + fromDate + "#  AND  #" + toDate + "# "
-                    + "AND USERINFO.USERID=CHECKINOUT.USERID";
-
-            PreparedStatement statement = getConn.prepareStatement(sql02); // statement create
-            ResultSet rs = statement.executeQuery(); // statement execute
+            // ============= ZKT ===========
+            Connection getConn = null;
+            ResultSet rs = null;
+            PreparedStatement statement = null;
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss a"); // get formatter for format date
 
+            if (stateZKT) {
+                getConn = AccessConnection.dbConnection(); // get connection from access database
+                // write SQL for pull data from database
+                String sql02 = "SELECT CHECKINOUT.CHECKTIME,CHECKINOUT.SENSORID,CHECKINOUT.USERID,USERINFO.Badgenumber "
+                        + "FROM CHECKINOUT,USERINFO WHERE "
+                        + "DateValue(checktime) BETWEEN  #" + fromDate + "#  AND  #" + toDate + "# "
+                        + "AND USERINFO.USERID=CHECKINOUT.USERID";
+
+                statement = getConn.prepareStatement(sql02); // statement create
+                rs = statement.executeQuery(); // statement execute
+            }
+
             // ========== RMS ============
-            Connection getRtaConn = AccessConnection.dbRTAConnection(); // get RMS server connection
-            String sql03 = "SELECT NODE_NO,CARD_NO,D_CARD,T_CARD FROM DATA_CARD WHERE (((data_card.d_card)='"+rtaFromDate+"')) OR (((data_card.d_card)='"+rtaToDate+"'));";
-            PreparedStatement rtaStatement = getRtaConn.prepareStatement(sql03); // statement create
-            ResultSet rtaSet = rtaStatement.executeQuery(); // statement execute           
+            Connection getRtaConn = null;
+            ResultSet rtaSet = null;
+            PreparedStatement rtaStatement = null;
+            if (stateRTA) {
+                getRtaConn = AccessConnection.dbRTAConnection(); // get RMS server connection
+                String sql03 = "SELECT NODE_NO,CARD_NO,D_CARD,T_CARD FROM DATA_CARD WHERE (((data_card.d_card)='" + rtaFromDate + "')) OR (((data_card.d_card)='" + rtaToDate + "'));";
+                rtaStatement = getRtaConn.prepareStatement(sql03); // statement create
+                rtaSet = rtaStatement.executeQuery(); // statement execute  
+            }
             //System.exit(0);
 
-            // wite data in txt file
+            // ========== NITGER ==========
+            Connection getNitgerConn = null;
+            ResultSet resultSetNitgen = null;
+            PreparedStatement nitgenStatement = null;
+
+            if (stateNITGEN) {
+                getNitgerConn = AccessConnection.dbNITGENconnection();
+                String sql04 = "select [TerminalID],[UserID],[TransactionTime] from "
+                        + "NGAC_AUTHLOG where NGAC_AUTHLOG.TransactionTime between '" + nitgenFromDate + " 10:00:00' and '" + nitgenToDate + " 10:00:00'";
+                nitgenStatement = getNitgerConn.prepareCall(sql04);
+                resultSetNitgen = nitgenStatement.executeQuery();
+            }
+
+            // write data in txt file
             try {
                 fileWriter = new FileWriter(filePath + fileName); // call fileWriter for get file or create file in system
                 printWriter = new PrintWriter(fileWriter); // call printWriter for write text in file
 
                 maxSize = rs.getRow();
 
-                // loop for push data in txt file
-                while (rs.next()) {
-                    Date date = rs.getTimestamp(1); // get date/time form result sheet
-                    String strDate = formatter.format(date); // format date using date formatter
-                    System.out.println(strDate);
-                    String onlyDate = strDate.substring(0, 10); // get only date from (date/time)
-                    onlyDate = onlyDate.replace("/", ""); // remove '/' from date
-                    System.out.println(onlyDate);
-                    String onlyTime = strDate.substring(11, 22); // get only time form (date/time)
-                    onlyTime = onlyTime.substring(0, 8); // resize time
-                    onlyTime = onlyTime.replace(":", ""); // remove ':' from time
-                    System.out.println(onlyTime);
+                // check ZKT are aviable
+                if (stateZKT) {
+                    System.out.println("================= From ZKT =================");
+                    // loop for push data in txt file
+                    while (rs.next()) {
+                        Date date = rs.getTimestamp(1); // get date/time form result sheet
+                        String strDate = formatter.format(date); // format date using date formatter
+                        String onlyDate = strDate.substring(0, 10); // get only date from (date/time)
+                        onlyDate = onlyDate.replace("/", ""); // remove '/' from date
+                        String onlyTime = strDate.substring(11, 22); // get only time form (date/time)
+                        onlyTime = onlyTime.substring(0, 8); // resize time
+                        onlyTime = onlyTime.replace(":", ""); // remove ':' from time
 
-                    // Make string format
-                    String finalText = (rs.getString(2) + ":00" + rs.getString(4) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
-                    printWriter.println(finalText); // write text in file
+                        // Make string format
+                        String finalText = (rs.getString(2) + ":00" + rs.getString(4) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
+                        printWriter.println(finalText); // write text in file
 
-                    System.out.println(rs.getString(2) + ":" + rs.getString(4) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
-                    rowCount++; // row count
+                        System.out.println(rs.getString(2) + ":" + rs.getString(4) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
+                        rowCount++; // row count
+                    }
+
+                    statement.close();
+                    rs.close();
+                    getConn.close();
                 }
 
-                // "00"+STRING(NODE_NO)+":"+CARD_NO+":"+D_CARD+":"+T_CARD+":"+"BLANK !!"+":"+"11"
-                while (rtaSet.next()) {
-                    System.out.println("----------- in ");
-                    // Make string format
-                    String finalText = ("0" + rtaSet.getString(1) + ":" + rtaSet.getString(2) + ":" + rtaSet.getString(3) + ":" + rtaSet.getString(4) + ":" + "BLANK !!:11");
-                    printWriter.println(finalText); // write text in file
+                // check RTA are aviable
+                if (stateRTA) {
+                    System.out.println("=================== From RTA =====================");
+                    // "00"+STRING(NODE_NO)+":"+CARD_NO+":"+D_CARD+":"+T_CARD+":"+"BLANK !!"+":"+"11"
+                    while (rtaSet.next()) {
+                        // Make string format
+                        String finalText = ("0" + rtaSet.getString(1) + ":" + rtaSet.getString(2) + ":" + rtaSet.getString(3) + ":" + rtaSet.getString(4) + ":" + "BLANK !!:11");
+                        printWriter.println(finalText); // write text in file
 
-                    System.out.println("0" + rtaSet.getString(1) + ":" + rtaSet.getString(2) + ":" + rtaSet.getString(3) + ":" + rtaSet.getString(4) + ":" + "BLANK !!:11");
-                    rowCount++; // row count
+                        System.out.println("0" + rtaSet.getString(1) + ":" + rtaSet.getString(2) + ":" + rtaSet.getString(3) + ":" + rtaSet.getString(4) + ":" + "BLANK !!:11");
+                        rowCount++; // row count
+                    }
+                    rtaStatement.close(); // close
+                    rtaSet.close(); // close
+                    getRtaConn.close(); // close
+                }
+
+                // check NITGEN are aviable
+                if (stateNITGEN) {
+                    System.out.println("================= From Nitgen ==================");
+                    while (resultSetNitgen.next()) {
+                        // "00"+STRING(NODE_NO)+":"+CARD_NO+":"+D_CARD+":"+T_CARD+":"+"BLANK !!"+":"+"11"
+                        String timeAndDate = resultSetNitgen.getString(3);
+                        String terminalId = resultSetNitgen.getString(1);
+                        if (terminalId.length() == 1) {
+                            terminalId = "00" + terminalId;
+                        } else if (terminalId.length() == 2) {
+                            terminalId = "0" + terminalId;
+                        }
+                        String secrateNo = "000000" + resultSetNitgen.getString(2);
+                        String finDate = timeAndDate.substring(0, 4) + timeAndDate.substring(5, 7) + timeAndDate.substring(8, 10);
+                        String finTime = timeAndDate.substring(11, 13) + timeAndDate.substring(14, 16) + timeAndDate.substring(17, 19);
+
+                        String finalText = (terminalId + ":" + secrateNo + ":" + finDate + ":" + finTime + ":" + "BLANK !!:11");
+                        printWriter.println(finalText); // write text in file
+                        System.out.println(finalText);
+                        rowCount++;
+                    }
+                    
+                    getNitgerConn.close();
+                    nitgenStatement.close();
+                    resultSetNitgen.close();
                 }
 
             } catch (IOException e) {
@@ -108,12 +171,6 @@ public class ConverterCore {
                         ":: File Error ZKT server :: ", JOptionPane.INFORMATION_MESSAGE);
             }
 
-            statement.close();
-            rs.close();
-            getConn.close();
-            rtaStatement.close(); // close
-            rtaSet.close(); // close
-            getRtaConn.close(); // close
             printWriter.close(); // close
             fileWriter.close(); // close
 
@@ -125,7 +182,7 @@ public class ConverterCore {
             JOptionPane.showMessageDialog(null, "Check SQL Syntex or Data | " + e.getMessage(),
                     ":: SQL Error :: ", JOptionPane.INFORMATION_MESSAGE);
         }
-        System.gc();
+        System.gc(); // gurbage collaction
     }
 
     public int getRowCount() {
