@@ -86,9 +86,9 @@ public class ConverterView extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 224));
 
-        jLabel5.setFont(new java.awt.Font("Arial", 2, 10)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 3, 10)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel5.setText("@Vistasoft IT Bangladesh Ltd.");
+        jLabel5.setText("Copyright @2012 Vistasoft IT Bangladesh Ltd.");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 224));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
@@ -151,6 +151,7 @@ public class ConverterView extends javax.swing.JFrame {
 
         jCheckNitgenServer.setBackground(new java.awt.Color(255, 255, 192));
         jCheckNitgenServer.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jCheckNitgenServer.setSelected(true);
         jCheckNitgenServer.setText("NITGEN");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -337,7 +338,7 @@ public class ConverterView extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 192));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        jLabel6.setFont(new java.awt.Font("Lucida Calligraphy", 0, 16)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Lucida Calligraphy", 1, 16)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText(" Data Converter ( VSI )");
         jLabel6.setPreferredSize(new java.awt.Dimension(222, 27));
@@ -379,7 +380,7 @@ public class ConverterView extends javax.swing.JFrame {
             toDate = txtToDate.getText(); // get to date
             // make final string
             String finToDate = toDate.substring(2, 4) + "/" + toDate.substring(0, 2) + "/" + toDate.substring(4, toDate.length());
-            System.out.println(finToDate);
+            //System.out.println(finToDate);
             txtToDate.setText(finToDate); // set the date
 
             btnProcessStart.requestFocus(); // request next work
@@ -392,7 +393,7 @@ public class ConverterView extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             fromDate = txtFromDate.getText();
             String finFromDate = fromDate.substring(2, 4) + "/" + fromDate.substring(0, 2) + "/" + fromDate.substring(4, fromDate.length());
-            System.out.println(finFromDate);
+            //System.out.println(finFromDate);
             txtFromDate.setText(finFromDate);
 
             txtToDate.requestFocus();
@@ -472,10 +473,10 @@ public class ConverterView extends javax.swing.JFrame {
             String tempDate = txtToDateDelete.getText(); // get to date
             // make final string
             String finFromDate = tempDate.substring(2, 4) + "/" + tempDate.substring(0, 2) + "/" + tempDate.substring(4, tempDate.length());
-            System.out.println(finFromDate);
+            //System.out.println(finFromDate);
             // make final date for nitgen
             nitgenToDate = tempDate.substring(4, tempDate.length()) + "-" + tempDate.substring(2, 4) + "-" + tempDate.substring(0, 2);
-            System.out.println(nitgenToDate);
+            //System.out.println(nitgenToDate);
 
             txtToDateDelete.setText(finFromDate); // set the date
             toDateDelete = tempDate.substring(4, tempDate.length()) + tempDate.substring(2, 4) + tempDate.substring(0, 2);
@@ -492,10 +493,10 @@ public class ConverterView extends javax.swing.JFrame {
             String tempDate = txtFromDateDelete.getText(); // get to date
             // make final string
             String finFromDate = tempDate.substring(2, 4) + "/" + tempDate.substring(0, 2) + "/" + tempDate.substring(4, tempDate.length());
-            System.out.println(finFromDate);
+            //System.out.println(finFromDate);
             // make final date for nitgen
             nitgenFromDate = tempDate.substring(4, tempDate.length()) + "-" + tempDate.substring(2, 4) + "-" + tempDate.substring(0, 2);
-            System.out.println(nitgenFromDate);
+            //System.out.println(nitgenFromDate);
             txtFromDateDelete.setText(finFromDate); // set the date
             fromDateDelete = tempDate.substring(4, tempDate.length()) + tempDate.substring(2, 4) + tempDate.substring(0, 2);
             txtToDateDelete.requestFocus(); // request next work

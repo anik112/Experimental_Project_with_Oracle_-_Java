@@ -104,12 +104,12 @@
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="10" style="2"/>
+              <Font name="Arial" size="10" style="3"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="@Vistasoft IT Bangladesh Ltd."/>
+            <Property name="text" type="java.lang.String" value="Copyright @2012 Vistasoft IT Bangladesh Ltd."/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel3">
@@ -320,6 +320,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="1"/>
                 </Property>
+                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="NITGEN"/>
               </Properties>
             </Component>
@@ -518,7 +519,7 @@
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Lucida Calligraphy" size="16" style="0"/>
+              <Font name="Lucida Calligraphy" size="16" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value=" Data Converter ( VSI )"/>

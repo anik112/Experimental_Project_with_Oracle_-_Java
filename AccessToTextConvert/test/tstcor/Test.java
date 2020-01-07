@@ -17,7 +17,7 @@
 package tstcor;
 
 import accesstotextconvert.AccessConnection;
-import java.io.FileWriter;
+import java.io.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -25,9 +25,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import utility.PWS;
+import utility.PasswordEnqDnq;
 
 /**
  *
@@ -37,7 +40,8 @@ public class Test {
 
     public static void main(String[] args) throws SQLException {
 
-//        String rtaFromDate="20191122";
+        try {
+            //        String rtaFromDate="20191122";
 //        String rtaToDate="20191123";
 //        
 //          // ========== RMS ============
@@ -63,32 +67,54 @@ public class Test {
 //            }
 //            rowCount++; // row count
 //        }
-        Connection cSQLS = AccessConnection.dbNITGENconnection();
-        PreparedStatement statement = cSQLS.prepareCall("select [TerminalID],[UserID],[TransactionTime] from NGAC_AUTHLOG where NGAC_AUTHLOG.TransactionTime between '2020-01-02 10:00:00' and '2020-01-03 10:00:00' \n"
-                + "order by TransactionTime desc");
-        ResultSet rs = statement.executeQuery();
+//        Connection cSQLS = AccessConnection.dbNITGENconnection();
+//        PreparedStatement statement = cSQLS.prepareCall("select [TerminalID],[UserID],[TransactionTime] from NGAC_AUTHLOG where NGAC_AUTHLOG.TransactionTime between '2020-01-02 10:00:00' and '2020-01-03 10:00:00' \n"
+//                + "order by TransactionTime desc");
+//        ResultSet rs = statement.executeQuery();
+//
+//        while (rs.next()) {
+//            String timeAndDate = rs.getString(3);
+//            String year = timeAndDate.substring(0, 4);
+//            String month = timeAndDate.substring(5, 7);
+//            String day = timeAndDate.substring(8, 10);
+//            String hours = timeAndDate.substring(11, 13);
+//            String min = timeAndDate.substring(14, 16);
+//            String sec = timeAndDate.substring(17, 19);
+//            String terminalId = rs.getString(1);
+//            if (terminalId.length() == 1) {
+//                terminalId = "00" + terminalId;
+//            } else if (terminalId.length() == 2) {
+//                terminalId = "0" + terminalId;
+//            }
+//            System.out.println("TID: " + terminalId);
+////            System.out.println("UID: " + rs.getString(2));
+////            System.out.println(timeAndDate);
+////            System.out.println("D: " + year + month + day);
+////            System.out.println("T: " + hours + min + sec);
+////            System.out.println("-----------------------------");
+//        }
 
-        while (rs.next()) {
-            String timeAndDate = rs.getString(3);
-            String year = timeAndDate.substring(0, 4);
-            String month = timeAndDate.substring(5, 7);
-            String day = timeAndDate.substring(8, 10);
-            String hours = timeAndDate.substring(11, 13);
-            String min = timeAndDate.substring(14, 16);
-            String sec = timeAndDate.substring(17, 19);
-            String terminalId = rs.getString(1);
-            if (terminalId.length() == 1) {
-                terminalId = "00" + terminalId;
-            } else if (terminalId.length() == 2) {
-                terminalId = "0" + terminalId;
-            }
-            System.out.println("TID: " + terminalId);
-//            System.out.println("UID: " + rs.getString(2));
-//            System.out.println(timeAndDate);
-//            System.out.println("D: " + year + month + day);
-//            System.out.println("T: " + hours + min + sec);
-//            System.out.println("-----------------------------");
+//        PasswordEnqDnq ped = new PWS();
+//
+//        String str = ped.passwordEnq("ABC");
+//        System.out.println(str);
+//        String str02=ped.passwordDnq(str);
+//        System.out.println(str02);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
+        try {
+            // FileReader fileReader = new FileReader("D:\\AccessToTextConvert\\config.txt");
+            File file=new File("D:\\AccessToTextConvert\\config.txt");
+            Scanner scanner=new Scanner(file);
+            
+            System.out.println(scanner.nextLine());
+            System.out.println(scanner.nextLine());
+            System.out.println(scanner.nextLine());
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
