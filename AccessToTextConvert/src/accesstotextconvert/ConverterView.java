@@ -28,6 +28,8 @@ public class ConverterView extends javax.swing.JFrame {
     private String toDate;
     private String fromDateDelete;
     private String toDateDelete;
+    private String nitgenFromDate;
+    private String nitgenToDate;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,7 +64,7 @@ public class ConverterView extends javax.swing.JFrame {
         txtToDateDelete = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtFromDateDelete = new javax.swing.JTextField();
-        radioBtnRta1 = new javax.swing.JRadioButton();
+        radioBtnNitgen = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -86,7 +88,7 @@ public class ConverterView extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial", 2, 10)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel5.setText("Vistasoft IT Bangladesh Ltd.");
+        jLabel5.setText("@Vistasoft IT Bangladesh Ltd.");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 224));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
@@ -132,6 +134,7 @@ public class ConverterView extends javax.swing.JFrame {
 
         btnProcessStart.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnProcessStart.setText("Process Start");
+        btnProcessStart.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnProcessStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProcessStartActionPerformed(evt);
@@ -171,12 +174,14 @@ public class ConverterView extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jCheckZKTserver))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtToDate, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtToDate, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(40, 40, 40)
                                         .addComponent(jCheckRTAserver)
-                                        .addGap(33, 33, 33)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jCheckNitgenServer)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(10, 10, 10))
@@ -199,11 +204,11 @@ public class ConverterView extends javax.swing.JFrame {
                     .addComponent(jCheckZKTserver)
                     .addComponent(jCheckRTAserver)
                     .addComponent(jCheckNitgenServer))
-                .addGap(18, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblMsg)
                 .addGap(1, 1, 1)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnProcessStart, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8))
         );
@@ -255,10 +260,10 @@ public class ConverterView extends javax.swing.JFrame {
             }
         });
 
-        radioBtnRta1.setBackground(new java.awt.Color(255, 255, 192));
-        buttonGroup1.add(radioBtnRta1);
-        radioBtnRta1.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        radioBtnRta1.setText("NITGEN");
+        radioBtnNitgen.setBackground(new java.awt.Color(255, 255, 192));
+        buttonGroup1.add(radioBtnNitgen);
+        radioBtnNitgen.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        radioBtnNitgen.setText("NITGEN");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -278,13 +283,13 @@ public class ConverterView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(radioBtnZkt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(radioBtnRta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(radioBtnRta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(radioBtnNitgen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(txtFromDateDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,7 +302,7 @@ public class ConverterView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(radioBtnRta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(radioBtnRta1)
+                .addComponent(radioBtnNitgen)
                 .addGap(18, 18, 18)
                 .addComponent(btnDeleteAttendenceData, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -404,9 +409,9 @@ public class ConverterView extends javax.swing.JFrame {
             // make final date format for RTA
             String rtaToDate = toDate.substring(4, toDate.length()) + toDate.substring(2, 4) + toDate.substring(0, 2);
             // make final date for nitgen
-            String nitgenFromDate = fromDate.substring(4, fromDate.length()) + "-" + fromDate.substring(2, 4) + "-" + fromDate.substring(0, 2);
+            nitgenFromDate = fromDate.substring(4, fromDate.length()) + "-" + fromDate.substring(2, 4) + "-" + fromDate.substring(0, 2);
             // make final date for nitgen
-            String nitgenToDate = toDate.substring(4, toDate.length()) + "-" + toDate.substring(2, 4) + "-" + toDate.substring(0, 2);
+            nitgenToDate = toDate.substring(4, toDate.length()) + "-" + toDate.substring(2, 4) + "-" + toDate.substring(0, 2);
 
             // check the date is valied
             if (txtFromDate.getText().length() == 10 && txtToDate.getText().length() == 10) {
@@ -441,12 +446,19 @@ public class ConverterView extends javax.swing.JFrame {
     private void btnDeleteAttendenceDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAttendenceDataActionPerformed
         // TODO add your handling code here:        
         DataDelete core = new DataDelete();
-        if (txtFromDateDelete.getText().length() == 10 && txtToDateDelete.getText().length() == 10) {
+        if (txtFromDateDelete.getText().length() == 10 && txtToDateDelete.getText().length() == 10
+                && (radioBtnZkt.isSelected() || radioBtnRta.isSelected() || radioBtnNitgen.isSelected())) {
+
             if (radioBtnZkt.isSelected()) {
                 core.deleteAttendenceDataInAccessDb(txtFromDateDelete.getText(), txtToDateDelete.getText());
             } else if (radioBtnRta.isSelected()) {
                 core.deleteAttendenceFromRmsServer(fromDateDelete, toDateDelete);
+            } else if (radioBtnNitgen.isSelected()) {
+                core.deleteAttendenceFromNitgen(nitgenFromDate, nitgenToDate);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please Select Any Option",
+                    "Select Option", JOptionPane.INFORMATION_MESSAGE);
         }
 
 
@@ -461,6 +473,10 @@ public class ConverterView extends javax.swing.JFrame {
             // make final string
             String finFromDate = tempDate.substring(2, 4) + "/" + tempDate.substring(0, 2) + "/" + tempDate.substring(4, tempDate.length());
             System.out.println(finFromDate);
+            // make final date for nitgen
+            nitgenToDate = tempDate.substring(4, tempDate.length()) + "-" + tempDate.substring(2, 4) + "-" + tempDate.substring(0, 2);
+            System.out.println(nitgenToDate);
+
             txtToDateDelete.setText(finFromDate); // set the date
             toDateDelete = tempDate.substring(4, tempDate.length()) + tempDate.substring(2, 4) + tempDate.substring(0, 2);
             btnDeleteAttendenceData.requestFocus(); // request next work
@@ -477,6 +493,9 @@ public class ConverterView extends javax.swing.JFrame {
             // make final string
             String finFromDate = tempDate.substring(2, 4) + "/" + tempDate.substring(0, 2) + "/" + tempDate.substring(4, tempDate.length());
             System.out.println(finFromDate);
+            // make final date for nitgen
+            nitgenFromDate = tempDate.substring(4, tempDate.length()) + "-" + tempDate.substring(2, 4) + "-" + tempDate.substring(0, 2);
+            System.out.println(nitgenFromDate);
             txtFromDateDelete.setText(finFromDate); // set the date
             fromDateDelete = tempDate.substring(4, tempDate.length()) + tempDate.substring(2, 4) + tempDate.substring(0, 2);
             txtToDateDelete.requestFocus(); // request next work
@@ -540,8 +559,8 @@ public class ConverterView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblMsg;
+    private javax.swing.JRadioButton radioBtnNitgen;
     private javax.swing.JRadioButton radioBtnRta;
-    private javax.swing.JRadioButton radioBtnRta1;
     private javax.swing.JRadioButton radioBtnZkt;
     private javax.swing.JTextField txtFromDate;
     private javax.swing.JTextField txtFromDateDelete;

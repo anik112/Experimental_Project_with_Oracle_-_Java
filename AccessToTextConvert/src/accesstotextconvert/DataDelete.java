@@ -49,7 +49,7 @@ public class DataDelete {
 
         try {
             PreparedStatement statementRms = connAccessRms.prepareCall("delete from data_card where d_card between '" + fromDate + "' and '" + toDate + "';");
-            statementRms.execute();
+            statementRms.executeUpdate();
 
             System.out.println("Data Delete");
             connAccessRms.close();
@@ -65,6 +65,30 @@ public class DataDelete {
                     ":: Date Error :: ", JOptionPane.INFORMATION_MESSAGE);
         }
 
+    }
+    
+    
+    public void deleteAttendenceFromNitgen(String fromDate, String toDate){
+        Connection connNitgen=AccessConnection.dbNITGENconnection();
+        
+        try{
+            PreparedStatement statementNitgen=connNitgen.prepareCall("delete from NGAC_AUTHLOG where NGAC_AUTHLOG.TransactionTime between '"+fromDate+" 01:00:00' and '"+toDate+" 23:59:00'");
+            statementNitgen.executeUpdate();
+            System.out.println("Data Delete");
+            
+            connNitgen.close();
+            statementNitgen.close();
+            
+            JOptionPane.showMessageDialog(
+                    null, " Date wise Attendence Delete Successfully :) ",
+                    ":: Date Delete :: ", JOptionPane.INFORMATION_MESSAGE);
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(
+                    null, " => Check Date Format and Date SQL :) ",
+                    ":: Date Error :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
     }
 
 // unused sql statement

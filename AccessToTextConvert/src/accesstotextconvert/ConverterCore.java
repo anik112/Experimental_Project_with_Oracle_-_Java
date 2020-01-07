@@ -24,7 +24,6 @@ import javax.swing.JOptionPane;
 public class ConverterCore {
 
     private int rowCount = 0;
-    private int maxSize = 0;
 
     private String filePath;
     private String dateForFileName;
@@ -51,7 +50,6 @@ public class ConverterCore {
             ResultSet rs = null;
             PreparedStatement statement = null;
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss a"); // get formatter for format date
-
             if (stateZKT) {
                 getConn = AccessConnection.dbConnection(); // get connection from access database
                 // write SQL for pull data from database
@@ -80,7 +78,6 @@ public class ConverterCore {
             Connection getNitgerConn = null;
             ResultSet resultSetNitgen = null;
             PreparedStatement nitgenStatement = null;
-
             if (stateNITGEN) {
                 getNitgerConn = AccessConnection.dbNITGENconnection();
                 String sql04 = "select [TerminalID],[UserID],[TransactionTime] from "
@@ -93,8 +90,6 @@ public class ConverterCore {
             try {
                 fileWriter = new FileWriter(filePath + fileName); // call fileWriter for get file or create file in system
                 printWriter = new PrintWriter(fileWriter); // call printWriter for write text in file
-
-                maxSize = rs.getRow();
 
                 // check ZKT are aviable
                 if (stateZKT) {
@@ -110,10 +105,10 @@ public class ConverterCore {
                         onlyTime = onlyTime.replace(":", ""); // remove ':' from time
 
                         // Make string format
-                        String finalText = (rs.getString(2) + ":00" + rs.getString(4) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
+                        String finalText = (rs.getString(2) + ":000" + rs.getString(4) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
                         printWriter.println(finalText); // write text in file
 
-                        System.out.println(rs.getString(2) + ":" + rs.getString(4) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
+                        System.out.println(finalText);
                         rowCount++; // row count
                     }
 
@@ -131,7 +126,7 @@ public class ConverterCore {
                         String finalText = ("0" + rtaSet.getString(1) + ":" + rtaSet.getString(2) + ":" + rtaSet.getString(3) + ":" + rtaSet.getString(4) + ":" + "BLANK !!:11");
                         printWriter.println(finalText); // write text in file
 
-                        System.out.println("0" + rtaSet.getString(1) + ":" + rtaSet.getString(2) + ":" + rtaSet.getString(3) + ":" + rtaSet.getString(4) + ":" + "BLANK !!:11");
+                        System.out.println(finalText);
                         rowCount++; // row count
                     }
                     rtaStatement.close(); // close
@@ -160,7 +155,7 @@ public class ConverterCore {
                         System.out.println(finalText);
                         rowCount++;
                     }
-                    
+
                     getNitgerConn.close();
                     nitgenStatement.close();
                     resultSetNitgen.close();
@@ -191,14 +186,6 @@ public class ConverterCore {
 
     public void setRowCount(int rowCount) {
         this.rowCount = rowCount;
-    }
-
-    public int getMaxSize() {
-        return maxSize;
-    }
-
-    public void setMaxSize(int maxSize) {
-        this.maxSize = maxSize;
     }
 
 }
