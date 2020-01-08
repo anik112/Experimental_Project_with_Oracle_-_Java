@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import utility.SetupDatabase;
 
 /**
  *
@@ -65,6 +66,7 @@ public class ConverterView extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtFromDateDelete = new javax.swing.JTextField();
         radioBtnNitgen = new javax.swing.JRadioButton();
+        btnSetup = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -309,24 +311,39 @@ public class ConverterView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnSetup.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnSetup.setText("Setup");
+        btnSetup.setToolTipText("Setup -- SQL Server");
+        btnSetup.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSetup.setContentAreaFilled(false);
+        btnSetup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSetup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetupActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel5))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(btnSetup, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addComponent(btnSetup, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -504,6 +521,11 @@ public class ConverterView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtFromDateDeleteKeyPressed
 
+    private void btnSetupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetupActionPerformed
+        // TODO add your handling code here:
+        new SetupDatabase().setVisible(true);
+    }//GEN-LAST:event_btnSetupActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -542,6 +564,7 @@ public class ConverterView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeleteAttendenceData;
     private javax.swing.JButton btnProcessStart;
+    private javax.swing.JButton btnSetup;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox jCheckNitgenServer;
     private javax.swing.JCheckBox jCheckRTAserver;

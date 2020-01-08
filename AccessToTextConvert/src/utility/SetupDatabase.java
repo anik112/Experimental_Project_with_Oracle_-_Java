@@ -16,11 +16,13 @@
  */
 package utility;
 
+import java.awt.event.KeyEvent;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,16 +54,29 @@ public class SetupDatabase extends javax.swing.JFrame {
         jBtnSave = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTxtPassword = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
+        jTxtDbName = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(100, 100));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 224));
 
-        jLabel1.setText("Server Name:");
+        jLabel1.setText("SQL Server Name:");
 
-        jLabel2.setText("User Name:");
+        jTxtServerName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtServerNameKeyPressed(evt);
+            }
+        });
+
+        jLabel2.setText("SQL Server User Name:");
+
+        jTxtUserName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtUserNameKeyPressed(evt);
+            }
+        });
 
         jBtnSave.setText("Save");
         jBtnSave.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(255, 204, 51), null, null));
@@ -73,7 +88,21 @@ public class SetupDatabase extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Password:");
+        jLabel3.setText("SQL Server Password:");
+
+        jTxtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtPasswordKeyPressed(evt);
+            }
+        });
+
+        jLabel4.setText("SQL Server DB Name:");
+
+        jTxtDbName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtDbNameKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,21 +111,23 @@ public class SetupDatabase extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                     .addComponent(jTxtServerName)
                     .addComponent(jTxtUserName)
                     .addComponent(jTxtPassword)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTxtDbName))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTxtServerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -108,9 +139,13 @@ public class SetupDatabase extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTxtDbName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
                 .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,7 +156,7 @@ public class SetupDatabase extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -129,25 +164,61 @@ public class SetupDatabase extends javax.swing.JFrame {
 
     private void jBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSaveActionPerformed
         // TODO add your handling code here:
-        
-        FileWriter fileWriter;
+
+        FileWriter fileWriter;  // Call FileWriter for write string in text file.
         try {
             fileWriter = new FileWriter("D:\\AccessToTextConvert\\config.txt"); // call fileWriter for get file or create file in system
             PrintWriter printWriter = new PrintWriter(fileWriter); // call printWriter for write text in file
-            
-            printWriter.write("SER="+jTxtServerName.getText()+"\n");
-            printWriter.write("USR="+jTxtUserName.getText()+"\n");
-            PasswordEnqDnq ped=new PWS();
-            String tempPass=ped.passwordEnq(jTxtPassword.getText());
-            printWriter.write("PWS="+tempPass+"\n");
-            
+
+            printWriter.write("SER=" + jTxtServerName.getText() + "\n");
+            printWriter.write("USR=" + jTxtUserName.getText() + "\n");
+            PasswordEnqDnq ped = new PWS();
+            String tempPass = ped.passwordEnq(jTxtPassword.getText());
+            printWriter.write("PWS=" + tempPass + "\n");
+            printWriter.write("SDB=" + jTxtDbName.getText() + "\n");
+
             printWriter.close();
             fileWriter.close();
+
+            JOptionPane.showMessageDialog(
+                    null, " Data Save ",
+                    ":: Date Converting Success :: ", JOptionPane.INFORMATION_MESSAGE);
+
         } catch (IOException ex) {
-            Logger.getLogger(SetupDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(
+                    null, ex.getMessage(),
+                    ":: Check File Or Folder Name :: ", JOptionPane.INFORMATION_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_jBtnSaveActionPerformed
+
+    private void jTxtServerNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtServerNameKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jTxtUserName.requestFocus();
+        }
+    }//GEN-LAST:event_jTxtServerNameKeyPressed
+
+    private void jTxtUserNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtUserNameKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jTxtPassword.requestFocus();
+        }
+    }//GEN-LAST:event_jTxtUserNameKeyPressed
+
+    private void jTxtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtPasswordKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jTxtDbName.requestFocus();
+        }
+    }//GEN-LAST:event_jTxtPasswordKeyPressed
+
+    private void jTxtDbNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtDbNameKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jBtnSave.requestFocus();
+        }
+    }//GEN-LAST:event_jTxtDbNameKeyPressed
 
     /**
      * @param args the command line arguments
@@ -189,7 +260,9 @@ public class SetupDatabase extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTxtDbName;
     private javax.swing.JPasswordField jTxtPassword;
     private javax.swing.JTextField jTxtServerName;
     private javax.swing.JTextField jTxtUserName;

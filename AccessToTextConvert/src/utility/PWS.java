@@ -27,16 +27,16 @@ public class PWS implements PasswordEnqDnq {
         
         String finalStr="";
         int lngSize = planPass.length();
-        System.out.println(planPass);
+        //System.out.println(planPass);
         
         for (int i = 0; i < lngSize; i++) {
             int tempAnsii =(int)planPass.charAt(i);
             tempAnsii += 2;
             char tempChar=(char) tempAnsii;
-            System.out.println(tempChar);
+            //System.out.println(tempChar);
             finalStr+=tempChar;
         }
-        System.out.println(finalStr);
+        //System.out.println(finalStr);
         return finalStr;
     }
 
@@ -44,17 +44,17 @@ public class PWS implements PasswordEnqDnq {
     public String passwordDnq(String planPass) {
         
         String finalStr="";
-        System.out.println(planPass);
+        //System.out.println(planPass);
         int lngSize=planPass.length();
         
         for(int i=0;i<lngSize;i++){
             int tempAnsii =(int)planPass.charAt(i);
             tempAnsii -= 2;
             char tempChar=(char) tempAnsii;
-            System.out.println(tempChar);
+            //System.out.println(tempChar);
             finalStr+=tempChar;
         }
-        System.out.println(finalStr);
+        //System.out.println(finalStr);
         return finalStr;
     }
 
