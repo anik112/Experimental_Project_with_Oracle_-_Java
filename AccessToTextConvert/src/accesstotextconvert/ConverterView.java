@@ -153,7 +153,6 @@ public class ConverterView extends javax.swing.JFrame {
 
         jCheckNitgenServer.setBackground(new java.awt.Color(255, 255, 192));
         jCheckNitgenServer.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jCheckNitgenServer.setSelected(true);
         jCheckNitgenServer.setText("NITGEN");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -313,7 +312,7 @@ public class ConverterView extends javax.swing.JFrame {
 
         btnSetup.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSetup.setText("Setup");
-        btnSetup.setToolTipText("Setup -- SQL Server");
+        btnSetup.setToolTipText("Setup -- Server");
         btnSetup.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSetup.setContentAreaFilled(false);
         btnSetup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -479,7 +478,6 @@ public class ConverterView extends javax.swing.JFrame {
                     "Select Option", JOptionPane.INFORMATION_MESSAGE);
         }
 
-
     }//GEN-LAST:event_btnDeleteAttendenceDataActionPerformed
 
     private void txtToDateDeleteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtToDateDeleteKeyPressed
@@ -537,7 +535,7 @@ public class ConverterView extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

@@ -94,20 +94,21 @@ public class Test {
 ////            System.out.println("-----------------------------");
 //        }
 
-//        PasswordEnqDnq ped = new PWS();
-//
-//        String str = ped.passwordEnq("ABC");
-//        System.out.println(str);
-//        String str02=ped.passwordDnq(str);
-//        System.out.println(str02);
+        PasswordEnqDnq ped = new PWS();
+
+        String str = ped.passwordEnq("0000");
+        System.out.println(str);
+        String str02=ped.passwordDnq(str);
+        System.out.println(str02);
+        
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        try {
+//        try {
             // FileReader fileReader = new FileReader("D:\\AccessToTextConvert\\config.txt");
-            File file=new File("D:\\AccessToTextConvert\\config.txt");
-            Scanner scanner=new Scanner(file);
+//            File file=new File("D:\\AccessToTextConvert\\config.txt");
+//            Scanner scanner=new Scanner(file);
             
 //            System.out.println(scanner.nextLine());
 //            System.out.println(scanner.nextLine());
@@ -116,27 +117,27 @@ public class Test {
 //            String tempDb=scanner.nextLine();
 //            System.out.println(tempDb);
 
-            String a=scanner.nextLine();
-            String b=scanner.nextLine();
-            String c=scanner.nextLine();
-            String d=scanner.nextLine();
-            
-            String serverNameTrim=a.substring(4, a.length());
-            String userNameTrim=b.substring(4, b.length());
-            String passwordTrim=c.substring(4, c.length());
-            String dbNameTrim=d.substring(4, d.length());
-            
-            System.out.println(passwordTrim);
-            PasswordEnqDnq enqDnq=new PWS();
-            passwordTrim=enqDnq.passwordDnq(passwordTrim);
-            
-            System.out.println(serverNameTrim);
-            System.out.println(userNameTrim);
-            System.out.println(passwordTrim);
-            System.out.println(dbNameTrim);
-            
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//            String a=scanner.nextLine();
+//            String b=scanner.nextLine();
+//            String c=scanner.nextLine();
+//            String d=scanner.nextLine();
+//            
+//            String serverNameTrim=a.substring(4, a.length());
+//            String userNameTrim=b.substring(4, b.length());
+//            String passwordTrim=c.substring(4, c.length());
+//            String dbNameTrim=d.substring(4, d.length());
+//            
+//            System.out.println(passwordTrim);
+//            PasswordEnqDnq enqDnq=new PWS();
+//            passwordTrim=enqDnq.passwordDnq(passwordTrim);
+//            
+//            System.out.println(serverNameTrim);
+//            System.out.println(userNameTrim);
+//            System.out.println(passwordTrim);
+//            System.out.println(dbNameTrim);
+//            
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 }

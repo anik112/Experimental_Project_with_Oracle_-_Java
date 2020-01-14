@@ -16,12 +16,16 @@
  */
 package utility;
 
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
-import java.io.FileWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Properties;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,11 +34,74 @@ import javax.swing.JOptionPane;
  */
 public class SetupDatabase extends javax.swing.JFrame {
 
+    private String zktDatabaseLink;
+    private String rtaDatabaseLink;
+    private String serverFile;
+    private String userNameFile;
+    private String passwordFile;
+    private String dbName;
+    private String zktPath;
+    private String rtaPath;
+    private KeyList keyList = new KeyList();
+
     /**
      * Creates new form SetupDatabase
      */
     public SetupDatabase() {
         initComponents();
+
+        holdOldData();
+        jTxtDbName.setText(dbName);
+        jTxtPassword.setText(passwordFile);
+        jTxtServerName.setText(serverFile);
+        jTxtUserName.setText(userNameFile);
+
+    }
+
+    private void holdOldData() {
+
+//        try {
+        try (InputStream input = new FileInputStream("config.properties")) {
+
+            Properties properties = new Properties();
+            properties.load(input);
+            serverFile = properties.getProperty(keyList.KEY_SERVER_NAME);
+            userNameFile = properties.getProperty(keyList.KEY_USER_NAME);
+            passwordFile = properties.getProperty(keyList.KEY_USER_PASSWORD);
+            dbName = properties.getProperty(keyList.KEY_DATABSE_NAME);
+            zktPath = properties.getProperty(keyList.KEY_ZKT_LINK);
+            rtaPath = properties.getProperty(keyList.KEY_RTA_LINK);
+            properties.clear();
+            
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(
+                    null, "Check File Exists? Or Save Information",
+                    ":: File Not Found :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        // call file.
+//            File file = new File("D:\\AccessToTextConvert\\config.txt");
+//            Scanner scan = new Scanner(file); // call scanner class
+//
+//            if (file.exists()) {
+//                while (scan.hasNextLine()) {
+//                    serverFile = scan.nextLine(); // get server name from txt file
+//                    userNameFile = scan.nextLine(); // get user name from txt file
+//                    passwordFile = scan.nextLine(); // get password from txt file
+//                    dbName = scan.nextLine(); // get db name from txt file
+//                    zktPath = scan.nextLine(); // get zkt file path
+//                    rtaPath = scan.nextLine(); // get rta file path
+//
+//                    zktPath = zktPath.substring(4, zktPath.length());
+//                    System.out.println(zktPath);
+//                    rtaPath = rtaPath.substring(4, rtaPath.length());
+//                }
+//                System.out.println(rtaPath);
+//            }
+//            scan.close();
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(SetupDatabase.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**
@@ -56,7 +123,14 @@ public class SetupDatabase extends javax.swing.JFrame {
         jTxtPassword = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         jTxtDbName = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        btnChoseZktDatabaseLink = new javax.swing.JButton();
+        lblFileNameZkt = new javax.swing.JLabel();
+        btnChoseRTAdatabaseLink = new javax.swing.JButton();
+        lblFileNameRta = new javax.swing.JLabel();
 
+        setTitle("Setup");
         setLocation(new java.awt.Point(100, 100));
         setResizable(false);
 
@@ -104,46 +178,97 @@ public class SetupDatabase extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("RTA Database Link");
+
+        jLabel6.setText("ZKT Database Link");
+
+        btnChoseZktDatabaseLink.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        btnChoseZktDatabaseLink.setText("Chose");
+        btnChoseZktDatabaseLink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChoseZktDatabaseLinkActionPerformed(evt);
+            }
+        });
+
+        lblFileNameZkt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        btnChoseRTAdatabaseLink.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        btnChoseRTAdatabaseLink.setText("Chose");
+        btnChoseRTAdatabaseLink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChoseRTAdatabaseLinkActionPerformed(evt);
+            }
+        });
+
+        lblFileNameRta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                    .addComponent(jTxtServerName)
-                    .addComponent(jTxtUserName)
-                    .addComponent(jTxtPassword)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTxtDbName))
-                .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTxtServerName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTxtUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTxtPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblFileNameZkt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnChoseZktDatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jTxtDbName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lblFileNameRta, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnChoseRTAdatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(10, 10, 10))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTxtServerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTxtServerName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtDbName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTxtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jTxtUserName)
+                    .addComponent(lblFileNameZkt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnChoseZktDatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTxtDbName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jTxtPassword)
+                    .addComponent(lblFileNameRta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnChoseRTAdatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -152,11 +277,11 @@ public class SetupDatabase extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -164,30 +289,41 @@ public class SetupDatabase extends javax.swing.JFrame {
 
     private void jBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSaveActionPerformed
         // TODO add your handling code here:
+        PasswordEnqDnq enqDnq=new PWS();
+        
+        if (jTxtServerName.getText() != null) {
 
-        FileWriter fileWriter;  // Call FileWriter for write string in text file.
-        try {
-            fileWriter = new FileWriter("D:\\AccessToTextConvert\\config.txt"); // call fileWriter for get file or create file in system
-            PrintWriter printWriter = new PrintWriter(fileWriter); // call printWriter for write text in file
+            try (OutputStream out = new FileOutputStream("config.properties")) {
 
-            printWriter.write("SER=" + jTxtServerName.getText() + "\n");
-            printWriter.write("USR=" + jTxtUserName.getText() + "\n");
-            PasswordEnqDnq ped = new PWS();
-            String tempPass = ped.passwordEnq(jTxtPassword.getText());
-            printWriter.write("PWS=" + tempPass + "\n");
-            printWriter.write("SDB=" + jTxtDbName.getText() + "\n");
+                Properties properties = new Properties();
+                
+                properties.setProperty(keyList.KEY_SERVER_NAME, jTxtServerName.getText());
+                properties.setProperty(keyList.KEY_USER_NAME, jTxtUserName.getText());
+                properties.setProperty(keyList.KEY_USER_PASSWORD, enqDnq.passwordEnq(jTxtPassword.getText()));
+                properties.setProperty(keyList.KEY_DATABSE_NAME, jTxtDbName.getText());
+                if (zktDatabaseLink==null) {
+                    properties.setProperty(keyList.KEY_ZKT_LINK, zktPath);
+                } else {
+                    properties.setProperty(keyList.KEY_ZKT_LINK, zktDatabaseLink);
+                }
+                if (rtaDatabaseLink==null) {
+                    properties.setProperty(keyList.KEY_RTA_LINK, rtaPath);
+                } else {
+                    properties.setProperty(keyList.KEY_RTA_LINK, rtaDatabaseLink);
+                }
+                
+                properties.store(out, "Update-Database-Info");
+                properties.clear();
 
-            printWriter.close();
-            fileWriter.close();
+                JOptionPane.showMessageDialog(
+                        null, " Data Save ",
+                        ":: Date Converting Success :: ", JOptionPane.INFORMATION_MESSAGE);
 
-            JOptionPane.showMessageDialog(
-                    null, " Data Save ",
-                    ":: Date Converting Success :: ", JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(
-                    null, ex.getMessage(),
-                    ":: Check File Or Folder Name :: ", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(
+                        null, "Check File Exists? " + e.getMessage(),
+                        ":: File Not Found :: ", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
 
     }//GEN-LAST:event_jBtnSaveActionPerformed
@@ -220,6 +356,44 @@ public class SetupDatabase extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTxtDbNameKeyPressed
 
+    private void btnChoseZktDatabaseLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoseZktDatabaseLinkActionPerformed
+        // TODO add your handling code here:
+        try {
+            // File Chooser for choose file location
+            JFileChooser jfc = new JFileChooser();
+            jfc.showDialog(null, "Select"); // set file select button.
+            jfc.setVisible(true); // view file chooser dialog.
+            File filename = jfc.getSelectedFile();
+            String filePath = filename.getAbsolutePath();
+            lblFileNameZkt.setText(filePath);
+            zktDatabaseLink = filePath;
+            System.out.println("File name " + filePath);
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(
+                    null, e.getMessage(),
+                    ":: Check File Is Exists ? ::", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnChoseZktDatabaseLinkActionPerformed
+
+    private void btnChoseRTAdatabaseLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoseRTAdatabaseLinkActionPerformed
+        // TODO add your handling code here:
+        try {
+            // File Chooser for choose file location.
+            JFileChooser jfc = new JFileChooser(); // set file select button.
+            jfc.showDialog(null, "Select"); // view file chooser dialog.
+            jfc.setVisible(true);
+            File filename = jfc.getSelectedFile();
+            String filePath = filename.getAbsolutePath();
+            lblFileNameRta.setText(filePath);
+            rtaDatabaseLink = filePath;
+            System.out.println("File name " + filePath);
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(
+                    null, e.getMessage(),
+                    ":: Check File Is Exists ? ::", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnChoseRTAdatabaseLinkActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -231,7 +405,7 @@ public class SetupDatabase extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -256,15 +430,21 @@ public class SetupDatabase extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChoseRTAdatabaseLink;
+    private javax.swing.JButton btnChoseZktDatabaseLink;
     private javax.swing.JButton jBtnSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTxtDbName;
     private javax.swing.JPasswordField jTxtPassword;
     private javax.swing.JTextField jTxtServerName;
     private javax.swing.JTextField jTxtUserName;
+    private javax.swing.JLabel lblFileNameRta;
+    private javax.swing.JLabel lblFileNameZkt;
     // End of variables declaration//GEN-END:variables
 }
