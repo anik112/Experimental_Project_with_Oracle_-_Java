@@ -42,20 +42,26 @@ public class SetupDatabase extends javax.swing.JFrame {
     private String dbName;
     private String zktPath;
     private String rtaPath;
+    private String extraCardnoAddedZkt;
+    private String extraCardnoAddedRta;
+    private String extraCardnoAddedNitgen;
     private KeyList keyList = new KeyList();
 
     /**
      * Creates new form SetupDatabase
      */
     public SetupDatabase() {
-        initComponents();
-
+        initComponents();     
         holdOldData();
+        
+        PasswordEnqDnq enqDnq=new PWS();
         jTxtDbName.setText(dbName);
-        jTxtPassword.setText(passwordFile);
+        jTxtPassword.setText(enqDnq.passwordDnq(passwordFile));
         jTxtServerName.setText(serverFile);
         jTxtUserName.setText(userNameFile);
-
+        jTxtExtraStringForCardnoRTA.setText(extraCardnoAddedRta);
+        jTxtExtraStringForCardnoZKT.setText(extraCardnoAddedZkt);
+        jTxtExtraStringForCardnoNITGEN.setText(extraCardnoAddedNitgen);
     }
 
     private void holdOldData() {
@@ -71,37 +77,18 @@ public class SetupDatabase extends javax.swing.JFrame {
             dbName = properties.getProperty(keyList.KEY_DATABSE_NAME);
             zktPath = properties.getProperty(keyList.KEY_ZKT_LINK);
             rtaPath = properties.getProperty(keyList.KEY_RTA_LINK);
+            extraCardnoAddedZkt = properties.getProperty(keyList.KEY_CARDNO_EXTRA_ADDED_ZKT);
+            extraCardnoAddedRta = properties.getProperty(keyList.KEY_CARDNO_EXTRA_ADDED_RTA);
+            extraCardnoAddedNitgen = properties.getProperty(keyList.KEY_CARDNO_EXTRA_ADDED_NTGEN);
+
             properties.clear();
-            
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(
                     null, "Check File Exists? Or Save Information",
-                    ":: File Not Found :: ", JOptionPane.INFORMATION_MESSAGE);
+                    ":: File Not Found ::", JOptionPane.INFORMATION_MESSAGE);
         }
-
-        // call file.
-//            File file = new File("D:\\AccessToTextConvert\\config.txt");
-//            Scanner scan = new Scanner(file); // call scanner class
-//
-//            if (file.exists()) {
-//                while (scan.hasNextLine()) {
-//                    serverFile = scan.nextLine(); // get server name from txt file
-//                    userNameFile = scan.nextLine(); // get user name from txt file
-//                    passwordFile = scan.nextLine(); // get password from txt file
-//                    dbName = scan.nextLine(); // get db name from txt file
-//                    zktPath = scan.nextLine(); // get zkt file path
-//                    rtaPath = scan.nextLine(); // get rta file path
-//
-//                    zktPath = zktPath.substring(4, zktPath.length());
-//                    System.out.println(zktPath);
-//                    rtaPath = rtaPath.substring(4, rtaPath.length());
-//                }
-//                System.out.println(rtaPath);
-//            }
-//            scan.close();
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(SetupDatabase.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        
     }
 
     /**
@@ -129,6 +116,12 @@ public class SetupDatabase extends javax.swing.JFrame {
         lblFileNameZkt = new javax.swing.JLabel();
         btnChoseRTAdatabaseLink = new javax.swing.JButton();
         lblFileNameRta = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTxtExtraStringForCardnoRTA = new javax.swing.JTextField();
+        jTxtExtraStringForCardnoZKT = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTxtExtraStringForCardnoNITGEN = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
 
         setTitle("Setup");
         setLocation(new java.awt.Point(100, 100));
@@ -202,74 +195,137 @@ public class SetupDatabase extends javax.swing.JFrame {
 
         lblFileNameRta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jLabel7.setText("Extra String Cardno RTA");
+
+        jTxtExtraStringForCardnoRTA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtExtraStringForCardnoRTAKeyPressed(evt);
+            }
+        });
+
+        jTxtExtraStringForCardnoZKT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtExtraStringForCardnoZKTKeyPressed(evt);
+            }
+        });
+
+        jLabel8.setText("Extra String Cardno ZKT");
+
+        jTxtExtraStringForCardnoNITGEN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtExtraStringForCardnoNITGENKeyPressed(evt);
+            }
+        });
+
+        jLabel9.setText("Extra String Cardno NITGEN");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTxtServerName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTxtPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblFileNameZkt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnChoseZktDatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(6, 6, 6)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jTxtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblFileNameZkt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnChoseZktDatabaseLink))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jTxtExtraStringForCardnoNITGEN, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(92, 92, 92)
+                                    .addComponent(jBtnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jTxtExtraStringForCardnoZKT, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTxtExtraStringForCardnoRTA))))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jTxtServerName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTxtDbName))))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jTxtDbName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(6, 6, 6)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jTxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(6, 6, 6)
                                     .addComponent(lblFileNameRta, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnChoseRTAdatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(10, 10, 10))
+                                    .addComponent(btnChoseRTAdatabaseLink)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTxtServerName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTxtDbName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTxtServerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtDbName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTxtUserName)
-                    .addComponent(lblFileNameZkt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTxtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFileNameZkt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnChoseZktDatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFileNameRta, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChoseRTAdatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel7))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTxtExtraStringForCardnoZKT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtExtraStringForCardnoRTA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTxtPassword)
-                    .addComponent(lblFileNameRta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnChoseRTAdatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtExtraStringForCardnoNITGEN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -289,29 +345,33 @@ public class SetupDatabase extends javax.swing.JFrame {
 
     private void jBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSaveActionPerformed
         // TODO add your handling code here:
-        PasswordEnqDnq enqDnq=new PWS();
-        
+        PasswordEnqDnq enqDnq = new PWS();
+
         if (jTxtServerName.getText() != null) {
 
             try (OutputStream out = new FileOutputStream("config.properties")) {
 
                 Properties properties = new Properties();
-                
+
                 properties.setProperty(keyList.KEY_SERVER_NAME, jTxtServerName.getText());
                 properties.setProperty(keyList.KEY_USER_NAME, jTxtUserName.getText());
                 properties.setProperty(keyList.KEY_USER_PASSWORD, enqDnq.passwordEnq(jTxtPassword.getText()));
                 properties.setProperty(keyList.KEY_DATABSE_NAME, jTxtDbName.getText());
-                if (zktDatabaseLink==null) {
+                properties.setProperty(keyList.KEY_CARDNO_EXTRA_ADDED_ZKT, jTxtExtraStringForCardnoZKT.getText());
+                properties.setProperty(keyList.KEY_CARDNO_EXTRA_ADDED_RTA, jTxtExtraStringForCardnoRTA.getText());
+                properties.setProperty(keyList.KEY_CARDNO_EXTRA_ADDED_NTGEN, jTxtExtraStringForCardnoNITGEN.getText());
+
+                if (zktDatabaseLink == null) {
                     properties.setProperty(keyList.KEY_ZKT_LINK, zktPath);
                 } else {
                     properties.setProperty(keyList.KEY_ZKT_LINK, zktDatabaseLink);
                 }
-                if (rtaDatabaseLink==null) {
+                if (rtaDatabaseLink == null) {
                     properties.setProperty(keyList.KEY_RTA_LINK, rtaPath);
                 } else {
                     properties.setProperty(keyList.KEY_RTA_LINK, rtaDatabaseLink);
                 }
-                
+
                 properties.store(out, "Update-Database-Info");
                 properties.clear();
 
@@ -394,6 +454,18 @@ public class SetupDatabase extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnChoseRTAdatabaseLinkActionPerformed
 
+    private void jTxtExtraStringForCardnoRTAKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtExtraStringForCardnoRTAKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtExtraStringForCardnoRTAKeyPressed
+
+    private void jTxtExtraStringForCardnoZKTKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtExtraStringForCardnoZKTKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtExtraStringForCardnoZKTKeyPressed
+
+    private void jTxtExtraStringForCardnoNITGENKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtExtraStringForCardnoNITGENKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtExtraStringForCardnoNITGENKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -439,8 +511,14 @@ public class SetupDatabase extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTxtDbName;
+    private javax.swing.JTextField jTxtExtraStringForCardnoNITGEN;
+    private javax.swing.JTextField jTxtExtraStringForCardnoRTA;
+    private javax.swing.JTextField jTxtExtraStringForCardnoZKT;
     private javax.swing.JPasswordField jTxtPassword;
     private javax.swing.JTextField jTxtServerName;
     private javax.swing.JTextField jTxtUserName;

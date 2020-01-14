@@ -28,6 +28,21 @@ public class KeyList {
     public final String KEY_DATABSE_NAME = "SDB";
     public final String KEY_ZKT_LINK = "ZFL";
     public final String KEY_RTA_LINK = "RFL";
+    public final String KEY_CARDNO_EXTRA_ADDED_ZKT="CEZ";
+    public final String KEY_CARDNO_EXTRA_ADDED_RTA="CER";
+    public final String KEY_CARDNO_EXTRA_ADDED_NTGEN="CEN";
+
+    public String getKEY_CARDNO_EXTRA_ADDED_ZKT() {
+        return KEY_CARDNO_EXTRA_ADDED_ZKT;
+    }
+
+    public String getKEY_CARDNO_EXTRA_ADDED_RTA() {
+        return KEY_CARDNO_EXTRA_ADDED_RTA;
+    }
+
+    public String getKEY_CARDNO_EXTRA_ADDED_NTGEN() {
+        return KEY_CARDNO_EXTRA_ADDED_NTGEN;
+    }
 
     public String getKEY_SERVER_NAME() {
         return KEY_SERVER_NAME;

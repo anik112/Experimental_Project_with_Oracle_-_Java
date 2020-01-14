@@ -5,8 +5,10 @@
  */
 package accesstotextconvert;
 
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,8 +16,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import utility.KeyList;
 
 /**
  *
@@ -28,6 +32,9 @@ public class ConverterCore {
     private String filePath;
     private String dateForFileName;
     private String fileName;
+    private String addedStringWithCardnoZkt;
+    private String addedStringWithCardnoRta;
+    private String addedStringWithCardnoNitgen;
     private FileWriter fileWriter;
     private PrintWriter printWriter;
 
@@ -42,6 +49,18 @@ public class ConverterCore {
         filePath = "D:\\DATA\\"; // file location
         dateForFileName = toDate.replace("/", ""); // resize date
         fileName = dateForFileName + random.nextInt(9) + ".txt"; // file name
+        KeyList key = new KeyList();
+
+        try (InputStream input = new FileInputStream("config.properties")) {
+            Properties properties = new Properties();
+            properties.load(input);
+            addedStringWithCardnoZkt = properties.getProperty(key.KEY_CARDNO_EXTRA_ADDED_ZKT);
+            addedStringWithCardnoRta = properties.getProperty(key.KEY_CARDNO_EXTRA_ADDED_ZKT);
+            addedStringWithCardnoNitgen = properties.getProperty(key.KEY_CARDNO_EXTRA_ADDED_NTGEN);
+            properties.clear();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // get data from access database
         try {
@@ -105,7 +124,7 @@ public class ConverterCore {
                         onlyTime = onlyTime.replace(":", ""); // remove ':' from time
 
                         // Make string format
-                        String finalText = (rs.getString(2) + ":000" + rs.getString(4) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
+                        String finalText = (rs.getString(2) + ":" + addedStringWithCardnoZkt + rs.getString(4) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
                         printWriter.println(finalText); // write text in file
 
                         System.out.println(finalText);
@@ -123,7 +142,7 @@ public class ConverterCore {
                     // "00"+STRING(NODE_NO)+":"+CARD_NO+":"+D_CARD+":"+T_CARD+":"+"BLANK !!"+":"+"11"
                     while (rtaSet.next()) {
                         // Make string format
-                        String finalText = ("0" + rtaSet.getString(1) + ":" + rtaSet.getString(2) + ":" + rtaSet.getString(3) + ":" + rtaSet.getString(4) + ":" + "BLANK !!:11");
+                        String finalText = ("0" + rtaSet.getString(1) + ":" + addedStringWithCardnoRta + rtaSet.getString(2) + ":" + rtaSet.getString(3) + ":" + rtaSet.getString(4) + ":" + "BLANK !!:11");
                         printWriter.println(finalText); // write text in file
 
                         System.out.println(finalText);
@@ -146,7 +165,7 @@ public class ConverterCore {
                         } else if (terminalId.length() == 2) {
                             terminalId = "0" + terminalId;
                         }
-                        String secrateNo = "000000" + resultSetNitgen.getString(2);
+                        String secrateNo = addedStringWithCardnoNitgen + resultSetNitgen.getString(2);
                         String finDate = timeAndDate.substring(0, 4) + timeAndDate.substring(5, 7) + timeAndDate.substring(8, 10);
                         String finTime = timeAndDate.substring(11, 13) + timeAndDate.substring(14, 16) + timeAndDate.substring(17, 19);
 
