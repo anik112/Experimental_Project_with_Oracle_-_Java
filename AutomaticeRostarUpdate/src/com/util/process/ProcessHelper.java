@@ -106,4 +106,48 @@ public class ProcessHelper {
         return cardList;
     }
     
+    public List<String> getLineNo(){
+        
+        List<String> lineList=new ArrayList<>();
+        
+        try{
+            Connection connection=OraDbConnection.connection();
+            PreparedStatement statement=connection.prepareCall("SELECT DISTINCT LINENO FROM TB_PERSONAL_INFO ORDER BY LINENO ASC");
+            ResultSet rs=statement.executeQuery();
+            
+            while(rs.next()){
+                lineList.add(rs.getString(1));
+            }
+            connection.close();
+            statement.close();
+            rs.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return lineList;
+    }
+    
+    
+    public List<DaoEmpInfo> getEmpInfo(String sectionnm){
+        List<DaoEmpInfo> empList=new ArrayList<>();
+        
+        try{
+            Connection connection=OraDbConnection.connection();
+            PreparedStatement statement=connection.prepareStatement("SELECT CARDNO,EMPNAME,WDAY FROM TB_PERSONAL_INFO WHERE ACTIVE=0 AND SECTIONNM='"+sectionnm+"'");
+            ResultSet rs=statement.executeQuery();
+            
+            while(rs.next()){
+                DaoEmpInfo info=new DaoEmpInfo();
+                info.setCardno(rs.getString(1));
+                info.setEmpName(rs.getString(2));
+                info.setEmpWday(rs.getString(3));
+                empList.add(info);
+            }
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return empList;
+    }
+    
 }

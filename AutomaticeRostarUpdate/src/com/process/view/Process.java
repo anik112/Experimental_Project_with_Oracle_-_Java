@@ -5,7 +5,12 @@
  */
 package com.process.view;
 
+import com.util.process.DaoEmpInfo;
 import com.util.process.ProcessHelper;
+import com.util.process.WdayList;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +28,8 @@ public class Process extends javax.swing.JFrame {
     private final int DPT_CHECK = 1;
     private final int SEC_CHECK = 2;
     private final int CARDNO_CHECK = 3;
+    private final int LINE_NO_CHECK=4;
+    private final int SHIFT_CHECK=5;
 
     /**
      * Creates new form Process
@@ -58,8 +65,8 @@ public class Process extends javax.swing.JFrame {
         txtCardno = new javax.swing.JTextField();
         txtLineNo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        comboShift = new javax.swing.JComboBox<>();
 
         jPanSearch.setBackground(new java.awt.Color(64, 192, 224));
 
@@ -94,7 +101,6 @@ public class Process extends javax.swing.JFrame {
         tblShowData.setIntercellSpacing(new java.awt.Dimension(2, 2));
         tblShowData.setOpaque(false);
         tblShowData.setRowHeight(20);
-        tblShowData.setRowMargin(2);
         tblShowData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblShowDataMouseClicked(evt);
@@ -207,19 +213,29 @@ public class Process extends javax.swing.JFrame {
         txtLineNo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         txtLineNo.setMargin(new java.awt.Insets(4, 4, 4, 4));
         txtLineNo.setName(""); // NOI18N
+        txtLineNo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtLineNoMouseClicked(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Shift:");
 
-        jTextField7.setBackground(new java.awt.Color(64, 192, 224));
-        jTextField7.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        jTextField7.setToolTipText("");
-        jTextField7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        jTextField7.setMargin(new java.awt.Insets(4, 4, 4, 4));
-        jTextField7.setName(""); // NOI18N
-
         jButton1.setText("Auto Update");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        comboShift.setBackground(new java.awt.Color(64, 192, 224));
+        comboShift.setEditable(true);
+        comboShift.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        comboShift.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "G", "A", "B", "C", "D", "AA", "BB" }));
+        comboShift.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        comboShift.setVerifyInputWhenFocusTarget(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -255,7 +271,7 @@ public class Process extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtCardno, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtLineNo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(comboShift, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -284,10 +300,10 @@ public class Process extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboShift, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(44, 44, 44))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -323,15 +339,25 @@ public class Process extends javax.swing.JFrame {
         returnValue = dtm.getValueAt(id, NORMAL).toString();
         System.out.println(returnValue);
 
-        if (check == COMPANY_CHECK) {
-            txtCompanyName.setText(returnValue);
-        } else if (check == DPT_CHECK) {
-            txtDepartment.setText(returnValue);
-        } else if (check == SEC_CHECK) {
-            txtSectionNm.setText(returnValue);
-        } else if (check == CARDNO_CHECK) {
-            String[] str=returnValue.split(",");
-            txtCardno.setText(str[0]);
+        switch (check) {
+            case COMPANY_CHECK:
+                txtCompanyName.setText(returnValue);
+                break;
+            case DPT_CHECK:
+                txtDepartment.setText(returnValue);
+                break;
+            case SEC_CHECK:
+                txtSectionNm.setText(returnValue);
+                break;
+            case CARDNO_CHECK:
+                String[] str=returnValue.split(",");
+                txtCardno.setText(str[0]);
+                break;
+            case LINE_NO_CHECK:
+                txtLineNo.setText(returnValue);
+                break;
+            default:
+                break;
         }
         jf.hide();
     }//GEN-LAST:event_tblShowDataMouseClicked
@@ -365,6 +391,44 @@ public class Process extends javax.swing.JFrame {
             runFrem(ph.getCardNo());
         }
     }//GEN-LAST:event_txtCardnoMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        // TODO add your handling code here:
+        ProcessHelper ph=new ProcessHelper();
+        WdayList wdayList=new WdayList();
+        
+        List<DaoEmpInfo> empList=new ArrayList<>();
+        empList=ph.getEmpInfo(txtSectionNm.getText());
+        System.out.println(empList);
+        Calendar calendar=Calendar.getInstance();
+        System.out.println(calendar);
+        int dateYear=calendar.get(9);
+        int dateMonth=calendar.get(10);
+        int dateDay=calendar.get(13);
+        System.out.println(dateDay+"/"+dateMonth+"/"+dateYear);
+        
+        String toDayis=wdayList.getDayNameFromDayNumber(calendar.get(7));
+        
+        for(int i=0;i<empList.size();i++){
+            if(empList.get(i).getEmpWday().equals(toDayis)){
+                System.out.println("=> "+empList.get(i).getCardno());
+            }
+            System.out.println("---"+empList.get(i).getEmpName());
+        }
+                
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtLineNoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLineNoMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            check = LINE_NO_CHECK;
+            ProcessHelper ph = new ProcessHelper();
+            runFrem(ph.getLineNo());
+        }
+        
+    }//GEN-LAST:event_txtLineNoMouseClicked
 
     // Show list of data
     private void runFrem(List<String> list) {
@@ -423,6 +487,7 @@ public class Process extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboShift;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -434,7 +499,6 @@ public class Process extends javax.swing.JFrame {
     private javax.swing.JPanel jPanSearch;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTable tblShowData;
     private javax.swing.JTextField txtCardno;
     private javax.swing.JTextField txtCompanyName;
