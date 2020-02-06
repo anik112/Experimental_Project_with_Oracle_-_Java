@@ -6,9 +6,9 @@
 package com.filefinder.view;
 
 import com.filefinder.utility.DaoFileNameList;
+import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,7 +30,7 @@ public class MainScreen extends javax.swing.JFrame {
     private List<DaoFileNameList> nameList = new ArrayList<>();
     private String lists[];
     private File fileList[];
-    private String fileWorkingPath = "D:\\Req._Change\\";
+    private final String fileWorkingPath = "D:\\Req._Change\\";
     private SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY");
     private String selectedFilePath;
     private int selectedFileIndex;
@@ -39,7 +40,16 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
-        showFile();
+
+        File f = new File(fileWorkingPath);
+        if (f.exists()) {
+            showFile();
+        } else {
+            JOptionPane.showMessageDialog(
+                    null, " Can't find the path : " + fileWorkingPath,
+                    "** Error **", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }
 
     /**
@@ -55,14 +65,23 @@ public class MainScreen extends javax.swing.JFrame {
         tblShowFileList = new javax.swing.JTable();
         comboShowComapnyList = new javax.swing.JComboBox<>();
         btnSubmit = new javax.swing.JButton();
-        comboShowReqDate = new javax.swing.JComboBox<>();
+        lblShowDate = new javax.swing.JLabel();
+        btnRefresh = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        menuItemRules = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("File Management System From VSI");
+        setLocation(new java.awt.Point(200, 100));
+        setPreferredSize(new java.awt.Dimension(1100, 600));
 
         tblShowFileList.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tblShowFileList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "SL", "Company", "Req Date", "Check"
@@ -96,9 +115,10 @@ public class MainScreen extends javax.swing.JFrame {
 
         comboShowComapnyList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         comboShowComapnyList.setMaximumRowCount(100);
-        comboShowComapnyList.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboShowComapnyListActionPerformed(evt);
+        comboShowComapnyList.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        comboShowComapnyList.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboShowComapnyListItemStateChanged(evt);
             }
         });
 
@@ -110,41 +130,170 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        comboShowReqDate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        comboShowReqDate.setMaximumRowCount(100);
+        lblShowDate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblShowDate.setForeground(new java.awt.Color(255, 0, 0));
+        lblShowDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblShowDate.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+
+        btnRefresh.setFont(new java.awt.Font("Candara", 1, 11)); // NOI18N
+        btnRefresh.setForeground(new java.awt.Color(255, 0, 0));
+        btnRefresh.setText("Ref");
+        btnRefresh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 153), 3));
+        btnRefresh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Candara", 3, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel1.setText("@ Vistasoft IT Bangladesh Ltd. Dv-by-(Pranta)");
+
+        jMenu1.setText("Utility");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem1.setText("Refresh");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        menuItemRules.setText("Rules");
+        menuItemRules.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemRulesActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuItemRules);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(comboShowComapnyList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1072, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(comboShowComapnyList, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboShowReqDate, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(lblShowDate, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comboShowComapnyList, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                        .addComponent(comboShowReqDate)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lblShowDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRefresh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSubmit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboShowComapnyList, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+
+        String texts[] = comboShowComapnyList.getSelectedItem().toString().split(" ");
+        selectedFileIndex = Integer.parseInt(texts[0]);
+        for (int i = 0; i < nameList.size(); i++) {
+            if (nameList.get(i).getSlNo() == selectedFileIndex) {
+                selectedFilePath = fileWorkingPath + nameList.get(i).getFileName() + "\\" + texts[2] + "\\log.txt";
+                //System.out.println(nameList.get(i).getFileName());
+                //System.out.println(selectedFilePath);
+                try {
+                    PrintWriter pw = new PrintWriter(selectedFilePath);
+                    pw.println("OK");
+                    pw.close();
+
+                    JOptionPane.showMessageDialog(
+                            null, "Job submitted :: ",
+                            "** Success **", JOptionPane.INFORMATION_MESSAGE);
+
+                    refreshProcess();
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(
+                            null, "Job not submitted :: " + ex.getMessage(),
+                            "** Error **", JOptionPane.INFORMATION_MESSAGE);
+                }
+                break;
+            }
+        }
+
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void tblShowFileListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblShowFileListMouseClicked
+        // TODO add your handling code here:
+        String loc = fileWorkingPath + nameList.get(tblShowFileList.getSelectedRow()).getFileName() + "\\";
+        //System.out.println("\n=> " + loc);
+        new PendingList(loc).setVisible(true);
+
+    }//GEN-LAST:event_tblShowFileListMouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        refreshProcess();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void refreshProcess() {
+        DefaultTableModel modelTbl = (DefaultTableModel) tblShowFileList.getModel();
+        modelTbl.setRowCount(0);
+        comboShowComapnyList.removeAllItems();
+        nameList = new ArrayList<>();
+        lists = null;
+        fileList = null;
+        selectedFilePath = "";
+        selectedFileIndex = 0;
+
+        showFile();
+    }
+
+
+    private void comboShowComapnyListItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboShowComapnyListItemStateChanged
+        // TODO add your handling code here:
+        if (comboShowComapnyList.getSelectedItem() != null) {
+            String texts[] = comboShowComapnyList.getSelectedItem().toString().split(" ");
+            //System.out.println("\n" + texts[0] + " -> " + texts[1] + " -> " + texts[2] + "\n");
+            int fileIndex = Integer.parseInt(texts[0]);
+
+            File tempFile = new File(fileWorkingPath + texts[1] + "\\" + texts[2]);
+            if (tempFile.exists()) {
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY");
+                lblShowDate.setText(format.format(tempFile.lastModified()));
+            }
+        }
+    }//GEN-LAST:event_comboShowComapnyListItemStateChanged
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        refreshProcess();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void menuItemRulesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRulesActionPerformed
+        // TODO add your handling code here:
+        new Rules().setVisible(true);
+    }//GEN-LAST:event_menuItemRulesActionPerformed
 
     public List<DaoFileNameList> findFile() {
 
@@ -156,7 +305,7 @@ public class MainScreen extends javax.swing.JFrame {
         for (int i = 0; i < lists.length; i++) {
             DaoFileNameList dfnl = new DaoFileNameList();
             Date date = new Date(fileList[i].lastModified());
-            System.out.println(lists[i] + "   Date: " + format.format(date));
+            //System.out.println(lists[i] + "   Date: " + format.format(date));
             dfnl.setSlNo(i);
             dfnl.setFileName(lists[i]);
             dfnl.setFileModifactionDate(date);
@@ -164,86 +313,93 @@ public class MainScreen extends javax.swing.JFrame {
             try {
                 String path = fileWorkingPath + lists[i] + "\\log.txt";
                 File f = new File(path);
+
                 Scanner scanner = new Scanner(f);
-                status = scanner.nextLine();
-                System.out.println(status);
+                if (scanner.nextLine().equals("OK")) {
+                    status = "Submitted";
+                } else {
+                    status = "Pending";
+                }
+                //System.out.println(status);             
                 scanner.close();
+
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
             dfnl.setIsSubmited(status);
-
             nameList.add(dfnl);
         }
         return nameList;
     }
 
-    
-    
     public void showFile() {
         List<DaoFileNameList> dfnls = findFile();
         DefaultTableModel model = (DefaultTableModel) tblShowFileList.getModel();
         Object row[] = new Object[4];
 
-        for (int i = 0; i < dfnls.size(); i++) {
-            row[0] = dfnls.get(i).getSlNo();
-            row[1] = dfnls.get(i).getFileName();
-            row[2] = format.format(dfnls.get(i).getFileModifactionDate());
-            row[3] = dfnls.get(i).getIsSubmited();
-            model.addRow(row);
-            comboShowComapnyList.addItem(dfnls.get(i).getSlNo() + " " + dfnls.get(i).getFileName());
-            comboShowReqDate.addItem(format.format(dfnls.get(i).getFileModifactionDate()));
+        try {
+            for (int i = 0; i < dfnls.size(); i++) {
+                row[0] = dfnls.get(i).getSlNo();
+                row[1] = dfnls.get(i).getFileName();
+                row[2] = format.format(dfnls.get(i).getFileModifactionDate());
+                row[3] = dfnls.get(i).getIsSubmited();
+                row[3] = dfnls.get(i).getIsSubmited();
+                model.addRow(row);
+
+                File subFileLink = new File(fileWorkingPath + dfnls.get(i).getFileName());
+                String subFileName[] = subFileLink.list();
+
+                File checkerFileLink = new File(fileWorkingPath + dfnls.get(i).getFileName() + "\\log.txt");
+                if (!checkerFileLink.exists()) {
+                    PrintWriter pw = new PrintWriter(checkerFileLink);
+                    pw.println("PND");
+                    pw.close();
+                    //System.out.println("Link: " + path);
+                }
+
+                File cFile[] = subFileLink.listFiles();
+                int lntOfCFile = cFile.length;
+                //System.out.println(lntOfCFile);
+                int counter = 0;
+
+                for (int j = 0; j < cFile.length; j++) {
+                    if (cFile[j].isDirectory()) {
+                        File cFileCheck = new File(cFile[j] + "\\log.txt");
+                        if (!cFileCheck.exists()) {
+                            PrintWriter pw = new PrintWriter(cFileCheck);
+                            pw.println("PND");
+                            pw.close();
+                            //System.out.println("Link: " + path);
+                        } else {
+                            Scanner scanner = new Scanner(cFileCheck);
+                            if ("PND".equals(scanner.nextLine())) {
+                                comboShowComapnyList.addItem(dfnls.get(i).getSlNo() + " " + dfnls.get(i).getFileName() + " " + subFileName[j]);
+                            } else {
+                                counter++;
+                                //System.out.println("-->> "+counter);
+                            }
+                        }
+                    }
+                }
+
+                if ((lntOfCFile - 1) == counter) {
+                    PrintWriter pw = new PrintWriter(checkerFileLink);
+                    pw.println("OK");
+                    pw.close();
+                } else {
+                    PrintWriter pw = new PrintWriter(checkerFileLink);
+                    pw.println("PND");
+                    pw.close();
+                }
+
+//            comboShowComapnyList.addItem(dfnls.get(i).getSlNo() + " " + dfnls.get(i).getFileName());
+//            comboShowReqDate.addItem(format.format(dfnls.get(i).getFileModifactionDate()));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
 
     }
-
-
-    private void comboShowComapnyListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboShowComapnyListActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboShowComapnyListActionPerformed
-
-    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        // TODO add your handling code here:
-
-        String texts[] = comboShowComapnyList.getSelectedItem().toString().split(" ");
-        selectedFileIndex = Integer.parseInt(texts[0]);
-        for (int i = 0; i < nameList.size(); i++) {
-            if (nameList.get(i).getSlNo() == selectedFileIndex) {
-                selectedFilePath = fileWorkingPath + nameList.get(i).getFileName() + "\\log.txt";
-                System.out.println(nameList.get(i).getFileName());
-                System.out.println(selectedFilePath);
-                try {
-                    PrintWriter pw = new PrintWriter(selectedFilePath);
-                    pw.println("OK");
-                    pw.println("OK");
-                    pw.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                break;
-            }
-        }
-
-        try {
-            File f = new File(selectedFilePath);
-            Scanner scanner = new Scanner(f);
-            System.out.println(scanner.nextLine());
-            System.out.println(scanner.nextLine());
-            scanner.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
-    }//GEN-LAST:event_btnSubmitActionPerformed
-
-    private void tblShowFileListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblShowFileListMouseClicked
-        // TODO add your handling code here:
-        String loc = fileWorkingPath + nameList.get(tblShowFileList.getSelectedRow()-1).getFileName() + "\\";
-        System.out.println("\n=> "+loc);
-        new PanddingList(loc).setVisible(true);
-
-    }//GEN-LAST:event_tblShowFileListMouseClicked
 
     /**
      * @param args the command line arguments
@@ -256,7 +412,7 @@ public class MainScreen extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -281,10 +437,16 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JComboBox<String> comboShowComapnyList;
-    private javax.swing.JComboBox<String> comboShowReqDate;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblShowDate;
+    private javax.swing.JMenuItem menuItemRules;
     private javax.swing.JTable tblShowFileList;
     // End of variables declaration//GEN-END:variables
 }

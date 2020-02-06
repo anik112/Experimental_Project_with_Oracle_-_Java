@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author VSI-ANIK
  */
-public class PanddingList extends javax.swing.JFrame {
+public class PendingList extends javax.swing.JFrame {
 
     private SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY");
     private String tempFilePath;
@@ -27,7 +27,7 @@ public class PanddingList extends javax.swing.JFrame {
      *
      * @param filePath
      */
-    public PanddingList(String filePath) {
+    public PendingList(String filePath) {
         initComponents();
         tempFilePath = filePath;
         System.out.println("**-> " + tempFilePath);
@@ -46,6 +46,10 @@ public class PanddingList extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPanddingList = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("View Of Pending Folder");
+        setLocation(new java.awt.Point(200, 100));
 
         tblPanddingList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -86,20 +90,20 @@ public class PanddingList extends javax.swing.JFrame {
 
         for (int i = 0; i < modFile.length; i++) {
             String workingPath = tempFilePath + modFile[i].getName() + "\\log.txt";
-            System.out.println("** " + workingPath + "       " + modFile[i].getName());
+            //System.out.println("** " + workingPath + "       " + modFile[i].getName());
             try {
                 File f = new File(workingPath);
                 if (f.exists()) {
                     Scanner scanner = new Scanner(f);
                     if ("PND".equals(scanner.nextLine())) {
-                        System.out.println(modFile[i].getName());
+                        //System.out.println(modFile[i].getName());
                         row[0] = modFile[i].getName();
                         row[1] = format.format(modFile[i].lastModified());
                         model.addRow(row);
                     }
                 }
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(PanddingList.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PendingList.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
