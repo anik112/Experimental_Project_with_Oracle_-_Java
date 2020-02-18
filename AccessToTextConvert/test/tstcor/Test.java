@@ -16,21 +16,9 @@
  */
 package tstcor;
 
-import accesstotextconvert.AccessConnection;
-import java.io.*;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import utility.PWS;
-import utility.PasswordEnqDnq;
 
 /**
  *
@@ -40,7 +28,7 @@ public class Test {
 
     public static void main(String[] args) throws SQLException {
 
-        try {
+//        try {
             //        String rtaFromDate="20191122";
 //        String rtaToDate="20191123";
 //        
@@ -94,16 +82,16 @@ public class Test {
 ////            System.out.println("-----------------------------");
 //        }
 
-        PasswordEnqDnq ped = new PWS();
-
-        String str = ped.passwordEnq("0000");
-        System.out.println(str);
-        String str02=ped.passwordDnq(str);
-        System.out.println(str02);
-        
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        PasswordEnqDnq ped = new PWS();
+//
+//        String str = ped.passwordEnq("0000");
+//        System.out.println(str);
+//        String str02=ped.passwordDnq(str);
+//        System.out.println(str02);
+//        
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
 //        try {
             // FileReader fileReader = new FileReader("D:\\AccessToTextConvert\\config.txt");
@@ -126,7 +114,7 @@ public class Test {
 //            String userNameTrim=b.substring(4, b.length());
 //            String passwordTrim=c.substring(4, c.length());
 //            String dbNameTrim=d.substring(4, d.length());
-//            
+//           
 //            System.out.println(passwordTrim);
 //            PasswordEnqDnq enqDnq=new PWS();
 //            passwordTrim=enqDnq.passwordDnq(passwordTrim);
@@ -139,5 +127,12 @@ public class Test {
 //        } catch (FileNotFoundException ex) {
 //            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
 //        }
+
+
+        Date date=new Date(System.currentTimeMillis());
+        System.out.println(date.getDate());
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(date);
+        System.out.println();
     }
 }
