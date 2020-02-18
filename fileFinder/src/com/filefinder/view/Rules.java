@@ -46,7 +46,7 @@ public class Rules extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setText("How to make folder name?\nAns: Please make folder name without \" \"(Space). And make sure every name different \n     from each other.\n\nHow to store data in folder?\nAns: 1st you download the file then make a folder in destination and put downloaded\n     file in folder. When you have done,  run program and click \"Ref\" button.");
+        jTextArea1.setText("How to make folder name?\nAns: Please make folder name without \" \"(Space). And make sure every \n     name different from each other.\n\nHow to store data in folder?\nAns: 1st you download the file then make a folder in destination and put \n     downloaded file in folder. When you have done,  \n     run program and click \"Ref\" button.");
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

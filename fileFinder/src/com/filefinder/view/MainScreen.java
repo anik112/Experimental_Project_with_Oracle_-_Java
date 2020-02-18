@@ -30,7 +30,7 @@ public class MainScreen extends javax.swing.JFrame {
     private List<DaoFileNameList> nameList = new ArrayList<>();
     private String lists[];
     private File fileList[];
-    private final String fileWorkingPath = "D:\\Req._Change\\";
+    private final String fileWorkingPath = "\\\\192.168.1.210\\Req._Change\\";
     private SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY");
     private String selectedFilePath;
     private int selectedFileIndex;
@@ -71,6 +71,7 @@ public class MainScreen extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        menuItemNotice = new javax.swing.JMenuItem();
         menuItemRules = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -160,6 +161,14 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem1);
+
+        menuItemNotice.setText("Notice");
+        menuItemNotice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemNoticeActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuItemNotice);
 
         menuItemRules.setText("Rules");
         menuItemRules.addActionListener(new java.awt.event.ActionListener() {
@@ -294,6 +303,13 @@ public class MainScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Rules().setVisible(true);
     }//GEN-LAST:event_menuItemRulesActionPerformed
+
+    private void menuItemNoticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemNoticeActionPerformed
+        // TODO add your handling code here:
+        Notice notice=new Notice();
+        notice.showNotice(fileWorkingPath+"notice\\notice\\notice.txt");
+        notice.setVisible(true);
+    }//GEN-LAST:event_menuItemNoticeActionPerformed
 
     public List<DaoFileNameList> findFile() {
 
@@ -446,6 +462,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblShowDate;
+    private javax.swing.JMenuItem menuItemNotice;
     private javax.swing.JMenuItem menuItemRules;
     private javax.swing.JTable tblShowFileList;
     // End of variables declaration//GEN-END:variables

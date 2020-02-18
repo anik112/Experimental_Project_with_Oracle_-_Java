@@ -58,7 +58,15 @@ public class PendingList extends javax.swing.JFrame {
             new String [] {
                 "File Name", "Mod Date"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblPanddingList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
