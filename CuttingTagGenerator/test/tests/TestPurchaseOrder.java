@@ -37,6 +37,8 @@ public class TestPurchaseOrder {
     
     public void testMarker(){
         MarkerPlan plan=new MarkerPlan();
+        
+        plan.setStyleName("");
     }
     
 }

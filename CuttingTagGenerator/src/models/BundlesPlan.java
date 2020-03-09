@@ -22,6 +22,15 @@ public class BundlesPlan {
     private String partsName;
     private int serialTo;
     private int serialFrom;
+    private int qty;
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
 
     public int getId() {
         return id;
