@@ -20,7 +20,7 @@ public class DBConnection {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             //"jdbc:oracle:thin:@localhost:1521:zktbiotime","zktadmin","Admin007
-            Connection connOra = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:payroll","cuttingPlan", "cuttingPlan");
+            Connection connOra = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:payroll","tagGenerator", "tagGenerator");
             //System.out.println("::: It's Works ---> Oracle :::");
             return connOra;
         } catch (Exception e) {

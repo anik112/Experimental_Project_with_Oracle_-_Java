@@ -9,6 +9,7 @@ import core.GetFromDatabase;
 import core.StoreInDatabase;
 import java.util.ArrayList;
 import java.util.List;
+import models.MarkerPlan;
 import models.PurchaseOrder;
 import service.DataStore;
 import service.DataView;
@@ -62,6 +63,35 @@ public class CuttingGUI extends javax.swing.JFrame {
         btnPurchaseOrderEdit = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         comboFactoryName = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
+        comboStyleNameForMarkerPlan = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        comboPoNumberForMarkerPlan = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        txtEntryStdPlyHight = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtEntryTableLength = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtEntryYY = new javax.swing.JTextField();
+        txtEntryXXS = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        txtEntryXS = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtEntryS = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        txtEntryM = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        txtEntryL = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        txtEntryXL = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        txtEntryXXL = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        txtEntryTotal = new javax.swing.JTextField();
+        btnAddMarkerPlan = new javax.swing.JButton();
+        btnViewMarkerPlan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -152,17 +182,15 @@ public class CuttingGUI extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("PO Number:");
 
-        comboBuyerName.setBackground(new java.awt.Color(204, 255, 255));
+        comboBuyerName.setBackground(new java.awt.Color(153, 255, 255));
         comboBuyerName.setMaximumRowCount(100);
-        comboBuyerName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select option" }));
 
         jLabel4.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Style Name:");
 
-        comboStyleName.setBackground(new java.awt.Color(204, 255, 255));
+        comboStyleName.setBackground(new java.awt.Color(153, 255, 255));
         comboStyleName.setMaximumRowCount(100);
-        comboStyleName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Option" }));
         comboStyleName.setToolTipText("");
 
         jLabel5.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
@@ -181,20 +209,30 @@ public class CuttingGUI extends javax.swing.JFrame {
 
         txtEntryCargoReciveDate.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
+        btnPurchaseOrdarSubmit.setBackground(new java.awt.Color(255, 255, 255));
+        btnPurchaseOrdarSubmit.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         btnPurchaseOrdarSubmit.setText("Submit");
+        btnPurchaseOrdarSubmit.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnPurchaseOrdarSubmit.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnPurchaseOrdarSubmitFocusGained(evt);
+            }
+        });
         btnPurchaseOrdarSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPurchaseOrdarSubmitActionPerformed(evt);
             }
         });
 
+        btnPurchaseOrderEdit.setBackground(new java.awt.Color(255, 255, 255));
+        btnPurchaseOrderEdit.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         btnPurchaseOrderEdit.setText("Edit");
 
         jLabel8.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Factory Name:");
 
-        comboFactoryName.setBackground(new java.awt.Color(204, 255, 255));
+        comboFactoryName.setBackground(new java.awt.Color(153, 255, 255));
         comboFactoryName.setMaximumRowCount(100);
         comboFactoryName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select option", "Vistasoft IT Bangladesh Ltd." }));
 
@@ -210,45 +248,35 @@ public class CuttingGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnPurchaseOrderEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panSetBuyerInfo5Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(comboBuyerName, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
+                        .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboStyleName, 0, 159, Short.MAX_VALUE))
-                    .addGroup(panSetBuyerInfo5Layout.createSequentialGroup()
-                        .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panSetBuyerInfo5Layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtEntryCargoReciveDate, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panSetBuyerInfo5Layout.createSequentialGroup()
-                                .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
-                                .addGap(10, 10, 10)
-                                .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEntryPoNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEntryFabricAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panSetBuyerInfo5Layout.createSequentialGroup()
                                 .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panSetBuyerInfo5Layout.createSequentialGroup()
-                                        .addGap(43, 43, 43)
-                                        .addComponent(jLabel6))
-                                    .addGroup(panSetBuyerInfo5Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel2)))
+                                    .addComponent(txtEntryFabricAmount)
+                                    .addComponent(txtEntryCargoReciveDate))
+                                .addGap(28, 28, 28)
+                                .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panSetBuyerInfo5Layout.createSequentialGroup()
+                                .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(comboBuyerName, 0, 134, Short.MAX_VALUE)
+                                    .addComponent(txtEntryPoNumber))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEntryIssueDate, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtEntryFirstCuttingDate)))
-                            .addGroup(panSetBuyerInfo5Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboFactoryName, 0, 1, Short.MAX_VALUE)))))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboFactoryName, 0, 266, Short.MAX_VALUE)
+                            .addComponent(txtEntryFirstCuttingDate)
+                            .addComponent(comboStyleName, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtEntryIssueDate, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         panSetBuyerInfo5Layout.setVerticalGroup(
@@ -271,11 +299,13 @@ public class CuttingGUI extends javax.swing.JFrame {
                         .addComponent(txtEntryPoNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEntryFabricAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEntryIssueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtEntryIssueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtEntryFabricAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,11 +313,266 @@ public class CuttingGUI extends javax.swing.JFrame {
                         .addComponent(txtEntryCargoReciveDate, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(comboFactoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(21, 21, 21)
                 .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPurchaseOrdarSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                    .addComponent(btnPurchaseOrderEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnPurchaseOrderEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
                 .addContainerGap())
+        );
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "  Create Marker Plan  ", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+
+        comboStyleNameForMarkerPlan.setBackground(new java.awt.Color(153, 255, 255));
+        comboStyleNameForMarkerPlan.setMaximumRowCount(100);
+        comboStyleNameForMarkerPlan.setToolTipText("");
+
+        jLabel9.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel9.setText("Style Name:");
+
+        comboPoNumberForMarkerPlan.setBackground(new java.awt.Color(153, 255, 255));
+        comboPoNumberForMarkerPlan.setMaximumRowCount(100);
+        comboPoNumberForMarkerPlan.setToolTipText("");
+
+        jLabel10.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("PO Number:");
+
+        txtEntryStdPlyHight.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryStdPlyHight.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel11.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Std Ply Hight:");
+
+        txtEntryTableLength.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryTableLength.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel12.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("YY");
+
+        jLabel13.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("Tabel Length:");
+
+        txtEntryYY.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryYY.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtEntryXXS.setBackground(new java.awt.Color(255, 255, 153));
+        txtEntryXXS.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryXXS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel14.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("XXS");
+
+        txtEntryXS.setBackground(new java.awt.Color(255, 255, 153));
+        txtEntryXS.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryXS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel15.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("XS");
+
+        txtEntryS.setBackground(new java.awt.Color(255, 255, 153));
+        txtEntryS.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel16.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("S");
+
+        txtEntryM.setBackground(new java.awt.Color(255, 255, 153));
+        txtEntryM.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryM.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel17.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("M");
+
+        txtEntryL.setBackground(new java.awt.Color(255, 255, 153));
+        txtEntryL.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryL.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel18.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("L");
+
+        jLabel19.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("XL");
+
+        txtEntryXL.setBackground(new java.awt.Color(255, 255, 153));
+        txtEntryXL.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryXL.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel20.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("XXL");
+
+        txtEntryXXL.setBackground(new java.awt.Color(255, 255, 153));
+        txtEntryXXL.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryXXL.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel21.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("TOTAL");
+
+        txtEntryTotal.setEditable(false);
+        txtEntryTotal.setBackground(new java.awt.Color(0, 255, 153));
+        txtEntryTotal.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        btnAddMarkerPlan.setBackground(new java.awt.Color(255, 255, 255));
+        btnAddMarkerPlan.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        btnAddMarkerPlan.setText("Add Plan");
+        btnAddMarkerPlan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnAddMarkerPlan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddMarkerPlanActionPerformed(evt);
+            }
+        });
+
+        btnViewMarkerPlan.setBackground(new java.awt.Color(255, 255, 255));
+        btnViewMarkerPlan.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        btnViewMarkerPlan.setText("View Plan");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboStyleNameForMarkerPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboPoNumberForMarkerPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEntryStdPlyHight)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtEntryTableLength))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEntryYY, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEntryXXS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEntryXS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEntryS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEntryM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnViewMarkerPlan)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAddMarkerPlan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEntryL, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEntryXL, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEntryXXL, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEntryTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(comboStyleNameForMarkerPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboPoNumberForMarkerPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEntryXS, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEntryXXS, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtEntryYY, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEntryTableLength, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEntryStdPlyHight, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(36, 36, 36))
+                                .addComponent(txtEntryS, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtEntryL, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEntryM, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(36, 36, 36))
+                                        .addComponent(txtEntryXL, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(36, 36, 36))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(36, 36, 36))
+                                        .addComponent(txtEntryXXL, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(36, 36, 36))
+                                        .addComponent(txtEntryTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAddMarkerPlan, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                        .addGap(7, 7, 7))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnViewMarkerPlan, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -296,11 +581,14 @@ public class CuttingGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panSetBuyerInfo4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panSetBuyerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(panSetBuyerInfo5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(panSetBuyerInfo4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panSetBuyerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panSetBuyerInfo5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -313,7 +601,9 @@ public class CuttingGUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(panSetBuyerInfo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panSetBuyerInfo5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         pack();
@@ -321,39 +611,85 @@ public class CuttingGUI extends javax.swing.JFrame {
 
     private void btnEntryBuyerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntryBuyerNameActionPerformed
         // TODO add your handling code here:
-        
+
         try {
-            String buyerName=txtEntryBuyerName.getText();
-            StoreInDatabase storeInDatabase=new DataStore();
+            String buyerName = txtEntryBuyerName.getText();
+            StoreInDatabase storeInDatabase = new DataStore();
             storeInDatabase.storeBuyerInformation(buyerName);
             txtEntryBuyerName.setText("");
             showBuyerInfoInComboBox();
         } catch (Exception e) {
-            System.err.println("CuttingGUI-> Buyer : "+e.getMessage());
+            System.err.println("CuttingGUI-> Buyer : " + e.getMessage());
         }
-        
-        
+
+
     }//GEN-LAST:event_btnEntryBuyerNameActionPerformed
 
     private void btnEntryStyleNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntryStyleNameActionPerformed
         // TODO add your handling code here:
-        
+
         try {
-            StoreInDatabase storeInDatabase=new DataStore();
+            StoreInDatabase storeInDatabase = new DataStore();
             storeInDatabase.storeStyleInformation(txtEntryStyleName.getText());
             txtEntryStyleName.setText("");
             showStyleInfoInComboBox();
         } catch (Exception e) {
-            System.err.println("CuttingGUI-> Style : "+e.getMessage());
+            System.err.println("CuttingGUI-> Style : " + e.getMessage());
         }
-        
+
     }//GEN-LAST:event_btnEntryStyleNameActionPerformed
+
+    private void btnPurchaseOrdarSubmitFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnPurchaseOrdarSubmitFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPurchaseOrdarSubmitFocusGained
+
+    private void btnAddMarkerPlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMarkerPlanActionPerformed
+        // TODO add your handling code here:
+
+        try {
+
+            MarkerPlan plan = new MarkerPlan();
+            plan.setStyleName(comboStyleNameForMarkerPlan.getSelectedItem().toString());
+            plan.setPoNumber(comboPoNumberForMarkerPlan.getSelectedItem().toString());
+            plan.setStdPlyHeight(Integer.valueOf(txtEntryStdPlyHight.getText()));
+            plan.setTbLength(Integer.valueOf(txtEntryTableLength.getText()));
+            plan.setYy(Integer.valueOf(txtEntryYY.getText()));
+            plan.setXxs(Integer.valueOf(txtEntryXXS.getText()));
+            plan.setXs(Integer.valueOf(txtEntryXS.getText()));
+            plan.setS(Integer.valueOf(txtEntryS.getText()));
+            plan.setL(Integer.valueOf(txtEntryL.getText()));
+            plan.setM(Integer.valueOf(txtEntryM.getText()));
+            plan.setXl(Integer.valueOf(txtEntryXL.getText()));
+            plan.setXxl(Integer.valueOf(txtEntryXXL.getText()));
+            plan.setTotal(Integer.valueOf(txtEntryTotal.getText()));
+
+            StoreInDatabase database = new DataStore();
+            database.storeMarkerPlan(plan);
+
+            txtEntryStdPlyHight.setText("");
+            txtEntryTableLength.setText("");
+            txtEntryYY.setText("");
+            txtEntryXXS.setText("");
+            txtEntryXS.setText("");
+            txtEntryS.setText("");
+            txtEntryL.setText("");
+            txtEntryM.setText("");
+            txtEntryXL.setText("");
+            txtEntryXXL.setText("");
+            txtEntryTotal.setText("");
+
+        } catch (Exception e) {
+            System.err.println("MarkerPlan: " + e.getMessage());
+        }
+
+
+    }//GEN-LAST:event_btnAddMarkerPlanActionPerformed
 
     private void btnPurchaseOrdarSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPurchaseOrdarSubmitActionPerformed
         // TODO add your handling code here:
-        
-        try{
-            PurchaseOrder order=new PurchaseOrder();
+
+        try {
+            PurchaseOrder order = new PurchaseOrder();
             order.setBuyerName(comboBuyerName.getSelectedItem().toString());
             order.setStyleName(comboStyleName.getSelectedItem().toString());
             order.setPoNumber(txtEntryPoNumber.getText());
@@ -362,53 +698,49 @@ public class CuttingGUI extends javax.swing.JFrame {
             order.setIssueDate(txtEntryIssueDate.getText());
             order.setCargoReciveDate(txtEntryCargoReciveDate.getText());
             order.setFactoryName(comboFactoryName.getSelectedItem().toString());
-            
-            StoreInDatabase storeInDatabase=new DataStore();
+
+            StoreInDatabase storeInDatabase = new DataStore();
             storeInDatabase.storePurchasOrder(order);
-            
+
             txtEntryFirstCuttingDate.setText("");
             txtEntryFabricAmount.setText("");
             txtEntryIssueDate.setText("");
             txtEntryCargoReciveDate.setText("");
-            
-        }catch(Exception e){
-            System.err.println("CuttingGUI-> purchase: "+e.getMessage());
+
+        } catch (Exception e) {
+            System.err.println("CuttingGUI-> purchase: " + e.getMessage());
         }
-        
-        
+
     }//GEN-LAST:event_btnPurchaseOrdarSubmitActionPerformed
 
-    
-    private void showBuyerInfoInComboBox(){
-        
+    private void showBuyerInfoInComboBox() {
+
         comboBuyerName.removeAllItems();
-        
-        List<String> buyerList=new ArrayList<>();
-        GetFromDatabase getFromDatabase=new DataView();
-        buyerList=getFromDatabase.getAllBuyerInformation();
-        
+
+        List<String> buyerList = new ArrayList<>();
+        GetFromDatabase getFromDatabase = new DataView();
+        buyerList = getFromDatabase.getAllBuyerInformation();
+
         for (String str : buyerList) {
             comboBuyerName.addItem(str);
         }
-        
+
     }
-    
-    private void showStyleInfoInComboBox(){
-        
+
+    private void showStyleInfoInComboBox() {
+
         comboStyleName.removeAllItems();
-        
-        List<String> styleList=new ArrayList<>();
-        GetFromDatabase getFromDatabase=new DataView();
-        styleList=getFromDatabase.getAllStyleInformation();
-        
+
+        List<String> styleList = new ArrayList<>();
+        GetFromDatabase getFromDatabase = new DataView();
+        styleList = getFromDatabase.getAllStyleInformation();
+
         for (String str : styleList) {
             comboStyleName.addItem(str);
         }
-        
+
     }
-    
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -445,39 +777,59 @@ public class CuttingGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddMarkerPlan;
     private javax.swing.JButton btnEntryBuyerName;
-    private javax.swing.JButton btnEntryBuyerName1;
-    private javax.swing.JButton btnEntryBuyerName2;
-    private javax.swing.JButton btnEntryBuyerName3;
     private javax.swing.JButton btnEntryStyleName;
     private javax.swing.JButton btnPurchaseOrdarSubmit;
     private javax.swing.JButton btnPurchaseOrderEdit;
+    private javax.swing.JButton btnViewMarkerPlan;
     private javax.swing.JComboBox<String> comboBuyerName;
     private javax.swing.JComboBox<String> comboFactoryName;
+    private javax.swing.JComboBox<String> comboPoNumberForMarkerPlan;
     private javax.swing.JComboBox<String> comboStyleName;
+    private javax.swing.JComboBox<String> comboStyleNameForMarkerPlan;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panSetBuyerInfo;
-    private javax.swing.JPanel panSetBuyerInfo1;
-    private javax.swing.JPanel panSetBuyerInfo2;
-    private javax.swing.JPanel panSetBuyerInfo3;
     private javax.swing.JPanel panSetBuyerInfo4;
     private javax.swing.JPanel panSetBuyerInfo5;
     private javax.swing.JTextField txtEntryBuyerName;
-    private javax.swing.JTextField txtEntryBuyerName1;
-    private javax.swing.JTextField txtEntryBuyerName2;
-    private javax.swing.JTextField txtEntryBuyerName3;
     private javax.swing.JTextField txtEntryCargoReciveDate;
     private javax.swing.JTextField txtEntryFabricAmount;
     private javax.swing.JTextField txtEntryFirstCuttingDate;
     private javax.swing.JTextField txtEntryIssueDate;
+    private javax.swing.JTextField txtEntryL;
+    private javax.swing.JTextField txtEntryM;
     private javax.swing.JTextField txtEntryPoNumber;
+    private javax.swing.JTextField txtEntryS;
+    private javax.swing.JTextField txtEntryStdPlyHight;
     private javax.swing.JTextField txtEntryStyleName;
+    private javax.swing.JTextField txtEntryTableLength;
+    private javax.swing.JTextField txtEntryTotal;
+    private javax.swing.JTextField txtEntryXL;
+    private javax.swing.JTextField txtEntryXS;
+    private javax.swing.JTextField txtEntryXXL;
+    private javax.swing.JTextField txtEntryXXS;
+    private javax.swing.JTextField txtEntryYY;
     // End of variables declaration//GEN-END:variables
 }
