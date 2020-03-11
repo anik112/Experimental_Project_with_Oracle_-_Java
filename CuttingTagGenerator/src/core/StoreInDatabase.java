@@ -9,6 +9,7 @@ import data.DBConnection;
 import java.sql.Connection;
 import models.BundlesPlan;
 import models.MarkerPlan;
+import models.Pivot;
 import models.PurchaseOrder;
 
 /**
@@ -27,10 +28,14 @@ public interface StoreInDatabase {
     
     public void storePurchasOrder(PurchaseOrder order);
     
-    public void storePartsPivot(String styleName, String partsName);
+    public void storePartsPivot(Pivot pivot);
     
     public void storeMarkerPlan(MarkerPlan plan);
     
     public void storeBundlesPlan(BundlesPlan plan);
+    
+    public void storePartsInformation(String partsName);
+    
+    public void storeWorkingPartsDtls(String styleName, String partsName);
     
 }

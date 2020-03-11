@@ -9,7 +9,9 @@ import core.GetFromDatabase;
 import core.StoreInDatabase;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import models.MarkerPlan;
+import models.Pivot;
 import models.PurchaseOrder;
 import service.DataStore;
 import service.DataView;
@@ -27,11 +29,11 @@ public class CuttingGUI extends javax.swing.JFrame {
         initComponents();
         showBuyerInfoInComboBox();
         showStyleInfoInComboBox();
+        showPartsNameInComboBox();
     }
 
-    
-    private int markerRatioTotal=0;
-    
+    private int markerRatioTotal = 0;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,12 +48,13 @@ public class CuttingGUI extends javax.swing.JFrame {
         btnEntryBuyerName = new javax.swing.JButton();
         txtEntryPartsName = new javax.swing.JTextField();
         btnEntryPartsName = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
         panSetBuyerInfo4 = new javax.swing.JPanel();
         txtEntryStyleName = new javax.swing.JTextField();
         btnEntryStyleName = new javax.swing.JButton();
-        comboStyleNameForMarkerPlan1 = new javax.swing.JComboBox<>();
+        comboStyleNameForWorkingParts = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
-        comboStyleNameForMarkerPlan2 = new javax.swing.JComboBox<>();
+        comboPartsNameForWorkingParts = new javax.swing.JComboBox<>();
         jLabel23 = new javax.swing.JLabel();
         btnEntryStyleName1 = new javax.swing.JButton();
         panSetBuyerInfo5 = new javax.swing.JPanel();
@@ -112,14 +115,16 @@ public class CuttingGUI extends javax.swing.JFrame {
         txtEntryBuyerName.setBackground(new java.awt.Color(102, 204, 255));
         txtEntryBuyerName.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEntryBuyerName.setToolTipText("Entry Buyer Name");
+        txtEntryBuyerName.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         btnEntryBuyerName.setBackground(new java.awt.Color(255, 255, 255));
         btnEntryBuyerName.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         btnEntryBuyerName.setText("Add");
         btnEntryBuyerName.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEntryBuyerName.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEntryBuyerName.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
+        btnEntryBuyerName.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnEntryBuyerName.setDoubleBuffered(true);
+        btnEntryBuyerName.setFocusCycleRoot(true);
         btnEntryBuyerName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntryBuyerNameActionPerformed(evt);
@@ -129,14 +134,25 @@ public class CuttingGUI extends javax.swing.JFrame {
         txtEntryPartsName.setBackground(new java.awt.Color(102, 204, 255));
         txtEntryPartsName.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEntryPartsName.setToolTipText("Entry Parts Name");
+        txtEntryPartsName.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         btnEntryPartsName.setBackground(new java.awt.Color(255, 255, 255));
         btnEntryPartsName.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         btnEntryPartsName.setText("Add");
         btnEntryPartsName.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEntryPartsName.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEntryPartsName.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
+        btnEntryPartsName.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnEntryPartsName.setDoubleBuffered(true);
+        btnEntryPartsName.setFocusCycleRoot(true);
+        btnEntryPartsName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntryPartsNameActionPerformed(evt);
+            }
+        });
+
+        jLabel24.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel24.setText("Parts:");
 
         javax.swing.GroupLayout panSetBuyerInfoLayout = new javax.swing.GroupLayout(panSetBuyerInfo);
         panSetBuyerInfo.setLayout(panSetBuyerInfoLayout);
@@ -144,13 +160,17 @@ public class CuttingGUI extends javax.swing.JFrame {
             panSetBuyerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panSetBuyerInfoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panSetBuyerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEntryBuyerName, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEntryPartsName, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panSetBuyerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnEntryBuyerName, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                    .addComponent(btnEntryPartsName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(txtEntryBuyerName, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panSetBuyerInfoLayout.createSequentialGroup()
+                        .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEntryPartsName, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panSetBuyerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEntryBuyerName, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEntryPartsName, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panSetBuyerInfoLayout.setVerticalGroup(
             panSetBuyerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,10 +179,11 @@ public class CuttingGUI extends javax.swing.JFrame {
                 .addGroup(panSetBuyerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtEntryBuyerName, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                     .addComponent(btnEntryBuyerName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panSetBuyerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEntryPartsName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEntryPartsName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEntryPartsName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -171,41 +192,33 @@ public class CuttingGUI extends javax.swing.JFrame {
         txtEntryStyleName.setBackground(new java.awt.Color(102, 204, 255));
         txtEntryStyleName.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEntryStyleName.setToolTipText("Entry Style Info");
+        txtEntryStyleName.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         btnEntryStyleName.setBackground(new java.awt.Color(255, 255, 255));
         btnEntryStyleName.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         btnEntryStyleName.setText("Add");
         btnEntryStyleName.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEntryStyleName.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEntryStyleName.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
+        btnEntryStyleName.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnEntryStyleName.setDoubleBuffered(true);
+        btnEntryStyleName.setFocusCycleRoot(true);
         btnEntryStyleName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntryStyleNameActionPerformed(evt);
             }
         });
 
-        comboStyleNameForMarkerPlan1.setBackground(new java.awt.Color(153, 255, 255));
-        comboStyleNameForMarkerPlan1.setMaximumRowCount(100);
-        comboStyleNameForMarkerPlan1.setToolTipText("");
-        comboStyleNameForMarkerPlan1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboStyleNameForMarkerPlan1ItemStateChanged(evt);
-            }
-        });
+        comboStyleNameForWorkingParts.setBackground(new java.awt.Color(153, 255, 255));
+        comboStyleNameForWorkingParts.setMaximumRowCount(100);
+        comboStyleNameForWorkingParts.setToolTipText("");
 
         jLabel22.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel22.setText("Working Style:");
 
-        comboStyleNameForMarkerPlan2.setBackground(new java.awt.Color(153, 255, 255));
-        comboStyleNameForMarkerPlan2.setMaximumRowCount(100);
-        comboStyleNameForMarkerPlan2.setToolTipText("");
-        comboStyleNameForMarkerPlan2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboStyleNameForMarkerPlan2ItemStateChanged(evt);
-            }
-        });
+        comboPartsNameForWorkingParts.setBackground(new java.awt.Color(153, 255, 255));
+        comboPartsNameForWorkingParts.setMaximumRowCount(100);
+        comboPartsNameForWorkingParts.setToolTipText("");
 
         jLabel23.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -216,8 +229,9 @@ public class CuttingGUI extends javax.swing.JFrame {
         btnEntryStyleName1.setText("Save Working Parts");
         btnEntryStyleName1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEntryStyleName1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEntryStyleName1.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
+        btnEntryStyleName1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnEntryStyleName1.setDoubleBuffered(true);
+        btnEntryStyleName1.setFocusCycleRoot(true);
         btnEntryStyleName1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntryStyleName1ActionPerformed(evt);
@@ -234,15 +248,15 @@ public class CuttingGUI extends javax.swing.JFrame {
                     .addGroup(panSetBuyerInfo4Layout.createSequentialGroup()
                         .addComponent(txtEntryStyleName, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEntryStyleName, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
+                        .addComponent(btnEntryStyleName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panSetBuyerInfo4Layout.createSequentialGroup()
                         .addGroup(panSetBuyerInfo4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panSetBuyerInfo4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboStyleNameForMarkerPlan1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboStyleNameForMarkerPlan2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboStyleNameForWorkingParts, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboPartsNameForWorkingParts, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEntryStyleName1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -256,23 +270,26 @@ public class CuttingGUI extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(panSetBuyerInfo4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(comboStyleNameForMarkerPlan1, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                    .addComponent(comboStyleNameForWorkingParts, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panSetBuyerInfo4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboStyleNameForMarkerPlan2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboPartsNameForWorkingParts, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEntryStyleName1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
 
         panSetBuyerInfo5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "  Entry Purchase Order  ", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
 
         txtEntryPoNumber.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryPoNumber.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         txtEntryFabricAmount.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryFabricAmount.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         txtEntryFirstCuttingDate.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryFirstCuttingDate.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jLabel1.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -306,20 +323,23 @@ public class CuttingGUI extends javax.swing.JFrame {
         jLabel6.setText("Issue Date:");
 
         txtEntryIssueDate.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryIssueDate.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jLabel7.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Cargo Rec Date:");
 
         txtEntryCargoReciveDate.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtEntryCargoReciveDate.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         btnPurchaseOrdarSubmit.setBackground(new java.awt.Color(255, 255, 255));
         btnPurchaseOrdarSubmit.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         btnPurchaseOrdarSubmit.setText("Submit");
         btnPurchaseOrdarSubmit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnPurchaseOrdarSubmit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnPurchaseOrdarSubmit.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
+        btnPurchaseOrdarSubmit.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnPurchaseOrdarSubmit.setDoubleBuffered(true);
+        btnPurchaseOrdarSubmit.setFocusCycleRoot(true);
         btnPurchaseOrdarSubmit.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 btnPurchaseOrdarSubmitFocusGained(evt);
@@ -336,8 +356,9 @@ public class CuttingGUI extends javax.swing.JFrame {
         btnPurchaseOrderEdit.setText("Edit");
         btnPurchaseOrderEdit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnPurchaseOrderEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnPurchaseOrderEdit.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
+        btnPurchaseOrderEdit.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnPurchaseOrderEdit.setDoubleBuffered(true);
+        btnPurchaseOrderEdit.setFocusCycleRoot(true);
         btnPurchaseOrderEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPurchaseOrderEditActionPerformed(evt);
@@ -383,10 +404,10 @@ public class CuttingGUI extends javax.swing.JFrame {
                             .addComponent(txtEntryFirstCuttingDate, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(comboStyleName, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboFactoryName, 0, 219, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panSetBuyerInfo5Layout.createSequentialGroup()
+                    .addGroup(panSetBuyerInfo5Layout.createSequentialGroup()
                         .addComponent(btnPurchaseOrderEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnPurchaseOrdarSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnPurchaseOrdarSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panSetBuyerInfo5Layout.setVerticalGroup(
@@ -422,10 +443,10 @@ public class CuttingGUI extends javax.swing.JFrame {
                     .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(comboFactoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panSetBuyerInfo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPurchaseOrdarSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPurchaseOrderEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPurchaseOrdarSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPurchaseOrderEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -454,6 +475,7 @@ public class CuttingGUI extends javax.swing.JFrame {
 
         txtEntryStdPlyHight.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEntryStdPlyHight.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEntryStdPlyHight.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jLabel11.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -461,6 +483,7 @@ public class CuttingGUI extends javax.swing.JFrame {
 
         txtEntryTableLength.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEntryTableLength.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEntryTableLength.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jLabel12.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -472,10 +495,12 @@ public class CuttingGUI extends javax.swing.JFrame {
 
         txtEntryYY.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEntryYY.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEntryYY.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         txtEntryXXS.setBackground(new java.awt.Color(255, 255, 153));
         txtEntryXXS.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEntryXXS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEntryXXS.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         txtEntryXXS.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtEntryXXSFocusLost(evt);
@@ -489,6 +514,7 @@ public class CuttingGUI extends javax.swing.JFrame {
         txtEntryXS.setBackground(new java.awt.Color(255, 255, 153));
         txtEntryXS.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEntryXS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEntryXS.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         txtEntryXS.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtEntryXSFocusLost(evt);
@@ -502,6 +528,7 @@ public class CuttingGUI extends javax.swing.JFrame {
         txtEntryS.setBackground(new java.awt.Color(255, 255, 153));
         txtEntryS.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEntryS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEntryS.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         txtEntryS.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtEntrySFocusLost(evt);
@@ -515,6 +542,7 @@ public class CuttingGUI extends javax.swing.JFrame {
         txtEntryM.setBackground(new java.awt.Color(255, 255, 153));
         txtEntryM.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEntryM.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEntryM.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         txtEntryM.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtEntryMFocusLost(evt);
@@ -528,6 +556,7 @@ public class CuttingGUI extends javax.swing.JFrame {
         txtEntryL.setBackground(new java.awt.Color(255, 255, 153));
         txtEntryL.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEntryL.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEntryL.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         txtEntryL.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtEntryLFocusLost(evt);
@@ -545,6 +574,7 @@ public class CuttingGUI extends javax.swing.JFrame {
         txtEntryXL.setBackground(new java.awt.Color(255, 255, 153));
         txtEntryXL.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEntryXL.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEntryXL.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         txtEntryXL.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtEntryXLFocusLost(evt);
@@ -558,6 +588,7 @@ public class CuttingGUI extends javax.swing.JFrame {
         txtEntryXXL.setBackground(new java.awt.Color(255, 255, 153));
         txtEntryXXL.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEntryXXL.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEntryXXL.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         txtEntryXXL.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtEntryXXLFocusLost(evt);
@@ -572,14 +603,16 @@ public class CuttingGUI extends javax.swing.JFrame {
         txtEntryTotal.setBackground(new java.awt.Color(0, 255, 153));
         txtEntryTotal.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEntryTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEntryTotal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         btnAddMarkerPlan.setBackground(new java.awt.Color(255, 255, 255));
         btnAddMarkerPlan.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         btnAddMarkerPlan.setText("Add Plan");
         btnAddMarkerPlan.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAddMarkerPlan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAddMarkerPlan.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
+        btnAddMarkerPlan.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnAddMarkerPlan.setDoubleBuffered(true);
+        btnAddMarkerPlan.setFocusCycleRoot(true);
         btnAddMarkerPlan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddMarkerPlanActionPerformed(evt);
@@ -591,8 +624,9 @@ public class CuttingGUI extends javax.swing.JFrame {
         btnViewMarkerPlan.setText("View Plan");
         btnViewMarkerPlan.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnViewMarkerPlan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnViewMarkerPlan.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
+        btnViewMarkerPlan.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnViewMarkerPlan.setDoubleBuffered(true);
+        btnViewMarkerPlan.setFocusCycleRoot(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -676,7 +710,8 @@ public class CuttingGUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtEntryXS, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEntryXXS, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtEntryXXS, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEntryYY, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -687,7 +722,6 @@ public class CuttingGUI extends javax.swing.JFrame {
                                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtEntryYY, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtEntryTableLength, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtEntryStdPlyHight, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -722,7 +756,7 @@ public class CuttingGUI extends javax.swing.JFrame {
                                             .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(36, 36, 36))
                                         .addComponent(txtEntryTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnAddMarkerPlan, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
@@ -732,17 +766,17 @@ public class CuttingGUI extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
-        panSetBuyerInfo6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "  Entry Style Info  ", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        panSetBuyerInfo6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "  Create Bundel  ", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
 
         javax.swing.GroupLayout panSetBuyerInfo6Layout = new javax.swing.GroupLayout(panSetBuyerInfo6);
         panSetBuyerInfo6.setLayout(panSetBuyerInfo6Layout);
         panSetBuyerInfo6Layout.setHorizontalGroup(
             panSetBuyerInfo6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 373, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panSetBuyerInfo6Layout.setVerticalGroup(
             panSetBuyerInfo6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 88, Short.MAX_VALUE)
+            .addGap(0, 130, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -752,15 +786,18 @@ public class CuttingGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panSetBuyerInfo6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panSetBuyerInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panSetBuyerInfo4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panSetBuyerInfo5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panSetBuyerInfo6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(panSetBuyerInfo5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -768,15 +805,15 @@ public class CuttingGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(panSetBuyerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panSetBuyerInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panSetBuyerInfo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panSetBuyerInfo5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panSetBuyerInfo5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
                 .addComponent(panSetBuyerInfo6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -791,6 +828,9 @@ public class CuttingGUI extends javax.swing.JFrame {
             storeInDatabase.storeBuyerInformation(buyerName);
             txtEntryBuyerName.setText("");
             showBuyerInfoInComboBox();
+            
+            JOptionPane.showMessageDialog(null, "Add data in Buyer table.",
+                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             System.err.println("CuttingGUI-> Buyer : " + e.getMessage());
         }
@@ -806,6 +846,9 @@ public class CuttingGUI extends javax.swing.JFrame {
             storeInDatabase.storeStyleInformation(txtEntryStyleName.getText());
             txtEntryStyleName.setText("");
             showStyleInfoInComboBox();
+            
+            JOptionPane.showMessageDialog(null, "Add data in style table.",
+                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             System.err.println("CuttingGUI-> Style : " + e.getMessage());
         }
@@ -850,7 +893,10 @@ public class CuttingGUI extends javax.swing.JFrame {
             txtEntryXL.setText("");
             txtEntryXXL.setText("");
             txtEntryTotal.setText("");
-
+            
+             JOptionPane.showMessageDialog(null, "Add data in marker table.",
+                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+                        
         } catch (Exception e) {
             System.err.println("MarkerPlan: " + e.getMessage());
         }
@@ -879,6 +925,9 @@ public class CuttingGUI extends javax.swing.JFrame {
             txtEntryFabricAmount.setText("");
             txtEntryIssueDate.setText("");
             txtEntryCargoReciveDate.setText("");
+            
+             JOptionPane.showMessageDialog(null, "Add data in purchase order table.",
+                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception e) {
             System.err.println("CuttingGUI-> purchase: " + e.getMessage());
@@ -895,7 +944,7 @@ public class CuttingGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         markerRatioTotal += Integer.valueOf(txtEntryXXS.getText());
         txtEntryTotal.setText(String.valueOf(markerRatioTotal));
-        
+
     }//GEN-LAST:event_txtEntryXXSFocusLost
 
     private void txtEntryXSFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEntryXSFocusLost
@@ -934,21 +983,47 @@ public class CuttingGUI extends javax.swing.JFrame {
         txtEntryTotal.setText(String.valueOf(markerRatioTotal));
     }//GEN-LAST:event_txtEntryXXLFocusLost
 
-    private void comboStyleNameForMarkerPlan1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboStyleNameForMarkerPlan1ItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboStyleNameForMarkerPlan1ItemStateChanged
-
-    private void comboStyleNameForMarkerPlan2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboStyleNameForMarkerPlan2ItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboStyleNameForMarkerPlan2ItemStateChanged
-
     private void btnEntryStyleName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntryStyleName1ActionPerformed
         // TODO add your handling code here:
+
+        try {
+            Pivot pivot = new Pivot();
+            pivot.setWorkingStyle(comboStyleNameForWorkingParts.getSelectedItem().toString());
+            pivot.setWorkingParts(comboPartsNameForWorkingParts.getSelectedItem().toString());
+
+            StoreInDatabase database = new DataStore();
+            database.storePartsPivot(pivot);
+            
+            showPartsNameInComboBox();
+
+            JOptionPane.showMessageDialog(null, "Add data in pivot table.",
+                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            System.err.println("CuttingGUI: " + e.getMessage());
+        }
+
     }//GEN-LAST:event_btnEntryStyleName1ActionPerformed
 
     private void btnPurchaseOrderEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPurchaseOrderEditActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPurchaseOrderEditActionPerformed
+
+    private void btnEntryPartsNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntryPartsNameActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            StoreInDatabase inDatabase = new DataStore();
+            inDatabase.storePartsInfo(txtEntryPartsName.getText());
+            txtEntryPartsName.setText("");
+            
+            JOptionPane.showMessageDialog(null, "Add data in parts table.",
+                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            System.err.println("CuttingGUI: " + e.getMessage());
+        }
+
+    }//GEN-LAST:event_btnEntryPartsNameActionPerformed
 
     private void showBuyerInfoInComboBox() {
 
@@ -976,22 +1051,35 @@ public class CuttingGUI extends javax.swing.JFrame {
         for (String str : styleList) {
             comboStyleName.addItem(str);
             comboStyleNameForMarkerPlan.addItem(str);
+            comboStyleNameForWorkingParts.addItem(str);
         }
 
     }
-    
-    
-    private void showPoNumberInComboBox(){
+
+    private void showPoNumberInComboBox() {
         comboPoNumberForMarkerPlan.removeAllItems();
-        
-        List<String> poList=new ArrayList<>();
-        GetFromDatabase getFromDatabase=new DataView();
-        poList=getFromDatabase.getAllPoNumberAcoudingToStyle(comboStyleNameForMarkerPlan.getSelectedItem().toString());
-        
-        for(String str : poList){
+
+        List<String> poList = new ArrayList<>();
+        GetFromDatabase getFromDatabase = new DataView();
+        poList = getFromDatabase.getAllPoNumberAcoudingToStyle(comboStyleNameForMarkerPlan.getSelectedItem().toString());
+
+        for (String str : poList) {
             comboPoNumberForMarkerPlan.addItem(str);
         }
     }
+    
+    
+   private void showPartsNameInComboBox(){
+       comboPartsNameForWorkingParts.removeAllItems();
+
+        List<String> partsList = new ArrayList<>();
+        GetFromDatabase getFromDatabase = new DataView();
+        partsList = getFromDatabase.getAllPartsName();
+
+        for (String str : partsList) {
+            comboPartsNameForWorkingParts.addItem(str);
+        }
+   }
 
     /**
      * @param args the command line arguments
@@ -1039,11 +1127,11 @@ public class CuttingGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnViewMarkerPlan;
     private javax.swing.JComboBox<String> comboBuyerName;
     private javax.swing.JComboBox<String> comboFactoryName;
+    private javax.swing.JComboBox<String> comboPartsNameForWorkingParts;
     private javax.swing.JComboBox<String> comboPoNumberForMarkerPlan;
     private javax.swing.JComboBox<String> comboStyleName;
     private javax.swing.JComboBox<String> comboStyleNameForMarkerPlan;
-    private javax.swing.JComboBox<String> comboStyleNameForMarkerPlan1;
-    private javax.swing.JComboBox<String> comboStyleNameForMarkerPlan2;
+    private javax.swing.JComboBox<String> comboStyleNameForWorkingParts;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1060,6 +1148,7 @@ public class CuttingGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

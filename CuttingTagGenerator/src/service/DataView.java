@@ -77,5 +77,25 @@ public class DataView implements GetFromDatabase{
         
         return listOfPoNumber;
     }
+
+    @Override
+    public List<String> getAllPartsName() {
+        List<String> listOfPrtsName=new ArrayList<>();
+        
+        String sql="SELECT PARTS_NAME FROM TB_PARTS_INFO";
+        
+        try{
+            PreparedStatement statement=connection.prepareCall(sql);
+            ResultSet rs=statement.executeQuery();
+            
+            while(rs.next()){
+                listOfPrtsName.add(rs.getString(1));
+            }
+        }catch(Exception e){
+            System.err.println("DataView: "+e.getMessage());
+        }
+        
+        return listOfPrtsName;
+    }
     
 }

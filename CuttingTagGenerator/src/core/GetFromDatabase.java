@@ -23,4 +23,6 @@ public interface GetFromDatabase {
     
     public List<String> getAllPoNumberAcoudingToStyle(String style);
     
+    public List<String> getAllPartsName();
+    
 }

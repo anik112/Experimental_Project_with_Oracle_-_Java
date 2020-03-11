@@ -8,6 +8,7 @@ package service;
 import java.sql.PreparedStatement;
 import models.BundlesPlan;
 import models.MarkerPlan;
+import models.Pivot;
 import models.PurchaseOrder;
 
 /**
@@ -178,16 +179,34 @@ public class DataStore implements core.StoreInDatabase {
     }
 
     @Override
-    public void storePartsPivot(String styleName, String partsName) {
-        String sql = "INSERT INTO TB_PARTS_PIVOT (STYLE_NAME,PARTS_NAME) VALUES ('" + styleName + "','"+partsName+"')";
-        
-        try{
+    public void storePartsPivot(Pivot p) {
+        String sql = "INSERT INTO TB_PARTS_PIVOT (STYLE_NAME,PARTS_NAME) VALUES ('" + p.getWorkingStyle() + "','" + p.getWorkingParts() + "')";
+
+        try {
             PreparedStatement statement = dataConn.prepareCall(sql);
             statement.executeUpdate();
             System.out.println("DataStore: Data  update povot");
-        }catch(Exception e){
-            System.err.println("DataStore: "+e.getMessage());
+        } catch (Exception e) {
+            System.err.println("DataStore: " + e.getMessage());
         }
+    }
+
+    @Override
+    public void storePartsInformation(String partsName) {
+
+        String sql = "INSERT INTO TB_PARTS_INFO (PARTS_NAME) VALUES ('" + partsName + "')";
+        try {
+            PreparedStatement statement = dataConn.prepareCall(sql);
+            statement.executeUpdate();
+            System.out.println("DataStore: Data  update PARTS");
+        } catch (Exception e) {
+            System.err.println("DataStore: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void storeWorkingPartsDtls(String styleName, String partsName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
