@@ -111,7 +111,7 @@ public class DataStore implements core.StoreInDatabase {
                 + "M,"
                 + "L,"
                 + "XL,"
-                + "XXL"
+                + "XXL,"
                 + "TOTAL) VALUES ("
                 + "'" + plan.getStyleName() + "',"
                 + "'" + plan.getPoNumber() + "',"
@@ -125,8 +125,7 @@ public class DataStore implements core.StoreInDatabase {
                 + plan.getL() + ","
                 + plan.getXl() + ","
                 + plan.getXxl() + ","
-                + plan.getTotal() + ","
-                + ")";
+                + plan.getTotal() + ")";
 
         try {
 
@@ -136,6 +135,7 @@ public class DataStore implements core.StoreInDatabase {
 
         } catch (Exception e) {
             System.err.println("DataStore: " + e.getMessage());
+            e.printStackTrace();
         }
 
     }

@@ -56,5 +56,26 @@ public class DataView implements GetFromDatabase{
         }
         return styleList;
     }
+
+    @Override
+    public List<String> getAllPoNumberAcoudingToStyle(String style) {
+        
+        List<String> listOfPoNumber=new ArrayList<>();
+        
+        String sql="SELECT PO_NUMBER FROM TB_PURCHASE_ORDER WHERE STYLE_NAME='"+style+"'";
+        
+        try{
+            PreparedStatement statement=connection.prepareCall(sql);
+            ResultSet rs=statement.executeQuery();
+            
+            while(rs.next()){
+                listOfPoNumber.add(rs.getString(1));
+            }
+        }catch(Exception e){
+            System.err.println("DataView: "+e.getMessage());
+        }
+        
+        return listOfPoNumber;
+    }
     
 }

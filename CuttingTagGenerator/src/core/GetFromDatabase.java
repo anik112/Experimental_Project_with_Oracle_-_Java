@@ -21,4 +21,6 @@ public interface GetFromDatabase {
     
     public List<String> getAllStyleInformation();
     
+    public List<String> getAllPoNumberAcoudingToStyle(String style);
+    
 }
