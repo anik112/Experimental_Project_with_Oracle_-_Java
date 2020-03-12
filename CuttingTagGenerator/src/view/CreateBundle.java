@@ -5,6 +5,12 @@
  */
 package view;
 
+import java.awt.Button;
+import java.awt.TextField;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Anik
@@ -29,9 +35,6 @@ public class CreateBundle extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        interPan = new javax.swing.JPanel();
-        txtItemGenerator1 = new javax.swing.JTextField();
-        txtItemGenerator2 = new javax.swing.JTextField();
         txtItemGenerator = new javax.swing.JTextField();
         btnItemGeneratorShow = new javax.swing.JButton();
 
@@ -39,54 +42,15 @@ public class CreateBundle extends javax.swing.JFrame {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
-        interPan.setBorder(javax.swing.BorderFactory.createTitledBorder(" Pan "));
-
-        txtItemGenerator1.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        txtItemGenerator1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtItemGenerator1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        txtItemGenerator1.setPreferredSize(new java.awt.Dimension(6, 39));
-
-        txtItemGenerator2.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        txtItemGenerator2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtItemGenerator2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        txtItemGenerator2.setPreferredSize(new java.awt.Dimension(6, 39));
-
-        javax.swing.GroupLayout interPanLayout = new javax.swing.GroupLayout(interPan);
-        interPan.setLayout(interPanLayout);
-        interPanLayout.setHorizontalGroup(
-            interPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(interPanLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtItemGenerator1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtItemGenerator2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        interPanLayout.setVerticalGroup(
-            interPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(interPanLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(interPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtItemGenerator2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtItemGenerator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(interPan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+            .addGap(0, 539, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(interPan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(341, Short.MAX_VALUE))
+            .addGap(0, 418, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -132,7 +96,7 @@ public class CreateBundle extends javax.swing.JFrame {
                     .addComponent(txtItemGenerator, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnItemGeneratorShow, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
 
@@ -148,46 +112,7 @@ public class CreateBundle extends javax.swing.JFrame {
     
     private void showInfo(){
         
-        javax.swing.JPanel interPan2=new javax.swing.JPanel();
-        
-        javax.swing.GroupLayout interPan2Layout = new javax.swing.GroupLayout(interPan2);
-        interPan2.setLayout(interPan2Layout);
-        interPanLayout.setHorizontalGroup(
-            interPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(interPanLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtItemGenerator1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtItemGenerator2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        interPanLayout.setVerticalGroup(
-            interPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(interPanLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(interPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtItemGenerator2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtItemGenerator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(interPan2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(interPan2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(341, Short.MAX_VALUE))
-        );
-        
+        jPanel1.add(new TextField());
     }
     
     
@@ -228,11 +153,8 @@ public class CreateBundle extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnItemGeneratorShow;
-    private javax.swing.JPanel interPan;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtItemGenerator;
-    private javax.swing.JTextField txtItemGenerator1;
-    private javax.swing.JTextField txtItemGenerator2;
     // End of variables declaration//GEN-END:variables
 }
