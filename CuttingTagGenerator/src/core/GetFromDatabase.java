@@ -8,6 +8,7 @@ package core;
 import data.DBConnection;
 import java.sql.Connection;
 import java.util.List;
+import models.MarkerPlan;
 
 /**
  *
@@ -24,5 +25,9 @@ public interface GetFromDatabase {
     public List<String> getAllPoNumberAcoudingToStyle(String style);
     
     public List<String> getAllPartsName();
+    
+    public MarkerPlan getAllMarkerPlan(String style, String poNumber);
+    
+    public List<String> getExistsParts(String style);
     
 }
