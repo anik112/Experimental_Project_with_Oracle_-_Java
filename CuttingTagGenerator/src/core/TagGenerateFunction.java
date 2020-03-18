@@ -7,7 +7,9 @@ package core;
 
 import java.util.ArrayList;
 import java.util.List;
+import models.BundlesPlan;
 import models.SizeManager;
+import service.DataStore;
 import service.DataView;
 
 /**
@@ -36,13 +38,22 @@ public class TagGenerateFunction implements cuttingtaggenerator.TagGenerate {
         for (int i = 0; i < existsPartsDtls.size(); i++) {
             for (int j = 0; j < lngth; j++) {
                 for (int k = 0; k < sizeCheks.size(); k++) {
+                    int itemSerialTo=serialCount;
+                    int itemSerialFrom=((serialCount + rollQty[j]) - 1);
+                    int itemQtyTemp=(rollQty[j] * (sizeCheks.get(k).getValue()));
                     System.out.println("=========================================");
                     System.out.println("Bundel No: " + bundel + " --- Po: " + poNumber);
                     System.out.println("Style: " + style + " ---- Parts: " + existsPartsDtls.get(i));
                     System.out.println("Roll No: " + rolls[j] + " ----- Size: " + sizeList[sizeCheks.get(k).getIndex()]);
-                    System.out.println("Qty: " + (rollQty[j] * (sizeCheks.get(k).getValue())));
-                    System.out.println("Serial No: " + serialCount + " to " + ((serialCount + rollQty[j]) - 1));
+                    System.out.println("Qty: " + itemQtyTemp);
+                    System.out.println("Serial No: " + itemSerialTo + " to " + itemSerialFrom);
                     System.out.println("=========================================");
+                    
+                    
+                    
+                    BundlesPlan plan=new BundlesPlan();
+                    StoreInDatabase inDatabase=new DataStore();
+                    inDatabase.storeBundlesPlan(plan);
                     serialCount += rollQty[j];
                     bundel++;
                 }

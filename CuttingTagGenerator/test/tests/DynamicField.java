@@ -49,6 +49,7 @@ public class DynamicField extends javax.swing.JFrame {
         btnAddRow = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
         txtRollSize = new javax.swing.JTextField();
+        lblShow = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         mainPan = new javax.swing.JPanel();
 
@@ -72,6 +73,20 @@ public class DynamicField extends javax.swing.JFrame {
             }
         });
 
+        txtRollSize.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRollSizeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRollSizeKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRollSizeKeyTyped(evt);
+            }
+        });
+
+        lblShow.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -82,14 +97,18 @@ public class DynamicField extends javax.swing.JFrame {
                     .addComponent(txtRollSize)
                     .addComponent(btnRemove, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAddRow, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAddRow, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                    .addComponent(lblShow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtRollSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRollSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblShow))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRemove)
@@ -173,6 +192,21 @@ public class DynamicField extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
+    private void txtRollSizeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRollSizeKeyTyped
+        // TODO add your handling code here:
+       //lblShow.setText(txtRollSize.getText());
+    }//GEN-LAST:event_txtRollSizeKeyTyped
+
+    private void txtRollSizeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRollSizeKeyPressed
+        // TODO add your handling code here:
+        //lblShow.setText(txtRollSize.getText());
+    }//GEN-LAST:event_txtRollSizeKeyPressed
+
+    private void txtRollSizeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRollSizeKeyReleased
+        // TODO add your handling code here:
+        lblShow.setText(txtRollSize.getText());
+    }//GEN-LAST:event_txtRollSizeKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -213,6 +247,7 @@ public class DynamicField extends javax.swing.JFrame {
     private javax.swing.JButton btnRemove;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblShow;
     private javax.swing.JPanel mainPan;
     private javax.swing.JTextField txtRollSize;
     // End of variables declaration//GEN-END:variables

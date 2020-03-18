@@ -5,17 +5,38 @@
  */
 package view;
 
+import core.GetFromDatabase;
+import static core.GetFromDatabase.connection;
+import core.TagGenerateFunction;
+import cuttingtaggenerator.TagGenerate;
+import java.awt.GridLayout;
+import java.awt.Label;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JTextField;
+import service.DataView;
+
 /**
  *
  * @author VSI-ANIK
  */
 public class CreateBundels extends javax.swing.JFrame {
 
+    private javax.swing.JTextField[] textRollName; //array of JTextFields
+    private javax.swing.JTextField[] textRollQty; //array of JTextFields
+    private int boxSize = 0;
+    
+    private String[] rolls;
+    private int[] rollQty;
+
     /**
      * Creates new form CreateBundels
      */
     public CreateBundels() {
         initComponents();
+        showStyleInfoInComboBox();
     }
 
     /**
@@ -27,18 +48,19 @@ public class CreateBundels extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtNumbesOfRoll = new javax.swing.JTextField();
+        txtNumberOfRoll = new javax.swing.JTextField();
         btnShow = new javax.swing.JButton();
         scrollPanShowRollList = new javax.swing.JScrollPane();
-
-        jButton1.setText("jButton1");
+        showListOfTxt = new javax.swing.JPanel();
+        btnSubmitTag = new javax.swing.JButton();
+        comboStyleNameForBundel = new javax.swing.JComboBox<>();
+        comboPoNumberForBundel = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Create Bundels");
-        setResizable(false);
+        setMaximumSize(new java.awt.Dimension(500, 2147483647));
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 0));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -46,8 +68,8 @@ public class CreateBundels extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         jLabel1.setText("Number Of Roll:");
 
-        txtNumbesOfRoll.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        txtNumbesOfRoll.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        txtNumberOfRoll.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtNumberOfRoll.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         btnShow.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         btnShow.setText("Show");
@@ -66,7 +88,7 @@ public class CreateBundels extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNumbesOfRoll, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNumberOfRoll, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -74,38 +96,87 @@ public class CreateBundels extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(txtNumbesOfRoll, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(btnShow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNumberOfRoll, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        scrollPanShowRollList.setToolTipText("");
+        scrollPanShowRollList.setFocusCycleRoot(true);
+
+        javax.swing.GroupLayout showListOfTxtLayout = new javax.swing.GroupLayout(showListOfTxt);
+        showListOfTxt.setLayout(showListOfTxtLayout);
+        showListOfTxtLayout.setHorizontalGroup(
+            showListOfTxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 525, Short.MAX_VALUE)
+        );
+        showListOfTxtLayout.setVerticalGroup(
+            showListOfTxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 132, Short.MAX_VALUE)
+        );
+
+        scrollPanShowRollList.setViewportView(showListOfTxt);
+
+        btnSubmitTag.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
+        btnSubmitTag.setText("Submit Tag");
+        btnSubmitTag.setToolTipText("");
+        btnSubmitTag.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSubmitTag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitTagActionPerformed(evt);
+            }
+        });
+
+        comboStyleNameForBundel.setBackground(new java.awt.Color(153, 255, 255));
+        comboStyleNameForBundel.setMaximumRowCount(100);
+        comboStyleNameForBundel.setToolTipText("");
+        comboStyleNameForBundel.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboStyleNameForBundelItemStateChanged(evt);
+            }
+        });
+
+        comboPoNumberForBundel.setBackground(new java.awt.Color(153, 255, 255));
+        comboPoNumberForBundel.setMaximumRowCount(100);
+        comboPoNumberForBundel.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scrollPanShowRollList))
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(comboStyleNameForBundel, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboPoNumberForBundel, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSubmitTag, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(scrollPanShowRollList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPanShowRollList, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrollPanShowRollList)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSubmitTag, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboStyleNameForBundel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboPoNumberForBundel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -113,9 +184,95 @@ public class CreateBundels extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
+        boxSize = Integer.valueOf(txtNumberOfRoll.getText());
+
+        textRollName = new JTextField[boxSize];
+        textRollQty = new JTextField[boxSize];
+        rolls=new String[boxSize];
+        rollQty=new int[boxSize];
+
+        for (int i = 0; i != boxSize; i++) {
+            Label l = new Label("Roll/Qty " + (i + 1) + ": ");
+
+            textRollName[i] = new JTextField();
+            textRollQty[i] = new JTextField();
+
+            l.setSize(30, 30);
+            textRollName[i].setSize(30, 30);
+            textRollQty[i].setSize(30, 30);
+
+            showListOfTxt.setLayout(new GridLayout(0, 3, 20, 20));
+
+            showListOfTxt.add(l);
+            showListOfTxt.add(textRollName[i]);
+            showListOfTxt.add(textRollQty[i]);
+            
+            showListOfTxt.revalidate();
+            showListOfTxt.repaint();
+        }
+
+        if (boxSize > 0) {
+            textRollName[0].addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyReleased(java.awt.event.KeyEvent evt) {
+                    textRollNameKeyReleased(evt);
+                }
+            });
+        }
+
+    }//GEN-LAST:event_btnShowActionPerformed
+
+    private void btnSubmitTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitTagActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_btnShowActionPerformed
+        for(int i=0;i<boxSize;i++){
+            rolls[i]=textRollName[i].getText();
+            rollQty[i]=Integer.valueOf(textRollQty[i].getText());
+        }
+        
+        TagGenerate generate=new TagGenerateFunction();
+        generate.createTag(rollQty, rolls, 
+                comboStyleNameForBundel.getSelectedItem().toString(), 
+                comboPoNumberForBundel.getSelectedItem().toString());
+        
+    }//GEN-LAST:event_btnSubmitTagActionPerformed
+
+    private void comboStyleNameForBundelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboStyleNameForBundelItemStateChanged
+        // TODO add your handling code here:
+        showPoNumberInComboBox();
+    }//GEN-LAST:event_comboStyleNameForBundelItemStateChanged
+
+    private void textRollNameKeyReleased(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+        for (int i = 1; i < boxSize; i++) {
+            textRollName[i].setText(textRollName[0].getText());
+        }
+    }
+    
+    
+     private void showStyleInfoInComboBox() {
+
+        comboStyleNameForBundel.removeAllItems();
+        comboPoNumberForBundel.removeAllItems();
+
+        List<String> styleList = new ArrayList<>();
+        GetFromDatabase getFromDatabase = new DataView();
+        styleList = getFromDatabase.getAllStyleInformation();
+
+        for (String str : styleList) {
+            comboStyleNameForBundel.addItem(str);
+        }
+
+    }
+
+    private void showPoNumberInComboBox() {
+        List<String> poList = new ArrayList<>();
+        GetFromDatabase getFromDatabase = new DataView();
+        poList = getFromDatabase.getAllPoNumberAcoudingToStyle(comboStyleNameForBundel.getSelectedItem().toString());
+
+        for (String str : poList) {
+            comboPoNumberForBundel.addItem(str);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -134,13 +291,17 @@ public class CreateBundels extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateBundels.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateBundels.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateBundels.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateBundels.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateBundels.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateBundels.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateBundels.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateBundels.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -154,10 +315,13 @@ public class CreateBundels extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnShow;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSubmitTag;
+    private javax.swing.JComboBox<String> comboPoNumberForBundel;
+    private javax.swing.JComboBox<String> comboStyleNameForBundel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane scrollPanShowRollList;
-    private javax.swing.JTextField txtNumbesOfRoll;
+    private javax.swing.JPanel showListOfTxt;
+    private javax.swing.JTextField txtNumberOfRoll;
     // End of variables declaration//GEN-END:variables
 }
