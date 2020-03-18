@@ -17,7 +17,7 @@ public class BundlesPlan {
     private int cuttingNumber;
     private String rollNumber;
     private int lays;
-    private int size;
+    private String sizeName;
     private int dbl;
     private String partsName;
     private int serialTo;
@@ -80,12 +80,12 @@ public class BundlesPlan {
         this.lays = lays;
     }
 
-    public int getSize() {
-        return size;
+    public String getSizeName() {
+        return sizeName;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public void setSizeName(String sizeName) {
+        this.sizeName = sizeName;
     }
 
     public int getDbl() {

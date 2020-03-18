@@ -22,7 +22,7 @@ public class TagGenerateFunction implements cuttingtaggenerator.TagGenerate {
     private int lngth = 0;
 
     @Override
-    public void createTag(int rollQty[], String rolls[], String style, String poNumber) {
+    public void createTag(int rollQty[], String rolls[], String style, String poNumber, int cuttingNumber) {
 
         GetFromDatabase gfd = new DataView();
         List<String> existsPartsDtls = gfd.getExistsParts(style);
@@ -50,9 +50,20 @@ public class TagGenerateFunction implements cuttingtaggenerator.TagGenerate {
                     System.out.println("=========================================");
                     
                     
-                    
                     BundlesPlan plan=new BundlesPlan();
                     StoreInDatabase inDatabase=new DataStore();
+                    
+                    plan.setStyleName(style);
+                    plan.setPoNumber(poNumber);
+                    plan.setPartsName(existsPartsDtls.get(i));
+                    plan.setCuttingNumber(cuttingNumber);
+                    plan.setRollNumber(rolls[i]);
+                    plan.setSizeName(sizeList[sizeCheks.get(k).getIndex()]);
+                    plan.setQty(itemQtyTemp);
+                    plan.setSerialTo(itemSerialTo);
+                    plan.setSerialFrom(itemSerialFrom);
+                    plan.setDbl(bundel);
+                                        
                     inDatabase.storeBundlesPlan(plan);
                     serialCount += rollQty[j];
                     bundel++;

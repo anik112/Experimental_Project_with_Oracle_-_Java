@@ -160,7 +160,7 @@ public class DataStore implements core.StoreInDatabase {
                 + plan.getCuttingNumber() + ","
                 + "'" + plan.getRollNumber() + "',"
                 + plan.getLays() + ","
-                + plan.getSize() + ","
+                + "'"+plan.getSizeName()+ "',"
                 + plan.getDbl() + ","
                 + "'" + plan.getPartsName() + "',"
                 + plan.getSerialTo() + ","

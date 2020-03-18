@@ -6,13 +6,10 @@
 package view;
 
 import core.GetFromDatabase;
-import static core.GetFromDatabase.connection;
 import core.TagGenerateFunction;
 import cuttingtaggenerator.TagGenerate;
 import java.awt.GridLayout;
 import java.awt.Label;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTextField;
@@ -27,6 +24,7 @@ public class CreateBundels extends javax.swing.JFrame {
     private javax.swing.JTextField[] textRollName; //array of JTextFields
     private javax.swing.JTextField[] textRollQty; //array of JTextFields
     private int boxSize = 0;
+    private int cuttingNumber=0;
     
     private String[] rolls;
     private int[] rollQty;
@@ -34,9 +32,10 @@ public class CreateBundels extends javax.swing.JFrame {
     /**
      * Creates new form CreateBundels
      */
-    public CreateBundels() {
+    public CreateBundels(int cuttingNumber) {
+        this.cuttingNumber=cuttingNumber;
         initComponents();
-        showStyleInfoInComboBox();
+        showStyleInfoInComboBoxInBundels();
     }
 
     /**
@@ -58,7 +57,7 @@ public class CreateBundels extends javax.swing.JFrame {
         comboStyleNameForBundel = new javax.swing.JComboBox<>();
         comboPoNumberForBundel = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Create Bundels");
         setMaximumSize(new java.awt.Dimension(500, 2147483647));
 
@@ -232,13 +231,14 @@ public class CreateBundels extends javax.swing.JFrame {
         TagGenerate generate=new TagGenerateFunction();
         generate.createTag(rollQty, rolls, 
                 comboStyleNameForBundel.getSelectedItem().toString(), 
-                comboPoNumberForBundel.getSelectedItem().toString());
+                comboPoNumberForBundel.getSelectedItem().toString(),
+                this.cuttingNumber);
         
     }//GEN-LAST:event_btnSubmitTagActionPerformed
 
     private void comboStyleNameForBundelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboStyleNameForBundelItemStateChanged
         // TODO add your handling code here:
-        showPoNumberInComboBox();
+        showPoNumberInComboBoxInBundels();
     }//GEN-LAST:event_comboStyleNameForBundelItemStateChanged
 
     private void textRollNameKeyReleased(java.awt.event.KeyEvent evt) {
@@ -249,7 +249,7 @@ public class CreateBundels extends javax.swing.JFrame {
     }
     
     
-     private void showStyleInfoInComboBox() {
+     private void showStyleInfoInComboBoxInBundels() {
 
         comboStyleNameForBundel.removeAllItems();
         comboPoNumberForBundel.removeAllItems();
@@ -264,7 +264,9 @@ public class CreateBundels extends javax.swing.JFrame {
 
     }
 
-    private void showPoNumberInComboBox() {
+    private void showPoNumberInComboBoxInBundels() {
+        
+        comboPoNumberForBundel.removeAllItems();
         List<String> poList = new ArrayList<>();
         GetFromDatabase getFromDatabase = new DataView();
         poList = getFromDatabase.getAllPoNumberAcoudingToStyle(comboStyleNameForBundel.getSelectedItem().toString());
@@ -274,44 +276,44 @@ public class CreateBundels extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateBundels.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateBundels.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateBundels.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateBundels.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CreateBundels().setVisible(true);
-            }
-        });
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(CreateBundels.class
+//                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(CreateBundels.class
+//                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(CreateBundels.class
+//                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(CreateBundels.class
+//                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CreateBundels(10).setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnShow;

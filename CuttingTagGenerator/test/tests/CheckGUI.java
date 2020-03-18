@@ -108,7 +108,7 @@ public class CheckGUI extends JFrame {
                         }
                         
                         TagGenerate tagGenerate=new TagGenerateFunction();
-                        tagGenerate.createTag(rollQty, rolls, "S1", "PO-0128392");
+                        //tagGenerate.createTag(rollQty, rolls, "S1", "PO-0128392");
                     }
                 });
             }

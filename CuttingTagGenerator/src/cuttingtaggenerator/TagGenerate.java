@@ -11,6 +11,6 @@ package cuttingtaggenerator;
  */
 public interface TagGenerate {
     
-    public void createTag(int rollQty[], String rolls[], String style, String poNumber);
+    public void createTag(int rollQty[], String rolls[], String style, String poNumber, int cuttingNumber);
     
 }
