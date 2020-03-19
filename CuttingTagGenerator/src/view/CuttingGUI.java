@@ -125,7 +125,6 @@ public class CuttingGUI extends javax.swing.JFrame {
         btnEntryBuyerName.setBackground(new java.awt.Color(255, 255, 255));
         btnEntryBuyerName.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         btnEntryBuyerName.setText("Add");
-        btnEntryBuyerName.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEntryBuyerName.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEntryBuyerName.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnEntryBuyerName.setDoubleBuffered(true);
@@ -144,7 +143,6 @@ public class CuttingGUI extends javax.swing.JFrame {
         btnEntryPartsName.setBackground(new java.awt.Color(255, 255, 255));
         btnEntryPartsName.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         btnEntryPartsName.setText("Add");
-        btnEntryPartsName.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEntryPartsName.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEntryPartsName.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnEntryPartsName.setDoubleBuffered(true);
@@ -173,9 +171,9 @@ public class CuttingGUI extends javax.swing.JFrame {
                     .addComponent(jLabel24)
                     .addComponent(jLabel26))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panSetBuyerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEntryBuyerName, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEntryPartsName, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panSetBuyerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtEntryPartsName, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                    .addComponent(txtEntryBuyerName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panSetBuyerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEntryBuyerName, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,7 +208,6 @@ public class CuttingGUI extends javax.swing.JFrame {
         btnEntryStyleName.setBackground(new java.awt.Color(255, 255, 255));
         btnEntryStyleName.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         btnEntryStyleName.setText("Add");
-        btnEntryStyleName.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEntryStyleName.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEntryStyleName.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnEntryStyleName.setDoubleBuffered(true);
@@ -240,7 +237,6 @@ public class CuttingGUI extends javax.swing.JFrame {
         btnEntryStyleName1.setBackground(new java.awt.Color(255, 255, 255));
         btnEntryStyleName1.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         btnEntryStyleName1.setText("Save Working Parts");
-        btnEntryStyleName1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEntryStyleName1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEntryStyleName1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnEntryStyleName1.setDoubleBuffered(true);
@@ -267,7 +263,7 @@ public class CuttingGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtEntryStyleName, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEntryStyleName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnEntryStyleName, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
                     .addGroup(panSetBuyerInfo4Layout.createSequentialGroup()
                         .addGroup(panSetBuyerInfo4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -355,7 +351,6 @@ public class CuttingGUI extends javax.swing.JFrame {
         btnPurchaseOrdarSubmit.setBackground(new java.awt.Color(255, 255, 255));
         btnPurchaseOrdarSubmit.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         btnPurchaseOrdarSubmit.setText("Submit");
-        btnPurchaseOrdarSubmit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnPurchaseOrdarSubmit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPurchaseOrdarSubmit.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnPurchaseOrdarSubmit.setDoubleBuffered(true);
@@ -374,7 +369,6 @@ public class CuttingGUI extends javax.swing.JFrame {
         btnPurchaseOrderEdit.setBackground(new java.awt.Color(255, 255, 255));
         btnPurchaseOrderEdit.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         btnPurchaseOrderEdit.setText("Edit");
-        btnPurchaseOrderEdit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnPurchaseOrderEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPurchaseOrderEdit.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnPurchaseOrderEdit.setDoubleBuffered(true);
@@ -628,7 +622,6 @@ public class CuttingGUI extends javax.swing.JFrame {
         btnAddMarkerPlan.setBackground(new java.awt.Color(255, 255, 255));
         btnAddMarkerPlan.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         btnAddMarkerPlan.setText("Add Plan");
-        btnAddMarkerPlan.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAddMarkerPlan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAddMarkerPlan.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnAddMarkerPlan.setDoubleBuffered(true);
@@ -642,7 +635,6 @@ public class CuttingGUI extends javax.swing.JFrame {
         btnViewMarkerPlan.setBackground(new java.awt.Color(255, 255, 255));
         btnViewMarkerPlan.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         btnViewMarkerPlan.setText("View Plan");
-        btnViewMarkerPlan.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnViewMarkerPlan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnViewMarkerPlan.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnViewMarkerPlan.setDoubleBuffered(true);
@@ -663,7 +655,7 @@ public class CuttingGUI extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboPoNumberForMarkerPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtEntryStdPlyHight)
                             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -692,7 +684,7 @@ public class CuttingGUI extends javax.swing.JFrame {
                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEntryM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnViewMarkerPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnViewMarkerPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAddMarkerPlan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -798,7 +790,6 @@ public class CuttingGUI extends javax.swing.JFrame {
         btnCreateBundel.setBackground(new java.awt.Color(255, 255, 255));
         btnCreateBundel.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         btnCreateBundel.setText("Create Bundel");
-        btnCreateBundel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCreateBundel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCreateBundel.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnCreateBundel.setDoubleBuffered(true);
@@ -840,6 +831,7 @@ public class CuttingGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -849,8 +841,8 @@ public class CuttingGUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(panSetBuyerInfo5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(panSetBuyerInfo6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(12, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 2, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -990,7 +982,7 @@ public class CuttingGUI extends javax.swing.JFrame {
 
     private void comboStyleNameForMarkerPlanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboStyleNameForMarkerPlanItemStateChanged
         // TODO add your handling code here:
-        showPoNumberInComboBox();
+        showPoNumberInComboBox(comboStyleNameForMarkerPlan.getSelectedItem().toString());
     }//GEN-LAST:event_comboStyleNameForMarkerPlanItemStateChanged
 
     private void txtEntryXXSFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEntryXXSFocusLost
@@ -1080,7 +1072,12 @@ public class CuttingGUI extends javax.swing.JFrame {
 
     private void btnCreateBundelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateBundelActionPerformed
         // TODO add your handling code here:
-        new CreateBundels(Integer.valueOf(txtEntryCuttingNumber.getText())).setVisible(true);
+        if(Integer.valueOf(txtEntryCuttingNumber.getText()) >0){
+            new CreateBundels(Integer.valueOf(txtEntryCuttingNumber.getText())).setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Please Type Cutting Number.",
+                    ":: Sorry :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
         
     }//GEN-LAST:event_btnCreateBundelActionPerformed
 
@@ -1095,14 +1092,14 @@ public class CuttingGUI extends javax.swing.JFrame {
         for (String str : buyerList) {
             comboBuyerName.addItem(str);
         }
-
     }
 
     private void showStyleInfoInComboBox() {
 
         comboStyleName.removeAllItems();
         comboStyleNameForMarkerPlan.removeAllItems();
-
+        comboStyleNameForWorkingParts.removeAllItems();
+                
         List<String> styleList = new ArrayList<>();
         GetFromDatabase getFromDatabase = new DataView();
         styleList = getFromDatabase.getAllStyleInformation();
@@ -1115,12 +1112,12 @@ public class CuttingGUI extends javax.swing.JFrame {
 
     }
 
-    private void showPoNumberInComboBox() {
+    private void showPoNumberInComboBox(String styleName) {
         comboPoNumberForMarkerPlan.removeAllItems();
 
         List<String> poList = new ArrayList<>();
         GetFromDatabase getFromDatabase = new DataView();
-        poList = getFromDatabase.getAllPoNumberAcoudingToStyle(comboStyleNameForMarkerPlan.getSelectedItem().toString());
+        poList = getFromDatabase.getAllPoNumberAcoudingToStyle(styleName);
 
         for (String str : poList) {
             comboPoNumberForMarkerPlan.addItem(str);
