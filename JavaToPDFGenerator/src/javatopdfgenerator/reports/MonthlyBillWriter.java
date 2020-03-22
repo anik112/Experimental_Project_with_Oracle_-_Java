@@ -34,10 +34,29 @@ public class MonthlyBillWriter {
         try {
             PdfWriter.getInstance(document, new FileOutputStream("D:\\test.pdf"));
             document.open();
+            document.add(new Paragraph("\n\n"+billDate+"\n\n"
+                                       +"Bill No: "+billNo+"\n"
+                                       +"To\n"
+                                       +toCompanyName+"\n"
+                                       +toCompanyAddress+"\n\n"));
+            document.add(new Paragraph("Dear Sir/Madam,\n" +
+                    "Thank you for using our software. Please pay the bill as follows:"));
             
-            document.add(new Paragraph("Hello i am anik paul"));
-            document.add(new Paragraph("Hello i am anik paul asdhj oasn. jsdk,asjjhas .jsjdhbchgja ,."
-                    + "sudhas hgas.sdjkavb yeascbasc,"));
+            document.add(new Paragraph("------------------------------------------------------------------------------------------------"));
+            
+            String table[][]=new String[3][3];
+            
+            table[0][0]="   SL  ";
+            table[0][1]="               Description of the services            ";
+            table[0][2]="   Amount (Taka)  ";
+            
+            table[1][0]="__";
+            table[1][1]="+___________________________";
+            table[1][2]="+_______________";
+            
+            document.add(new Paragraph(table[1][0]+table[1][1]+table[1][2]));
+            document.add(new Paragraph(table[0][0]+table[0][1]+table[0][2]));
+            
             document.close();
         } catch (Exception ex) {
             Logger.getLogger(MonthlyBillWriter.class.getName()).log(Level.SEVERE, null, ex);

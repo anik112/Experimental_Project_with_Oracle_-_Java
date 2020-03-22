@@ -49,7 +49,6 @@ public class MainScreen extends javax.swing.JFrame {
                     null, " Can't find the path : " + fileWorkingPath,
                     "** Error **", JOptionPane.INFORMATION_MESSAGE);
         }
-
     }
 
     /**
@@ -334,7 +333,7 @@ public class MainScreen extends javax.swing.JFrame {
                 if (scanner.nextLine().equals("OK")) {
                     status = "Submitted";
                 } else {
-                    status = "Pending";
+                    status = "<===== Pending =====>";
                 }
                 //System.out.println(status);             
                 scanner.close();

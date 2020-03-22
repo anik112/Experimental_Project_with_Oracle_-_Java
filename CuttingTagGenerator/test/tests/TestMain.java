@@ -1,3 +1,5 @@
+package tests;
+
 
 import tests.TestPurchaseOrder;
 import view.CuttingGUI;

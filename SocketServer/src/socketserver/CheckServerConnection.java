@@ -5,8 +5,10 @@
  */
 package socketserver;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -126,28 +128,38 @@ public class CheckServerConnection extends javax.swing.JFrame {
             // TODO add your handling code here:
             jLblMsg.setText("");
             s = new Socket(jTextIp.getText(), Integer.valueOf(jTextPort.getText()));
-            
+
             if (s.isConnected()) {
                 jLblMsg.setText("= Connected =");
             } else {
                 jLblMsg.setText("= not Connected =");
             }
-        } catch (IOException ex) {            
+        } catch (IOException ex) {
             jLblMsg.setText("= not Connected =");
         }
-        
+
     }//GEN-LAST:event_jBtnCheckActionPerformed
 
     private void jBtnGetDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGetDataActionPerformed
-        try {
+        try {   
             // TODO add your handling code here:
-            DataInputStream dis = new DataInputStream(s.getInputStream());
-            jTxtArea.setText(dis.readUTF()+" <==> "+dis.toString());
-            dis.close();
+//            DataInputStream dis = new DataInputStream(s.getInputStream());
+//            
+//            System.out.println(dis);
+//            System.out.println(dis.toString());
+//            System.out.println(dis.readUTF());
+//            System.out.println(dis.readLong());
+//            System.out.println(dis.readByte());
+            
+            BufferedReader in =new BufferedReader(new InputStreamReader(s.getInputStream()));
+            
+            System.out.println(in.readLine());
+            
             s.close();
-        } catch (IOException ex) {
+            System.exit(0);
+        } catch (Exception ex) {
             Logger.getLogger(CheckServerConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
     }//GEN-LAST:event_jBtnGetDataActionPerformed
 
     /**

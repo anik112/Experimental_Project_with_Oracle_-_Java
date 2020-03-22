@@ -1095,11 +1095,11 @@ public class CuttingGUI extends javax.swing.JFrame {
     }
 
     private void showStyleInfoInComboBox() {
-
+        
         comboStyleName.removeAllItems();
         comboStyleNameForMarkerPlan.removeAllItems();
         comboStyleNameForWorkingParts.removeAllItems();
-                
+        
         List<String> styleList = new ArrayList<>();
         GetFromDatabase getFromDatabase = new DataView();
         styleList = getFromDatabase.getAllStyleInformation();
@@ -1109,7 +1109,6 @@ public class CuttingGUI extends javax.swing.JFrame {
             comboStyleNameForMarkerPlan.addItem(str);
             comboStyleNameForWorkingParts.addItem(str);
         }
-
     }
 
     private void showPoNumberInComboBox(String styleName) {
