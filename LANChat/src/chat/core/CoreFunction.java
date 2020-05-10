@@ -38,7 +38,7 @@ public class CoreFunction {
         return allMsgList;
     }
 
-    public void writeMsg(String fileLocationSender, String fileLocationReciver, String msg) {
+    public void writeMsg(String fileLocationSender, String fileLocationReciver, String msg, String senderIp) {
 
         try {
             File getFileReciver = new File(fileLocationReciver);
@@ -47,10 +47,12 @@ public class CoreFunction {
             FileWriter fwSender = new FileWriter(getFileSender, true);
 
             fwReciver.write("\n-2\n");
+            fwReciver.write(senderIp + "\n");
             fwReciver.write(msg);
             fwReciver.close();
 
             fwSender.write("\n-1\n");
+            fwSender.write(senderIp + "\n");
             fwSender.write(msg);
             fwSender.close();
 
@@ -68,7 +70,7 @@ public class CoreFunction {
             Scanner s = new Scanner(f);
 
             while (s.hasNext()) {
-                String line=s.nextLine();
+                String line = s.nextLine();
                 if (line.equals("-")) {
                     continue;
                 } else {
@@ -87,8 +89,21 @@ public class CoreFunction {
         }
         return frndList;
     }
-    
-    
-    private String 
+
+    public String getMyIp(String loc) {
+        String myIp = "";
+        try {
+            File f = new File(loc);
+            Scanner s = new Scanner(f);
+
+            while (s.hasNext()) {
+                myIp = s.nextLine();
+            }
+            return myIp;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return myIp;
+    }
 
 }

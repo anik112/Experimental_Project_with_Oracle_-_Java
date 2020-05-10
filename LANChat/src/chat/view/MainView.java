@@ -22,22 +22,21 @@ public class MainView extends javax.swing.JFrame {
 
     private String senderFileLoc;
     private String reciverFileLoc;
-    private String frndListLoc="D:\\LANChat\\frndList.txt";
-    private String configLoc="D:\\LANChat\\config.txt";
+    private String frndListLoc = "D:\\LANChat\\frndList.txt";
+    private String configLoc = "D:\\LANChat\\config.txt";
     private List<DaoCoreFunction> getFrndList;
-    
-    private String urlHeader="\\\\";
-    private String urlMid="\\LiveApps\\LANChat\\";
-    
-    /**
-     * Creates new form MainView
-     *
-     * @param senderFileLocation
-     * @param reciverFileLocation
-     */
+
+    private String urlHeader = "\\\\";
+    private String urlMid = "\\LiveApps\\LANChat\\";
+    private String fileExns = ".txt";
+    private String serverIp = "192.168.1.210";
+    private String myip;
+
     public MainView() {
         initComponents();
 
+        myip = new CoreFunction().getMyIp(configLoc);
+        senderFileLoc = urlHeader + serverIp + urlMid + myip + fileExns;
         viewDataInTable(senderFileLoc);
         txtArWriteMsg.setLineWrap(true);
         showList.setBackground(Color.white);
@@ -63,6 +62,7 @@ public class MainView extends javax.swing.JFrame {
         showList = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -120,6 +120,12 @@ public class MainView extends javax.swing.JFrame {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setHorizontalScrollBar(null);
 
+        showList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                showListMouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout showListLayout = new javax.swing.GroupLayout(showList);
         showList.setLayout(showListLayout);
         showListLayout.setHorizontalGroup(
@@ -162,6 +168,15 @@ public class MainView extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Setup");
+
+        jMenuItem1.setText("Refresh");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Exit");
@@ -203,11 +218,20 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtArWriteMsgKeyPressed
 
     private void comboSenderListItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboSenderListItemStateChanged
-        // TODO add your handling code here:
-        
-        
-        
+        // TODO add your handling code here
+
     }//GEN-LAST:event_comboSenderListItemStateChanged
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        refMsgList();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void showListMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showListMouseEntered
+        // TODO add your handling code here:
+        showList.removeAll();
+        viewDataInTable(senderFileLoc);
+    }//GEN-LAST:event_showListMouseEntered
 
     private void viewDataInTable(String fileLoc) {
         String keyPerson01 = "-1";
@@ -215,15 +239,20 @@ public class MainView extends javax.swing.JFrame {
 
         try {
             List<String> msgList = new CoreFunction().getMsgList(fileLoc);
-            System.out.println(msgList.size());
+            //System.out.println(msgList.size());
 
             int i = 0;
             while (i != msgList.size()) {
                 showList.setLayout(new GridLayout(0, 1, 10, 10));
                 String s = msgList.get(i);
-
+                String personName="Unknown";
+                for (int k = 0; k < getFrndList.size(); k++) {
+                    if (getFrndList.get(k).getIpAddress().equals(msgList.get(i + 1))) {
+                        personName = getFrndList.get(k).getFrndName();
+                    }
+                }
                 if (s.equals(keyPerson02)) {
-                    JTextArea field = new JTextArea(msgList.get(i + 1));
+                    JTextArea field = new JTextArea(personName + "\n" + msgList.get(i + 2));
                     field.setLineWrap(true);
                     field.setBackground(new Color(0, 153, 153));
                     field.setForeground(new java.awt.Color(255, 255, 255));
@@ -232,7 +261,8 @@ public class MainView extends javax.swing.JFrame {
                     showList.revalidate();
                     showList.repaint();
                 } else if (s.equals(keyPerson01)) {
-                    JTextArea field = new JTextArea(msgList.get(i + 1));
+
+                    JTextArea field = new JTextArea(personName + "\n" + msgList.get(i + 2));
                     field.setLineWrap(true);
 
                     showList.add(field);
@@ -249,22 +279,41 @@ public class MainView extends javax.swing.JFrame {
 
     private void sendMsg() {
         if (txtArWriteMsg.getText().length() > 1) {
-            new CoreFunction().writeMsg(senderFileLoc, reciverFileLoc, txtArWriteMsg.getText());
+
+//            for(int i=0;i<getFrndList.size();i++){
+//                String ip=getFrndList.get(i).getIpAddress();
+//                if(ip=="192.168.1.204"){
+//                    senderFileLoc=urlHeader+ip+urlMid+ip;
+//                }
+//            }
+            String reciverIp;
+            for (int i = 0; i < getFrndList.size(); i++) {
+                String selectedFrnd = comboSenderList.getSelectedItem().toString();
+                String frndName = getFrndList.get(i).getFrndName();
+                if (frndName.equals(selectedFrnd)) {
+                    reciverIp = getFrndList.get(i).getIpAddress().toString();
+                    reciverFileLoc = urlHeader + serverIp + urlMid + reciverIp + fileExns;
+                    new CoreFunction().writeMsg(senderFileLoc, reciverFileLoc, txtArWriteMsg.getText(), myip);
+                    break;
+                }
+            }
+
             txtArWriteMsg.setText("");
             refMsgList();
         }
     }
-    
-    private void showFrndListInBox(){
-        getFrndList=new ArrayList<>();
-        getFrndList=new CoreFunction().frndsList(frndListLoc);
-        
-        for(DaoCoreFunction dcf:getFrndList){
+
+    private void showFrndListInBox() {
+        getFrndList = new ArrayList<>();
+        getFrndList = new CoreFunction().frndsList(frndListLoc);
+
+        for (DaoCoreFunction dcf : getFrndList) {
             comboSenderList.addItem(dcf.getFrndName());
         }
     }
 
     private void refMsgList() {
+        txtArWriteMsg.setText("");
         showList.removeAll();
         viewDataInTable(senderFileLoc);
     }
@@ -276,6 +325,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

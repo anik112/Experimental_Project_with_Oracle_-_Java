@@ -33,6 +33,6 @@ public class TestFunction {
 //        } catch (Exception e) {
 //            System.err.println(e.getMessage());
 //        }
-        new CoreFunction().writeMsg(filePathSender,filePathReciver, "What is your name -- anik?");
+       // new CoreFunction().writeMsg(filePathSender,filePathReciver, "What is your name -- anik?");
     }
 }
