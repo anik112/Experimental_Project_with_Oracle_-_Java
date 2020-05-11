@@ -5,8 +5,10 @@
  */
 package chat.app;
 
+import chat.core.Notifaction;
 import chat.view.MainView;
-import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -15,14 +17,13 @@ import javafx.stage.Stage;
  * @author Anik
  */
 public class ChatApp extends Application {
-    
-    
+
     private static String filePathSender = "D:\\test.txt";
-    private static String filePathReciver="D:\\test2.txt";
-    private static String configLoc="D:\\LANChat\\config.txt";
-    
-    private static String path="\\\\192.168.1.210\\LiveApps\\LANChat";
-    
+    private static String filePathReciver = "D:\\test2.txt";
+    private static String configLoc = "D:\\LANChat\\config.txt";
+
+    private static String path = "\\\\192.168.1.210\\LiveApps\\LANChat";
+
     @Override
     public void start(Stage primaryStage) {
         /* Create and display the form */
@@ -31,14 +32,13 @@ public class ChatApp extends Application {
                 new MainView().setVisible(true);
             }
         });
-
     }
-
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -55,8 +55,8 @@ public class ChatApp extends Application {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+
         launch(args);
     }
-    
+
 }

@@ -20,7 +20,7 @@ import javax.swing.JTextArea;
  */
 public class MainView extends javax.swing.JFrame {
 
-    private String senderFileLoc;
+    private String senderFileLoc = "";
     private String reciverFileLoc;
     private String frndListLoc = "D:\\LANChat\\frndList.txt";
     private String configLoc = "D:\\LANChat\\config.txt";
@@ -245,13 +245,15 @@ public class MainView extends javax.swing.JFrame {
             while (i != msgList.size()) {
                 showList.setLayout(new GridLayout(0, 1, 10, 10));
                 String s = msgList.get(i);
-                String personName="Unknown";
-                for (int k = 0; k < getFrndList.size(); k++) {
-                    if (getFrndList.get(k).getIpAddress().equals(msgList.get(i + 1))) {
-                        personName = getFrndList.get(k).getFrndName();
-                    }
-                }
+                String personName = "Unknown";
+
                 if (s.equals(keyPerson02)) {
+                    for (int k = 0; k < getFrndList.size(); k++) {
+                        if (getFrndList.get(k).getIpAddress().equals(msgList.get(i + 1))) {
+                            personName = getFrndList.get(k).getFrndName();
+                            break;
+                        }
+                    }
                     JTextArea field = new JTextArea(personName + "\n" + msgList.get(i + 2));
                     field.setLineWrap(true);
                     field.setBackground(new Color(0, 153, 153));
@@ -260,8 +262,14 @@ public class MainView extends javax.swing.JFrame {
                     showList.add(field);
                     showList.revalidate();
                     showList.repaint();
-                } else if (s.equals(keyPerson01)) {
 
+                } else if (s.equals(keyPerson01)) {
+                    for (int k = 0; k < getFrndList.size(); k++) {
+                        if (getFrndList.get(k).getIpAddress().equals(msgList.get(i + 1))) {
+                            personName = getFrndList.get(k).getFrndName();
+                            break;
+                        }
+                    }
                     JTextArea field = new JTextArea(personName + "\n" + msgList.get(i + 2));
                     field.setLineWrap(true);
 
@@ -273,6 +281,7 @@ public class MainView extends javax.swing.JFrame {
                 i++;
             }
         } catch (Exception e) {
+            e.printStackTrace();
             System.err.println(e.getMessage());
         }
     }
