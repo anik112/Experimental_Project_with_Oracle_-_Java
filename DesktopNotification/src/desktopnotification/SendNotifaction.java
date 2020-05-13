@@ -49,16 +49,23 @@ public class SendNotifaction {
         return myIp;
     }
 
-    public int getMsgSize(String fileLocation) {
+    public int getMsgSize(String fileLocation, String myIp) {
         List<String> allMsgList = new ArrayList<>();
-        int size=0;
+        int size = 1;
         try {
-            int i = 0;
             File fileName = new File(fileLocation);
             Scanner scanner = new Scanner(fileName);
             while (scanner.hasNext()) {
-                allMsgList.add(scanner.nextLine());
-                //System.out.println(scanner.nextLine());
+                String head = scanner.nextLine();
+                String ip = scanner.nextLine();
+                //System.out.println(s);
+                if (ip.equals(myIp)) {
+                    //System.out.println(scanner.nextLine());
+                    scanner.nextLine();
+                }else{
+                    scanner.nextLine();
+                    allMsgList.add(head);
+                }
             }
             size=allMsgList.size();
             return size;
