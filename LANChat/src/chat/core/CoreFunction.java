@@ -28,8 +28,9 @@ public class CoreFunction {
             File fileName = new File(fileLocation);
             Scanner scanner = new Scanner(fileName);
             while (scanner.hasNext()) {
-                allMsgList.add(scanner.nextLine());
-                //System.out.println(scanner.nextLine());
+                String check = scanner.nextLine();
+                allMsgList.add(check);
+                System.out.println(check);
             }
             return allMsgList;
         } catch (Exception e) {
@@ -38,7 +39,7 @@ public class CoreFunction {
         return allMsgList;
     }
 
-    public void writeMsg(String fileLocationSender, String fileLocationReciver, String msg, String senderIp) {
+    public void writeMsg(String fileLocationSender, String fileLocationReciver, String msg, String senderIp, String date) {
 
         try {
             File getFileReciver = new File(fileLocationReciver);
@@ -46,14 +47,14 @@ public class CoreFunction {
             File getFileSender = new File(fileLocationSender);
             FileWriter fwSender = new FileWriter(getFileSender, true);
 
-            fwReciver.write("\n-2\n");
+            fwReciver.write("-2 " + date + "\n");
             fwReciver.write(senderIp + "\n");
-            fwReciver.write(msg);
+            fwReciver.write(msg+"\n");
             fwReciver.close();
 
-            fwSender.write("\n-1\n");
+            fwSender.write("-1 " + date + "\n");
             fwSender.write(senderIp + "\n");
-            fwSender.write(msg);
+            fwSender.write(msg+"\n");
             fwSender.close();
 
         } catch (Exception e) {

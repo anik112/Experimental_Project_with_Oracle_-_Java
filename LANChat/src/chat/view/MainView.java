@@ -10,7 +10,9 @@ import chat.core.DaoCoreFunction;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JTextArea;
 
@@ -31,16 +33,20 @@ public class MainView extends javax.swing.JFrame {
     private String fileExns = ".txt";
     private String serverIp = "192.168.1.210";
     private String myip;
+    private String dateTime="00/00/0000 00:00:00";
 
     public MainView() {
         initComponents();
-
+        
+        dateTime=getDateAndTime();
+        System.out.println(dateTime);
         myip = new CoreFunction().getMyIp(configLoc);
         senderFileLoc = urlHeader + serverIp + urlMid + myip + fileExns;
         viewDataInTable(senderFileLoc);
         txtArWriteMsg.setLineWrap(true);
         showList.setBackground(Color.white);
         showFrndListInBox();
+        setNikNameInEditor(comboSenderList.getSelectedItem().toString());
     }
 
     /**
@@ -212,14 +218,14 @@ public class MainView extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txtArWriteMsg.getText() != null) {
                 sendMsg();
-                txtArWriteMsg.setText(null);
+                setNikNameInEditor(comboSenderList.getSelectedItem().toString());
             }
         }
     }//GEN-LAST:event_txtArWriteMsgKeyPressed
 
     private void comboSenderListItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboSenderListItemStateChanged
         // TODO add your handling code here
-
+        setNikNameInEditor(comboSenderList.getSelectedItem().toString());
     }//GEN-LAST:event_comboSenderListItemStateChanged
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -245,16 +251,22 @@ public class MainView extends javax.swing.JFrame {
             while (i != msgList.size()) {
                 showList.setLayout(new GridLayout(0, 1, 10, 10));
                 String s = msgList.get(i);
+                //System.out.println(s);
+                String key=s.substring(0,2);
+                //System.out.println(key);
+                String getDate=s.substring(2,s.length());
+                //System.out.println(getDate);
+                
                 String personName = "Unknown";
 
-                if (s.equals(keyPerson02)) {
+                if (key.equals(keyPerson02)) {
                     for (int k = 0; k < getFrndList.size(); k++) {
                         if (getFrndList.get(k).getIpAddress().equals(msgList.get(i + 1))) {
                             personName = getFrndList.get(k).getFrndName();
                             break;
                         }
                     }
-                    JTextArea field = new JTextArea(personName + "\n" + msgList.get(i + 2));
+                    JTextArea field = new JTextArea(personName + getDate +"\n" + msgList.get(i + 2));
                     field.setLineWrap(true);
                     field.setBackground(new Color(0, 153, 153));
                     field.setForeground(new java.awt.Color(255, 255, 255));
@@ -263,14 +275,14 @@ public class MainView extends javax.swing.JFrame {
                     showList.revalidate();
                     showList.repaint();
 
-                } else if (s.equals(keyPerson01)) {
+                } else if (key.equals(keyPerson01)) {
                     for (int k = 0; k < getFrndList.size(); k++) {
                         if (getFrndList.get(k).getIpAddress().equals(msgList.get(i + 1))) {
                             personName = getFrndList.get(k).getFrndName();
                             break;
                         }
                     }
-                    JTextArea field = new JTextArea(personName + "\n" + msgList.get(i + 2));
+                    JTextArea field = new JTextArea(personName + getDate +"\n" + msgList.get(i + 2));
                     field.setLineWrap(true);
 
                     showList.add(field);
@@ -302,12 +314,12 @@ public class MainView extends javax.swing.JFrame {
                 if (frndName.equals(selectedFrnd)) {
                     reciverIp = getFrndList.get(i).getIpAddress().toString();
                     reciverFileLoc = urlHeader + serverIp + urlMid + reciverIp + fileExns;
-                    new CoreFunction().writeMsg(senderFileLoc, reciverFileLoc, txtArWriteMsg.getText(), myip);
+                    new CoreFunction().writeMsg(senderFileLoc, reciverFileLoc, txtArWriteMsg.getText(), myip, dateTime);
                     break;
                 }
             }
-
-            txtArWriteMsg.setText("");
+            
+            setNikNameInEditor(comboSenderList.getSelectedItem().toString());
             refMsgList();
         }
     }
@@ -325,6 +337,19 @@ public class MainView extends javax.swing.JFrame {
         txtArWriteMsg.setText("");
         showList.removeAll();
         viewDataInTable(senderFileLoc);
+    }
+    
+    private String getDateAndTime(){
+        Date d=new Date(System.currentTimeMillis());
+        System.out.println(d);
+        SimpleDateFormat format=new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+        String dateAndTime=format.format(d);
+        
+        return dateAndTime;
+    }
+    
+    private void setNikNameInEditor(String selectedName){
+        txtArWriteMsg.setText(selectedName+": ");
     }
 
 
