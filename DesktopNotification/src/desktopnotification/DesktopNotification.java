@@ -30,9 +30,9 @@ public class DesktopNotification extends Application {
     @Override
     public void start(Stage primaryStage) {
         myip = new SendNotifaction().getMyIp(configLoc);
-
-        //String fileUrl = urlHeader + serverIp + urlMid + myip + fileExns;
-        String fileUrl = "D:\\LANChat\\"+myip+".txt";
+        
+        String fileUrl = urlHeader + serverIp + urlMid + myip + fileExns;
+        //String fileUrl = "D:\\LANChat\\"+myip+".txt";
         
         try {
             while (true) {

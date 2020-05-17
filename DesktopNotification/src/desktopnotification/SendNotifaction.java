@@ -50,8 +50,9 @@ public class SendNotifaction {
     }
 
     public int getMsgSize(String fileLocation, String myIp) {
+        //System.out.println(fileLocation);
         List<String> allMsgList = new ArrayList<>();
-        int size = 1;
+        int size = 0;
         try {
             File fileName = new File(fileLocation);
             Scanner scanner = new Scanner(fileName);
@@ -68,6 +69,8 @@ public class SendNotifaction {
                 }
             }
             size=allMsgList.size();
+            System.err.println(size);
+            System.err.println("--------------------------");
             return size;
         } catch (Exception e) {
             e.printStackTrace();
