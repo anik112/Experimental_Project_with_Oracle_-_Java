@@ -8,7 +8,9 @@ package chat.view;
 import chat.core.CoreFunction;
 import chat.core.DaoCoreFunction;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,12 +35,12 @@ public class MainView extends javax.swing.JFrame {
     private String fileExns = ".txt";
     private String serverIp = "192.168.1.210";
     private String myip;
-    private String dateTime="00/00/0000 00:00:00";
+    private String dateTime = "00/00/0000 00:00:00";
 
     public MainView() {
         initComponents();
-        
-        dateTime=getDateAndTime();
+
+        dateTime = getDateAndTime();
         System.out.println(dateTime);
         myip = new CoreFunction().getMyIp(configLoc);
         senderFileLoc = urlHeader + serverIp + urlMid + myip + fileExns;
@@ -107,6 +109,7 @@ public class MainView extends javax.swing.JFrame {
         );
 
         txtArWriteMsg.setColumns(20);
+        txtArWriteMsg.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
         txtArWriteMsg.setRows(5);
         txtArWriteMsg.setDragEnabled(true);
         txtArWriteMsg.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -136,11 +139,11 @@ public class MainView extends javax.swing.JFrame {
         showList.setLayout(showListLayout);
         showListLayout.setHorizontalGroup(
             showListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 643, Short.MAX_VALUE)
         );
         showListLayout.setVerticalGroup(
             showListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 309, Short.MAX_VALUE)
+            .addGap(0, 323, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(showList);
@@ -157,7 +160,7 @@ public class MainView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnSendMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,9 +168,9 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSendMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
@@ -249,14 +252,14 @@ public class MainView extends javax.swing.JFrame {
 
             int i = 0;
             while (i != msgList.size()) {
-                showList.setLayout(new GridLayout(0, 1, 10, 10));
+                showList.setLayout(new GridLayout(0, 1, 5, 5));
                 String s = msgList.get(i);
                 //System.out.println(s);
-                String key=s.substring(0,2);
+                String key = s.substring(0, 2);
                 //System.out.println(key);
-                String getDate=s.substring(2,s.length());
+                String getDate = s.substring(2, s.length());
                 //System.out.println(getDate);
-                
+
                 String personName = "Unknown";
 
                 if (key.equals(keyPerson02)) {
@@ -266,10 +269,15 @@ public class MainView extends javax.swing.JFrame {
                             break;
                         }
                     }
-                    JTextArea field = new JTextArea(personName + getDate +"\n" + msgList.get(i + 2));
+
+                    JTextArea field = new JTextArea(personName + getDate 
+                                                    + "\n\n" 
+                                                    + msgList.get(i + 2));
                     field.setLineWrap(true);
                     field.setBackground(new Color(0, 153, 153));
                     field.setForeground(new java.awt.Color(255, 255, 255));
+                    Font font = new Font("Lucida Sans",Font.PLAIN, 14);
+                    field.setFont(font);
 
                     showList.add(field);
                     showList.revalidate();
@@ -282,8 +290,12 @@ public class MainView extends javax.swing.JFrame {
                             break;
                         }
                     }
-                    JTextArea field = new JTextArea(personName + getDate +"\n" + msgList.get(i + 2));
+                    JTextArea field = new JTextArea(personName + getDate 
+                                                    + "\n\n"
+                                                    + msgList.get(i + 2));
                     field.setLineWrap(true);
+                    Font font = new Font("Lucida Sans",Font.PLAIN, 14);
+                    field.setFont(font);
 
                     showList.add(field);
                     showList.revalidate();
@@ -318,7 +330,7 @@ public class MainView extends javax.swing.JFrame {
                     break;
                 }
             }
-            
+
             setNikNameInEditor(comboSenderList.getSelectedItem().toString());
             refMsgList();
         }
@@ -338,18 +350,18 @@ public class MainView extends javax.swing.JFrame {
         showList.removeAll();
         viewDataInTable(senderFileLoc);
     }
-    
-    private String getDateAndTime(){
-        Date d=new Date(System.currentTimeMillis());
+
+    private String getDateAndTime() {
+        Date d = new Date(System.currentTimeMillis());
         System.out.println(d);
-        SimpleDateFormat format=new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
-        String dateAndTime=format.format(d);
-        
+        SimpleDateFormat format = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+        String dateAndTime = format.format(d);
+
         return dateAndTime;
     }
-    
-    private void setNikNameInEditor(String selectedName){
-        txtArWriteMsg.setText(selectedName+": ");
+
+    private void setNikNameInEditor(String selectedName) {
+        txtArWriteMsg.setText(selectedName + ": ");
     }
 
 

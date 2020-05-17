@@ -30,7 +30,7 @@ public class CoreFunction {
             while (scanner.hasNext()) {
                 String check = scanner.nextLine();
                 allMsgList.add(check);
-                System.out.println(check);
+                //System.out.println(check);
             }
             return allMsgList;
         } catch (Exception e) {
@@ -39,9 +39,13 @@ public class CoreFunction {
         return allMsgList;
     }
 
-    public void writeMsg(String fileLocationSender, String fileLocationReciver, String msg, String senderIp, String date) {
+    public void writeMsg(String fileLocationSender, String fileLocationReciver, String tempMsg, String senderIp, String date) {
 
         try {
+            
+            String msg=tempMsg.replace('\n', '\b');
+            System.out.println(msg);
+            
             File getFileReciver = new File(fileLocationReciver);
             FileWriter fwReciver = new FileWriter(getFileReciver, true);
             File getFileSender = new File(fileLocationSender);
