@@ -14,9 +14,12 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import reportgenerator.dao.MonthlyBillComponent;
 
 /**
  *
@@ -24,13 +27,7 @@ import java.util.logging.Logger;
  */
 public class WriteMonthlyBill {
 
-    private String date;
-    private String billNo;
-    private String companyName;
-    private String address;
-    private String month;
-    private String year;
-    private int amount;
+    private String configAmountListUrl = "setup\\NumberInWord.txt";
 
     private final String to = "To";
     private final String greetingtextHead = "Dear Sir/Madam,";
@@ -45,25 +42,16 @@ public class WriteMonthlyBill {
     private final String noteTxt = "N.B: All payments should be in a/c payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
     private final String sign = "..................................\nAuthorized Signatory";
 
-    public static void main(String[] arg) {
-
-        new WriteMonthlyBill().writeMonthlyBillInPdfFile();
-    }
-
-    public void writeMonthlyBillInPdfFile() {
-
-        date = "May 05, 2020";
-        billNo = "052020";
-        month = "May";
-        year = "2020";
-        companyName = "Alif Embroidery Village Ltd.";
-        address = "Bangabandhu Road, Tongabari , Ashulia, Savar, Dhaka.";
-        amount = 4000;
+//    public static void main(String[] arg) {
+//
+//        new WriteMonthlyBill().writeMonthlyBillInPdfFile();
+//    }
+    public boolean writeMonthlyBillInPdfFile(MonthlyBillComponent component, File selectedFile) {
 
         try {
             Document document = new Document();
 
-            PdfWriter.getInstance(document, new FileOutputStream("D:\\test01.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream(selectedFile));
             document.setMargins(40, 40, 20, 20);
             document.open();
 
@@ -72,15 +60,15 @@ public class WriteMonthlyBill {
             topLogo.scaleAbsolute(180, 60);
             //topLogo.setSpacingBefore(100);
             document.add(topLogo);
-            
+
             FontFactory.register("font\\calibri.ttf", "calibri");
             Font f1 = FontFactory.getFont("calibri", 12);
 
-            Paragraph docHeader = new Paragraph("\nDate: " + date + "\n\n"
-                    + "Bill no: " + billNo + "\n\n"
+            Paragraph docHeader = new Paragraph("\nDate: " + component.getDate() + "\n\n"
+                    + "Bill No: " + component.getBillNo() + "\n\n"
                     + to + "\n"
-                    + companyName + "\n"
-                    + address + "\n\n"
+                    + component.getCompanyName() + "\n"
+                    + component.getAddress() + "\n\n"
                     + greetingtextHead + "\n"
                     + greetingtextBody,
                     f1);
@@ -132,7 +120,7 @@ public class WriteMonthlyBill {
             row01Head.setHorizontalAlignment(Element.ALIGN_LEFT);
             row01Head.setVerticalAlignment(Element.ALIGN_TOP);
 
-            PdfPCell row01Body = new PdfPCell(new Paragraph(rowBody + " " + month + ", " + year, f2));
+            PdfPCell row01Body = new PdfPCell(new Paragraph(rowBody + " " + component.getMonth() + ", " + component.getYear(), f2));
             row01Body.setPaddingLeft(padding);
             row01Body.setPaddingTop(rowTopPadding);
             row01Body.setPaddingBottom(rowBttomPadding);
@@ -140,7 +128,7 @@ public class WriteMonthlyBill {
             row01Body.setHorizontalAlignment(Element.ALIGN_LEFT);
             row01Body.setVerticalAlignment(Element.ALIGN_TOP);
 
-            PdfPCell row01Footer = new PdfPCell(new Paragraph(String.valueOf(amount) + ".00", f2));
+            PdfPCell row01Footer = new PdfPCell(new Paragraph(String.valueOf(component.getAmount()) + ".00", f2));
             row01Footer.setPaddingLeft(padding);
             row01Footer.setPaddingTop(rowTopPadding);
             row01Footer.setPaddingBottom(rowBttomPadding);
@@ -157,7 +145,7 @@ public class WriteMonthlyBill {
             row02Body.setVerticalAlignment(Element.ALIGN_TOP);
             row02Body.setColspan(2);
 
-            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(amount) + ".00", f2));
+            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(component.getAmount()) + ".00", f2));
             row02Footer.setPaddingLeft(padding);
             row02Footer.setPaddingTop(padding);
             row02Footer.setPaddingBottom(padding);
@@ -169,41 +157,41 @@ public class WriteMonthlyBill {
             table.addCell(cellHeader02);
             table.addCell(cellHeader03);
             table.addCell(row01Head);
-            table.addCell(row01Body); 
+            table.addCell(row01Body);
             table.addCell(row01Footer);
             table.addCell(row02Body);
             table.addCell(row02Footer);
 
             document.add(table);
-            
-            
+
             Font f3 = FontFactory.getFont("SansSerif", 10);
             document.add(new Paragraph(tableFooterTxt, f3));
 
-            document.add(new Paragraph("\n"+amountTage,f1));
-            document.add(new Paragraph(noteTxt+"\n\n\n",f1));
-            
-            Image sirSing=Image.getInstance("img\\Sir-Sign.jpg");
+            document.add(new Paragraph("\n" + amountTage + (new IOFunction().getNumberInWord(component.getAmount(), configAmountListUrl))+" only.", f1));
+            document.add(new Paragraph(noteTxt + "\n\n\n", f1));
+
+            Image sirSing = Image.getInstance("img\\Sir-Sign.jpg");
             sirSing.setAlignment(sirSing.ALIGN_LEFT);
             sirSing.scaleAbsolute(100, 30);
             document.add(sirSing);
-            
-            document.add(new Paragraph(sign+"\n\n",f1));            
-            
-            
-            
-            Image footerImage=Image.getInstance("img\\footer.jpg");
+
+            document.add(new Paragraph(sign + "\n\n", f1));
+
+            Image footerImage = Image.getInstance("img\\footer.jpg");
             footerImage.setAlignment(footerImage.ALIGN_LEFT);
-            footerImage.scaleAbsolute(document.getPageSize().getWidth()-80, 80);
+            footerImage.scaleAbsolute(document.getPageSize().getWidth() - 80, 90);
             document.add(footerImage);
-            
+
             document.close();
+            return true;
 
         } catch (Exception ex) {
             Logger.getLogger(WriteMonthlyBill.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        return false;
     }
-    
+
 //    
 //    private Image getWatermarkedImage(PdfDocument pdfDoc, Image img, String watermark) {
 //        float width = img.getImageScaledWidth();
@@ -219,5 +207,4 @@ public class WriteMonthlyBill {
 //                .close();
 //        return new Image(template);
 //    }
-
 }

@@ -1,0 +1,4 @@
+500-Five hundred taka
+1000-One thousend taka
+1500-One thousend five hundred taka
+2000-Two thousend taka

@@ -5,17 +5,37 @@
  */
 package reportgenerator.view;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import reportgenerator.corefunction.IOFunction;
+import reportgenerator.corefunction.WriteMonthlyBill;
+import reportgenerator.dao.MonthlyBillComponent;
+
 /**
  *
  * @author Anik
  */
 public class MainWindow extends javax.swing.JFrame {
 
+    private String savingLoc = "D:\\";
+    private String configComapnyListUrl = "setup\\CompanyName.txt";
+    private String billNo = "";
+
+    private List<String> companyAndAddressList = new ArrayList<>();
+
+    private int i = 0;
+
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
         initComponents();
+        showCompanyNameInComboBox();
     }
 
     /**
@@ -27,21 +47,170 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        comboMonth = new javax.swing.JComboBox<>();
+        comboYear = new javax.swing.JComboBox<>();
+        btnGenerate = new javax.swing.JButton();
+        btnOpenFile = new javax.swing.JButton();
+        comboCompany = new javax.swing.JComboBox<>();
+        txtAmount = new javax.swing.JTextField();
+        txtDate = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        comboMonth.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
+        comboMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "January", "February", "March", "April", "May", "Jun", "July", "August", "September", "October", "November", "December" }));
+        comboMonth.setToolTipText("");
+
+        comboYear.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
+        comboYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
+        comboYear.setToolTipText("");
+
+        btnGenerate.setText("Generate");
+        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerateActionPerformed(evt);
+            }
+        });
+
+        btnOpenFile.setText("Open File");
+
+        comboCompany.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
+        comboCompany.setMaximumRowCount(100);
+        comboCompany.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Company Name" }));
+        comboCompany.setToolTipText("");
+
+        txtAmount.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtAmount.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Amount", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+
+        txtDate.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtDate.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Date", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        txtDate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDateKeyPressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(comboCompany, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(comboMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(comboYear, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtAmount)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGenerate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnOpenFile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(comboMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnOpenFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(174, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 661, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 429, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
+
+        PrintWriter pw = null;
+        try {
+            // TODO add your handling code here:
+            
+            String companyName = comboCompany.getSelectedItem().toString();
+            companyName = companyName.replace(' ', '-');
+            savingLoc += companyName+"-"+billNo+".pdf";
+            
+            MonthlyBillComponent component = new MonthlyBillComponent();
+            component.setMonth(comboMonth.getSelectedItem().toString());
+            component.setYear(comboYear.getSelectedItem().toString());
+            String parts[] = comboCompany.getSelectedItem().toString().split("-");
+            component.setCompanyName(parts[1]);
+            component.setAddress(companyAndAddressList.get(Integer.parseInt(parts[0]) + 1));
+            component.setAmount(Integer.parseInt(txtAmount.getText()));
+            component.setDate(txtDate.getText());
+            component.setBillNo(billNo);
+            
+            File selectedFile = new File(savingLoc);
+            
+            if (new WriteMonthlyBill().writeMonthlyBillInPdfFile(component, selectedFile)) {
+                System.out.println("File is generate");
+            } else {
+                System.out.println("File isn't generate");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnGenerateActionPerformed
+
+    private void txtDateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDateKeyPressed
+        // TODO add your handling code here:
+
+        if (i == 8) {
+            String date = txtDate.getText();
+            String day = date.substring(0, 2);
+            String month = date.substring(2, 4);
+            String year = date.substring(4, 8);
+
+            billNo = month + year;
+            System.out.println(day + "/" + month + "/" + year);
+            txtDate.setText(day + "/" + month + "/" + year);
+            txtAmount.requestFocus();
+        }
+        i++;
+    }//GEN-LAST:event_txtDateKeyPressed
+
+    private void showCompanyNameInComboBox() {
+        companyAndAddressList = new IOFunction().getCompanyNameAndAddress(configComapnyListUrl);
+
+        int i = 0;
+        while (i != companyAndAddressList.size()) {
+            comboCompany.addItem(i + "-" + companyAndAddressList.get(i));
+            i += 2;
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -79,5 +248,13 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGenerate;
+    private javax.swing.JButton btnOpenFile;
+    private javax.swing.JComboBox<String> comboCompany;
+    private javax.swing.JComboBox<String> comboMonth;
+    private javax.swing.JComboBox<String> comboYear;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtAmount;
+    private javax.swing.JTextField txtDate;
     // End of variables declaration//GEN-END:variables
 }
