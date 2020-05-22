@@ -15,23 +15,39 @@ import java.util.logging.Logger;
  * @author Anik
  */
 public class TestClass {
-    
+
     private static String configComapnyListUrl = "setup\\CompanyName.txt";
 
     public static void main(String[] args) {
         System.out.println(configComapnyListUrl);
         try {
-            File selectedFile = new File("D:\\0-VisioApls.pdf");
-            if (!selectedFile.exists()) {
-                PrintWriter pw;
+//            File selectedFile = new File("D:\\0-VisioApls.pdf");
+//            if (!selectedFile.exists()) {
+//                PrintWriter pw;
+//
+//                pw = new PrintWriter(selectedFile);
+//
+//                System.out.println("--------------->> file create");
+//                pw.close();
+//            }
 
-                pw = new PrintWriter(selectedFile);
+//              string check
+//            String s = "19032a";
+//            if (s.matches("-?\\d+(\\.\\d+)?")) {
+//                System.out.println("Is number");
+//            }else{
+//                System.out.println("Is not number");
+//            }
+            // date check
+            System.out.println(System.currentTimeMillis());
+            
+            // check dynamic variable
+//            int n1=1,n2=3,n3=4;
+//            for(int i=1;i<4;i++){
+//                System.out.println(n<i>);
+//            }
 
-                System.out.println("--------------->> file create");
-                pw.close();
-            }
-
-        } catch (FileNotFoundException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
