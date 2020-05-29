@@ -18,6 +18,15 @@ public class ReqQutComponent {
     private String year;
     private String bodyContent;
     private String amount;
+    private String billNo;
+
+    public String getBillNo() {
+        return billNo;
+    }
+
+    public void setBillNo(String billNo) {
+        this.billNo = billNo;
+    }
 
     public String getDate() {
         return date;

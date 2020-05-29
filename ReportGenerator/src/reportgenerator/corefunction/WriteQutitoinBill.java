@@ -26,7 +26,7 @@ import reportgenerator.dao.ReqQutComponent;
  *
  * @author Anik
  */
-public class WriteQutitoin {
+public class WriteQutitoinBill {
 
     private String configAmountListUrl = "setup\\NumberInWord.txt";
 
@@ -39,11 +39,11 @@ public class WriteQutitoin {
     private final String colFooterTxt = "Total Amount";
     private final String tableFooterTxt = "VAT and TAX not included.";
     private final String amountTage = "Amount in word: ";
-    private final String noteTxt = "N.B: All payments should be in a/c payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
+    private final String noteTxt = "N.B: All payments should be in A/C payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
     private final String sign = "..................................\nAuthorized Signatory";
     private int totalamount = 0;
 
-    public boolean writeReqQtInPdfFile(List<ReqQutComponent> components, File selectedFile) {
+    public boolean writeReqQtBillInPdfFile(List<ReqQutComponent> components, String billNo, File selectedFile) {
 
         try {
             Document document = new Document(); // create a new document
@@ -66,7 +66,8 @@ public class WriteQutitoin {
             Font f1 = FontFactory.getFont("calibri", 12);  // set font style and size into font object
 
             // make first text in document
-            Paragraph docHeader = new Paragraph("\nDate: " + components.get(0).getDate() + "\n\n"
+            Paragraph docHeader = new Paragraph("\nDate: " + components.get(0).getDate() + "\n"
+                    + "Bill No: " + billNo+ "\n"
                     + to + "\n"
                     + components.get(0).getCompanyName() + "\n"
                     + components.get(0).getAddress() + "\n\n"
@@ -233,7 +234,7 @@ public class WriteQutitoin {
             return true;
 
         } catch (Exception ex) {
-            Logger.getLogger(WriteQutitoin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WriteQutitoinBill.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return false;
