@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import reportgenerator.dao.ReqQutComponent;
 
 /**
@@ -182,6 +183,8 @@ public class WriteQutitoinBill {
                 }
             }catch(Exception e){
                 e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                    ":: Error-07 :: ", JOptionPane.INFORMATION_MESSAGE);
             }
 
             // last row body text
@@ -235,6 +238,8 @@ public class WriteQutitoinBill {
 
         } catch (Exception ex) {
             Logger.getLogger(WriteQutitoinBill.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    ":: Error-08 :: ", JOptionPane.INFORMATION_MESSAGE);
         }
 
         return false;

@@ -7,11 +7,17 @@ package reportgenerator.view;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import reportgenerator.corefunction.IOFunction;
 import reportgenerator.corefunction.WriteMonthlyBill;
 import reportgenerator.corefunction.WriteQutitoin;
@@ -27,12 +33,14 @@ public class MainWindow extends javax.swing.JFrame {
 
     private String savingLoc = "D:\\";
     private String configComapnyListUrl = "setup\\CompanyName.txt";
+    private String configPendingBillList = "setup\\PandingList.txt";
     private String billNo = "";
     private String recentMonthlyBillFileLoc = "";
     private String recentReqQutFileLoc = "";
-    private String recentReqQutBillFileLoc="";
+    private String recentReqQutBillFileLoc = "";
 
     private List<String> companyAndAddressList = new ArrayList<>();
+    private List<String> pendingBillList = new ArrayList<>();
 
     private int i = 0;
 
@@ -42,6 +50,7 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
         showCompanyNameInComboBox();
+        refPendingBillTable();
     }
 
     /**
@@ -112,7 +121,6 @@ public class MainWindow extends javax.swing.JFrame {
         txtReqAmountRow15 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
         jPanel4 = new javax.swing.JPanel();
         btnMakeRow = new javax.swing.JButton();
         btnMakeRow1 = new javax.swing.JButton();
@@ -120,8 +128,14 @@ public class MainWindow extends javax.swing.JFrame {
         btnMakeReqQtuBill = new javax.swing.JButton();
         btnMakeReqQutBill = new javax.swing.JButton();
         txtReqQutBillNumber = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblBillPendingList = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Making Slip");
+        setLocation(new java.awt.Point(200, 100));
         setResizable(false);
 
         comboMonth.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
@@ -131,11 +145,6 @@ public class MainWindow extends javax.swing.JFrame {
         comboYear.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
         comboYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
         comboYear.setToolTipText("");
-        comboYear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboYearActionPerformed(evt);
-            }
-        });
 
         comboCompany.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
         comboCompany.setMaximumRowCount(100);
@@ -194,7 +203,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(0, 5, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "No Detls   -----------------------------------------   Amount", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "No-Detls   -----------------------------------------   Amount", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         txtReqRow1.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
@@ -583,12 +592,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator4)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboCompany, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboMonth, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -596,22 +604,22 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtDate)
                             .addComponent(comboYear, 0, 153, Short.MAX_VALUE)))
-                    .addComponent(jSeparator1)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator2)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -628,21 +636,68 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        jLabel17.setFont(new java.awt.Font("Lucida Sans", 1, 10)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel17.setText("@copyright: Vistasoft IT Bangladesh Ltd.");
+
+        tblBillPendingList.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        tblBillPendingList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Bill Pending List"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblBillPendingList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBillPendingListMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblBillPendingList);
+        if (tblBillPendingList.getColumnModel().getColumnCount() > 0) {
+            tblBillPendingList.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel17))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel17))
         );
 
         pack();
@@ -673,12 +728,17 @@ public class MainWindow extends javax.swing.JFrame {
             File selectedFile = new File(url);
 
             if (new WriteMonthlyBill().writeMonthlyBillInPdfFile(component, selectedFile)) {
+                new IOFunction().writeBillNumber(billNo, configPendingBillList);
+                refPendingBillTable();
+
                 System.out.println("File is generate");
-            } else {
-                System.out.println("File isn't generate");
+                JOptionPane.showMessageDialog(null, "File Is Generated.",
+                        ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    ":: Error-01 :: ", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }//GEN-LAST:event_btnGenerateActionPerformed
@@ -700,10 +760,6 @@ public class MainWindow extends javax.swing.JFrame {
         i++;
     }//GEN-LAST:event_txtDateKeyPressed
 
-    private void comboYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboYearActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboYearActionPerformed
-
     private void btnMakeRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeRowActionPerformed
         // TODO add your handling code here:
         // split company name and address
@@ -718,6 +774,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         if (new WriteQutitoin().writeReqQtInPdfFile(setReqDataInArray(), selectedFile)) {
             System.out.println("Qutation make --> ");
+            JOptionPane.showMessageDialog(null, "Qutation Is Generated.",
+                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Qutation Isn't Generated.",
+                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }//GEN-LAST:event_btnMakeRowActionPerformed
@@ -734,6 +795,8 @@ public class MainWindow extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    ":: Error-02 :: ", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnMakeRow1ActionPerformed
 
@@ -749,6 +812,8 @@ public class MainWindow extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    ":: Error-03 :: ", JOptionPane.INFORMATION_MESSAGE);
         }
 
 
@@ -756,7 +821,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnMakeReqQutBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeReqQutBillActionPerformed
         // TODO add your handling code here:
-        // split company name and address
+        // split company name and address 
         // replace string , replace space to '-' charecter
         String parts[] = comboCompany.getSelectedItem().toString().split("-");
         parts[1] = parts[1].replace(' ', '-');
@@ -767,7 +832,15 @@ public class MainWindow extends javax.swing.JFrame {
         File selectedFile = new File(url);
 
         if (new WriteQutitoinBill().writeReqQtBillInPdfFile(setReqDataInArray(), txtReqQutBillNumber.getText(), selectedFile)) {
+            new IOFunction().writeBillNumber(txtReqQutBillNumber.getText(), configPendingBillList);
+            refPendingBillTable();
+
             System.out.println("Qutation Bill make --> ");
+            JOptionPane.showMessageDialog(null, "Qutation Bill Is Generated.",
+                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Qutation Bill Isn't Generated.",
+                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnMakeReqQutBillActionPerformed
 
@@ -782,8 +855,33 @@ public class MainWindow extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    ":: Error-04 :: ", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnMakeReqQtuBillActionPerformed
+
+    private void tblBillPendingListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBillPendingListMouseClicked
+        try {
+            // TODO add your handling code here:
+
+            File f = new File(configPendingBillList);
+            FileWriter fw = new FileWriter(f, false);
+            for (int i = 0; i < pendingBillList.size(); i++) {
+                if (pendingBillList.get(i).equals(pendingBillList.get(tblBillPendingList.getSelectedRow()))) {
+                    System.out.println("Selected text: " + pendingBillList.get(tblBillPendingList.getSelectedRow()));
+                    continue;
+                }
+                fw.write(pendingBillList.get(i)+"\n");
+            }
+            fw.close();
+            refPendingBillTable();
+        } catch (Exception ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    ":: Error-11 :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }//GEN-LAST:event_tblBillPendingListMouseClicked
 
     private void showCompanyNameInComboBox() {
         companyAndAddressList = new IOFunction().getCompanyNameAndAddress(configComapnyListUrl);
@@ -793,6 +891,25 @@ public class MainWindow extends javax.swing.JFrame {
             comboCompany.addItem(i + "-" + companyAndAddressList.get(i));
             i += 2;
         }
+    }
+
+    private void showPendingBillList() {
+        pendingBillList = new IOFunction().getBillPendingList(configPendingBillList);
+
+        DefaultTableModel model = (DefaultTableModel) tblBillPendingList.getModel();
+        Object[] obj = new Object[1];
+        int i = 0;
+        while (i != pendingBillList.size()) {
+            obj[0] = pendingBillList.get(i);
+            model.addRow(obj);
+            i++;
+        }
+    }
+
+    private void refPendingBillTable() {
+        DefaultTableModel model = (DefaultTableModel) tblBillPendingList.getModel();
+        model.setRowCount(0);
+        showPendingBillList();
     }
 
     private List<ReqQutComponent> setReqDataInArray() {
@@ -925,40 +1042,6 @@ public class MainWindow extends javax.swing.JFrame {
         return components;
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainWindow().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerate;
@@ -978,6 +1061,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -992,9 +1076,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTable tblBillPendingList;
     private javax.swing.JTextField txtAmount;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtReqAmountRow1;

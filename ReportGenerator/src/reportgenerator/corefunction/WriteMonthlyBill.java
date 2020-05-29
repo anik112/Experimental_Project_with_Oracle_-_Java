@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import reportgenerator.dao.MonthlyBillComponent;
 
 /**
@@ -186,6 +187,8 @@ public class WriteMonthlyBill {
 
         } catch (Exception ex) {
             Logger.getLogger(WriteMonthlyBill.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    ":: Error-05 :: ", JOptionPane.INFORMATION_MESSAGE);
         }
 
         return false;

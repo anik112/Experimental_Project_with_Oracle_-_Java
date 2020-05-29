@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import reportgenerator.dao.ReqQutComponent;
 
 /**
@@ -177,7 +178,7 @@ public class WriteQutitoin {
                     if (components.get(i).getAmount().matches("-?\\d+(\\.\\d+)?")) {
                         totalamount += Integer.parseInt(components.get(i).getAmount()); // amount added
                     }
-                    System.out.println("------------>" + i);
+                   
                 }
             }catch(Exception e){
                 e.printStackTrace();
@@ -234,6 +235,8 @@ public class WriteQutitoin {
 
         } catch (Exception ex) {
             Logger.getLogger(WriteQutitoin.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    ":: Error-06 :: ", JOptionPane.INFORMATION_MESSAGE);
         }
 
         return false;
