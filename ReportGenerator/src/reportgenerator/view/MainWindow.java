@@ -6,6 +6,7 @@
 package reportgenerator.view;
 
 import java.awt.Desktop;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -42,7 +43,7 @@ public class MainWindow extends javax.swing.JFrame {
     private List<String> companyAndAddressList = new ArrayList<>();
     private List<String> pendingBillList = new ArrayList<>();
 
-    private int i = 0;
+    private int keyTypeChecker = 0;
 
     /**
      * Creates new form MainWindow
@@ -72,6 +73,7 @@ public class MainWindow extends javax.swing.JFrame {
         txtAmount = new javax.swing.JTextField();
         btnGenerate = new javax.swing.JButton();
         btnMonthlyBillOpenFile = new javax.swing.JButton();
+        btnMonthlyBillOpenFolder = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         txtReqRow1 = new javax.swing.JTextField();
@@ -128,22 +130,23 @@ public class MainWindow extends javax.swing.JFrame {
         btnMakeReqQtuBill = new javax.swing.JButton();
         btnMakeReqQutBill = new javax.swing.JButton();
         txtReqQutBillNumber = new javax.swing.JTextField();
+        btnRequirmentBillOpenFolder = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblBillPendingList = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Making Slip");
+        setTitle("Makeing Slip");
         setLocation(new java.awt.Point(200, 100));
         setResizable(false);
 
         comboMonth.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
-        comboMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "January", "February", "March", "April", "May", "Jun", "July", "August", "September", "October", "November", "December" }));
+        comboMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "Jun", "July", "August", "September", "October", "November", "December" }));
         comboMonth.setToolTipText("");
 
         comboYear.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
-        comboYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
+        comboYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
         comboYear.setToolTipText("");
 
         comboCompany.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
@@ -153,6 +156,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         txtDate.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtDate.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Date", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        txtDate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDateFocusGained(evt);
+            }
+        });
         txtDate.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtDateKeyPressed(evt);
@@ -163,6 +171,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         txtAmount.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtAmount.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Amount", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        txtAmount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAmountActionPerformed(evt);
+            }
+        });
 
         btnGenerate.setText("Generate");
         btnGenerate.addActionListener(new java.awt.event.ActionListener() {
@@ -178,6 +191,13 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        btnMonthlyBillOpenFolder.setText("Open Folder");
+        btnMonthlyBillOpenFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMonthlyBillOpenFolderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -186,21 +206,23 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(txtAmount)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGenerate)
+                .addGap(4, 4, 4)
+                .addComponent(btnMonthlyBillOpenFolder)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMonthlyBillOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btnMonthlyBillOpenFile))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtAmount)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnMonthlyBillOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 5, Short.MAX_VALUE))
+                        .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnMonthlyBillOpenFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(5, 5, 5))
         );
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "No-Detls   -----------------------------------------   Amount", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
@@ -269,6 +291,11 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         txtReqAmountRow8.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtReqAmountRow8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtReqAmountRow8ActionPerformed(evt);
+            }
+        });
 
         txtReqRow9.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
@@ -331,95 +358,88 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtReqRow1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtReqRow2)
+                            .addComponent(txtReqRow3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtReqAmountRow3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtReqAmountRow2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtReqAmountRow1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel2)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtReqRow4))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtReqRow6))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtReqRow5))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtReqRow7))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtReqRow8))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtReqRow9))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtReqRow10))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtReqRow11))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtReqRow12))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtReqRow13))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtReqRow14))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtReqRow15)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow5, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow7, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow8, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow9, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow10, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow11, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow12, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow12, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow13, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow13, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow14, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow14, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqRow15, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtReqAmountRow15, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtReqAmountRow15)
+                    .addComponent(txtReqAmountRow14)
+                    .addComponent(txtReqAmountRow13)
+                    .addComponent(txtReqAmountRow12)
+                    .addComponent(txtReqAmountRow11)
+                    .addComponent(txtReqAmountRow10)
+                    .addComponent(txtReqAmountRow9)
+                    .addComponent(txtReqAmountRow7)
+                    .addComponent(txtReqAmountRow5)
+                    .addComponent(txtReqAmountRow6, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                    .addComponent(txtReqAmountRow8, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtReqAmountRow4, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -564,28 +584,36 @@ public class MainWindow extends javax.swing.JFrame {
         txtReqQutBillNumber.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtReqQutBillNumber.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Bill Number", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
 
+        btnRequirmentBillOpenFolder.setText("Open Folder");
+        btnRequirmentBillOpenFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequirmentBillOpenFolderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtReqQutBillNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnMakeReqQutBill, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnMakeReqQtuBill, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(txtReqQutBillNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMakeReqQutBill, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRequirmentBillOpenFolder)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMakeReqQtuBill, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnMakeReqQutBill, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnMakeReqQtuBill, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtReqQutBillNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnMakeReqQtuBill, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtReqQutBillNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRequirmentBillOpenFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMakeReqQutBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(5, 5, 5))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -593,7 +621,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -609,13 +637,12 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -676,16 +703,18 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel17))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator3)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -706,39 +735,44 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
 
         PrintWriter pw = null;
-        try {
-            // TODO add your handling code here:
-            String parts[] = comboCompany.getSelectedItem().toString().split("-");
+        if ((txtDate.getText().length() > 9) && (comboCompany.getSelectedIndex() > 0)) {
+            try {
+                // TODO add your handling code here:
+                String parts[] = comboCompany.getSelectedItem().toString().split("-");
 
-            String companyName = parts[1];
-            companyName = companyName.replace(' ', '-');
-            String url = savingLoc + companyName + "-" + billNo + ".pdf";
+                String companyName = parts[1];
+                companyName = companyName.replace(' ', '-');
+                String url = savingLoc + companyName + "-" + billNo + ".pdf";
 
-            recentMonthlyBillFileLoc = url;
+                recentMonthlyBillFileLoc = url;
 
-            MonthlyBillComponent component = new MonthlyBillComponent();
-            component.setMonth(comboMonth.getSelectedItem().toString());
-            component.setYear(comboYear.getSelectedItem().toString());
-            component.setCompanyName(parts[1]);
-            component.setAddress(companyAndAddressList.get(Integer.parseInt(parts[0]) + 1));
-            component.setAmount(Integer.parseInt(txtAmount.getText()));
-            component.setDate(txtDate.getText());
-            component.setBillNo(billNo);
+                MonthlyBillComponent component = new MonthlyBillComponent();
+                component.setMonth(comboMonth.getSelectedItem().toString());
+                component.setYear(comboYear.getSelectedItem().toString());
+                component.setCompanyName(parts[1]);
+                component.setAddress(companyAndAddressList.get(Integer.parseInt(parts[0]) + 1));
+                component.setAmount(Integer.parseInt(txtAmount.getText()));
+                component.setDate(txtDate.getText());
+                component.setBillNo(billNo);
 
-            File selectedFile = new File(url);
+                File selectedFile = new File(url);
 
-            if (new WriteMonthlyBill().writeMonthlyBillInPdfFile(component, selectedFile)) {
-                new IOFunction().writeBillNumber(billNo, configPendingBillList);
-                refPendingBillTable();
+                if (new WriteMonthlyBill().writeMonthlyBillInPdfFile(component, selectedFile)) {
+                    new IOFunction().writeBillNumber(billNo, companyName, configPendingBillList);
+                    refPendingBillTable();
 
-                System.out.println("File is generate");
-                JOptionPane.showMessageDialog(null, "File Is Generated.",
-                        ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+                    System.out.println("File is generate");
+                    JOptionPane.showMessageDialog(null, "File Is Generated.",
+                            ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex.getMessage(),
+                        ":: Error-01 :: ", JOptionPane.INFORMATION_MESSAGE);
             }
-        } catch (Exception ex) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, ex.getMessage(),
-                    ":: Error-01 :: ", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Select Company, Month, Year, Date",
+                    ":: Please Select :: ", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }//GEN-LAST:event_btnGenerateActionPerformed
@@ -746,7 +780,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void txtDateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDateKeyPressed
         // TODO add your handling code here:
 
-        if (i == 8) {
+        if (keyTypeChecker == 8) {
             String date = txtDate.getText();
             String day = date.substring(0, 2);
             String month = date.substring(2, 4);
@@ -757,29 +791,37 @@ public class MainWindow extends javax.swing.JFrame {
             txtDate.setText(day + "/" + month + "/" + year);
             txtAmount.requestFocus();
         }
-        i++;
+        keyTypeChecker++;
     }//GEN-LAST:event_txtDateKeyPressed
 
     private void btnMakeRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeRowActionPerformed
         // TODO add your handling code here:
-        // split company name and address
-        // replace string , replace space to '-' charecter
-        String parts[] = comboCompany.getSelectedItem().toString().split("-");
-        parts[1] = parts[1].replace(' ', '-');
-        String url = savingLoc + parts[1] + "-Req-Qtnt-" + System.currentTimeMillis() + ".pdf";
 
-        recentReqQutFileLoc = url;
+        if ((txtDate.getText().length() > 9) && (comboCompany.getSelectedIndex() > 0)) {
+            // split company name and address
+            // replace string , replace space to '-' charecter
+            String parts[] = comboCompany.getSelectedItem().toString().split("-");
+            parts[1] = parts[1].replace(' ', '-');
+            String url = savingLoc + parts[1] + "-Req-Qtnt-" + System.currentTimeMillis() + ".pdf";
 
-        File selectedFile = new File(url);
+            recentReqQutFileLoc = url;
 
-        if (new WriteQutitoin().writeReqQtInPdfFile(setReqDataInArray(), selectedFile)) {
-            System.out.println("Qutation make --> ");
-            JOptionPane.showMessageDialog(null, "Qutation Is Generated.",
-                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+            File selectedFile = new File(url);
+
+            if (new WriteQutitoin().writeReqQtInPdfFile(setReqDataInArray(), selectedFile)) {
+                System.out.println("Qutation make --> ");
+                JOptionPane.showMessageDialog(null, "Qutation Is Generated.",
+                        ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Qutation Isn't Generated.",
+                        ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+            }
+
         } else {
-            JOptionPane.showMessageDialog(null, "Qutation Isn't Generated.",
-                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Select Company, Month, Year, Date",
+                    ":: Please Select :: ", JOptionPane.INFORMATION_MESSAGE);
         }
+
 
     }//GEN-LAST:event_btnMakeRowActionPerformed
 
@@ -821,27 +863,34 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnMakeReqQutBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeReqQutBillActionPerformed
         // TODO add your handling code here:
-        // split company name and address 
-        // replace string , replace space to '-' charecter
-        String parts[] = comboCompany.getSelectedItem().toString().split("-");
-        parts[1] = parts[1].replace(' ', '-');
-        String url = savingLoc + parts[1] + "-Req-Qtnt-Bill-" + System.currentTimeMillis() + ".pdf";
 
-        recentReqQutBillFileLoc = url;
+        if ((txtDate.getText().length() > 9) && (comboCompany.getSelectedIndex() > 0)) {
+            // split company name and address 
+            // replace string , replace space to '-' charecter
+            String parts[] = comboCompany.getSelectedItem().toString().split("-");
+            parts[1] = parts[1].replace(' ', '-');
+            String url = savingLoc + parts[1] + "-Req-Qtnt-Bill-" + System.currentTimeMillis() + ".pdf";
 
-        File selectedFile = new File(url);
+            recentReqQutBillFileLoc = url;
 
-        if (new WriteQutitoinBill().writeReqQtBillInPdfFile(setReqDataInArray(), txtReqQutBillNumber.getText(), selectedFile)) {
-            new IOFunction().writeBillNumber(txtReqQutBillNumber.getText(), configPendingBillList);
-            refPendingBillTable();
+            File selectedFile = new File(url);
 
-            System.out.println("Qutation Bill make --> ");
-            JOptionPane.showMessageDialog(null, "Qutation Bill Is Generated.",
-                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+            if (new WriteQutitoinBill().writeReqQtBillInPdfFile(setReqDataInArray(), txtReqQutBillNumber.getText(), selectedFile)) {
+                new IOFunction().writeBillNumber(txtReqQutBillNumber.getText(), parts[1], configPendingBillList);
+                refPendingBillTable();
+
+                System.out.println("Qutation Bill make --> ");
+                JOptionPane.showMessageDialog(null, "Qutation Bill Is Generated.",
+                        ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Qutation Bill Isn't Generated.",
+                        ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Qutation Bill Isn't Generated.",
-                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Select Company, Month, Year, Date",
+                    ":: Please Select :: ", JOptionPane.INFORMATION_MESSAGE);
         }
+
     }//GEN-LAST:event_btnMakeReqQutBillActionPerformed
 
     private void btnMakeReqQtuBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeReqQtuBillActionPerformed
@@ -861,27 +910,58 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMakeReqQtuBillActionPerformed
 
     private void tblBillPendingListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBillPendingListMouseClicked
-        try {
-            // TODO add your handling code here:
 
-            File f = new File(configPendingBillList);
-            FileWriter fw = new FileWriter(f, false);
-            for (int i = 0; i < pendingBillList.size(); i++) {
-                if (pendingBillList.get(i).equals(pendingBillList.get(tblBillPendingList.getSelectedRow()))) {
-                    System.out.println("Selected text: " + pendingBillList.get(tblBillPendingList.getSelectedRow()));
-                    continue;
-                }
-                fw.write(pendingBillList.get(i)+"\n");
-            }
-            fw.close();
-            refPendingBillTable();
-        } catch (Exception ex) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, ex.getMessage(),
-                    ":: Error-11 :: ", JOptionPane.INFORMATION_MESSAGE);
-        }
+        Confirmation confirmation = new Confirmation(billNo, configPendingBillList, pendingBillList, pendingBillList.get(tblBillPendingList.getSelectedRow()));
+        confirmation.setVisible(true);
+
+        refPendingBillTable();
 
     }//GEN-LAST:event_tblBillPendingListMouseClicked
+
+    private void txtDateFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDateFocusGained
+        // TODO add your handling code here:
+        txtDate.setText("");
+        keyTypeChecker = 0;
+    }//GEN-LAST:event_txtDateFocusGained
+
+    private void btnMonthlyBillOpenFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyBillOpenFolderActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            if (!savingLoc.isEmpty()) {
+                File file = new File(savingLoc);
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(file);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    ":: Error-12 :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnMonthlyBillOpenFolderActionPerformed
+
+    private void btnRequirmentBillOpenFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequirmentBillOpenFolderActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (!savingLoc.isEmpty()) {
+                File file = new File(savingLoc);
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(file);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    ":: Error-13 :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnRequirmentBillOpenFolderActionPerformed
+
+    private void txtReqAmountRow8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReqAmountRow8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtReqAmountRow8ActionPerformed
+
+    private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAmountActionPerformed
 
     private void showCompanyNameInComboBox() {
         companyAndAddressList = new IOFunction().getCompanyNameAndAddress(configComapnyListUrl);
@@ -1050,6 +1130,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnMakeRow;
     private javax.swing.JButton btnMakeRow1;
     private javax.swing.JButton btnMonthlyBillOpenFile;
+    private javax.swing.JButton btnMonthlyBillOpenFolder;
+    private javax.swing.JButton btnRequirmentBillOpenFolder;
     private javax.swing.JComboBox<String> comboCompany;
     private javax.swing.JComboBox<String> comboMonth;
     private javax.swing.JComboBox<String> comboYear;

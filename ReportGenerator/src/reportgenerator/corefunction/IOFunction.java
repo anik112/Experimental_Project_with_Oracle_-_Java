@@ -107,12 +107,12 @@ public class IOFunction {
         return pendingBillList;
     }
 
-    public void writeBillNumber(String billNo, String url) {
+    public void writeBillNumber(String billNo,String companyName, String url) {
         FileWriter fWriter = null;
         try {
             File getFile = new File(url);
             fWriter = new FileWriter(getFile, true);
-            fWriter.write(billNo + "\n");
+            fWriter.write(billNo +"/"+companyName+ "\n");
             fWriter.close();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),

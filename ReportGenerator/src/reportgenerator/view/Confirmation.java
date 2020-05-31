@@ -5,7 +5,13 @@
  */
 package reportgenerator.view;
 
-import reportgenerator.corefunction.IOFunction;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,14 +22,22 @@ public class Confirmation extends javax.swing.JFrame {
     
     private String billNo;
     private String url;
+    private List<String> pendingBillList=new ArrayList<>();
+    private String selectedBillNo;
     
     /**
      * Creates new form Confirmation
+     * @param billNo
+     * @param url
+     * @param selectedBillNo
+     * @param scriptBillList
      */
-    public Confirmation(String billNo, String url) {
+    public Confirmation(String billNo, String url,List<String> scriptBillList,String selectedBillNo) {
         initComponents();
         this.billNo=billNo;
         this.url=url;
+        this.pendingBillList=scriptBillList;
+        this.selectedBillNo=selectedBillNo;
     }
 
     /**
@@ -39,7 +53,9 @@ public class Confirmation extends javax.swing.JFrame {
         btnExit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Confirmation");
+        setLocation(new java.awt.Point(500, 200));
+        setResizable(false);
 
         btnBllCollected.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         btnBllCollected.setText("Collect");
@@ -93,13 +109,31 @@ public class Confirmation extends javax.swing.JFrame {
 
     private void btnBllCollectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBllCollectedActionPerformed
         // TODO add your handling code here:
-        
+        try {
+            // TODO add your handling code here:
+
+            File f = new File(url);
+            FileWriter fw = new FileWriter(f, false);
+            for (int i = 0; i < pendingBillList.size(); i++) {
+                if (pendingBillList.get(i).equals(selectedBillNo)) {
+                    System.out.println("Selected text: " + selectedBillNo);
+                    continue;
+                }
+                fw.write(pendingBillList.get(i)+"\n");
+            }
+            fw.close();
+            this.dispose();
+        } catch (Exception ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    ":: Error-11 :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
         
     }//GEN-LAST:event_btnBllCollectedActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
 
