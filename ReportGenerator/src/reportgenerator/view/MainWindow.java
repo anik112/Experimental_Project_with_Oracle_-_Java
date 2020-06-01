@@ -142,7 +142,7 @@ public class MainWindow extends javax.swing.JFrame {
         setResizable(false);
 
         comboMonth.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
-        comboMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "Jun", "July", "August", "September", "October", "November", "December" }));
+        comboMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         comboMonth.setToolTipText("");
 
         comboYear.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N

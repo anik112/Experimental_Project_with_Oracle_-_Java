@@ -195,7 +195,7 @@ public class WriteQutitoin {
             row02Body.setColspan(2);
 
             // last row footer txt
-            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(totalamount) + ".00", f4));
+            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(totalamount), f4));
             row02Footer.setPaddingLeft(padding);
             row02Footer.setPaddingTop(padding);
             row02Footer.setPaddingBottom(padding);
