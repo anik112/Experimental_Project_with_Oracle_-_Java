@@ -163,7 +163,9 @@ public class WriteQutitoin {
                     rowBody.setHorizontalAlignment(Element.ALIGN_LEFT);
                     rowBody.setVerticalAlignment(Element.ALIGN_TOP);
                     // add row footer
-                    PdfPCell rowFooter = new PdfPCell(new Paragraph(components.get(i).getAmount(), f4));
+                    PdfPCell rowFooter = new PdfPCell(new Paragraph(components.get(i).getAmount()+(
+                                    components.get(i).getAmount().length()>0?".00":""
+                                ), f4));
                     rowFooter.setPaddingLeft(padding);
                     rowFooter.setPaddingTop(rowTopPadding);
                     rowFooter.setPaddingBottom(rowBttomPadding);
@@ -176,7 +178,7 @@ public class WriteQutitoin {
                     table.addCell(rowFooter);
                     // check if amount have any charecter 
                     if (components.get(i).getAmount().matches("-?\\d+(\\.\\d+)?")) {
-                        totalamount += Integer.parseInt(components.get(i).getAmount()); // amount added
+                        totalamount += Math.round(Float.valueOf((components.get(i).getAmount()))); // amount added
                     }
                    
                 }
@@ -195,7 +197,7 @@ public class WriteQutitoin {
             row02Body.setColspan(2);
 
             // last row footer txt
-            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(totalamount), f4));
+            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(totalamount)+".00", f4));
             row02Footer.setPaddingLeft(padding);
             row02Footer.setPaddingTop(padding);
             row02Footer.setPaddingBottom(padding);

@@ -39,7 +39,7 @@ public class TestClass {
 //                System.out.println("Is not number");
 //            }
             // date check
-            System.out.println(System.currentTimeMillis());
+            System.out.println(Math.round(Float.valueOf("10.00")));
             
             // check dynamic variable
 //            int n1=1,n2=3,n3=4;
