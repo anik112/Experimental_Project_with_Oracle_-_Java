@@ -164,7 +164,9 @@ public class WriteQutitoinBill {
                     rowBody.setHorizontalAlignment(Element.ALIGN_LEFT);
                     rowBody.setVerticalAlignment(Element.ALIGN_TOP);
                     // add row footer
-                    PdfPCell rowFooter = new PdfPCell(new Paragraph(components.get(i).getAmount(), f4));
+                    PdfPCell rowFooter = new PdfPCell(new Paragraph(components.get(i).getAmount()+(
+                                    components.get(i).getAmount().length()>0?".00":""
+                                ), f4));
                     rowFooter.setPaddingLeft(padding);
                     rowFooter.setPaddingTop(rowTopPadding);
                     rowFooter.setPaddingBottom(rowBttomPadding);
@@ -177,7 +179,7 @@ public class WriteQutitoinBill {
                     table.addCell(rowFooter);
                     // check if amount have any charecter 
                     if (components.get(i).getAmount().matches("-?\\d+(\\.\\d+)?")) {
-                        totalamount += Integer.parseInt(components.get(i).getAmount()); // amount added
+                        totalamount += Math.round(Float.valueOf((components.get(i).getAmount()))); // amount added
                     }
                     System.out.println("------------>" + i);
                 }
