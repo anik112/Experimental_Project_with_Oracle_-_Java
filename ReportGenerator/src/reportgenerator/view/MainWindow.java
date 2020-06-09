@@ -135,6 +135,10 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblBillPendingList = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        ManuItemMakeHardwareQut = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Makeing Slip");
@@ -697,6 +701,23 @@ public class MainWindow extends javax.swing.JFrame {
             tblBillPendingList.getColumnModel().getColumn(0).setResizable(false);
         }
 
+        jMenu1.setText("More");
+
+        ManuItemMakeHardwareQut.setText("Make Hardware Qut");
+        ManuItemMakeHardwareQut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManuItemMakeHardwareQutActionPerformed(evt);
+            }
+        });
+        jMenu1.add(ManuItemMakeHardwareQut);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -963,6 +984,10 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAmountActionPerformed
 
+    private void ManuItemMakeHardwareQutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManuItemMakeHardwareQutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ManuItemMakeHardwareQutActionPerformed
+
     private void showCompanyNameInComboBox() {
         companyAndAddressList = new IOFunction().getCompanyNameAndAddress(configComapnyListUrl);
 
@@ -1124,6 +1149,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ManuItemMakeHardwareQut;
     private javax.swing.JButton btnGenerate;
     private javax.swing.JButton btnMakeReqQtuBill;
     private javax.swing.JButton btnMakeReqQutBill;
@@ -1152,6 +1178,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
