@@ -7,7 +7,6 @@ package reportgenerator.view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -18,6 +17,8 @@ import javax.swing.border.TitledBorder;
  */
 public class MakeHardwareQutAndBill extends javax.swing.JFrame {
 
+    private JTextField field[];
+    
     /**
      * Creates new form MakeHardwareQutAndBill
      */
@@ -482,7 +483,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             pan[i] = new JPanel();
             pan[i].setLayout(new GridLayout(1, 7, 5, 15));
 
-            JTextField field[] = new JTextField[6];
+            field = new JTextField[6];
             String label[] = {"Model:", "Origin:", "Face Cap:", "Finger Cap:", "Card Cap:", "Event Log:"};
             for (int j = 0; j < 6; j++) {
                 field[j] = new JTextField();
@@ -501,6 +502,16 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
 
             jPanShowList.revalidate();
             jPanShowList.repaint();
+        }
+        
+    }
+    
+    
+    private void showData(){
+        for(int i=0;i<5;i++){
+            for(int j=0;j<6;j++){
+                
+            }
         }
     }
 
