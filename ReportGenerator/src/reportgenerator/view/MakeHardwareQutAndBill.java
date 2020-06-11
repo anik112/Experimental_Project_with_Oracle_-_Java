@@ -7,9 +7,12 @@ package reportgenerator.view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import reportgenerator.dao.HardwareQutComponent;
 
 /**
  *
@@ -17,8 +20,15 @@ import javax.swing.border.TitledBorder;
  */
 public class MakeHardwareQutAndBill extends javax.swing.JFrame {
 
-    private JTextField field[];
-    
+    private JTextField modelName[];
+    private JTextField originName[];
+    private JTextField faceCapacity[];
+    private JTextField fingerCapacity[];
+    private JTextField cardCapacity[];
+    private JTextField eventLog[];
+
+    List<HardwareQutComponent> listOfHarwareQut = new ArrayList<>();
+
     /**
      * Creates new form MakeHardwareQutAndBill
      */
@@ -74,22 +84,9 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         txtReqRow10 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtReqAmountRow10 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        txtReqRow11 = new javax.swing.JTextField();
-        txtReqAmountRow11 = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        txtReqRow12 = new javax.swing.JTextField();
-        txtReqAmountRow12 = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        txtReqRow13 = new javax.swing.JTextField();
-        txtReqAmountRow13 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        txtReqRow14 = new javax.swing.JTextField();
-        txtReqAmountRow14 = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        txtReqRow15 = new javax.swing.JTextField();
-        txtReqAmountRow15 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnMakeHardwareQut = new javax.swing.JButton();
+        txtHardwareBillNo = new javax.swing.JTextField();
+        btnMakeQutBill = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -208,46 +205,6 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
 
         txtReqAmountRow10.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
-        jLabel12.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel12.setText("11");
-        jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txtReqRow11.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow11.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        jLabel13.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel13.setText("12");
-        jLabel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txtReqRow12.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow12.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        jLabel14.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel14.setText("13");
-        jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txtReqRow13.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow13.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        jLabel15.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel15.setText("14");
-        jLabel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txtReqRow14.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow14.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        jLabel16.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel16.setText("15");
-        jLabel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txtReqRow15.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow15.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -257,7 +214,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
+                        .addComponent(txtReqRow1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -300,34 +257,9 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow10))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow11))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow12))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow13))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow14))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow15)))
+                        .addComponent(txtReqRow10)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtReqAmountRow15)
-                    .addComponent(txtReqAmountRow14)
-                    .addComponent(txtReqAmountRow13)
-                    .addComponent(txtReqAmountRow12)
-                    .addComponent(txtReqAmountRow11)
                     .addComponent(txtReqAmountRow10)
                     .addComponent(txtReqAmountRow9)
                     .addComponent(txtReqAmountRow7)
@@ -339,7 +271,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtReqRow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -388,56 +320,53 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txtReqRow10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtReqAmountRow10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtReqRow11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtReqAmountRow11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtReqRow12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtReqAmountRow12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(txtReqRow13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtReqAmountRow13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(txtReqRow14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtReqAmountRow14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(txtReqRow15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtReqAmountRow15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtReqAmountRow10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jScrollPane1.setViewportView(jPanel3);
 
-        jButton1.setText("jButton1");
+        btnMakeHardwareQut.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        btnMakeHardwareQut.setText("Make Qutitoin");
+        btnMakeHardwareQut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMakeHardwareQutActionPerformed(evt);
+            }
+        });
+
+        txtHardwareBillNo.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        btnMakeQutBill.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        btnMakeQutBill.setText("Make Qutitoin Bill");
+        btnMakeQutBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMakeQutBillActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(txtHardwareBillNo)
+                .addGap(18, 18, 18)
+                .addComponent(btnMakeHardwareQut, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnMakeQutBill, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtHardwareBillNo)
+                    .addComponent(btnMakeQutBill, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMakeHardwareQut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jScrollPane1.getAccessibleContext().setAccessibleName("No-Detls   --------------------------------------------------------------------------------------   Amount");
@@ -475,44 +404,78 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtReqAmountRow8ActionPerformed
 
+    private void btnMakeHardwareQutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeHardwareQutActionPerformed
+        // TODO add your handling code here:
+       for (int i = 0; i < 5; i++) {
+            if (!modelName[i].getText().isEmpty()) {
+                HardwareQutComponent component = new HardwareQutComponent();
+
+                component.setModel(modelName[i].getText());
+                component.setOrigin(originName[i].getText());
+                component.setFaceCapacity(Integer.parseInt(faceCapacity[i].getText()));
+                component.setFingerCapacity(Integer.parseInt(fingerCapacity[i].getText()));
+                component.setCardCapacity(Integer.parseInt(cardCapacity[i].getText()));
+                component.setEventLog(Integer.parseInt(eventLog[i].getText()));
+                
+                listOfHarwareQut.add(component);
+            }
+        }
+
+    }//GEN-LAST:event_btnMakeHardwareQutActionPerformed
+
+    private void btnMakeQutBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeQutBillActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMakeQutBillActionPerformed
+
     private void showListOfPenel() {
         JPanel pan[] = new JPanel[10];
         jPanShowList.setLayout(new GridLayout(0, 1, 20, 20));
 
+        modelName = new JTextField[5];
+        originName = new JTextField[5];
+        faceCapacity = new JTextField[5];
+        fingerCapacity = new JTextField[5];
+        cardCapacity = new JTextField[5];
+        eventLog = new JTextField[5];
+
         for (int i = 0; i < 5; i++) {
             pan[i] = new JPanel();
-            pan[i].setLayout(new GridLayout(1, 7, 5, 15));
+            pan[i].setLayout(new GridLayout(1, 6, 5, 15));
 
-            field = new JTextField[6];
             String label[] = {"Model:", "Origin:", "Face Cap:", "Finger Cap:", "Card Cap:", "Event Log:"};
-            for (int j = 0; j < 6; j++) {
-                field[j] = new JTextField();
-                field[j].setBorder(new TitledBorder(label[j]));
-                field[j].setSize(100, 20);
-                if (j == 0) {
-                    field[j].setSize(40, 20);
-                }
 
-                pan[i].add(field[j]);
-                pan[i].revalidate();
-                pan[i].repaint();
-            }
+            modelName[i] = new JTextField();
+            modelName[i].setBorder(new TitledBorder(label[0]));
+            originName[i] = new JTextField();
+            originName[i].setBorder(new TitledBorder(label[1]));
+            faceCapacity[i] = new JTextField();
+            faceCapacity[i].setBorder(new TitledBorder(label[2]));
+            fingerCapacity[i] = new JTextField();
+            fingerCapacity[i].setBorder(new TitledBorder(label[3]));
+            cardCapacity[i] = new JTextField();
+            cardCapacity[i].setBorder(new TitledBorder(label[4]));
+            eventLog[i] = new JTextField();
+            eventLog[i].setBorder(new TitledBorder(label[5]));
+
+            pan[i].add(modelName[i]);
+            pan[i].add(originName[i]);
+            pan[i].add(faceCapacity[i]);
+            pan[i].add(fingerCapacity[i]);
+            pan[i].add(cardCapacity[i]);
+            pan[i].add(eventLog[i]);
+            pan[i].revalidate();
+            pan[i].repaint();
             pan[i].setBackground(Color.WHITE);
-            jPanShowList.add(pan[i]);
 
+            jPanShowList.add(pan[i]);
             jPanShowList.revalidate();
             jPanShowList.repaint();
         }
-        
+
     }
-    
-    
-    private void showData(){
-        for(int i=0;i<5;i++){
-            for(int j=0;j<6;j++){
-                
-            }
-        }
+
+    private void showData() {
+        
     }
 
     /**
@@ -551,15 +514,11 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnMakeHardwareQut;
+    private javax.swing.JButton btnMakeQutBill;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -575,13 +534,9 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField txtHardwareBillNo;
     private javax.swing.JTextField txtReqAmountRow1;
     private javax.swing.JTextField txtReqAmountRow10;
-    private javax.swing.JTextField txtReqAmountRow11;
-    private javax.swing.JTextField txtReqAmountRow12;
-    private javax.swing.JTextField txtReqAmountRow13;
-    private javax.swing.JTextField txtReqAmountRow14;
-    private javax.swing.JTextField txtReqAmountRow15;
     private javax.swing.JTextField txtReqAmountRow2;
     private javax.swing.JTextField txtReqAmountRow3;
     private javax.swing.JTextField txtReqAmountRow4;
@@ -592,11 +547,6 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
     private javax.swing.JTextField txtReqAmountRow9;
     private javax.swing.JTextField txtReqRow1;
     private javax.swing.JTextField txtReqRow10;
-    private javax.swing.JTextField txtReqRow11;
-    private javax.swing.JTextField txtReqRow12;
-    private javax.swing.JTextField txtReqRow13;
-    private javax.swing.JTextField txtReqRow14;
-    private javax.swing.JTextField txtReqRow15;
     private javax.swing.JTextField txtReqRow2;
     private javax.swing.JTextField txtReqRow3;
     private javax.swing.JTextField txtReqRow4;
