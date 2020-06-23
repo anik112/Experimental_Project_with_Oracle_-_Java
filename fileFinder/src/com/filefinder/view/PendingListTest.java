@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author VSI-ANIK
  */
-public class PendingList extends javax.swing.JFrame {
+public class PendingListTest extends javax.swing.JFrame {
 
     private SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY");
     private String tempFilePath;
@@ -27,7 +27,7 @@ public class PendingList extends javax.swing.JFrame {
      *
      * @param filePath
      */
-    public PendingList(String filePath) {
+    public PendingListTest(String filePath) {
         initComponents();
         tempFilePath = filePath;
         System.out.println("**-> " + tempFilePath);
