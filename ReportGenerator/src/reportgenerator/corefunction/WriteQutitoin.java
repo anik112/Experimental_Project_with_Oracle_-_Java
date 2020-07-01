@@ -154,6 +154,9 @@ public class WriteQutitoin {
                     rowHead.setPaddingRight(padding);
                     rowHead.setHorizontalAlignment(Element.ALIGN_LEFT);
                     rowHead.setVerticalAlignment(Element.ALIGN_TOP);
+                    rowHead.setBorder(Rectangle.LEFT|Rectangle.RIGHT);
+                    
+                    
                     // add row body
                     PdfPCell rowBody = new PdfPCell(new Paragraph(components.get(i).getBodyContent(), f4));
                     rowBody.setPaddingLeft(padding);
@@ -162,6 +165,7 @@ public class WriteQutitoin {
                     rowBody.setPaddingRight(padding);
                     rowBody.setHorizontalAlignment(Element.ALIGN_LEFT);
                     rowBody.setVerticalAlignment(Element.ALIGN_TOP);
+                    rowBody.setBorder(Rectangle.RIGHT);
                     // add row footer
                     PdfPCell rowFooter = new PdfPCell(new Paragraph(components.get(i).getAmount()+(
                                     components.get(i).getAmount().length()>0?".00":""
@@ -172,6 +176,7 @@ public class WriteQutitoin {
                     rowFooter.setPaddingRight(padding);
                     rowFooter.setHorizontalAlignment(Element.ALIGN_CENTER);
                     rowFooter.setVerticalAlignment(Element.ALIGN_TOP);
+                    rowFooter.setBorder(Rectangle.LEFT|Rectangle.RIGHT);
 
                     table.addCell(rowHead);
                     table.addCell(rowBody);
@@ -195,6 +200,7 @@ public class WriteQutitoin {
             row02Body.setHorizontalAlignment(Element.ALIGN_RIGHT);
             row02Body.setVerticalAlignment(Element.ALIGN_TOP);
             row02Body.setColspan(2);
+            
 
             // last row footer txt
             PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(totalamount)+".00", f4));
