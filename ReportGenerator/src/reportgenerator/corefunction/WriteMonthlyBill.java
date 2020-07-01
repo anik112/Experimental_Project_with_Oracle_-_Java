@@ -31,7 +31,7 @@ public class WriteMonthlyBill {
 
     private final String to = "To";
     private final String greetingtextHead = "Dear Sir/Madam,";
-    private final String greetingtextBody = "Thank you for using our software  A¶i . Please pay the bill as follows:";
+    private final String greetingtextBody = "Thank you for using our software. Please pay the bill as follows:";
     private final String colHeder01 = "S/L";
     private final String colHeder02 = "Description of the products/Services";
     private final String colHeader03 = "Amount (TK.)";
