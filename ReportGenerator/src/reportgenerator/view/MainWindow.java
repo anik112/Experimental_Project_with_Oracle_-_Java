@@ -32,7 +32,7 @@ import reportgenerator.dao.ReqQutComponent;
  */
 public class MainWindow extends javax.swing.JFrame {
 
-    private String savingLoc = "D:\\";
+    private String savingLoc = "\\\\192.168.1.210\\monthly_online_bill_and_quotation\\";
     private String configComapnyListUrl = "setup\\CompanyName.txt";
     private String configPendingBillList = "setup\\PandingList.txt";
     private String billNo = "";
@@ -763,7 +763,7 @@ public class MainWindow extends javax.swing.JFrame {
 
                 String companyName = parts[1];
                 companyName = companyName.replace(' ', '-');
-                String url = savingLoc + companyName + "-" + billNo + ".pdf";
+                String url = savingLoc + companyName +"\\"+companyName+ "-" + billNo + ".pdf";
 
                 recentMonthlyBillFileLoc = url;
 

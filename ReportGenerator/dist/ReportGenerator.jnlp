@@ -8,7 +8,19 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< HEAD
     <jar href="ReportGenerator.jar" size="65168" download="eager" />
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <jar href="ReportGenerator.jar" size="50858" download="eager" />
+=======
+    <jar href="ReportGenerator.jar" size="61641" download="eager" />
+>>>>>>> b05ccb1164660530e667c112fa31f331ad73b6bf
+=======
+    <jar href="ReportGenerator.jar" size="61922" download="eager" />
+>>>>>>> f66d2cf88175f1d42f2c417f76d21e1459ef9bc8
+>>>>>>> 1fc45966fbe9500446bc9e2000402ffe963ebd87
     <jar href="lib\itextpdf-5.5.13.1.jar" size="2330916" download="eager" />
     <jar href="lib\pdfbox-2.0.19.jar" size="2715618" download="eager" />
   </resources>
