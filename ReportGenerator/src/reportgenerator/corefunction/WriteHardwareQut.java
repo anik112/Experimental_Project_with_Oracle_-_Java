@@ -36,8 +36,8 @@ public class WriteHardwareQut {
     private final String greetingtextHead = "Dear Sir/Madam,";
     private final String greetingtextBody = "Thank you for using our software. Please pay the bill as follows:";
     private final String colHeader01 = "S/L";
-    private final String colHeader02="Intro";
-    private final String colHeader03 = "Description of the products";
+    private final String colHeader02="Description of the products";
+    private final String colHeader03 = "More Details";
     private final String colHeader06 = "Amount (TK.)";
     private final String colHeader04="Qty";
     private final String colHeader05="Unit Price";
@@ -46,8 +46,11 @@ public class WriteHardwareQut {
     private final String amountTage = "Amount in word: ";
     private final String noteTxt = "N.B: All payments should be in a/c payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
     private final String sign = "..................................\nAuthorized Signatory";
-    private int totalamount = 0;
+    private float totalamount = 0;
 
+    public WriteHardwareQut() {
+    }
+    
     public boolean writeHardwareQutInPdfFile(List<HardwareQutComponent> components, File selectedFile) {
 
         try {
@@ -71,9 +74,9 @@ public class WriteHardwareQut {
             Font f1 = FontFactory.getFont("calibri", 10);  // set font style and size into font object
 
             // make first text in document
-            Paragraph docHeader = new Paragraph("\nDate: " + components.get(0).getDate() + "\n\n"
+            Paragraph docHeader = new Paragraph("\nDate: " + components.get(0).getDate()+ "\n\n"
                     + to + "\n"
-                    + components.get(0).getCompanyName() + "\n"
+                    + components.get(0).getCompanyName()+ "\n"
                     + components.get(0).getAddress() + "\n\n"
                     + greetingtextHead + "\n"
                     + greetingtextBody,
@@ -181,7 +184,7 @@ public class WriteHardwareQut {
                 PdfPCell[] row6=new PdfPCell[15];
 
                 // adding row in table
-                for (int i = 0; i < 7; i++) {
+                for (int i = 0; i < components.size(); i++) {
                     String count = ""; // make row number list
                     count = String.valueOf(i + 1);
                     
@@ -192,33 +195,35 @@ public class WriteHardwareQut {
                     row5[i]=new PdfPCell();
                     row6[i]=new PdfPCell();
                     
-                    if(i<2){
+                    if(!components.get(i).getBrand().isEmpty()){
                         row1[i].setPhrase(new Paragraph(count,f4));
                         row2[i].setPhrase(new Paragraph(""
                             + "Time Attendence Device\n\n"
-                            + "Brand: uFace 8000\n"
-                            + "Model: Zkt\n"
-                            + "Origin: Bangladesh\n\n"
-                            + "1 Year Warranty ",f4
+                            + "Brand: "+components.get(i).getBrand()+"\n"
+                            + "Model: "+components.get(i).getModel()+"Zkt\n"
+                            + "Origin: "+components.get(i).getOrigin()+"\n\n"
+                            + components.get(i).getWarranty()+" Year Warranty ",f4
                         ));
                         row3[i].setPhrase(new Paragraph(""
-                            + "Face Capacity: 20000\n"
-                            + "Finger Capacity: 20000\n"
-                            + "ID Card: 10000\n"
-                            + "Event Log: 100,0000\n\n"
+                            + "Face Capacity: "+components.get(i).getFaceCapacity()+"\n"
+                            + "Finger Capacity: "+components.get(i).getFingerCapacity()+"\n"
+                            + "ID Card: "+components.get(i).getCardCapacity()+"\n"
+                            + "Event Log: "+components.get(i).getEventLog()+"\n\n"
                             + "Communication:\n" 
-                            +"RS485, TCP/IP, USB-host",f4
+                            +components.get(i).getCommunicationWay(),f4
                         ));
-                        row4[i].setPhrase(new Paragraph("5000 PCS",f4));
-                        row5[i].setPhrase(new Paragraph("1035000",f4));
-                        row6[i].setPhrase(new Paragraph("1035000",f4));
+                        row4[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getDeviceQty()+" PCS"),f4));
+                        row5[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getDeviceUnitPrice()),f4));
+                        row6[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getDeviceTotalPrice()),f4));
+                        totalamount += components.get(i).getDeviceTotalPrice();
                     }else{
                         row1[i].setPhrase(new Paragraph(count,f4));
-                        row2[i].setPhrase(new Paragraph("----",f4));
-                        row3[i].setPhrase(new Paragraph("-----",f4));
-                        row4[i].setPhrase(new Paragraph("5000 PCS",f4));
-                        row5[i].setPhrase(new Paragraph("1035000",f4));
-                        row6[i].setPhrase(new Paragraph("1035000",f4));
+                        row2[i].setPhrase(new Paragraph(components.get(i).getDtls01(),f4));
+                        row3[i].setPhrase(new Paragraph(components.get(i).getDtls02(),f4));
+                        row4[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getQty())+" "+components.get(i).getQtyType(),f4));
+                        row5[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getUnitPrice()),f4));
+                        row6[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getTotalPrice()),f4));
+                        totalamount += components.get(i).getTotalPrice();
                     }
                     
                     
@@ -279,7 +284,7 @@ public class WriteHardwareQut {
                     table.addCell(row4[i]);
                     table.addCell(row5[i]);
                     table.addCell(row6[i]);
-
+                    
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -293,10 +298,10 @@ public class WriteHardwareQut {
             row02Body.setPaddingRight(padding);
             row02Body.setHorizontalAlignment(Element.ALIGN_RIGHT);
             row02Body.setVerticalAlignment(Element.ALIGN_TOP);
-            row02Body.setColspan(2);
+            row02Body.setColspan(4);
 
             // last row footer txt
-            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(totalamount) + ".00", f2));
+            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(totalamount), f2));
             row02Footer.setPaddingLeft(padding);
             row02Footer.setPaddingTop(padding);
             row02Footer.setPaddingBottom(padding);
@@ -313,7 +318,7 @@ public class WriteHardwareQut {
             Font f3 = FontFactory.getFont("SansSerif", 8);
             document.add(new Paragraph(tableFooterTxt, f3));
 
-            document.add(new Paragraph("\n" + amountTage + (new IOFunction().getNumberInWord(totalamount, configAmountListUrl)) + " only.", f1));
+            document.add(new Paragraph("\n" + amountTage + (new IOFunction().getNumberInWord((int) totalamount, configAmountListUrl)) + " only.", f1));
             document.add(new Paragraph(noteTxt + "\n\n", f2));
 
             Image sirSing = Image.getInstance("img\\Sir-Sign.jpg");

@@ -7,11 +7,13 @@ package reportgenerator.view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import reportgenerator.corefunction.WriteHardwareQut;
 import reportgenerator.dao.HardwareQutComponent;
 
 /**
@@ -28,13 +30,29 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
     private JTextField fingerCapacity[];
     private JTextField cardCapacity[];
     private JTextField eventLog[];
+    private JTextField comWay[];
+    private JTextField deviceQty[];
+    private JTextField deviceUnitPrice[];
+    private String date;
+    private String companyName;
+    private String companyAddress;
+    private String url;
 
     List<HardwareQutComponent> listOfHarwareQut = new ArrayList<>();
 
     /**
      * Creates new form MakeHardwareQutAndBill
+     *
+     * @param date
+     * @param comName
+     * @param comAddress
      */
-    public MakeHardwareQutAndBill() {
+    public MakeHardwareQutAndBill(String date, String comName, String comAddress, String url) {
+        this.date = date;
+        this.companyName = comName;
+        this.companyAddress = comAddress;
+        this.url=url;
+
         initComponents();
         showListOfPenel();
     }
@@ -56,68 +74,73 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
-        txtReqRow1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        txtReqAmountRow1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txtReqRow2 = new javax.swing.JTextField();
-        txtReqAmountRow2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtReqRow3 = new javax.swing.JTextField();
-        txtReqAmountRow3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtReqRow4 = new javax.swing.JTextField();
-        txtReqAmountRow4 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtReqRow5 = new javax.swing.JTextField();
-        txtReqAmountRow5 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txtReqRow6 = new javax.swing.JTextField();
-        txtReqAmountRow6 = new javax.swing.JTextField();
-        txtReqRow7 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txtReqAmountRow7 = new javax.swing.JTextField();
-        txtReqRow8 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        txtReqAmountRow8 = new javax.swing.JTextField();
-        txtReqRow9 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        txtReqAmountRow9 = new javax.swing.JTextField();
-        txtReqRow10 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        txtReqAmountRow10 = new javax.swing.JTextField();
-        txtReqAmountRow11 = new javax.swing.JTextField();
-        txtReqAmountRow12 = new javax.swing.JTextField();
-        txtReqAmountRow13 = new javax.swing.JTextField();
-        txtReqAmountRow14 = new javax.swing.JTextField();
-        txtReqAmountRow15 = new javax.swing.JTextField();
-        txtReqAmountRow16 = new javax.swing.JTextField();
-        txtReqAmountRow17 = new javax.swing.JTextField();
-        txtReqAmountRow18 = new javax.swing.JTextField();
-        txtReqAmountRow19 = new javax.swing.JTextField();
-        txtReqAmountRow20 = new javax.swing.JTextField();
-        txtReqAmountRow21 = new javax.swing.JTextField();
-        txtReqAmountRow22 = new javax.swing.JTextField();
-        txtReqAmountRow23 = new javax.swing.JTextField();
-        txtReqAmountRow24 = new javax.swing.JTextField();
-        txtReqAmountRow25 = new javax.swing.JTextField();
-        txtReqAmountRow26 = new javax.swing.JTextField();
-        txtReqAmountRow27 = new javax.swing.JTextField();
-        txtReqAmountRow28 = new javax.swing.JTextField();
-        txtReqAmountRow29 = new javax.swing.JTextField();
-        txtReqAmountRow30 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        txtDtls9 = new javax.swing.JTextField();
+        txtDtls1 = new javax.swing.JTextField();
+        txtDtls3 = new javax.swing.JTextField();
+        txtDtls2 = new javax.swing.JTextField();
+        txtDtls5 = new javax.swing.JTextField();
+        txtDtls8 = new javax.swing.JTextField();
+        txtDtls10 = new javax.swing.JTextField();
+        txtDtls6 = new javax.swing.JTextField();
+        txtDtls4 = new javax.swing.JTextField();
+        txtDtls7 = new javax.swing.JTextField();
+        txtMoreDtls3 = new javax.swing.JTextField();
+        txtMoreDtls1 = new javax.swing.JTextField();
+        txtMoreDtls6 = new javax.swing.JTextField();
+        txtMoreDtls7 = new javax.swing.JTextField();
+        txtMoreDtls8 = new javax.swing.JTextField();
+        txtMoreDtls2 = new javax.swing.JTextField();
+        txtMoreDtls5 = new javax.swing.JTextField();
+        txtMoreDtls9 = new javax.swing.JTextField();
+        txtMoreDtls4 = new javax.swing.JTextField();
+        txtMoreDtls10 = new javax.swing.JTextField();
+        txtQty1 = new javax.swing.JTextField();
+        txtQty5 = new javax.swing.JTextField();
+        txtQty10 = new javax.swing.JTextField();
+        txtQty4 = new javax.swing.JTextField();
+        txtQty6 = new javax.swing.JTextField();
+        txtQty9 = new javax.swing.JTextField();
+        txtQty2 = new javax.swing.JTextField();
+        txtQty3 = new javax.swing.JTextField();
+        txtQty7 = new javax.swing.JTextField();
+        txtQty8 = new javax.swing.JTextField();
+        txtUnitPrice5 = new javax.swing.JTextField();
+        txtUnitPrice8 = new javax.swing.JTextField();
+        txtUnitPrice6 = new javax.swing.JTextField();
+        txtUnitPrice10 = new javax.swing.JTextField();
+        txtUnitPrice2 = new javax.swing.JTextField();
+        txtUnitPrice1 = new javax.swing.JTextField();
+        txtUnitPrice9 = new javax.swing.JTextField();
+        txtUnitPrice3 = new javax.swing.JTextField();
+        txtUnitPrice7 = new javax.swing.JTextField();
+        txtUnitPrice4 = new javax.swing.JTextField();
         btnMakeHardwareQut = new javax.swing.JButton();
         txtHardwareBillNo = new javax.swing.JTextField();
-        btnMakeQutBill = new javax.swing.JButton();
+        btnMakeHardwareQutBill = new javax.swing.JButton();
+        comboQtyType1 = new javax.swing.JComboBox<>();
+        comboQtyType2 = new javax.swing.JComboBox<>();
+        comboQtyType3 = new javax.swing.JComboBox<>();
+        comboQtyType4 = new javax.swing.JComboBox<>();
+        comboQtyType5 = new javax.swing.JComboBox<>();
+        comboQtyType6 = new javax.swing.JComboBox<>();
+        comboQtyType7 = new javax.swing.JComboBox<>();
+        comboQtyType8 = new javax.swing.JComboBox<>();
+        comboQtyType9 = new javax.swing.JComboBox<>();
+        comboQtyType10 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(250, 100));
         setResizable(false);
 
         javax.swing.GroupLayout jPanShowListLayout = new javax.swing.GroupLayout(jPanShowList);
         jPanShowList.setLayout(jPanShowListLayout);
         jPanShowListLayout.setHorizontalGroup(
             jPanShowListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGap(0, 981, Short.MAX_VALUE)
         );
         jPanShowListLayout.setVerticalGroup(
             jPanShowListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,354 +153,278 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Write Divice Info", jPanel4);
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "No-Detls   ------------------------------- Detls 02 -------- Qty ------------  Unit Price", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        txtReqRow1.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Dtls");
+        jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel1.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel1.setText("01");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel13.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Dtls2");
+        jLabel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        txtReqAmountRow1.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Qty");
+        jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel2.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel2.setText("02");
-        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel15.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Unit Price");
+        jLabel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        txtReqRow2.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtDtls9.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
-        txtReqAmountRow2.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtDtls1.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel3.setText("03");
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtDtls3.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
-        txtReqRow3.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        txtReqRow3.addActionListener(new java.awt.event.ActionListener() {
+        txtDtls2.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtDtls5.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtDtls8.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtDtls10.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtDtls6.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtDtls4.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtDtls7.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtMoreDtls3.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtMoreDtls1.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtMoreDtls6.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtMoreDtls7.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtMoreDtls8.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtMoreDtls2.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtMoreDtls5.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtMoreDtls9.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtMoreDtls4.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtMoreDtls10.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtQty1.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtQty5.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtQty10.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtQty4.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtQty6.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtQty9.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtQty2.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtQty3.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtQty7.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+
+        txtQty8.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtQty8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtReqRow3ActionPerformed(evt);
+                txtQty8ActionPerformed(evt);
             }
         });
 
-        txtReqAmountRow3.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice5.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel4.setText("04");
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txtReqRow4.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow4.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        jLabel5.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel5.setText("05");
-        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txtReqRow5.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow5.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        jLabel6.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel6.setText("06");
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txtReqRow6.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow6.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqRow7.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        jLabel7.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel7.setText("07");
-        jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txtReqAmountRow7.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqRow8.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        jLabel8.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel8.setText("08");
-        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txtReqAmountRow8.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        txtReqAmountRow8.addActionListener(new java.awt.event.ActionListener() {
+        txtUnitPrice8.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtReqAmountRow8ActionPerformed(evt);
+                txtUnitPrice8ActionPerformed(evt);
             }
         });
 
-        txtReqRow9.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice6.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
-        jLabel10.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel10.setText("09");
-        jLabel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtUnitPrice10.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
-        txtReqAmountRow9.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice2.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
-        txtReqRow10.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice1.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
-        jLabel11.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        jLabel11.setText("10");
-        jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtUnitPrice9.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
-        txtReqAmountRow10.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice3.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
-        txtReqAmountRow11.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice7.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
-        txtReqAmountRow12.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow13.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        txtReqAmountRow13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtReqAmountRow13ActionPerformed(evt);
-            }
-        });
-
-        txtReqAmountRow14.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow15.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow16.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow17.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow18.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow19.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow20.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow21.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow22.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow23.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow24.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow25.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow26.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        txtReqAmountRow26.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtReqAmountRow26ActionPerformed(evt);
-            }
-        });
-
-        txtReqAmountRow27.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow28.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow29.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-
-        txtReqAmountRow30.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice4.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                    .addComponent(txtDtls10, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                    .addComponent(txtDtls9)
+                    .addComponent(txtDtls7)
+                    .addComponent(txtDtls6)
+                    .addComponent(txtDtls2)
+                    .addComponent(txtDtls3)
+                    .addComponent(txtDtls1)
+                    .addComponent(txtDtls8)
+                    .addComponent(txtDtls4)
+                    .addComponent(txtDtls5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                    .addComponent(txtMoreDtls8, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtMoreDtls1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtMoreDtls2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtMoreDtls3)
+                    .addComponent(txtMoreDtls5)
+                    .addComponent(txtMoreDtls6)
+                    .addComponent(txtMoreDtls9, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtMoreDtls10)
+                    .addComponent(txtMoreDtls7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtMoreDtls4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow10, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow9))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow8))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow7))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow6))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow5))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow4))
+                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
+                            .addComponent(txtQty3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                            .addComponent(txtQty2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                            .addComponent(txtQty1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtQty10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtQty7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtQty9, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                                        .addComponent(txtQty5)
+                                        .addComponent(txtQty6)
+                                        .addComponent(txtQty8, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(txtQty4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtReqRow2)
-                            .addComponent(txtReqRow3)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReqRow1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtReqAmountRow3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtReqAmountRow2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtReqAmountRow1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtReqAmountRow10)
-                        .addComponent(txtReqAmountRow9)
-                        .addComponent(txtReqAmountRow7)
-                        .addComponent(txtReqAmountRow5)
-                        .addComponent(txtReqAmountRow6)
-                        .addComponent(txtReqAmountRow8, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtReqAmountRow4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtReqAmountRow18, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtReqAmountRow19, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtReqAmountRow20, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtReqAmountRow11)
-                        .addComponent(txtReqAmountRow12)
-                        .addComponent(txtReqAmountRow14)
-                        .addComponent(txtReqAmountRow16)
-                        .addComponent(txtReqAmountRow15)
-                        .addComponent(txtReqAmountRow13, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtReqAmountRow17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtReqAmountRow23, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtReqAmountRow22, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtReqAmountRow29, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtReqAmountRow25)
-                        .addComponent(txtReqAmountRow27)
-                        .addComponent(txtReqAmountRow21)
-                        .addComponent(txtReqAmountRow30)
-                        .addComponent(txtReqAmountRow24)
-                        .addComponent(txtReqAmountRow26, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtReqAmountRow28, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                            .addComponent(txtUnitPrice3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                            .addComponent(txtUnitPrice2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtUnitPrice10)
+                                .addComponent(txtUnitPrice9)
+                                .addComponent(txtUnitPrice7)
+                                .addComponent(txtUnitPrice5)
+                                .addComponent(txtUnitPrice6)
+                                .addComponent(txtUnitPrice8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtUnitPrice4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
+                            .addComponent(txtUnitPrice1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(1, 1, 1))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                            .addComponent(txtReqAmountRow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                            .addComponent(txtReqAmountRow20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                            .addComponent(txtReqAmountRow29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtReqAmountRow25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtDtls1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDtls2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMoreDtls2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtQty2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUnitPrice2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(130, 130, 130)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDtls7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtMoreDtls7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtQty7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtUnitPrice7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDtls8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMoreDtls8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtQty8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUnitPrice8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDtls9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMoreDtls9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtQty9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUnitPrice9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDtls10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMoreDtls10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtQty10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUnitPrice10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtReqRow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtQty1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMoreDtls1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUnitPrice1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtQty3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMoreDtls3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUnitPrice3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDtls3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtQty4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtUnitPrice4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtMoreDtls4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDtls4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtReqRow2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtQty5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMoreDtls5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUnitPrice5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDtls5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtReqRow3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtReqRow4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtReqRow5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtReqRow6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtReqRow7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(txtReqRow8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(txtReqRow9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(txtReqRow10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(txtQty6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMoreDtls6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUnitPrice6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDtls6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
 
         jScrollPane1.setViewportView(jPanel3);
@@ -492,11 +439,11 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
 
         txtHardwareBillNo.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
-        btnMakeQutBill.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        btnMakeQutBill.setText("Make Qutitoin Bill");
-        btnMakeQutBill.addActionListener(new java.awt.event.ActionListener() {
+        btnMakeHardwareQutBill.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        btnMakeHardwareQutBill.setText("Make Qutitoin Bill");
+        btnMakeHardwareQutBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMakeQutBillActionPerformed(evt);
+                btnMakeHardwareQutBillActionPerformed(evt);
             }
         });
 
@@ -504,42 +451,101 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtHardwareBillNo)
-                .addGap(18, 18, 18)
-                .addComponent(btnMakeHardwareQut, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMakeQutBill, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtHardwareBillNo)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnMakeHardwareQut, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnMakeHardwareQutBill, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtHardwareBillNo)
-                    .addComponent(btnMakeQutBill, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMakeHardwareQut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnMakeHardwareQutBill, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtHardwareBillNo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnMakeHardwareQut, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jScrollPane1.getAccessibleContext().setAccessibleName("No-Detls   --------------------------------------------------------------------------------------   Amount");
+
+        comboQtyType1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PCS", "CM", "M" }));
+
+        comboQtyType2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PCS", "CM", "M" }));
+
+        comboQtyType3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PCS", "CM", "M" }));
+
+        comboQtyType4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PCS", "CM", "M" }));
+
+        comboQtyType5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PCS", "CM", "M" }));
+
+        comboQtyType6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PCS", "CM", "M" }));
+
+        comboQtyType7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PCS", "CM", "M" }));
+
+        comboQtyType8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PCS", "CM", "M" }));
+
+        comboQtyType9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PCS", "CM", "M" }));
+
+        comboQtyType10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PCS", "CM", "M" }));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboQtyType1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboQtyType2, javax.swing.GroupLayout.Alignment.TRAILING, 0, 110, Short.MAX_VALUE)
+                    .addComponent(comboQtyType3, javax.swing.GroupLayout.Alignment.TRAILING, 0, 110, Short.MAX_VALUE)
+                    .addComponent(comboQtyType4, javax.swing.GroupLayout.Alignment.TRAILING, 0, 110, Short.MAX_VALUE)
+                    .addComponent(comboQtyType5, javax.swing.GroupLayout.Alignment.TRAILING, 0, 110, Short.MAX_VALUE)
+                    .addComponent(comboQtyType6, 0, 110, Short.MAX_VALUE)
+                    .addComponent(comboQtyType7, 0, 110, Short.MAX_VALUE)
+                    .addComponent(comboQtyType8, 0, 110, Short.MAX_VALUE)
+                    .addComponent(comboQtyType9, 0, 110, Short.MAX_VALUE)
+                    .addComponent(comboQtyType10, 0, 110, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(comboQtyType1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(comboQtyType2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(comboQtyType3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(comboQtyType4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(comboQtyType5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(comboQtyType6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(comboQtyType7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(comboQtyType8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(comboQtyType9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(comboQtyType10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Write Other Item", jPanel5);
@@ -558,63 +564,50 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtReqAmountRow8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReqAmountRow8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtReqAmountRow8ActionPerformed
-
     private void btnMakeHardwareQutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeHardwareQutActionPerformed
         // TODO add your handling code here:
-       for (int i = 0; i < 5; i++) {
-            if (!modelName[i].getText().isEmpty()) {
-                HardwareQutComponent component = new HardwareQutComponent();
+        showData(setData());
 
-                component.setModel(modelName[i].getText());
-                component.setOrigin(originName[i].getText());
-                component.setFaceCapacity(Integer.parseInt(faceCapacity[i].getText()));
-                component.setFingerCapacity(Integer.parseInt(fingerCapacity[i].getText()));
-                component.setCardCapacity(Integer.parseInt(cardCapacity[i].getText()));
-                component.setEventLog(Integer.parseInt(eventLog[i].getText()));
-                
-                listOfHarwareQut.add(component);
-            }
-        }
+        File selectedFile = new File(url);
+        new WriteHardwareQut().writeHardwareQutInPdfFile(setData(), selectedFile);
 
     }//GEN-LAST:event_btnMakeHardwareQutActionPerformed
 
-    private void btnMakeQutBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeQutBillActionPerformed
+    private void btnMakeHardwareQutBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeHardwareQutBillActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnMakeQutBillActionPerformed
+    }//GEN-LAST:event_btnMakeHardwareQutBillActionPerformed
 
-    private void txtReqAmountRow13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReqAmountRow13ActionPerformed
+    private void txtQty8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQty8ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtReqAmountRow13ActionPerformed
+    }//GEN-LAST:event_txtQty8ActionPerformed
 
-    private void txtReqAmountRow26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReqAmountRow26ActionPerformed
+    private void txtUnitPrice8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnitPrice8ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtReqAmountRow26ActionPerformed
-
-    private void txtReqRow3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReqRow3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtReqRow3ActionPerformed
+    }//GEN-LAST:event_txtUnitPrice8ActionPerformed
 
     private void showListOfPenel() {
         JPanel pan[] = new JPanel[10];
         jPanShowList.setLayout(new GridLayout(0, 1, 20, 20));
 
-        brandName=new JTextField[5];
+        brandName = new JTextField[5];
         modelName = new JTextField[5];
         originName = new JTextField[5];
-        warranty=new JTextField[5];
+        warranty = new JTextField[5];
         faceCapacity = new JTextField[5];
         fingerCapacity = new JTextField[5];
         cardCapacity = new JTextField[5];
         eventLog = new JTextField[5];
+        comWay = new JTextField[5];
+        deviceQty = new JTextField[5];
+        deviceUnitPrice = new JTextField[5];
 
         for (int i = 0; i < 5; i++) {
+
             pan[i] = new JPanel();
             pan[i].setLayout(new GridLayout(1, 6, 5, 15));
 
-            String label[] = {"Brand:","Model:", "Origin:","Warranty:", "Face Cap:", "Finger Cap:", "Card Cap:", "Event Log:"};
+            String label[] = {"Brand:", "Model:", "Origin:", "Warranty:", "Face Cap:", "Finger Cap:", "Card Cap:",
+                "Event Log:", "Com way:", "Qty:", "Unit Price:"};
 
             brandName[i] = new JTextField();
             brandName[i].setBorder(new TitledBorder(label[0]));
@@ -622,16 +615,22 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             modelName[i].setBorder(new TitledBorder(label[1]));
             originName[i] = new JTextField();
             originName[i].setBorder(new TitledBorder(label[2]));
-            faceCapacity[i] = new JTextField();
-            faceCapacity[i].setBorder(new TitledBorder(label[3]));
             warranty[i] = new JTextField();
-            warranty[i].setBorder(new TitledBorder(label[4]));
+            warranty[i].setBorder(new TitledBorder(label[3]));
+            faceCapacity[i] = new JTextField();
+            faceCapacity[i].setBorder(new TitledBorder(label[4]));
             fingerCapacity[i] = new JTextField();
             fingerCapacity[i].setBorder(new TitledBorder(label[5]));
             cardCapacity[i] = new JTextField();
             cardCapacity[i].setBorder(new TitledBorder(label[6]));
             eventLog[i] = new JTextField();
             eventLog[i].setBorder(new TitledBorder(label[7]));
+            comWay[i] = new JTextField();
+            comWay[i].setBorder(new TitledBorder(label[8]));
+            deviceQty[i] = new JTextField();
+            deviceQty[i].setBorder(new TitledBorder(label[9]));
+            deviceUnitPrice[i] = new JTextField();
+            deviceUnitPrice[i].setBorder(new TitledBorder(label[10]));
 
             pan[i].add(brandName[i]);
             pan[i].add(modelName[i]);
@@ -641,6 +640,9 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             pan[i].add(fingerCapacity[i]);
             pan[i].add(cardCapacity[i]);
             pan[i].add(eventLog[i]);
+            pan[i].add(comWay[i]);
+            pan[i].add(deviceQty[i]);
+            pan[i].add(deviceUnitPrice[i]);
             pan[i].revalidate();
             pan[i].repaint();
             pan[i].setBackground(Color.WHITE);
@@ -652,58 +654,267 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
 
     }
 
-    private void showData() {
-        
+    private List<HardwareQutComponent> setData() {
+
+        List<HardwareQutComponent> listOfComponent = new ArrayList<>();
+        String tempStr = "";
+
+        int i = 0;
+        while (i < 5) {
+
+            if (!modelName[i].getText().isEmpty()) {
+                HardwareQutComponent component = new HardwareQutComponent();
+
+                component.setDate(date);
+                component.setCompanyName(companyName);
+                component.setAddress(companyAddress);
+                component.setBrand(brandName[i].getText());
+                component.setModel(modelName[i].getText());
+                component.setOrigin(originName[i].getText());
+                component.setWarranty(Integer.parseInt(warranty[i].getText()));
+                component.setFaceCapacity(Integer.parseInt(faceCapacity[i].getText()));
+                component.setFingerCapacity(Integer.parseInt(fingerCapacity[i].getText()));
+                component.setCardCapacity(Integer.parseInt(cardCapacity[i].getText()));
+                component.setEventLog(Integer.parseInt(eventLog[i].getText()));
+                component.setCommunicationWay(comWay[i].getText());
+                int dvcQty = Integer.parseInt(deviceQty[i].getText());
+                component.setDeviceQty(dvcQty);
+                float dvcUnitPrice = Float.valueOf(deviceUnitPrice[i].getText());
+                component.setDeviceUnitPrice(dvcUnitPrice);
+                component.setDeviceTotalPrice(dvcUnitPrice * dvcQty);
+
+                listOfComponent.add(component);
+            }
+            i++;
+        }
+
+        if (!txtDtls1.getText().isEmpty()) {
+            HardwareQutComponent component = new HardwareQutComponent();
+            component.setDate(date);
+            component.setCompanyName(companyName);
+            component.setAddress(companyAddress);
+            component.setBrand(tempStr);
+            component.setDtls01(txtDtls1.getText());
+            component.setDtls02(txtMoreDtls1.getText());
+            int qty = Integer.parseInt(txtQty1.getText());
+            component.setQty(qty);
+            float price = Float.parseFloat(txtUnitPrice1.getText());
+            component.setUnitPrice(price);
+            float totalPrice = (price * qty);
+            component.setTotalPrice(totalPrice);
+            component.setQtyType(comboQtyType1.getSelectedItem().toString());
+            listOfComponent.add(component);
+        }
+
+        if (!txtDtls2.getText().isEmpty()) {
+            HardwareQutComponent component = new HardwareQutComponent();
+            component.setDate(date);
+            component.setCompanyName(companyName);
+            component.setAddress(companyAddress);
+            component.setBrand(tempStr);
+            component.setDtls01(txtDtls2.getText());
+            component.setDtls02(txtMoreDtls2.getText());
+            int qty = Integer.parseInt(txtQty2.getText());
+            component.setQty(qty);
+            float price = Float.parseFloat(txtUnitPrice2.getText());
+            component.setUnitPrice(price);
+            float totalPrice = (price * qty);
+            component.setTotalPrice(totalPrice);
+            component.setQtyType(comboQtyType2.getSelectedItem().toString());
+            listOfComponent.add(component);
+        }
+
+        if (!txtDtls3.getText().isEmpty()) {
+            HardwareQutComponent component = new HardwareQutComponent();
+            component.setDate(date);
+            component.setCompanyName(companyName);
+            component.setAddress(companyAddress);
+            component.setBrand(tempStr);
+            component.setDtls01(txtDtls3.getText());
+            component.setDtls02(txtMoreDtls3.getText());
+            int qty = Integer.parseInt(txtQty3.getText());
+            component.setQty(qty);
+            float price = Float.parseFloat(txtUnitPrice3.getText());
+            component.setUnitPrice(price);
+            float totalPrice = (price * qty);
+            component.setTotalPrice(totalPrice);
+            component.setQtyType(comboQtyType3.getSelectedItem().toString());
+            listOfComponent.add(component);
+        }
+
+        if (!txtDtls4.getText().isEmpty()) {
+            HardwareQutComponent component = new HardwareQutComponent();
+            component.setDate(date);
+            component.setCompanyName(companyName);
+            component.setAddress(companyAddress);
+            component.setBrand(tempStr);
+            component.setDtls01(txtDtls4.getText());
+            component.setDtls02(txtMoreDtls4.getText());
+            int qty = Integer.parseInt(txtQty4.getText());
+            component.setQty(qty);
+            float price = Float.parseFloat(txtUnitPrice4.getText());
+            component.setUnitPrice(price);
+            float totalPrice = (price * qty);
+            component.setTotalPrice(totalPrice);
+            component.setQtyType(comboQtyType4.getSelectedItem().toString());
+            listOfComponent.add(component);
+        }
+
+        if (!txtDtls5.getText().isEmpty()) {
+            HardwareQutComponent component = new HardwareQutComponent();
+            component.setDate(date);
+            component.setCompanyName(companyName);
+            component.setAddress(companyAddress);
+            component.setBrand(tempStr);
+            component.setDtls01(txtDtls5.getText());
+            component.setDtls02(txtMoreDtls5.getText());
+            int qty = Integer.parseInt(txtQty5.getText());
+            component.setQty(qty);
+            float price = Float.parseFloat(txtUnitPrice5.getText());
+            component.setUnitPrice(price);
+            float totalPrice = (price * qty);
+            component.setTotalPrice(totalPrice);
+            component.setQtyType(comboQtyType5.getSelectedItem().toString());
+            listOfComponent.add(component);
+        }
+
+        if (!txtDtls6.getText().isEmpty()) {
+            HardwareQutComponent component = new HardwareQutComponent();
+            component.setDate(date);
+            component.setCompanyName(companyName);
+            component.setAddress(companyAddress);
+            component.setBrand(tempStr);
+            component.setDtls01(txtDtls6.getText());
+            component.setDtls02(txtMoreDtls6.getText());
+            int qty = Integer.parseInt(txtQty6.getText());
+            component.setQty(qty);
+            float price = Float.parseFloat(txtUnitPrice6.getText());
+            component.setUnitPrice(price);
+            float totalPrice = (price * qty);
+            component.setTotalPrice(totalPrice);
+            component.setQtyType(comboQtyType6.getSelectedItem().toString());
+            listOfComponent.add(component);
+        }
+
+        if (!txtDtls7.getText().isEmpty()) {
+            HardwareQutComponent component = new HardwareQutComponent();
+            component.setDate(date);
+            component.setCompanyName(companyName);
+            component.setAddress(companyAddress);
+            component.setBrand(tempStr);
+            component.setDtls01(txtDtls7.getText());
+            component.setDtls02(txtMoreDtls7.getText());
+            int qty = Integer.parseInt(txtQty7.getText());
+            component.setQty(qty);
+            float price = Float.parseFloat(txtUnitPrice7.getText());
+            component.setUnitPrice(price);
+            float totalPrice = (price * qty);
+            component.setTotalPrice(totalPrice);
+            component.setQtyType(comboQtyType7.getSelectedItem().toString());
+            listOfComponent.add(component);
+        }
+
+        if (!txtDtls8.getText().isEmpty()) {
+            HardwareQutComponent component = new HardwareQutComponent();
+            component.setDate(date);
+            component.setCompanyName(companyName);
+            component.setAddress(companyAddress);
+            component.setBrand(tempStr);
+            component.setDtls01(txtDtls8.getText());
+            component.setDtls02(txtMoreDtls8.getText());
+            int qty = Integer.parseInt(txtQty8.getText());
+            component.setQty(qty);
+            float price = Float.parseFloat(txtUnitPrice8.getText());
+            component.setUnitPrice(price);
+            float totalPrice = (price * qty);
+            component.setTotalPrice(totalPrice);
+            component.setQtyType(comboQtyType8.getSelectedItem().toString());
+            listOfComponent.add(component);
+        }
+
+        if (!txtDtls9.getText().isEmpty()) {
+            HardwareQutComponent component = new HardwareQutComponent();
+            component.setDate(date);
+            component.setCompanyName(companyName);
+            component.setAddress(companyAddress);
+            component.setBrand(tempStr);
+            component.setDtls01(txtDtls9.getText());
+            component.setDtls02(txtMoreDtls9.getText());
+            int qty = Integer.parseInt(txtQty9.getText());
+            component.setQty(qty);
+            float price = Float.parseFloat(txtUnitPrice9.getText());
+            component.setUnitPrice(price);
+            float totalPrice = (price * qty);
+            component.setTotalPrice(totalPrice);
+            component.setQtyType(comboQtyType9.getSelectedItem().toString());
+            listOfComponent.add(component);
+        }
+
+        if (!txtDtls10.getText().isEmpty()) {
+            HardwareQutComponent component = new HardwareQutComponent();
+            component.setDate(date);
+            component.setCompanyName(companyName);
+            component.setAddress(companyAddress);
+            component.setBrand(tempStr);
+            component.setDtls01(txtDtls10.getText());
+            component.setDtls02(txtMoreDtls10.getText());
+            int qty = Integer.parseInt(txtQty10.getText());
+            component.setQty(qty);
+            float price = Float.parseFloat(txtUnitPrice10.getText());
+            component.setUnitPrice(price);
+            float totalPrice = (price * qty);
+            component.setTotalPrice(totalPrice);
+            component.setQtyType(comboQtyType10.getSelectedItem().toString());
+            listOfComponent.add(component);
+        }
+
+        return listOfComponent;
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+    private void showData(List<HardwareQutComponent> list) {
+        System.out.println(list.size());
+
+        for (int i = 0; i < list.size(); i++) {
+            try {
+                if (!list.get(i).getBrand().isEmpty()) {
+                    System.out.println(list.get(i).getBrand());
+                    System.out.println(list.get(i).getModel());
+                    System.out.println(list.get(i).getFingerCapacity());
+                    System.out.println(list.get(i).getCardCapacity());
+                    System.out.println(list.get(i).getCommunicationWay());
+                } else if (!list.get(i).getDtls01().isEmpty()) {
+                    System.out.println(list.get(i).getDtls01());
+                    System.out.println(list.get(i).getDtls02());
+                    System.out.println(list.get(i).getTotalPrice());
+                } else {
                     break;
                 }
+            } catch (NullPointerException e) {
+                e.printStackTrace();
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MakeHardwareQutAndBill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MakeHardwareQutAndBill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MakeHardwareQutAndBill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MakeHardwareQutAndBill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            System.out.println("===========================================");
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MakeHardwareQutAndBill().setVisible(true);
-            }
-        });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMakeHardwareQut;
-    private javax.swing.JButton btnMakeQutBill;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JButton btnMakeHardwareQutBill;
+    private javax.swing.JComboBox<String> comboQtyType1;
+    private javax.swing.JComboBox<String> comboQtyType10;
+    private javax.swing.JComboBox<String> comboQtyType2;
+    private javax.swing.JComboBox<String> comboQtyType3;
+    private javax.swing.JComboBox<String> comboQtyType4;
+    private javax.swing.JComboBox<String> comboQtyType5;
+    private javax.swing.JComboBox<String> comboQtyType6;
+    private javax.swing.JComboBox<String> comboQtyType7;
+    private javax.swing.JComboBox<String> comboQtyType8;
+    private javax.swing.JComboBox<String> comboQtyType9;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JPanel jPanShowList;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -712,46 +923,46 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField txtDtls1;
+    private javax.swing.JTextField txtDtls10;
+    private javax.swing.JTextField txtDtls2;
+    private javax.swing.JTextField txtDtls3;
+    private javax.swing.JTextField txtDtls4;
+    private javax.swing.JTextField txtDtls5;
+    private javax.swing.JTextField txtDtls6;
+    private javax.swing.JTextField txtDtls7;
+    private javax.swing.JTextField txtDtls8;
+    private javax.swing.JTextField txtDtls9;
     private javax.swing.JTextField txtHardwareBillNo;
-    private javax.swing.JTextField txtReqAmountRow1;
-    private javax.swing.JTextField txtReqAmountRow10;
-    private javax.swing.JTextField txtReqAmountRow11;
-    private javax.swing.JTextField txtReqAmountRow12;
-    private javax.swing.JTextField txtReqAmountRow13;
-    private javax.swing.JTextField txtReqAmountRow14;
-    private javax.swing.JTextField txtReqAmountRow15;
-    private javax.swing.JTextField txtReqAmountRow16;
-    private javax.swing.JTextField txtReqAmountRow17;
-    private javax.swing.JTextField txtReqAmountRow18;
-    private javax.swing.JTextField txtReqAmountRow19;
-    private javax.swing.JTextField txtReqAmountRow2;
-    private javax.swing.JTextField txtReqAmountRow20;
-    private javax.swing.JTextField txtReqAmountRow21;
-    private javax.swing.JTextField txtReqAmountRow22;
-    private javax.swing.JTextField txtReqAmountRow23;
-    private javax.swing.JTextField txtReqAmountRow24;
-    private javax.swing.JTextField txtReqAmountRow25;
-    private javax.swing.JTextField txtReqAmountRow26;
-    private javax.swing.JTextField txtReqAmountRow27;
-    private javax.swing.JTextField txtReqAmountRow28;
-    private javax.swing.JTextField txtReqAmountRow29;
-    private javax.swing.JTextField txtReqAmountRow3;
-    private javax.swing.JTextField txtReqAmountRow30;
-    private javax.swing.JTextField txtReqAmountRow4;
-    private javax.swing.JTextField txtReqAmountRow5;
-    private javax.swing.JTextField txtReqAmountRow6;
-    private javax.swing.JTextField txtReqAmountRow7;
-    private javax.swing.JTextField txtReqAmountRow8;
-    private javax.swing.JTextField txtReqAmountRow9;
-    private javax.swing.JTextField txtReqRow1;
-    private javax.swing.JTextField txtReqRow10;
-    private javax.swing.JTextField txtReqRow2;
-    private javax.swing.JTextField txtReqRow3;
-    private javax.swing.JTextField txtReqRow4;
-    private javax.swing.JTextField txtReqRow5;
-    private javax.swing.JTextField txtReqRow6;
-    private javax.swing.JTextField txtReqRow7;
-    private javax.swing.JTextField txtReqRow8;
-    private javax.swing.JTextField txtReqRow9;
+    private javax.swing.JTextField txtMoreDtls1;
+    private javax.swing.JTextField txtMoreDtls10;
+    private javax.swing.JTextField txtMoreDtls2;
+    private javax.swing.JTextField txtMoreDtls3;
+    private javax.swing.JTextField txtMoreDtls4;
+    private javax.swing.JTextField txtMoreDtls5;
+    private javax.swing.JTextField txtMoreDtls6;
+    private javax.swing.JTextField txtMoreDtls7;
+    private javax.swing.JTextField txtMoreDtls8;
+    private javax.swing.JTextField txtMoreDtls9;
+    private javax.swing.JTextField txtQty1;
+    private javax.swing.JTextField txtQty10;
+    private javax.swing.JTextField txtQty2;
+    private javax.swing.JTextField txtQty3;
+    private javax.swing.JTextField txtQty4;
+    private javax.swing.JTextField txtQty5;
+    private javax.swing.JTextField txtQty6;
+    private javax.swing.JTextField txtQty7;
+    private javax.swing.JTextField txtQty8;
+    private javax.swing.JTextField txtQty9;
+    private javax.swing.JTextField txtUnitPrice1;
+    private javax.swing.JTextField txtUnitPrice10;
+    private javax.swing.JTextField txtUnitPrice2;
+    private javax.swing.JTextField txtUnitPrice3;
+    private javax.swing.JTextField txtUnitPrice4;
+    private javax.swing.JTextField txtUnitPrice5;
+    private javax.swing.JTextField txtUnitPrice6;
+    private javax.swing.JTextField txtUnitPrice7;
+    private javax.swing.JTextField txtUnitPrice8;
+    private javax.swing.JTextField txtUnitPrice9;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,7 +10,7 @@ package reportgenerator.dao;
  * @author Anik
  */
 public class HardwareQutComponent {
-    
+
     private String date;
     private String billNo;
     private String companyName;
@@ -20,6 +20,10 @@ public class HardwareQutComponent {
     private String brand;
     private String model;
     private String origin;
+    private String dtls01;
+    private String dtls02;
+    private float totalPrice;
+    private int warranty;
     private int amount;
     private int faceCapacity;
     private int fingerCapacity;
@@ -27,7 +31,43 @@ public class HardwareQutComponent {
     private int eventLog;
     private String communicationWay;
     private int qty;
-    private int unitPrice;
+    private float unitPrice;
+    private int deviceQty;
+    private float deviceUnitPrice;
+    private float deviceTotalPrice;
+    private String qtyType;
+
+    public String getQtyType() {
+        return qtyType;
+    }
+
+    public void setQtyType(String qtyType) {
+        this.qtyType = qtyType;
+    }
+
+    public int getDeviceQty() {
+        return deviceQty;
+    }
+
+    public void setDeviceQty(int deviceQty) {
+        this.deviceQty = deviceQty;
+    }
+
+    public float getDeviceUnitPrice() {
+        return deviceUnitPrice;
+    }
+
+    public void setDeviceUnitPrice(float deviceUnitPrice) {
+        this.deviceUnitPrice = deviceUnitPrice;
+    }
+
+    public float getDeviceTotalPrice() {
+        return deviceTotalPrice;
+    }
+
+    public void setDeviceTotalPrice(float deviceTotalPrice) {
+        this.deviceTotalPrice = deviceTotalPrice;
+    }
 
     public String getDate() {
         return date;
@@ -157,12 +197,44 @@ public class HardwareQutComponent {
         this.qty = qty;
     }
 
-    public int getUnitPrice() {
+    public String getDtls01() {
+        return dtls01;
+    }
+
+    public void setDtls01(String dtls01) {
+        this.dtls01 = dtls01;
+    }
+
+    public String getDtls02() {
+        return dtls02;
+    }
+
+    public void setDtls02(String dtls02) {
+        this.dtls02 = dtls02;
+    }
+
+    public float getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public float getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(int unitPrice) {
+    public void setUnitPrice(float unitPrice) {
         this.unitPrice = unitPrice;
     }
-    
+
+    public void setWarranty(int warranty) {
+        this.warranty = warranty;
+    }
+
+    public int getWarranty() {
+        return this.warranty;
+    }
+
 }

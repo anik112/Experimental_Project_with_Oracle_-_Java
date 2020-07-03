@@ -32,7 +32,8 @@ import reportgenerator.dao.ReqQutComponent;
  */
 public class MainWindow extends javax.swing.JFrame {
 
-    private String savingLoc = "\\\\192.168.1.210\\monthly_online_bill_and_quotation\\";
+      private String savingLoc = "D:\\";
+    //private String savingLoc = "\\\\192.168.1.210\\monthly_online_bill_and_quotation\\";
     private String configComapnyListUrl = "setup\\CompanyName.txt";
     private String configPendingBillList = "setup\\PandingList.txt";
     private String billNo = "";
@@ -763,7 +764,7 @@ public class MainWindow extends javax.swing.JFrame {
 
                 String companyName = parts[1];
                 companyName = companyName.replace(' ', '-');
-                String url = savingLoc + companyName +"\\"+companyName+ "-" + billNo + ".pdf";
+                String url = savingLoc + companyName + "\\" + companyName + "-" + billNo + ".pdf";
 
                 recentMonthlyBillFileLoc = url;
 
@@ -986,6 +987,17 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void ManuItemMakeHardwareQutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManuItemMakeHardwareQutActionPerformed
         // TODO add your handling code here:
+
+        String parts[] = comboCompany.getSelectedItem().toString().split("-");
+        
+        String date=txtDate.getText();
+        String companyName=parts[1];
+        String companyAddress=companyAndAddressList.get(Integer.parseInt(parts[0]) + 1);
+        parts[1] = parts[1].replace(' ', '-');
+        String url = savingLoc + parts[1] + "-Req-Qtnt-" + System.currentTimeMillis() + ".pdf";
+        
+        new MakeHardwareQutAndBill(date, companyName, companyAddress, url).setVisible(true);
+
     }//GEN-LAST:event_ManuItemMakeHardwareQutActionPerformed
 
     private void showCompanyNameInComboBox() {
