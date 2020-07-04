@@ -1,0 +1,6 @@
+conn SYSTEM/MANAGER@payroll
+BEGIN
+DATA_INSERT;
+END;
+/
+EXIT;

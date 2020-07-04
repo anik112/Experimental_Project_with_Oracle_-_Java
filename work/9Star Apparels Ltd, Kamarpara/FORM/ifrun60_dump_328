@@ -1,0 +1,33 @@
+[02/07/12 14:23:27 Pacific Standard Time]::Client Status [ConnId=0, PID=328]
+	>> ERROR: Abnormal termination, Error Code: C0000005 ACCESS_VIOLATION
+
+======================= STACK DUMP =======================
+
+Fault address:  0037346A 06:0000046A
+Module: D:\Dev_6i\BIN\CA60.dll
+
+System Information:
+Operating System: Windows NT Version 5.1 Build 2600 Service Pack 2
+Command line: "D:\Dev_6i\BIN\ifrun60.EXE" D:\PAYROLL\FORM\WELCOME_SCREEN.fmx payroll/payroll@payroll
+FORM/BLOCK/FIELD: EMPLOYEE_TAX_BILL:TB_EMP_TAX_AMOUNT.PB_EXIT
+Last Trigger: WHEN-BUTTON-PRESSED - (Execution Suspended)
+Msg: <NULL>
+Last Builtin: CALL_FORM - (Successfully Completed)
+
+Registers:
+EAX:00000000
+EBX:0012E2F8
+ECX:7C91056D
+EDX:00260000
+ESI:00000002
+EDI:00000000
+CS:EIP:001B:0037346A
+SS:ESP:0023:0012E1E0  EBP:30355F30
+DS:0023  ES:0023  FS:003B  GS:0000
+Flags:00010293
+
+
+Call stack:
+Address   Frame
+0037346A  30355F30  0006:0000046A D:\Dev_6i\BIN\CA60.dll
+

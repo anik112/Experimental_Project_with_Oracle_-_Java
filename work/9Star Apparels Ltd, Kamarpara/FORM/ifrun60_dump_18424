@@ -1,0 +1,37 @@
+[07/07/18 14:17:26 Central Asia Standard Time]::Client Status [ConnId=0, PID=18424]
+	>> ERROR: Abnormal termination, Error Code: C0000005 ACCESS_VIOLATION
+
+======================= STACK DUMP =======================
+
+Fault address:  664F35B0 01:000A25B0
+Module: D:\Dev_6i\BIN\PLS805.dll
+
+System Information:
+Operating System: Windows NT Version 6.1 Build 7601 Service Pack 1
+Command line: "D:\Dev_6i\BIN\ifrun60.EXE" D:\PAYROLL\FORM\WELCOME_SCREEN.fmx fashion/fashion@payroll
+FORM/BLOCK/FIELD: GOVTHOL_CONVERT_OTDAY:TB_MONTH_CONVERT_OTDAY.CHECK_INSERT
+Last Trigger: WHEN-CHECKBOX-CHANGED - (In Progress)
+Msg: <NULL>
+Last Builtin: SET_WINDOW_PROPERTY - (Successfully Completed)
+
+Registers:
+EAX:00000000
+EBX:0472AC1C
+ECX:00000000
+EDX:04682320
+ESI:0012C01C
+EDI:0169AF64
+CS:EIP:001B:664F35B0
+SS:ESP:0023:0012B308  EBP:0012B328
+DS:0023  ES:0023  FS:003B  GS:0000
+Flags:00010246
+------------------- Call Stack Trace ---------------------
+Frameptr   RetAddr  Param#1  Param#2  Param#3  Param#4  Function Name       
+0x0012b328 664b8296 04682320 00000001 0012c01c 0472ac1c 0x664f35b0          
+0x0012c42c 6646452a 04682320 0169af64 046dc69c 00000001 0x664b8296          
+0x0012c494 005dfebc 0169af64 04682320 016b53e0 0168e634 0x6646452a          
+0x01698f00 0168e634 005a1c70 005a1cb0 00467f50 00000000 0x005dfebc          
+0x016b53e0 00000001 0000000a 016b3ea0 67fbcf2f 00411890 0x0168e634          
+------------------- End of Stack Trace -------------------
+
+

@@ -1,0 +1,34 @@
+[03/24/08 03:01:06 Central Asia Standard Time]::Client Status [ConnId=0, PID=1492]
+	>> ERROR: Abnormal termination, Error Code: C0000005 ACCESS_VIOLATION
+
+======================= STACK DUMP =======================
+
+Fault address:  9708ABD5 FA0:0013DF9C
+Module: .1 ]   
+
+System Information:
+Operating System: Windows NT Version 5.0 Build 2195 
+Command line: "D:\Developer\BIN\ifrun60.EXE" D:\PAYROLL\FORM\WELCOME_SCREEN.fmx test/test@payroll
+FORM/BLOCK/FIELD: TB_ADVANCEORLOAN:TB_ADVANCEORLOAN.PB_EXIT
+Last Trigger: WHEN-BUTTON-PRESSED - (Execution Suspended)
+Msg: <NULL>
+Last Builtin: CALL_FORM - (Successfully Completed)
+
+Registers:
+EAX:00000000
+EBX:0012E2F8
+ECX:0012FFB0
+EDX:000C0000
+ESI:00000002
+EDI:00000000
+CS:EIP:001B:9708ABD5
+SS:ESP:0023:0012E1E0  EBP:4D415246
+DS:0023  ES:0023  FS:0038  GS:0000
+Flags:00010246
+
+
+Call stack:
+Address   Frame
+9708ABD5  0012E1DC  0000:00000000 
+6400364A  4D415246  xOCICacheFlushRefresh
+

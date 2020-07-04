@@ -6,15 +6,10 @@
 package reportgenerator.view;
 
 import java.awt.Desktop;
-import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -43,6 +38,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private List<String> companyAndAddressList = new ArrayList<>();
     private List<String> pendingBillList = new ArrayList<>();
+    
 
     private int keyTypeChecker = 0;
 
@@ -764,7 +760,8 @@ public class MainWindow extends javax.swing.JFrame {
 
                 String companyName = parts[1];
                 companyName = companyName.replace(' ', '-');
-                String url = savingLoc + companyName + "\\" + companyName + "-" + billNo + ".pdf";
+                //String url = savingLoc + companyName + "\\" + companyName + "-" + billNo + ".pdf";
+                String url = savingLoc + companyName+ "-" + billNo + ".pdf";
 
                 recentMonthlyBillFileLoc = url;
 

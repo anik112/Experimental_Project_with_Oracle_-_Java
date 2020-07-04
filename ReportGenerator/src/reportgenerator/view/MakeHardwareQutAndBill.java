@@ -10,10 +10,12 @@ import java.awt.GridLayout;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import reportgenerator.corefunction.WriteHardwareQut;
+import reportgenerator.corefunction.WriteHardwareQutBill;
 import reportgenerator.dao.HardwareQutComponent;
 
 /**
@@ -51,7 +53,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         this.date = date;
         this.companyName = comName;
         this.companyAddress = comAddress;
-        this.url=url;
+        this.url = url;
 
         initComponents();
         showListOfPenel();
@@ -226,54 +228,64 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         txtMoreDtls10.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
         txtQty1.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtQty1.setText("0");
 
         txtQty5.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtQty5.setText("0");
 
         txtQty10.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtQty10.setText("0");
 
         txtQty4.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtQty4.setText("0");
 
         txtQty6.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtQty6.setText("0");
 
         txtQty9.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtQty9.setText("0");
 
         txtQty2.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtQty2.setText("0");
 
         txtQty3.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtQty3.setText("0");
 
         txtQty7.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtQty7.setText("0");
 
         txtQty8.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        txtQty8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQty8ActionPerformed(evt);
-            }
-        });
+        txtQty8.setText("0");
 
         txtUnitPrice5.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice5.setText("0");
 
         txtUnitPrice8.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        txtUnitPrice8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUnitPrice8ActionPerformed(evt);
-            }
-        });
+        txtUnitPrice8.setText("0");
 
         txtUnitPrice6.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice6.setText("0");
 
         txtUnitPrice10.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice10.setText("0");
 
         txtUnitPrice2.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice2.setText("0");
 
         txtUnitPrice1.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice1.setText("0");
 
         txtUnitPrice9.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice9.setText("0");
 
         txtUnitPrice3.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice3.setText("0");
 
         txtUnitPrice7.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice7.setText("0");
 
         txtUnitPrice4.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtUnitPrice4.setText("0");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -569,21 +581,32 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         showData(setData());
 
         File selectedFile = new File(url);
-        new WriteHardwareQut().writeHardwareQutInPdfFile(setData(), selectedFile);
+
+        if (new WriteHardwareQut().writeHardwareQutInPdfFile(setData(), selectedFile)) {
+            System.out.println("Qutation make --> ");
+            JOptionPane.showMessageDialog(null, "Qutation Is Generated.",
+                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Qutation Isn't Generated.",
+                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnMakeHardwareQutActionPerformed
 
     private void btnMakeHardwareQutBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeHardwareQutBillActionPerformed
         // TODO add your handling code here:
+        
+        File selectedFile = new File(url);
+
+        if (new WriteHardwareQutBill().writeHardwareQutBillInPdfFile(setData(), selectedFile)) {
+            System.out.println("Qutation make --> ");
+            JOptionPane.showMessageDialog(null, "Qutation Is Generated.",
+                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Qutation Isn't Generated.",
+                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnMakeHardwareQutBillActionPerformed
-
-    private void txtQty8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQty8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtQty8ActionPerformed
-
-    private void txtUnitPrice8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnitPrice8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUnitPrice8ActionPerformed
 
     private void showListOfPenel() {
         JPanel pan[] = new JPanel[10];
@@ -615,21 +638,21 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             modelName[i].setBorder(new TitledBorder(label[1]));
             originName[i] = new JTextField();
             originName[i].setBorder(new TitledBorder(label[2]));
-            warranty[i] = new JTextField();
+            warranty[i] = new JTextField("0");
             warranty[i].setBorder(new TitledBorder(label[3]));
-            faceCapacity[i] = new JTextField();
+            faceCapacity[i] = new JTextField("0");
             faceCapacity[i].setBorder(new TitledBorder(label[4]));
-            fingerCapacity[i] = new JTextField();
+            fingerCapacity[i] = new JTextField("0");
             fingerCapacity[i].setBorder(new TitledBorder(label[5]));
-            cardCapacity[i] = new JTextField();
+            cardCapacity[i] = new JTextField("0");
             cardCapacity[i].setBorder(new TitledBorder(label[6]));
-            eventLog[i] = new JTextField();
+            eventLog[i] = new JTextField("0");
             eventLog[i].setBorder(new TitledBorder(label[7]));
             comWay[i] = new JTextField();
             comWay[i].setBorder(new TitledBorder(label[8]));
-            deviceQty[i] = new JTextField();
+            deviceQty[i] = new JTextField("0");
             deviceQty[i].setBorder(new TitledBorder(label[9]));
-            deviceUnitPrice[i] = new JTextField();
+            deviceUnitPrice[i] = new JTextField("0");
             deviceUnitPrice[i].setBorder(new TitledBorder(label[10]));
 
             pan[i].add(brandName[i]);
@@ -667,6 +690,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
 
                 component.setDate(date);
                 component.setCompanyName(companyName);
+                component.setBillNo(txtHardwareBillNo.getText());
                 component.setAddress(companyAddress);
                 component.setBrand(brandName[i].getText());
                 component.setModel(modelName[i].getText());
@@ -693,6 +717,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             component.setDate(date);
             component.setCompanyName(companyName);
             component.setAddress(companyAddress);
+            component.setBillNo(txtHardwareBillNo.getText());
             component.setBrand(tempStr);
             component.setDtls01(txtDtls1.getText());
             component.setDtls02(txtMoreDtls1.getText());
@@ -711,6 +736,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             component.setDate(date);
             component.setCompanyName(companyName);
             component.setAddress(companyAddress);
+            component.setBillNo(txtHardwareBillNo.getText());
             component.setBrand(tempStr);
             component.setDtls01(txtDtls2.getText());
             component.setDtls02(txtMoreDtls2.getText());
@@ -729,6 +755,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             component.setDate(date);
             component.setCompanyName(companyName);
             component.setAddress(companyAddress);
+            component.setBillNo(txtHardwareBillNo.getText());
             component.setBrand(tempStr);
             component.setDtls01(txtDtls3.getText());
             component.setDtls02(txtMoreDtls3.getText());
@@ -747,6 +774,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             component.setDate(date);
             component.setCompanyName(companyName);
             component.setAddress(companyAddress);
+            component.setBillNo(txtHardwareBillNo.getText());
             component.setBrand(tempStr);
             component.setDtls01(txtDtls4.getText());
             component.setDtls02(txtMoreDtls4.getText());
@@ -765,6 +793,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             component.setDate(date);
             component.setCompanyName(companyName);
             component.setAddress(companyAddress);
+            component.setBillNo(txtHardwareBillNo.getText());
             component.setBrand(tempStr);
             component.setDtls01(txtDtls5.getText());
             component.setDtls02(txtMoreDtls5.getText());
@@ -783,6 +812,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             component.setDate(date);
             component.setCompanyName(companyName);
             component.setAddress(companyAddress);
+            component.setBillNo(txtHardwareBillNo.getText());
             component.setBrand(tempStr);
             component.setDtls01(txtDtls6.getText());
             component.setDtls02(txtMoreDtls6.getText());
@@ -801,6 +831,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             component.setDate(date);
             component.setCompanyName(companyName);
             component.setAddress(companyAddress);
+            component.setBillNo(txtHardwareBillNo.getText());
             component.setBrand(tempStr);
             component.setDtls01(txtDtls7.getText());
             component.setDtls02(txtMoreDtls7.getText());
@@ -819,6 +850,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             component.setDate(date);
             component.setCompanyName(companyName);
             component.setAddress(companyAddress);
+            component.setBillNo(txtHardwareBillNo.getText());
             component.setBrand(tempStr);
             component.setDtls01(txtDtls8.getText());
             component.setDtls02(txtMoreDtls8.getText());
@@ -837,6 +869,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             component.setDate(date);
             component.setCompanyName(companyName);
             component.setAddress(companyAddress);
+            component.setBillNo(txtHardwareBillNo.getText());
             component.setBrand(tempStr);
             component.setDtls01(txtDtls9.getText());
             component.setDtls02(txtMoreDtls9.getText());
@@ -855,6 +888,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             component.setDate(date);
             component.setCompanyName(companyName);
             component.setAddress(companyAddress);
+            component.setBillNo(txtHardwareBillNo.getText());
             component.setBrand(tempStr);
             component.setDtls01(txtDtls10.getText());
             component.setDtls02(txtMoreDtls10.getText());
@@ -896,7 +930,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         }
 
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMakeHardwareQut;

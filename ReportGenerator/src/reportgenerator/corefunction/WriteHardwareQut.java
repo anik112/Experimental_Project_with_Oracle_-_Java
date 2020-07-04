@@ -22,7 +22,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import reportgenerator.dao.HardwareQutComponent;
-import reportgenerator.dao.ReqQutComponent;
 
 /**
  *
@@ -200,7 +199,7 @@ public class WriteHardwareQut {
                         row2[i].setPhrase(new Paragraph(""
                             + "Time Attendence Device\n\n"
                             + "Brand: "+components.get(i).getBrand()+"\n"
-                            + "Model: "+components.get(i).getModel()+"Zkt\n"
+                            + "Model: "+components.get(i).getModel()+"\n"
                             + "Origin: "+components.get(i).getOrigin()+"\n\n"
                             + components.get(i).getWarranty()+" Year Warranty ",f4
                         ));
@@ -291,17 +290,17 @@ public class WriteHardwareQut {
             }
 
             // last row body text
-            PdfPCell row02Body = new PdfPCell(new Paragraph(colFooterTxt, f2));
+            PdfPCell row02Body = new PdfPCell(new Paragraph(colFooterTxt, f4));
             row02Body.setPaddingLeft(padding);
             row02Body.setPaddingTop(padding);
             row02Body.setPaddingBottom(padding);
             row02Body.setPaddingRight(padding);
             row02Body.setHorizontalAlignment(Element.ALIGN_RIGHT);
             row02Body.setVerticalAlignment(Element.ALIGN_TOP);
-            row02Body.setColspan(4);
+            row02Body.setColspan(5);
 
             // last row footer txt
-            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(totalamount), f2));
+            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(totalamount), f4));
             row02Footer.setPaddingLeft(padding);
             row02Footer.setPaddingTop(padding);
             row02Footer.setPaddingBottom(padding);

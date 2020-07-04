@@ -1,0 +1,37 @@
+[12/19/13 14:07:31 Central Asia Standard Time]::Client Status [ConnId=0, PID=1052]
+	>> ERROR: Abnormal termination, Error Code: C0000005 ACCESS_VIOLATION
+
+======================= STACK DUMP =======================
+
+Fault address:  645A3370 01:000A2370
+Module: D:\Dev_6i\BIN\PLS805.dll
+
+System Information:
+Operating System: Windows NT Version 5.1 Build 2600 Service Pack 2
+Command line: "D:\Dev_6i\BIN\ifrun60.EXE" D:\PAYROLL\FORM\WELCOME_SCREEN.fmx PAYROLL/PAYROLL@PAYROLL
+FORM/BLOCK/FIELD: EMPLOYEE_DUPLICATE_CARD:TB_PERSONAL_INFO.PB_SEARCH
+Last Trigger: WHEN-BUTTON-PRESSED - (In Progress)
+Msg: <NULL>
+Last Builtin: SET_WINDOW_PROPERTY - (Successfully Completed)
+
+Registers:
+EAX:00000000
+EBX:02BEB618
+ECX:00000000
+EDX:0119DA7C
+ESI:0012D530
+EDI:010DA450
+CS:EIP:001B:645A3370
+SS:ESP:0023:0012C820  EBP:0012C840
+DS:0023  ES:0023  FS:003B  GS:0000
+Flags:00010246
+
+
+Call stack:
+Address   Frame
+645A3370  0012C840  trekin
+645682B9  0012D940  trekin
+6451452A  0012D9A8  peicnt
+67B14617  010D846C  depxcrun
+010CDE74  003B6D40  0000:00000000 
+

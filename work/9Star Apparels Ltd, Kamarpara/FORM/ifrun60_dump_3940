@@ -1,0 +1,37 @@
+[03/10/18 13:09:03 Central Asia Standard Time]::Client Status [ConnId=0, PID=3940]
+	>> ERROR: Abnormal termination, Error Code: C0000005 ACCESS_VIOLATION
+
+======================= STACK DUMP =======================
+
+Fault address:  664F35B0 01:000A25B0
+Module: D:\Dev_6i\BIN\PLS805.dll
+
+System Information:
+Operating System: Windows NT Version 6.1 Build 7601 Service Pack 1
+Command line: "D:\Dev_6i\BIN\ifrun60.EXE" D:\PAYROLL\FORM\WELCOME_SCREEN.fmx fashion/fashion@payroll
+FORM/BLOCK/FIELD: CARD_NO_REJOIN:TB_EMP_CARD_REJOIN.PB_PROCESS
+Last Trigger: WHEN-BUTTON-PRESSED - (In Progress)
+Msg: <NULL>
+Last Builtin: GO_ITEM - (Successfully Completed)
+
+Registers:
+EAX:00000000
+EBX:0426F1E0
+ECX:00000000
+EDX:041C337C
+ESI:0012C01C
+EDI:0171AF64
+CS:EIP:001B:664F35B0
+SS:ESP:0023:0012B308  EBP:0012B328
+DS:0023  ES:0023  FS:003B  GS:0000
+Flags:00010246
+------------------- Call Stack Trace ---------------------
+Frameptr   RetAddr  Param#1  Param#2  Param#3  Param#4  Function Name       
+0x0012b328 664b8296 041c337c 00000001 0012c01c 0426f1e0 0x664f35b0          
+0x0012c42c 6646452a 041c337c 0171af64 04213858 00000001 0x664b8296          
+0x0012c494 0077febc 0171af64 041c337c 017353e0 0170e634 0x6646452a          
+0x01718f00 0170e634 00741c70 00741cb0 00227f50 00000000 0x0077febc          
+0x017353e0 00000001 0000000a 01733ea0 67fbcf2f 001d1890 0x0170e634          
+------------------- End of Stack Trace -------------------
+
+
