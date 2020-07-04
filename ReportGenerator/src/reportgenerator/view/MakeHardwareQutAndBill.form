@@ -32,7 +32,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="1" max="32767" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="1" pref="483" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -58,7 +58,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane2" alignment="1" pref="420" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" alignment="1" pref="455" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -99,7 +99,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanel1" min="-2" pref="874" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="comboQtyType1" max="32767" attributes="0"/>
@@ -119,10 +119,6 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel1" pref="409" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="comboQtyType1" min="-2" max="-2" attributes="0"/>
@@ -144,8 +140,9 @@
                       <Component id="comboQtyType9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="comboQtyType10" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="110" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="jPanel1" alignment="0" pref="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -156,14 +153,17 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtHardwareBillNo" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Component id="txtHardwareBillNo" min="-2" pref="201" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtAmountInWord" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnMakeHardwareQut" min="-2" pref="157" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnMakeHardwareQutBill" min="-2" pref="157" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -176,15 +176,18 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnMakeHardwareQutBill" alignment="1" min="-2" pref="41" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtHardwareBillNo" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                                  <Component id="txtAmountInWord" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="btnMakeHardwareQut" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                                  <Component id="btnMakeHardwareQutBill" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -239,54 +242,45 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel14" pref="107" max="32767" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jLabel15" pref="108" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="lblTotalAmount" min="-2" pref="220" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="jLabel14" max="32767" attributes="0"/>
+                                              <Component id="txtQty2" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtQty3" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtQty9" alignment="0" pref="106" max="32767" attributes="0"/>
+                                              <Component id="txtQty5" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtQty6" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtQty8" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="txtQty4" alignment="0" pref="106" max="32767" attributes="0"/>
+                                              <Component id="txtQty7" alignment="0" pref="106" max="32767" attributes="0"/>
+                                              <Component id="txtQty10" alignment="0" pref="106" max="32767" attributes="0"/>
+                                              <Component id="txtQty1" max="32767" attributes="0"/>
+                                          </Group>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtQty3" alignment="1" pref="107" max="32767" attributes="0"/>
-                                              <Component id="txtQty2" alignment="1" pref="107" max="32767" attributes="0"/>
-                                              <Component id="txtQty1" alignment="1" pref="107" max="32767" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="txtUnitPrice2" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="txtUnitPrice10" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="txtUnitPrice9" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="txtUnitPrice7" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="txtUnitPrice5" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="txtUnitPrice6" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="txtUnitPrice8" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="txtUnitPrice4" alignment="1" pref="106" max="32767" attributes="0"/>
+                                                      <Component id="txtUnitPrice3" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="txtUnitPrice1" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                               <Group type="102" alignment="1" attributes="0">
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="txtQty10" alignment="1" min="-2" pref="106" max="-2" attributes="0"/>
-                                                      <Component id="txtQty7" alignment="1" min="-2" pref="106" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                                          <Component id="txtQty9" alignment="0" pref="106" max="32767" attributes="0"/>
-                                                          <Component id="txtQty5" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="txtQty6" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="txtQty8" alignment="1" max="32767" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="txtQty4" min="-2" pref="106" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                                  <Component id="jLabel15" min="-2" pref="107" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtUnitPrice3" alignment="1" pref="107" max="32767" attributes="0"/>
-                                              <Component id="txtUnitPrice2" alignment="1" pref="107" max="32767" attributes="0"/>
-                                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="txtUnitPrice10" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="txtUnitPrice9" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="txtUnitPrice7" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="txtUnitPrice5" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="txtUnitPrice6" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="txtUnitPrice8" alignment="1" max="32767" attributes="0"/>
-                                                  <Component id="txtUnitPrice4" alignment="1" pref="106" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Component id="txtUnitPrice1" alignment="1" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -389,6 +383,7 @@
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblTotalAmount" min="-2" pref="47" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -750,6 +745,27 @@
                             <Property name="text" type="java.lang.String" value="0"/>
                           </Properties>
                         </Component>
+                        <Component class="javax.swing.JLabel" name="lblTotalAmount">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Lucida Sans" size="12" style="0"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                                <TitledBorder title="Total Amount">
+                                  <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                                    <LineBorder/>
+                                  </Border>
+                                  <Font PropertyName="font" name="Lucida Sans" size="12" style="0"/>
+                                </TitledBorder>
+                              </Border>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblTotalAmountMouseEntered"/>
+                          </Events>
+                        </Component>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -770,6 +786,16 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Lucida Sans" size="12" style="0"/>
                     </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                        <TitledBorder title="Bill Number">
+                          <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder/>
+                          </Border>
+                          <Font PropertyName="font" name="Lucida Sans" size="12" style="0"/>
+                        </TitledBorder>
+                      </Border>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnMakeHardwareQutBill">
@@ -782,6 +808,23 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMakeHardwareQutBillActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtAmountInWord">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Lucida Sans" size="12" style="0"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                        <TitledBorder title="Amount In Word">
+                          <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder/>
+                          </Border>
+                          <Font PropertyName="font" name="Lucida Sans" size="12" style="0"/>
+                        </TitledBorder>
+                      </Border>
+                    </Property>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

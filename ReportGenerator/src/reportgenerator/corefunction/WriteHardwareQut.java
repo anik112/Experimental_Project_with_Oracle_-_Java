@@ -46,9 +46,19 @@ public class WriteHardwareQut {
     private final String noteTxt = "N.B: All payments should be in a/c payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
     private final String sign = "..................................\nAuthorized Signatory";
     private float totalamount = 0;
+    private String amountInWord;
 
     public WriteHardwareQut() {
     }
+
+    public String getAmountInWord() {
+        return amountInWord;
+    }
+
+    public void setAmountInWord(String amountInWord) {
+        this.amountInWord = amountInWord;
+    }
+    
     
     public boolean writeHardwareQutInPdfFile(List<HardwareQutComponent> components, File selectedFile) {
 
@@ -305,7 +315,7 @@ public class WriteHardwareQut {
             row02Footer.setPaddingTop(padding);
             row02Footer.setPaddingBottom(padding);
             row02Footer.setPaddingRight(padding);
-            row02Footer.setHorizontalAlignment(Element.ALIGN_CENTER);
+            row02Footer.setHorizontalAlignment(Element.ALIGN_LEFT);
             row02Footer.setVerticalAlignment(Element.ALIGN_TOP);
 
             table.addCell(row02Body); // add row in table
@@ -317,7 +327,9 @@ public class WriteHardwareQut {
             Font f3 = FontFactory.getFont("SansSerif", 8);
             document.add(new Paragraph(tableFooterTxt, f3));
 
-            document.add(new Paragraph("\n" + amountTage + (new IOFunction().getNumberInWord((int) totalamount, configAmountListUrl)) + " only.", f1));
+            //document.add(new Paragraph("\n" + amountTage + (new IOFunction().getNumberInWord((int) totalamount, configAmountListUrl)) + " only.", f1));
+            
+            document.add(new Paragraph("\n" + amountTage + this.getAmountInWord() + " only.", f1));
             document.add(new Paragraph(noteTxt + "\n\n", f2));
 
             Image sirSing = Image.getInstance("img\\Sir-Sign.jpg");
