@@ -1,9 +1,0 @@
-1. Orginal intime and outtime (data master) goes
-    to orginal job card
-
-2. orginal intime and EXITTIME_V (data master , part) goes
-    to HnM job card
-
-3. compliance intime and outtime (data master temp) goes 
-    to compliance job card
-

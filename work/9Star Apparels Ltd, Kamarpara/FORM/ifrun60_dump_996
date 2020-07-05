@@ -1,6 +1,0 @@
-[05/16/09 16:43:00 Central Asia Standard Time]::Client Status [ConnId=0, PID=996]
-	>> ERROR: Abnormal termination, Error Code: C0000005 ACCESS_VIOLATION
-
-[05/16/09 16:44:26 Central Asia Standard Time]::Client Status [ConnId=0, PID=996]
-	>> ERROR: Abnormal termination, Error Code: C0000005 ACCESS_VIOLATION
-
