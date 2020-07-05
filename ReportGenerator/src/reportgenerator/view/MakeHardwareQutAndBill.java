@@ -6,6 +6,7 @@
 package reportgenerator.view;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.GridLayout;
 import java.io.File;
 import java.util.ArrayList;
@@ -136,8 +137,11 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         comboQtyType8 = new javax.swing.JComboBox<>();
         comboQtyType9 = new javax.swing.JComboBox<>();
         comboQtyType10 = new javax.swing.JComboBox<>();
+        btnOpenFile = new javax.swing.JButton();
+        btnOpenFolder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Hardware Bill Generate");
         setLocation(new java.awt.Point(250, 100));
         setResizable(false);
 
@@ -470,6 +474,11 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
 
         txtAmountInWord.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtAmountInWord.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Amount In Word", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        txtAmountInWord.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtAmountInWordMouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -528,6 +537,20 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
 
         comboQtyType10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PCS", "CM", "M" }));
 
+        btnOpenFile.setText("Open File");
+        btnOpenFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpenFileActionPerformed(evt);
+            }
+        });
+
+        btnOpenFolder.setText("Open Folder");
+        btnOpenFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpenFolderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -545,7 +568,9 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
                     .addComponent(comboQtyType7, 0, 110, Short.MAX_VALUE)
                     .addComponent(comboQtyType8, 0, 110, Short.MAX_VALUE)
                     .addComponent(comboQtyType9, 0, 110, Short.MAX_VALUE)
-                    .addComponent(comboQtyType10, 0, 110, Short.MAX_VALUE))
+                    .addComponent(comboQtyType10, 0, 110, Short.MAX_VALUE)
+                    .addComponent(btnOpenFolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnOpenFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -571,8 +596,12 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
                 .addComponent(comboQtyType9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(comboQtyType10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnOpenFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Write Other Item", jPanel5);
@@ -585,7 +614,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -635,6 +664,46 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         setData();
         lblTotalAmount.setText(String.valueOf(totalAmounts));
     }//GEN-LAST:event_lblTotalAmountMouseEntered
+
+    private void txtAmountInWordMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAmountInWordMouseEntered
+        // TODO add your handling code here:
+        totalAmounts=0;
+        setData();
+        lblTotalAmount.setText(String.valueOf(totalAmounts));
+    }//GEN-LAST:event_txtAmountInWordMouseEntered
+
+    private void btnOpenFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenFolderActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (!url.isEmpty()) {
+                String tempCompany=companyName.replace(" ", "-");
+                //System.out.println(tempCompany);
+                String parts[]=url.split(tempCompany);
+                File file = new File(parts[0]);
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(file);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                ":: Error-13 :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnOpenFolderActionPerformed
+
+    private void btnOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenFileActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (!url.isEmpty()) {
+                File file = new File(url);
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(file);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                ":: Error-04 :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnOpenFileActionPerformed
 
     private void showListOfPenel() {
         JPanel pan[] = new JPanel[10];
@@ -977,6 +1046,8 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMakeHardwareQut;
     private javax.swing.JButton btnMakeHardwareQutBill;
+    private javax.swing.JButton btnOpenFile;
+    private javax.swing.JButton btnOpenFolder;
     private javax.swing.JComboBox<String> comboQtyType1;
     private javax.swing.JComboBox<String> comboQtyType10;
     private javax.swing.JComboBox<String> comboQtyType2;
