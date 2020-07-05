@@ -35,15 +35,15 @@ public class WriteHardwareQutBill {
     private final String greetingtextHead = "Dear Sir/Madam,";
     private final String greetingtextBody = "Thank you for using our software. Please pay the bill as follows:";
     private final String colHeader01 = "S/L";
-    private final String colHeader02="Description of the products";
-    private final String colHeader03 = "More Details";
+    private final String colHeader02="Name of the products";
+    private final String colHeader03 = "Description of the products";
     private final String colHeader06 = "Amount (TK.)";
     private final String colHeader04="Qty";
     private final String colHeader05="Unit Price";
     private final String colFooterTxt = "Total Amount";
     private final String tableFooterTxt = "VAT and TAX not included.";
     private final String amountTage = "Amount in word: ";
-    private final String noteTxt = "N.B: All payments should be in a/c payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
+    private final String noteTxt = "N.B: All payments should be in A/C payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
     private final String sign = "..................................\nAuthorized Signatory";
     private float totalamount = 0;
     private String amountInWord;
@@ -328,7 +328,7 @@ public class WriteHardwareQutBill {
             document.add(new Paragraph(tableFooterTxt, f3));
 
             //document.add(new Paragraph("\n" + amountTage + (new IOFunction().getNumberInWord((int) totalamount, configAmountListUrl)) + " only.", f1));
-            document.add(new Paragraph("\n" + amountTage + this.getAmountInWord()+ " only.", f1));            
+            document.add(new Paragraph("\n" + amountTage + this.getAmountInWord(), f1));            
             document.add(new Paragraph(noteTxt + "\n\n", f2));
 
             Image sirSing = Image.getInstance("img\\Sir-Sign.jpg");
