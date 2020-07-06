@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import reportgenerator.corefunction.WriteHardwareQut;
 import reportgenerator.corefunction.WriteHardwareQutBill;
+import reportgenerator.corefunction.WriteHardwareQutBillHardCopy;
 import reportgenerator.dao.HardwareQutComponent;
 
 /**
@@ -40,7 +41,8 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
     private String companyName;
     private String companyAddress;
     private String url;
-    private float totalAmounts=0;
+    private float totalAmounts = 0;
+    private String recentFileLocation;
 
     List<HardwareQutComponent> listOfHarwareQut = new ArrayList<>();
 
@@ -123,6 +125,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         txtUnitPrice7 = new javax.swing.JTextField();
         txtUnitPrice4 = new javax.swing.JTextField();
         lblTotalAmount = new javax.swing.JLabel();
+        checkBoxHardwareQutHardCopy = new javax.swing.JCheckBox();
         btnMakeHardwareQut = new javax.swing.JButton();
         txtHardwareBillNo = new javax.swing.JTextField();
         btnMakeHardwareQutBill = new javax.swing.JButton();
@@ -303,6 +306,11 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             }
         });
 
+        checkBoxHardwareQutHardCopy.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
+        checkBoxHardwareQutHardCopy.setText("Hard Copy");
+        checkBoxHardwareQutHardCopy.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        checkBoxHardwareQutHardCopy.setBorderPainted(true);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -310,30 +318,35 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
-                    .addComponent(txtDtls10, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
-                    .addComponent(txtDtls9)
-                    .addComponent(txtDtls7)
-                    .addComponent(txtDtls6)
-                    .addComponent(txtDtls2)
-                    .addComponent(txtDtls3)
-                    .addComponent(txtDtls1)
-                    .addComponent(txtDtls8)
-                    .addComponent(txtDtls4)
-                    .addComponent(txtDtls5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                    .addComponent(txtMoreDtls8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtMoreDtls1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtMoreDtls2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtMoreDtls3)
-                    .addComponent(txtMoreDtls5)
-                    .addComponent(txtMoreDtls6)
-                    .addComponent(txtMoreDtls9, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtMoreDtls10)
-                    .addComponent(txtMoreDtls7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtMoreDtls4, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                            .addComponent(txtDtls10, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                            .addComponent(txtDtls9)
+                            .addComponent(txtDtls7)
+                            .addComponent(txtDtls6)
+                            .addComponent(txtDtls2)
+                            .addComponent(txtDtls3)
+                            .addComponent(txtDtls1)
+                            .addComponent(txtDtls8)
+                            .addComponent(txtDtls4)
+                            .addComponent(txtDtls5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                            .addComponent(txtMoreDtls8, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtMoreDtls1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtMoreDtls2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtMoreDtls3)
+                            .addComponent(txtMoreDtls5)
+                            .addComponent(txtMoreDtls6)
+                            .addComponent(txtMoreDtls9, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtMoreDtls10)
+                            .addComponent(txtMoreDtls7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtMoreDtls4, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(checkBoxHardwareQutHardCopy, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -448,7 +461,9 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
                             .addComponent(txtUnitPrice6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDtls6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblTotalAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .addComponent(checkBoxHardwareQutHardCopy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jScrollPane1.setViewportView(jPanel3);
@@ -623,11 +638,11 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
     private void btnMakeHardwareQutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeHardwareQutActionPerformed
         // TODO add your handling code here:
         showData(setData());
-        
-        WriteHardwareQut writeQut=new WriteHardwareQut();
+
+        WriteHardwareQut writeQut = new WriteHardwareQut();
         writeQut.setAmountInWord(txtAmountInWord.getText());
-        
-        File selectedFile = new File(url);
+        recentFileLocation = url + ".pdf";
+        File selectedFile = new File(recentFileLocation);
 
         if (writeQut.writeHardwareQutInPdfFile(setData(), selectedFile)) {
             System.out.println("Qutation make --> ");
@@ -642,32 +657,48 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
 
     private void btnMakeHardwareQutBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeHardwareQutBillActionPerformed
         // TODO add your handling code here:
-        
-        WriteHardwareQutBill writeQutBill=new WriteHardwareQutBill();
-        writeQutBill.setAmountInWord(txtAmountInWord.getText());
-        
-        File selectedFile = new File(url);
 
-        if (writeQutBill.writeHardwareQutBillInPdfFile(setData(), selectedFile)) {
-            System.out.println("Qutation make --> ");
-            JOptionPane.showMessageDialog(null, "Qutation Is Generated.",
-                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Qutation Isn't Generated.",
-                    ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+        if (!checkBoxHardwareQutHardCopy.isSelected()) {
+            WriteHardwareQutBill writeQutBill = new WriteHardwareQutBill();
+            writeQutBill.setAmountInWord(txtAmountInWord.getText());
+            recentFileLocation = url + "-Bill-soft-copy.pdf";
+            File selectedFile = new File(recentFileLocation);
+
+            if (writeQutBill.writeHardwareQutBillInPdfFile(setData(), selectedFile)) {
+                
+                JOptionPane.showMessageDialog(null, "Qutation Is Generated.",
+                        ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Qutation Isn't Generated.",
+                        ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else{
+            WriteHardwareQutBillHardCopy writeHardQutBill = new WriteHardwareQutBillHardCopy();
+            writeHardQutBill.setAmountInWord(txtAmountInWord.getText());
+            recentFileLocation = url + "-Bill-hard-copy.pdf";
+            File selectedFile = new File(recentFileLocation);
+
+            if (writeHardQutBill.writeHardwareQutBillInPdfFile(setData(), selectedFile)) {
+                
+                JOptionPane.showMessageDialog(null, "Qutation Is Generated.",
+                        ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Qutation Isn't Generated.",
+                        ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnMakeHardwareQutBillActionPerformed
 
     private void lblTotalAmountMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTotalAmountMouseEntered
         // TODO add your handling code here:
-        totalAmounts=0;
+        totalAmounts = 0;
         setData();
         lblTotalAmount.setText(String.valueOf(totalAmounts));
     }//GEN-LAST:event_lblTotalAmountMouseEntered
 
     private void txtAmountInWordMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAmountInWordMouseEntered
         // TODO add your handling code here:
-        totalAmounts=0;
+        totalAmounts = 0;
         setData();
         lblTotalAmount.setText(String.valueOf(totalAmounts));
     }//GEN-LAST:event_txtAmountInWordMouseEntered
@@ -676,9 +707,9 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             if (!url.isEmpty()) {
-                String tempCompany=companyName.replace(" ", "-");
+                String tempCompany = companyName.replace(" ", "-");
                 //System.out.println(tempCompany);
-                String parts[]=url.split(tempCompany);
+                String parts[] = url.split(tempCompany);
                 File file = new File(parts[0]);
                 Desktop desktop = Desktop.getDesktop();
                 desktop.open(file);
@@ -686,7 +717,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                ":: Error-13 :: ", JOptionPane.INFORMATION_MESSAGE);
+                    ":: Error-13 :: ", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnOpenFolderActionPerformed
 
@@ -694,14 +725,14 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             if (!url.isEmpty()) {
-                File file = new File(url);
+                File file = new File(recentFileLocation);
                 Desktop desktop = Desktop.getDesktop();
                 desktop.open(file);
             }
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                ":: Error-04 :: ", JOptionPane.INFORMATION_MESSAGE);
+                    ":: Error-04 :: ", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnOpenFileActionPerformed
 
@@ -776,7 +807,6 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
 
     private List<HardwareQutComponent> setData() {
 
-
         List<HardwareQutComponent> listOfComponent = new ArrayList<>();
         String tempStr = "";
 
@@ -803,11 +833,11 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
                 component.setDeviceQty(dvcQty);
                 float dvcUnitPrice = Float.valueOf(deviceUnitPrice[i].getText());
                 component.setDeviceUnitPrice(dvcUnitPrice);
-                float dvcTotalAmount=dvcUnitPrice * dvcQty;
+                float dvcTotalAmount = dvcUnitPrice * dvcQty;
                 component.setDeviceTotalPrice(dvcTotalAmount);
                 // set total amount in label
-                totalAmounts+=dvcTotalAmount;
-            
+                totalAmounts += dvcTotalAmount;
+
                 listOfComponent.add(component);
             }
             i++;
@@ -829,7 +859,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             float totalPrice = (price * qty);
             component.setTotalPrice(totalPrice);
             component.setQtyType(comboQtyType1.getSelectedItem().toString());
-            totalAmounts+=totalPrice;
+            totalAmounts += totalPrice;
             listOfComponent.add(component);
         }
 
@@ -849,7 +879,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             float totalPrice = (price * qty);
             component.setTotalPrice(totalPrice);
             component.setQtyType(comboQtyType2.getSelectedItem().toString());
-            totalAmounts+=totalPrice;
+            totalAmounts += totalPrice;
             listOfComponent.add(component);
         }
 
@@ -869,7 +899,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             float totalPrice = (price * qty);
             component.setTotalPrice(totalPrice);
             component.setQtyType(comboQtyType3.getSelectedItem().toString());
-            totalAmounts+=totalPrice;
+            totalAmounts += totalPrice;
             listOfComponent.add(component);
         }
 
@@ -889,7 +919,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             float totalPrice = (price * qty);
             component.setTotalPrice(totalPrice);
             component.setQtyType(comboQtyType4.getSelectedItem().toString());
-            totalAmounts+=totalPrice;
+            totalAmounts += totalPrice;
             listOfComponent.add(component);
         }
 
@@ -909,7 +939,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             float totalPrice = (price * qty);
             component.setTotalPrice(totalPrice);
             component.setQtyType(comboQtyType5.getSelectedItem().toString());
-            totalAmounts+=totalPrice;
+            totalAmounts += totalPrice;
             listOfComponent.add(component);
         }
 
@@ -929,7 +959,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             float totalPrice = (price * qty);
             component.setTotalPrice(totalPrice);
             component.setQtyType(comboQtyType6.getSelectedItem().toString());
-            totalAmounts+=totalPrice;
+            totalAmounts += totalPrice;
             listOfComponent.add(component);
         }
 
@@ -949,7 +979,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             float totalPrice = (price * qty);
             component.setTotalPrice(totalPrice);
             component.setQtyType(comboQtyType7.getSelectedItem().toString());
-            totalAmounts+=totalPrice;
+            totalAmounts += totalPrice;
             listOfComponent.add(component);
         }
 
@@ -969,7 +999,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             float totalPrice = (price * qty);
             component.setTotalPrice(totalPrice);
             component.setQtyType(comboQtyType8.getSelectedItem().toString());
-            totalAmounts+=totalPrice;
+            totalAmounts += totalPrice;
             listOfComponent.add(component);
         }
 
@@ -989,7 +1019,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             float totalPrice = (price * qty);
             component.setTotalPrice(totalPrice);
             component.setQtyType(comboQtyType9.getSelectedItem().toString());
-            totalAmounts+=totalPrice;
+            totalAmounts += totalPrice;
             listOfComponent.add(component);
         }
 
@@ -1009,7 +1039,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
             float totalPrice = (price * qty);
             component.setTotalPrice(totalPrice);
             component.setQtyType(comboQtyType10.getSelectedItem().toString());
-            totalAmounts+=totalPrice;
+            totalAmounts += totalPrice;
             listOfComponent.add(component);
         }
 
@@ -1048,6 +1078,7 @@ public class MakeHardwareQutAndBill extends javax.swing.JFrame {
     private javax.swing.JButton btnMakeHardwareQutBill;
     private javax.swing.JButton btnOpenFile;
     private javax.swing.JButton btnOpenFolder;
+    private javax.swing.JCheckBox checkBoxHardwareQutHardCopy;
     private javax.swing.JComboBox<String> comboQtyType1;
     private javax.swing.JComboBox<String> comboQtyType10;
     private javax.swing.JComboBox<String> comboQtyType2;

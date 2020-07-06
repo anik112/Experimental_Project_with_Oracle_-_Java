@@ -221,31 +221,39 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel12" pref="359" max="32767" attributes="0"/>
-                                      <Component id="txtDtls10" alignment="0" pref="359" max="32767" attributes="0"/>
-                                      <Component id="txtDtls9" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtDtls7" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtDtls6" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtDtls2" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtDtls3" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtDtls1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtDtls8" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtDtls4" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtDtls5" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel13" pref="272" max="32767" attributes="0"/>
-                                      <Component id="txtMoreDtls8" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="txtMoreDtls1" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="txtMoreDtls2" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="txtMoreDtls3" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtMoreDtls5" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtMoreDtls6" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtMoreDtls9" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="txtMoreDtls10" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtMoreDtls7" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="txtMoreDtls4" alignment="1" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel12" pref="359" max="32767" attributes="0"/>
+                                              <Component id="txtDtls10" alignment="0" pref="359" max="32767" attributes="0"/>
+                                              <Component id="txtDtls9" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtDtls7" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtDtls6" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtDtls2" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtDtls3" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtDtls1" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtDtls8" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtDtls4" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtDtls5" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel13" pref="272" max="32767" attributes="0"/>
+                                              <Component id="txtMoreDtls8" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="txtMoreDtls1" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="txtMoreDtls2" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="txtMoreDtls3" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtMoreDtls5" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtMoreDtls6" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtMoreDtls9" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="txtMoreDtls10" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtMoreDtls7" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="txtMoreDtls4" alignment="1" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="checkBoxHardwareQutHardCopy" min="-2" pref="94" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -390,7 +398,10 @@
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblTotalAmount" min="-2" pref="47" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="lblTotalAmount" pref="47" max="32767" attributes="0"/>
+                                      <Component id="checkBoxHardwareQutHardCopy" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -772,6 +783,20 @@
                           <Events>
                             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblTotalAmountMouseEntered"/>
                           </Events>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="checkBoxHardwareQutHardCopy">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Lucida Sans" size="12" style="1"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Hard Copy"/>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                                <LineBorder/>
+                              </Border>
+                            </Property>
+                            <Property name="borderPainted" type="boolean" value="true"/>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
