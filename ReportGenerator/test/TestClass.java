@@ -67,12 +67,13 @@ public class TestClass {
 //        }
         String url = "D:\\FileFinder\\fileFinder\\amex.xml";
 
-        String parts[] = url.split("amex");
-
-        for (int i = 0; i < parts.length; i++) {
-            System.out.println(parts[i]);
-        }
-
+//        String parts[] = url.split("amex");
+//
+//        for (int i = 0; i < parts.length; i++) {
+//            System.out.println(parts[i]);
+//        }
+        
+        System.out.println("Amex.".replace(".", ""));
     }
 
 }
