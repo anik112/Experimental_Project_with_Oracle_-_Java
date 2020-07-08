@@ -255,7 +255,8 @@ public class MainScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         String loc = fileWorkingPath + nameList.get(tblShowFileList.getSelectedRow()).getFileName() + "\\";
         //System.out.println("\n=> " + loc);
-        new PendingList(loc).setVisible(true);
+         new PendingList(loc).setVisible(true);
+         //new PendingListTest(loc).setVisible(true);
 
     }//GEN-LAST:event_tblShowFileListMouseClicked
 
