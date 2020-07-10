@@ -69,7 +69,7 @@ public class WriteHardwareQutBillHardCopy {
             Rectangle rectangle = document.getPageSize(); // get total page size in a rectangle
             pw.setBoxSize("rectangle", rectangle); // set rectangle in pdfWriter
 
-            document.setMargins(40, 40, 80, 80); // set document margen
+            document.setMargins(40, 40, 100, 100); // set document margen
             document.open(); // open this doucment
             
             FontFactory.register("font\\calibri.ttf", "calibri"); // call font factory for setup font style

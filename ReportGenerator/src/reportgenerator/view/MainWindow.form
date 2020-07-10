@@ -76,7 +76,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" min="-2" pref="252" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" pref="271" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -116,10 +116,10 @@
                               <Component id="comboCompany" max="32767" attributes="0"/>
                               <Component id="comboMonth" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="comboYear" pref="165" max="32767" attributes="0"/>
                               <Component id="txtDate" max="32767" attributes="0"/>
-                              <Component id="comboYear" pref="153" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
@@ -140,7 +140,7 @@
                       <Component id="comboMonth" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="comboYear" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="txtDate" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
@@ -150,17 +150,17 @@
                   </Group>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="173" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -1016,9 +1016,9 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnMakeRow" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnMakeRow1" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="btnReqQutOpenFoler" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnMonthlyBillOpenFile1" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="btnReqQutOpenFile" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1028,8 +1028,8 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnMakeRow" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="btnMakeRow1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="btnMonthlyBillOpenFile1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="btnReqQutOpenFoler" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="btnReqQutOpenFile" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
                   </Group>
@@ -1045,20 +1045,20 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMakeRowActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnMakeRow1">
+            <Component class="javax.swing.JButton" name="btnReqQutOpenFoler">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Open File"/>
+                <Property name="text" type="java.lang.String" value="Open Folder"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMakeRow1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReqQutOpenFolerActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnMonthlyBillOpenFile1">
+            <Component class="javax.swing.JButton" name="btnReqQutOpenFile">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Open File"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMonthlyBillOpenFile1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReqQutOpenFileActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -1091,7 +1091,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnRequirmentBillOpenFolder" max="32767" attributes="0"/>
-                          <Component id="btnMakeReqQtuBill" max="32767" attributes="0"/>
+                          <Component id="btnRequirmentBillOpenFile" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -1108,7 +1108,7 @@
                       <Component id="btnRequirmentBillOpenFolder" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnMakeReqQtuBill" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="btnRequirmentBillOpenFile" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="checkBoxRequirmentBillHardcopy" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1117,12 +1117,12 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btnMakeReqQtuBill">
+            <Component class="javax.swing.JButton" name="btnRequirmentBillOpenFile">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Open File"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMakeReqQtuBillActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRequirmentBillOpenFileActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnMakeReqQutBill">

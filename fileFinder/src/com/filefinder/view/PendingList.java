@@ -5,6 +5,7 @@
  */
 package com.filefinder.view;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
@@ -67,6 +68,11 @@ public class PendingList extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblPanddingList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPanddingListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPanddingList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -87,6 +93,14 @@ public class PendingList extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblPanddingListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPanddingListMouseClicked
+        // TODO add your handling code here:
+//               
+//        File file = new File(parts[0] + tempCompany);
+//        Desktop desktop = Desktop.getDesktop();
+//        desktop.open(file);
+    }//GEN-LAST:event_tblPanddingListMouseClicked
 
     public void showDataList(String filePath) {
         DefaultTableModel model = (DefaultTableModel) tblPanddingList.getModel();

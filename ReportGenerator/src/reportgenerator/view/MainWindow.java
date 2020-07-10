@@ -29,10 +29,10 @@ import reportgenerator.dao.ReqQutComponent;
  */
 public class MainWindow extends javax.swing.JFrame {
 
-    private String savingLoc = "D:\\";
-    //private String savingLoc = "\\\\192.168.1.210\\monthly_online_bill_and_quotation\\";
+    //private String savingLoc = "D:\\";
+    private String savingLoc = "\\\\192.168.1.210\\monthly_online_bill_and_quotation\\";
     private String configComapnyListUrl = "setup\\CompanyName.txt";
-    private String configPendingBillList = "setup\\PandingList.txt";
+    private String configPendingBillUrl = "setup\\PandingList.txt";
     private String billNo = "";
     private String recentMonthlyBillFileLoc = "";
     private String recentReqQutFileLoc = "";
@@ -124,10 +124,10 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jPanel4 = new javax.swing.JPanel();
         btnMakeRow = new javax.swing.JButton();
-        btnMakeRow1 = new javax.swing.JButton();
-        btnMonthlyBillOpenFile1 = new javax.swing.JButton();
+        btnReqQutOpenFoler = new javax.swing.JButton();
+        btnReqQutOpenFile = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
-        btnMakeReqQtuBill = new javax.swing.JButton();
+        btnRequirmentBillOpenFile = new javax.swing.JButton();
         btnMakeReqQutBill = new javax.swing.JButton();
         txtReqQutBillNumber = new javax.swing.JTextField();
         btnRequirmentBillOpenFolder = new javax.swing.JButton();
@@ -532,17 +532,17 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        btnMakeRow1.setText("Open File");
-        btnMakeRow1.addActionListener(new java.awt.event.ActionListener() {
+        btnReqQutOpenFoler.setText("Open Folder");
+        btnReqQutOpenFoler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMakeRow1ActionPerformed(evt);
+                btnReqQutOpenFolerActionPerformed(evt);
             }
         });
 
-        btnMonthlyBillOpenFile1.setText("Open File");
-        btnMonthlyBillOpenFile1.addActionListener(new java.awt.event.ActionListener() {
+        btnReqQutOpenFile.setText("Open File");
+        btnReqQutOpenFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMonthlyBillOpenFile1ActionPerformed(evt);
+                btnReqQutOpenFileActionPerformed(evt);
             }
         });
 
@@ -554,9 +554,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnMakeRow, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMakeRow1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReqQutOpenFoler, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMonthlyBillOpenFile1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReqQutOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
         );
         jPanel4Layout.setVerticalGroup(
@@ -564,17 +564,17 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMakeRow, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMakeRow1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMonthlyBillOpenFile1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnReqQutOpenFoler, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReqQutOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 8, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Make Requirment Bill", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
 
-        btnMakeReqQtuBill.setText("Open File");
-        btnMakeReqQtuBill.addActionListener(new java.awt.event.ActionListener() {
+        btnRequirmentBillOpenFile.setText("Open File");
+        btnRequirmentBillOpenFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMakeReqQtuBillActionPerformed(evt);
+                btnRequirmentBillOpenFileActionPerformed(evt);
             }
         });
 
@@ -615,7 +615,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRequirmentBillOpenFolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMakeReqQtuBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnRequirmentBillOpenFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -628,7 +628,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(btnRequirmentBillOpenFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMakeReqQtuBill, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRequirmentBillOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(checkBoxRequirmentBillHardcopy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addComponent(txtReqQutBillNumber)
         );
@@ -645,10 +645,10 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboCompany, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboMonth, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDate)
-                            .addComponent(comboYear, 0, 153, Short.MAX_VALUE)))
+                            .addComponent(comboYear, 0, 165, Short.MAX_VALUE)
+                            .addComponent(txtDate)))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -663,7 +663,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -671,17 +671,17 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(comboCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jLabel9)
                 .addGap(4, 4, 4)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -757,7 +757,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -786,6 +786,7 @@ public class MainWindow extends javax.swing.JFrame {
 
                 String companyName = parts[1];
                 companyName = companyName.replace(' ', '-');
+                companyName = companyName.replace(".", "");
                 //String url = savingLoc + companyName + "\\" + companyName + "-" + billNo + ".pdf";
 
                 MonthlyBillComponent component = new MonthlyBillComponent();
@@ -798,36 +799,38 @@ public class MainWindow extends javax.swing.JFrame {
                 component.setBillNo(billNo);
 
                 if ((!checkBoxMonthlyBillHardcopy.isSelected())) {
-                    String url = savingLoc + companyName + "-soft-copy-" + billNo + ".pdf";
+                    String url = savingLoc + "Monthly-Bill\\" + companyName + "\\"
+                            + companyName + "-Monthly-Bill-Soft-Copy-" + billNo + ".pdf";
                     recentMonthlyBillFileLoc = url;
                     File selectedFile = new File(url);
 
                     if (new WriteMonthlyBill().writeMonthlyBillInPdfFile(component, selectedFile)) {
-                        new IOFunction().writeBillNumber(billNo, companyName, configPendingBillList);
-                        refPendingBillTable();
-
-                        System.out.println("File is generate");
-                        JOptionPane.showMessageDialog(null, "File Is Generated. Please try.",
-                                ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Monthly Bill Isn't Generated.",
-                            ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                } else {
-                    String url = savingLoc + companyName + "-hard-copy" + billNo + ".pdf";
-                    recentMonthlyBillFileLoc = url;
-                    File selectedFile = new File(url);
-
-                    if (new WriteMonthlyBillHardCopy().writeMonthlyBillInPdfFile(component, selectedFile)) {
-                        new IOFunction().writeBillNumber(billNo, companyName, configPendingBillList);
+                        new IOFunction().writeBillNumber(billNo, companyName, configPendingBillUrl);
                         refPendingBillTable();
 
                         System.out.println("File is generate");
                         JOptionPane.showMessageDialog(null, "File Is Generated.",
                                 ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(null, "Monthly Bill Isn't Generated.",
-                            ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+                                ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } else {
+                    String url = savingLoc + "Monthly-Bill\\" + companyName + "\\"
+                            + companyName + "-Monthly-Bill-Hard-Copy-" + billNo + ".pdf";
+                    recentMonthlyBillFileLoc = url;
+                    File selectedFile = new File(url);
+
+                    if (new WriteMonthlyBillHardCopy().writeMonthlyBillInPdfFile(component, selectedFile)) {
+                        new IOFunction().writeBillNumber(billNo, companyName, configPendingBillUrl);
+                        refPendingBillTable();
+
+                        System.out.println("File is generate");
+                        JOptionPane.showMessageDialog(null, "File Is Generated.",
+                                ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Monthly Bill Isn't Generated.",
+                                ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
 
@@ -863,12 +866,16 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnMakeRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeRowActionPerformed
         // TODO add your handling code here:
 
-        if ((txtDate.getText().length() > 9) && (comboCompany.getSelectedIndex() > 0)) {
+        if ((txtDate.getText().length() > 9) && (comboCompany.getSelectedIndex() > 0)
+                && (!txtReqRow1.getText().isEmpty())) {
+
             // split company name and address
             // replace string , replace space to '-' charecter
             String parts[] = comboCompany.getSelectedItem().toString().split("-");
             parts[1] = parts[1].replace(' ', '-');
-            String url = savingLoc + parts[1] + "-Req-Qtnt-" + System.currentTimeMillis() + ".pdf";
+            parts[1] = parts[1].replace(".", "");
+            String url = savingLoc + "Requirment-Bill-&-Quotation\\" + parts[1] + "\\"
+                    + parts[1] + "-Req-Software-Qut-" + System.currentTimeMillis() + ".pdf";
 
             recentReqQutFileLoc = url;
 
@@ -891,22 +898,28 @@ public class MainWindow extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnMakeRowActionPerformed
 
-    private void btnMakeRow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeRow1ActionPerformed
+    private void btnReqQutOpenFolerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReqQutOpenFolerActionPerformed
         // TODO add your handling code here:
-        // open file in file explorer
+
         try {
-            if (!recentReqQutFileLoc.isEmpty()) {
-                File file = new File(recentReqQutFileLoc);
+            if (!savingLoc.isEmpty()) {
+                String parts[] = comboCompany.getSelectedItem().toString().split("-");
+                parts[1] = parts[1].replace(" ", "-");
+                parts[1] = parts[1].replace(".", "");
+                //System.out.println(tempCompany);
+
+                File file = new File(savingLoc + "Requirment-Bill-&-Quotation\\" + parts[1]);
+
                 Desktop desktop = Desktop.getDesktop();
                 desktop.open(file);
-                recentReqQutFileLoc = "";
             }
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                    ":: Error-02 :: ", JOptionPane.INFORMATION_MESSAGE);
+                    ":: Error-03 :: ", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_btnMakeRow1ActionPerformed
+
+    }//GEN-LAST:event_btnReqQutOpenFolerActionPerformed
 
     private void btnMonthlyBillOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyBillOpenFileActionPerformed
         // TODO add your handling code here:
@@ -930,19 +943,23 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnMakeReqQutBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeReqQutBillActionPerformed
         // TODO add your handling code here:
 
-        if ((txtDate.getText().length() > 9) && (comboCompany.getSelectedIndex() > 0)) {
+        if ((txtDate.getText().length() > 9) && (comboCompany.getSelectedIndex() > 0)
+                && (!txtReqRow1.getText().isEmpty()) && (!txtReqQutBillNumber.getText().isEmpty())) {
+
             // split company name and address 
             // replace string , replace space to '-' charecter
             String parts[] = comboCompany.getSelectedItem().toString().split("-");
             parts[1] = parts[1].replace(' ', '-');
 
             if (!checkBoxRequirmentBillHardcopy.isSelected()) {
-                String url = savingLoc + parts[1] + "-Req-Qtnt-Bill-soft-copy" + System.currentTimeMillis() + ".pdf";
+                String url = savingLoc + "Requirment-Bill-&-Quotation\\" + parts[1] + "\\"
+                        + parts[1] + "-Req-Software-Qut-Bill-Soft-Copy" + System.currentTimeMillis() + ".pdf";
+
                 recentReqQutBillFileLoc = url;
                 File selectedFile = new File(url);
 
                 if (new WriteQutitoinBill().writeReqQtBillInPdfFile(setReqDataInArray(), txtReqQutBillNumber.getText(), selectedFile)) {
-                    new IOFunction().writeBillNumber(txtReqQutBillNumber.getText(), parts[1], configPendingBillList);
+                    new IOFunction().writeBillNumber(txtReqQutBillNumber.getText(), parts[1], configPendingBillUrl);
                     refPendingBillTable();
 
                     System.out.println("Qutation Bill make --> ");
@@ -954,12 +971,13 @@ public class MainWindow extends javax.swing.JFrame {
                 }
 
             } else {
-                String url = savingLoc + parts[1] + "-Req-Qtnt-Bill-hard-copy" + System.currentTimeMillis() + ".pdf";
+                String url = savingLoc + "Requirment-Bill-&-Quotation\\" + parts[1] + "\\"
+                        + parts[1] + "-Req-Software-Qtnt-Bill-Hard-Copy" + System.currentTimeMillis() + ".pdf";
                 recentReqQutBillFileLoc = url;
                 File selectedFile = new File(url);
 
                 if (new WriteQutitoinBilHardCopy().writeReqQtBillInPdfFile(setReqDataInArray(), txtReqQutBillNumber.getText(), selectedFile)) {
-                    new IOFunction().writeBillNumber(txtReqQutBillNumber.getText(), parts[1], configPendingBillList);
+                    new IOFunction().writeBillNumber(txtReqQutBillNumber.getText(), parts[1], configPendingBillUrl);
                     refPendingBillTable();
 
                     System.out.println("Qutation Bill make --> ");
@@ -978,7 +996,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnMakeReqQutBillActionPerformed
 
-    private void btnMakeReqQtuBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeReqQtuBillActionPerformed
+    private void btnRequirmentBillOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequirmentBillOpenFileActionPerformed
         // TODO add your handling code here:
         try {
             if (!recentReqQutBillFileLoc.isEmpty()) {
@@ -992,11 +1010,11 @@ public class MainWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     ":: Error-04 :: ", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_btnMakeReqQtuBillActionPerformed
+    }//GEN-LAST:event_btnRequirmentBillOpenFileActionPerformed
 
     private void tblBillPendingListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBillPendingListMouseClicked
 
-        Confirmation confirmation = new Confirmation(billNo, configPendingBillList, pendingBillList, pendingBillList.get(tblBillPendingList.getSelectedRow()));
+        Confirmation confirmation = new Confirmation(billNo, configPendingBillUrl, pendingBillList, pendingBillList.get(tblBillPendingList.getSelectedRow()));
         confirmation.setVisible(true);
 
         refPendingBillTable();
@@ -1014,7 +1032,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         try {
             if (!savingLoc.isEmpty()) {
-                File file = new File(savingLoc);
+                String parts[] = comboCompany.getSelectedItem().toString().split("-");
+                parts[1] = parts[1].replace(" ", "-");
+                parts[1] = parts[1].replace(".", "");
+                //System.out.println(tempCompany);
+
+                File file = new File(savingLoc + "Monthly-Bill\\" + parts[1]);
+
                 Desktop desktop = Desktop.getDesktop();
                 desktop.open(file);
             }
@@ -1029,7 +1053,13 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             if (!savingLoc.isEmpty()) {
-                File file = new File(savingLoc);
+                String parts[] = comboCompany.getSelectedItem().toString().split("-");
+                parts[1] = parts[1].replace(" ", "-");
+                parts[1] = parts[1].replace(".", "");
+                //System.out.println(tempCompany);
+
+                File file = new File(savingLoc + "Requirment-Bill-&-Quotation\\" + parts[1]);
+
                 Desktop desktop = Desktop.getDesktop();
                 desktop.open(file);
             }
@@ -1051,21 +1081,41 @@ public class MainWindow extends javax.swing.JFrame {
     private void ManuItemMakeHardwareQutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManuItemMakeHardwareQutActionPerformed
         // TODO add your handling code here:
 
-        String parts[] = comboCompany.getSelectedItem().toString().split("-");
+        if ((comboCompany.getSelectedIndex() > 0)&&(txtDate.getText().length() > 9)) {
+            String parts[] = comboCompany.getSelectedItem().toString().split("-");
+            String date = txtDate.getText();
+            String companyName = parts[1];
+            String companyAddress = companyAndAddressList.get(Integer.parseInt(parts[0]) + 1);
+            parts[1] = parts[1].replace(' ', '-');
+            String url = savingLoc + "Requirment-Bill-&-Quotation\\" + parts[1] + "\\"
+                    + parts[1] + "-Req-Hardware-Qut-";
 
-        String date = txtDate.getText();
-        String companyName = parts[1];
-        String companyAddress = companyAndAddressList.get(Integer.parseInt(parts[0]) + 1);
-        parts[1] = parts[1].replace(' ', '-');
-        String url = savingLoc + parts[1] + "-Req-Hardware-Qtnt-" + System.currentTimeMillis();
-
-        new MakeHardwareQutAndBill(date, companyName, companyAddress, url).setVisible(true);
+            new MakeHardwareQutAndBill(date, companyName, companyAddress, url, configPendingBillUrl).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select the company or date.",
+                    ":: Select Company :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
 
     }//GEN-LAST:event_ManuItemMakeHardwareQutActionPerformed
 
-    private void btnMonthlyBillOpenFile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyBillOpenFile1ActionPerformed
+    private void btnReqQutOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReqQutOpenFileActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnMonthlyBillOpenFile1ActionPerformed
+
+        // open file in file explorer
+        try {
+            if (!recentReqQutFileLoc.isEmpty()) {
+                File file = new File(recentReqQutFileLoc);
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(file);
+                recentReqQutFileLoc = "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    ":: Error-02 :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnReqQutOpenFileActionPerformed
 
     private void manuItemAdvenceAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuItemAdvenceAmountActionPerformed
         // TODO add your handling code here:
@@ -1082,7 +1132,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void showPendingBillList() {
-        pendingBillList = new IOFunction().getBillPendingList(configPendingBillList);
+        pendingBillList = new IOFunction().getBillPendingList(configPendingBillUrl);
 
         DefaultTableModel model = (DefaultTableModel) tblBillPendingList.getModel();
         Object[] obj = new Object[1];
@@ -1234,13 +1284,13 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ManuItemMakeHardwareQut;
     private javax.swing.JButton btnGenerate;
-    private javax.swing.JButton btnMakeReqQtuBill;
     private javax.swing.JButton btnMakeReqQutBill;
     private javax.swing.JButton btnMakeRow;
-    private javax.swing.JButton btnMakeRow1;
     private javax.swing.JButton btnMonthlyBillOpenFile;
-    private javax.swing.JButton btnMonthlyBillOpenFile1;
     private javax.swing.JButton btnMonthlyBillOpenFolder;
+    private javax.swing.JButton btnReqQutOpenFile;
+    private javax.swing.JButton btnReqQutOpenFoler;
+    private javax.swing.JButton btnRequirmentBillOpenFile;
     private javax.swing.JButton btnRequirmentBillOpenFolder;
     private javax.swing.JCheckBox checkBoxMonthlyBillHardcopy;
     private javax.swing.JCheckBox checkBoxRequirmentBillHardcopy;

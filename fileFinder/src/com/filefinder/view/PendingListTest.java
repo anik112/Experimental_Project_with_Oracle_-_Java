@@ -5,12 +5,18 @@
  */
 package com.filefinder.view;
 
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.LayoutManager;
+import java.awt.Panel;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -53,14 +59,14 @@ public class PendingListTest extends javax.swing.JFrame {
 
         tblPanddingList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null}
+                {null, null, null}
             },
             new String [] {
-                "File Name", "Mod Date"
+                "File Name", "Mod Date", "Action"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -94,7 +100,7 @@ public class PendingListTest extends javax.swing.JFrame {
         File file = new File(filePath);
         File modFile[] = file.listFiles();
 
-        Object row[] = new Object[2];
+        Object row[] = new Object[3];
 
         for (int i = 0; i < modFile.length; i++) {
             String workingPath = tempFilePath + modFile[i].getName() + "\\log.txt";
@@ -105,8 +111,19 @@ public class PendingListTest extends javax.swing.JFrame {
                     Scanner scanner = new Scanner(f);
                     if ("PND".equals(scanner.nextLine())) {
                         //System.out.println(modFile[i].getName());
+                        
+                        JButton button=new JButton("Show");
+                        button.setPreferredSize(new Dimension(50, 20));
+                        
+                        
                         row[0] = modFile[i].getName();
                         row[1] = format.format(modFile[i].lastModified());
+                        JPanel jPanel=new JPanel();
+                        jPanel.setLayout(new GridLayout(1, 1));
+                        jPanel.add(button);
+                        jPanel.revalidate();
+                        jPanel.repaint();
+                        row[2]=jPanel;
                         model.addRow(row);
                     }
                 }
@@ -116,8 +133,8 @@ public class PendingListTest extends javax.swing.JFrame {
         }
 
     }
-
-
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPanddingList;
