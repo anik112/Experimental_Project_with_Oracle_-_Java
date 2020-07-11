@@ -34,10 +34,6 @@ public class MainWorkingWindow extends javax.swing.JFrame {
      */
     public MainWorkingWindow() {
         
-        Dimension DimMax = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setMaximumSize(DimMax);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
         initComponents();
 
         hightOfReportGenerateSoftware = penReportGenerateSoftware.getHeight();
@@ -46,6 +42,11 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         widthOfReportGenerateHardware = penReportGenerateHardware.getWidth();
 
         mainPen.setLayout(new BorderLayout(50, 50));
+        
+        Dimension DimMax = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setMaximumSize(DimMax);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //lblShowCompany.setSize(DimMax.width, 80);
 
         //subPenOfReportGenerateSoftware.setLayout(new GridLayout(1,1));
     }
@@ -66,6 +67,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         mainPen = new javax.swing.JPanel();
         lblShowCompany = new javax.swing.JLabel();
         lblCopyRightTeg = new javax.swing.JLabel();
+        lblShowLogo = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
         menuGenerate = new javax.swing.JMenu();
         manuItemMakeSoftwareQutAndBill = new javax.swing.JMenuItem();
@@ -169,9 +171,9 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
 
-        mainPen.setBackground(new java.awt.Color(255, 255, 153));
+        mainPen.setBackground(new java.awt.Color(255, 255, 224));
 
-        lblShowCompany.setFont(new java.awt.Font("Lucida Calligraphy", 1, 36)); // NOI18N
+        lblShowCompany.setFont(new java.awt.Font("Lucida Calligraphy", 1, 48)); // NOI18N
         lblShowCompany.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblShowCompany.setText("Vistasoft IT Bangladesh Ltd.");
 
@@ -179,22 +181,27 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         lblCopyRightTeg.setForeground(new java.awt.Color(255, 0, 51));
         lblCopyRightTeg.setText("@copyright: Vistasoft IT Bangladesh Ltd. / Anik paul");
 
+        lblShowLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reportgenerator/view/icon/logoWithFooterTxt-app-color02.png"))); // NOI18N
+
         javax.swing.GroupLayout mainPenLayout = new javax.swing.GroupLayout(mainPen);
         mainPen.setLayout(mainPenLayout);
         mainPenLayout.setHorizontalGroup(
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
             .addGroup(mainPenLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblShowLogo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblCopyRightTeg))
+            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 1011, Short.MAX_VALUE)
         );
         mainPenLayout.setVerticalGroup(
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPenLayout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addComponent(lblShowCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
-                .addComponent(lblCopyRightTeg))
+                .addGap(190, 190, 190)
+                .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(160, 160, 160)
+                .addGroup(mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCopyRightTeg)
+                    .addComponent(lblShowLogo)))
         );
 
         mainMenuBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -257,7 +264,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         hideLableInMainWindow();
         //System.out.println(mainPen.getComponentCount());
 
-        for (int i = 2, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
+        for (int i = 3, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
             mainPen.getComponent(i).setBounds(mainPen.getWidth() - (mainPen.getWidth() - j), (mainPen.getHeight() - 50), 100, 50);
         }
 
@@ -275,7 +282,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
         hideLableInMainWindow();
         //System.out.println(mainPen.getComponentCount());
-        for (int i = 2, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
+        for (int i = 3, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
             mainPen.getComponent(i).setBounds(mainPen.getWidth() - (mainPen.getWidth() - j), (mainPen.getHeight() - 50), 100, 50);
         }
 
@@ -319,12 +326,14 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
         lblShowCompany.setVisible(false);
         lblCopyRightTeg.setVisible(false);
+        lblShowLogo.setVisible(false);
     }
 
     private void showLableInMainWindow() {
-        if (mainPen.getComponentCount() == 2) {
+        if (mainPen.getComponentCount() == 3) {
             lblShowCompany.setVisible(true);
             lblCopyRightTeg.setVisible(true);
+            lblShowLogo.setVisible(true);
         }
     }
 
@@ -367,6 +376,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JLabel lblCopyRightTeg;
     private javax.swing.JLabel lblShowCompany;
+    private javax.swing.JLabel lblShowLogo;
     private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JPanel mainPen;
     private javax.swing.JMenuItem manuItemHardwareQutAndBill;
