@@ -7,7 +7,6 @@ package reportgenerator.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
@@ -20,11 +19,11 @@ import reportgenerator.view.subwindow.ReportGenerateSoftware;
  */
 public class MainWorkingWindow extends javax.swing.JFrame {
 
-     private String savingLoc = "D:\\";
+    private String savingLoc = "D:\\";
     //private String savingLoc = "\\\\192.168.1.210\\monthly_online_bill_and_quotation\\";
     private String configComapnyListUrl = "setup\\CompanyName.txt";
     private String configPendingBillList = "setup\\PandingList.txt";
-    
+
     private int hightOfReportGenerateSoftware;
     private int widthOfReportGenerateSoftware;
     private int hightOfReportGenerateHardware;
@@ -42,14 +41,12 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         widthOfReportGenerateHardware = penReportGenerateHardware.getWidth();
 
         mainPen.setLayout(new BorderLayout(50, 50));
-        
+
         Dimension DimMax = Toolkit.getDefaultToolkit().getScreenSize();
         this.setMaximumSize(DimMax);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+
         //subPenOfReportGenerateSoftware.setLayout(new GridLayout(1,1));
-        
-        
     }
 
     /**
@@ -66,8 +63,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         penReportGenerateHardware = new javax.swing.JInternalFrame();
         subPenOfReportGenerateHardware = new javax.swing.JPanel();
         mainPen = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        lblShowCompany = new javax.swing.JLabel();
+        lblCopyRightTeg = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
         menuGenerate = new javax.swing.JMenu();
         manuItemMakeSoftwareQutAndBill = new javax.swing.JMenuItem();
@@ -81,6 +78,23 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         penReportGenerateSoftware.setTitle("Make Software Qut & Bill");
         penReportGenerateSoftware.setToolTipText("Make Software Qut & Bill");
         penReportGenerateSoftware.setVisible(true);
+        penReportGenerateSoftware.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                penReportGenerateSoftwareInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         javax.swing.GroupLayout subPenOfReportGenerateSoftwareLayout = new javax.swing.GroupLayout(subPenOfReportGenerateSoftware);
         subPenOfReportGenerateSoftware.setLayout(subPenOfReportGenerateSoftwareLayout);
@@ -111,6 +125,23 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         penReportGenerateHardware.setTitle("Make Hardware Qut & Bill");
         penReportGenerateHardware.setToolTipText("Make Hardware Qut & Bill");
         penReportGenerateHardware.setVisible(true);
+        penReportGenerateHardware.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                penReportGenerateHardwareInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         javax.swing.GroupLayout subPenOfReportGenerateHardwareLayout = new javax.swing.GroupLayout(subPenOfReportGenerateHardware);
         subPenOfReportGenerateHardware.setLayout(subPenOfReportGenerateHardwareLayout);
@@ -138,30 +169,30 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
         mainPen.setBackground(new java.awt.Color(255, 255, 153));
 
-        jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Vistasoft IT Bangladesh Ltd.");
+        lblShowCompany.setFont(new java.awt.Font("Lucida Calligraphy", 1, 36)); // NOI18N
+        lblShowCompany.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblShowCompany.setText("Vistasoft IT Bangladesh Ltd.");
 
-        jLabel17.setFont(new java.awt.Font("Lucida Sans", 1, 10)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel17.setText("@copyright: Vistasoft IT Bangladesh Ltd.");
+        lblCopyRightTeg.setFont(new java.awt.Font("Lucida Sans", 1, 10)); // NOI18N
+        lblCopyRightTeg.setForeground(new java.awt.Color(255, 0, 51));
+        lblCopyRightTeg.setText("@copyright: Vistasoft IT Bangladesh Ltd. / Anik paul");
 
         javax.swing.GroupLayout mainPenLayout = new javax.swing.GroupLayout(mainPen);
         mainPen.setLayout(mainPenLayout);
         mainPenLayout.setHorizontalGroup(
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
+            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
             .addGroup(mainPenLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel17))
+                .addComponent(lblCopyRightTeg))
         );
         mainPenLayout.setVerticalGroup(
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPenLayout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, Short.MAX_VALUE)
-                .addComponent(jLabel17))
+                .addGap(161, 161, 161)
+                .addComponent(lblShowCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
+                .addComponent(lblCopyRightTeg))
         );
 
         mainMenuBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -220,9 +251,10 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
     private void manuItemMakeSoftwareQutAndBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuItemMakeSoftwareQutAndBillActionPerformed
         // TODO add your handling code here:
-        
-        System.out.println(mainPen.getComponentCount());
-        
+
+        hideLableInMainWindow();
+        //System.out.println(mainPen.getComponentCount());
+
         for (int i = 2, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
             mainPen.getComponent(i).setBounds(mainPen.getWidth() - (mainPen.getWidth() - j), (mainPen.getHeight() - 50), 100, 50);
         }
@@ -238,11 +270,13 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
     private void manuItemHardwareQutAndBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuItemHardwareQutAndBillActionPerformed
         // TODO add your handling code here:
-        System.out.println(mainPen.getComponentCount());
+
+        hideLableInMainWindow();
+        //System.out.println(mainPen.getComponentCount());
         for (int i = 2, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
             mainPen.getComponent(i).setBounds(mainPen.getWidth() - (mainPen.getWidth() - j), (mainPen.getHeight() - 50), 100, 50);
         }
-        
+
         addPenInReportGenerateHardware();
         penReportGenerateHardware.setBounds(10, 10, widthOfReportGenerateHardware, hightOfReportGenerateHardware);
         penReportGenerateHardware.setVisible(true);
@@ -251,10 +285,22 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         mainPen.repaint();
     }//GEN-LAST:event_manuItemHardwareQutAndBillActionPerformed
 
+    private void penReportGenerateSoftwareInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_penReportGenerateSoftwareInternalFrameClosed
+        // TODO add your handling code here:
+        mainPen.remove(penReportGenerateSoftware);
+        showLableInMainWindow();
+    }//GEN-LAST:event_penReportGenerateSoftwareInternalFrameClosed
+
+    private void penReportGenerateHardwareInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_penReportGenerateHardwareInternalFrameClosed
+        // TODO add your handling code here:
+        mainPen.remove(penReportGenerateHardware);
+        showLableInMainWindow();
+    }//GEN-LAST:event_penReportGenerateHardwareInternalFrameClosed
+
     private void addPenInReportGenerateSoftware() {
         subPenOfReportGenerateSoftware.setLayout(new GridLayout(1, 1));
         subPenOfReportGenerateSoftware.removeAll();
-        subPenOfReportGenerateSoftware.add(new ReportGenerateSoftware(savingLoc,configComapnyListUrl,configPendingBillList));
+        subPenOfReportGenerateSoftware.add(new ReportGenerateSoftware(savingLoc, configComapnyListUrl, configPendingBillList));
         subPenOfReportGenerateSoftware.revalidate();
         subPenOfReportGenerateSoftware.repaint();
     }
@@ -262,9 +308,22 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private void addPenInReportGenerateHardware() {
         subPenOfReportGenerateHardware.setLayout(new GridLayout(1, 1));
         subPenOfReportGenerateHardware.removeAll();
-        subPenOfReportGenerateHardware.add(new ReportGenerateHardware(savingLoc,configComapnyListUrl,configPendingBillList));
+        subPenOfReportGenerateHardware.add(new ReportGenerateHardware(savingLoc, configComapnyListUrl, configPendingBillList));
         subPenOfReportGenerateHardware.revalidate();
         subPenOfReportGenerateHardware.repaint();
+    }
+
+    private void hideLableInMainWindow() {
+
+        lblShowCompany.setVisible(false);
+        lblCopyRightTeg.setVisible(false);
+    }
+
+    private void showLableInMainWindow() {
+        if (mainPen.getComponentCount() == 2) {
+            lblShowCompany.setVisible(true);
+            lblCopyRightTeg.setVisible(true);
+        }
     }
 
     /**
@@ -303,9 +362,9 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JLabel lblCopyRightTeg;
+    private javax.swing.JLabel lblShowCompany;
     private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JPanel mainPen;
     private javax.swing.JMenuItem manuItemHardwareQutAndBill;

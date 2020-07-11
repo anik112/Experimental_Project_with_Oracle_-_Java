@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 062020/Amex-Kinitting-&-Dying-(U1).
 022020/Apex-Footwear-Limited.
 022020/Tharmex-Group.
@@ -12,9 +11,6 @@
 0620200001/Total-Fashion-Ltd.
 0620200001/Kims-Corporation-Ltd.
 012020/Amex-Knitting-&-Dyeing-Industries-Ltd-(U1).
-012015/Amex-Knitting-&-Dyeing-Industries-Ltd-(U2).
-012015/Amex-Knitting-&-Dyeing-Industries-Ltd-(U2).
-012015/Amex-Knitting-&-Dyeing-Industries-Ltd-(U2).
 012015/Himalay-Sourcing-Limited.
 012015/Mascot-Group.
 012015/Golden-Son-(Pvt.)-Ltd.
@@ -23,5 +19,3 @@
 012015/Landmark-Footwear-Limited.
 01010101/FGS-Knitwear-Limited.
 01010101/FGS-Knitwear-Limited.
-=======
->>>>>>> 371205652814f242dda3f2fa68aed5b50d8f3e5a
