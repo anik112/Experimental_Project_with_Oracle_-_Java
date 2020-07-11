@@ -33,6 +33,11 @@ public class MainWorkingWindow extends javax.swing.JFrame {
      * Creates new form MainWorkingWindow
      */
     public MainWorkingWindow() {
+        
+        Dimension DimMax = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setMaximumSize(DimMax);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
         initComponents();
 
         hightOfReportGenerateSoftware = penReportGenerateSoftware.getHeight();
@@ -41,10 +46,6 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         widthOfReportGenerateHardware = penReportGenerateHardware.getWidth();
 
         mainPen.setLayout(new BorderLayout(50, 50));
-
-        Dimension DimMax = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setMaximumSize(DimMax);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         //subPenOfReportGenerateSoftware.setLayout(new GridLayout(1,1));
     }
@@ -166,6 +167,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
 
         mainPen.setBackground(new java.awt.Color(255, 255, 153));
 
