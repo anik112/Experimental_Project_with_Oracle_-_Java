@@ -4,10 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/All_Program/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/view/subwindow/AdvanceAmountEntry.java</file>
-            <file>file:/D:/All_Program/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/view/subwindow/ReportGenerateHardware.java</file>
+            <file>file:/D:/All_Program/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/service/TB_ADVANCE_AMOUNT.sql</file>
+            <file>file:/D:/All_Program/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/service/AdvanceAmountService.java</file>
             <file>file:/D:/All_Program/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/view/MainWorkingWindow.java</file>
-            <file>file:/D:/All_Program/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/view/subwindow/ReportGenerateSoftware.java</file>
-            <file>file:/D:/All_Program/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/dao/AdvanceAmountEntry.java</file>
+            <file>file:/D:/All_Program/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/dbConnection/DBConnection.java</file>
         </group>
     </open-files>
 </project-private>

@@ -14,13 +14,32 @@ import java.util.Date;
 public class AdvanceAmount {
     
     private int id;
-    private Date givenDate;
+    private String givenDate;
     private String advanceHolderName;
     private String couseOfAdvance;
     private float amountOfAdvance;
+    private float amountOfCost;
+    private float amountCashOnHand;
     private boolean authorized;
     private Date writeDate;
     private String writePerson;
+
+    public float getAmountOfCost() {
+        return amountOfCost;
+    }
+
+    public void setAmountOfCost(float amountOfCost) {
+        this.amountOfCost = amountOfCost;
+    }
+
+    public float getAmountCashOnHand() {
+        return amountCashOnHand;
+    }
+
+    public void setAmountCashOnHand(float amountCashOnHand) {
+        this.amountCashOnHand = amountCashOnHand;
+    }
+    
 
     public int getId() {
         return id;
@@ -30,11 +49,11 @@ public class AdvanceAmount {
         this.id = id;
     }
 
-    public Date getGivenDate() {
+    public String getGivenDate() {
         return givenDate;
     }
 
-    public void setGivenDate(Date givenDate) {
+    public void setGivenDate(String givenDate) {
         this.givenDate = givenDate;
     }
 

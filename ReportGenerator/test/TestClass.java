@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import reportgenerator.corefunction.WriteHardwareQut;
 import reportgenerator.dao.HardwareQutComponent;
+import reportgenerator.dbConnection.DBConnection;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -65,7 +66,7 @@ public class TestClass {
 //        } catch (Exception ex) {
 //            Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        String url = "D:\\FileFinder\\fileFinder\\amex.xml";
+//        String url = "D:\\FileFinder\\fileFinder\\amex.xml";
 
 //        String parts[] = url.split("amex");
 //
@@ -74,6 +75,8 @@ public class TestClass {
 //        }
         
         System.out.println("Amex.".replace(".", ""));
+        
+        System.out.println(DBConnection.getConnection());
     }
 
 }
