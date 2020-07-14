@@ -368,6 +368,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
     private void penEntryAdvanceAmountInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_penEntryAdvanceAmountInternalFrameClosed
         // TODO add your handling code here:
+        mainPen.remove(penEntryAdvanceAmount);
+        showLableInMainWindow();
     }//GEN-LAST:event_penEntryAdvanceAmountInternalFrameClosed
 
     private void manuItemEntryAdvanceAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuItemEntryAdvanceAmountActionPerformed

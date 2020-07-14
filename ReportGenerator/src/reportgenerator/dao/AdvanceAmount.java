@@ -20,7 +20,7 @@ public class AdvanceAmount {
     private float amountOfAdvance;
     private float amountOfCost;
     private float amountCashOnHand;
-    private boolean authorized;
+    private String authorized;
     private Date writeDate;
     private String writePerson;
 
@@ -81,14 +81,15 @@ public class AdvanceAmount {
         this.amountOfAdvance = amountOfAdvance;
     }
 
-    public boolean isAuthorized() {
+    public String getAuthorized() {
         return authorized;
     }
 
-    public void setAuthorized(boolean authorized) {
+    public void setAuthorized(String authorized) {
         this.authorized = authorized;
     }
-
+    
+    
     public Date getWriteDate() {
         return writeDate;
     }

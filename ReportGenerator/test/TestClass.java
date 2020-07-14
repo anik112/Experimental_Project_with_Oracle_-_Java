@@ -2,13 +2,19 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import reportgenerator.corefunction.WriteHardwareQut;
+import reportgenerator.dao.AdvanceAmount;
 import reportgenerator.dao.HardwareQutComponent;
 import reportgenerator.dbConnection.DBConnection;
+import reportgenerator.service.AdvanceAmountService;
+import reportgenerator.view.subwindow.AdvanceAmountEntry;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,7 +30,8 @@ public class TestClass {
     private static String configComapnyListUrl = "setup\\CompanyName.txt";
 
     public static void main(String[] args) {
-//        System.out.println(configComapnyListUrl);
+        try {
+            //        System.out.println(configComapnyListUrl);
 //        try {
 //            File selectedFile = new File("D:\\0-VisioApls.pdf");
 //            if (!selectedFile.exists()) {
@@ -43,10 +50,9 @@ public class TestClass {
 //            }else{
 //                System.out.println("Is not number");
 //            }
-        // date check
-        //System.out.println(Math.round(Float.valueOf("10.00")));
-
-        // check dynamic variable
+// date check
+//System.out.println(Math.round(Float.valueOf("10.00")));
+// check dynamic variable
 //            int n1=1,n2=3,n3=4;
 //            for(int i=1;i<4;i++){
 //                System.out.println(n<i>);
@@ -67,16 +73,31 @@ public class TestClass {
 //            Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //        String url = "D:\\FileFinder\\fileFinder\\amex.xml";
-
 //        String parts[] = url.split("amex");
 //
 //        for (int i = 0; i < parts.length; i++) {
 //            System.out.println(parts[i]);
 //        }
+//        System.out.println("Amex.".replace(".", ""));
+//        
+//        System.out.println(DBConnection.getConnection());
+//        
+        AdvanceAmount aa=new AdvanceAmount();
+        aa.setGivenDate("12/12/2020");
+        aa.setAdvanceHolderName("Shuvo02");
+        aa.setAmountOfAdvance(30);
+        aa.setAmountOfCost(12);
+        aa.setAmountCashOnHand(13);
         
-        System.out.println("Amex.".replace(".", ""));
-        
-        System.out.println(DBConnection.getConnection());
+        new AdvanceAmountService().saveData(aa);
+//            Connection connection = DBConnection.getConnection();
+//            PreparedStatement statement = connection.prepareStatement("INSERT INTO TB_ADVANCE_AMOUNT (SUB_DATE,EMP_NAME,AMOUNT,COST,CASH_IN_HAND,AUTHORIZED) VALUES ('12/01/2020','Suvo',2,1,3,'NO')");
+//            statement.executeUpdate();
+//            System.out.println("Update::");
+//            System.exit(0);
+        } catch (Exception ex) {
+            Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
