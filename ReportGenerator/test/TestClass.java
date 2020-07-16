@@ -80,16 +80,16 @@ public class TestClass {
 //        }
 //        System.out.println("Amex.".replace(".", ""));
 //        
-//        System.out.println(DBConnection.getConnection());
+        System.out.println(DBConnection.getConnection());
 //        
-        AdvanceAmount aa=new AdvanceAmount();
-        aa.setGivenDate("12/12/2020");
-        aa.setAdvanceHolderName("Shuvo02");
-        aa.setAmountOfAdvance(30);
-        aa.setAmountOfCost(12);
-        aa.setAmountCashOnHand(13);
-        
-        new AdvanceAmountService().saveData(aa);
+//        AdvanceAmount aa=new AdvanceAmount();
+//        aa.setGivenDate("12/12/2020");
+//        aa.setAdvanceHolderName("Shuvo02");
+//        aa.setAmountOfAdvance(30);
+//        aa.setAmountOfCost(12);
+//        aa.setAmountCashOnHand(13);
+//        
+//        new AdvanceAmountService().saveData(aa);
 //            Connection connection = DBConnection.getConnection();
 //            PreparedStatement statement = connection.prepareStatement("INSERT INTO TB_ADVANCE_AMOUNT (SUB_DATE,EMP_NAME,AMOUNT,COST,CASH_IN_HAND,AUTHORIZED) VALUES ('12/01/2020','Suvo',2,1,3,'NO')");
 //            statement.executeUpdate();

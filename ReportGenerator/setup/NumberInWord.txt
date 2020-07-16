@@ -1,25 +1,26 @@
 500-Five hundred taka
-1000-One thousend taka
-1500-One thousend five hundred taka
-2000-Two thousend taka
-2500-Two thousend five hundred taka
-3000-Three thousend taka
-3500-Three thousend five hundred taka
-4000-Four thousend taka
-4500-Four thousend five hundred taka
-5000-Five thousend taka
-5500-Five thousend five hundred taka
-6000-Six thousend taka
-6500-Six thousend five hundred taka
-7000-Seven thousend taka
-7500-Seven thousend five hundred taka
-8000-Eight thousend taka
-8500-Eight thousend five hundred taka
-9000-Nine thousend taka
-9500-Nine thousend five hundred taka
-10000-Ten thousend taka
-10500-Ten thousend five hundred taka
-11000-Eleven thousend taka
-11500-Eleven thousend five hundred taka
-12000-Twelve thousend taka
-12500-Twelve thousend five hundred taka
+1000-One thousand taka
+1500-One thousand five hundred taka
+2000-Two thousand taka
+2500-Two thousand five hundred taka
+3000-Three thousand taka
+3500-Three thousand five hundred taka
+4000-Four thousand taka
+4500-Four thousand five hundred taka
+5000-Five thousand taka
+5500-Five thousand five hundred taka
+6000-Six thousand taka
+6500-Six thousand five hundred taka
+7000-Seven thousand taka
+7500-Seven thousand five hundred taka
+8000-Eight thousand taka
+8500-Eight thousand five hundred taka
+9000-Nine thousand taka
+9500-Nine thousand five hundred taka
+10000-Ten thousand taka
+10500-Ten thousand five hundred taka
+11000-Eleven thousand taka
+11500-Eleven thousand five hundred taka
+12000-Twelve thousand taka
+12500-Twelve thousand five hundred taka
+20000-Twenty thousand taka

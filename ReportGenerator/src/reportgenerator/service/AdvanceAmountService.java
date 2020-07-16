@@ -107,11 +107,47 @@ public class AdvanceAmountService {
                     + "WHERE ID="+amount.getId());
             
             statement.executeUpdate();
-            
+            connection.close();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     ":: ERROR- SERVICE ADVANCE AMOUNT [UPDATE DATA] :: ", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+    
+    
+    public List<AdvanceAmount> searchByDateAndEmpName(String date, String name){
+        Connection connection=DBConnection.getConnection();
+        List<AdvanceAmount> listOfData=new ArrayList<>();
+        
+        try{
+            
+            PreparedStatement statement=connection.prepareStatement("SELECT * FROM TB_ADVANCE_AMOUNT "
+                    + "WHERE SUB_DATE='"+date+"'"
+                    + "AND EMP_NAME='"+name+"' "
+                    + "ORDER BY ID DESC");
+            
+            ResultSet rs=statement.executeQuery();
+            
+            while (rs.next()) {
+                AdvanceAmount amount=new AdvanceAmount();
+                amount.setId(rs.getInt(1));
+                amount.setGivenDate(rs.getString(2));
+                amount.setAdvanceHolderName(rs.getString(3));
+                amount.setAmountOfAdvance(rs.getFloat(4));
+                amount.setAmountOfCost(rs.getFloat(5));
+                amount.setAmountCashOnHand(rs.getFloat(6));
+                amount.setAuthorized(rs.getString(7));
+                
+                listOfData.add(amount);
+            }
+            
+            connection.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    ":: ERROR- SERVICE ADVANCE AMOUNT [SELECT DATA] :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        return listOfData;
     }
     
 }

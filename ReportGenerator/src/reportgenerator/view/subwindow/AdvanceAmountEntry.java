@@ -5,13 +5,14 @@
  */
 package reportgenerator.view.subwindow;
 
-import java.util.AbstractList;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import reportgenerator.dao.AdvanceAmount;
 import reportgenerator.service.AdvanceAmountService;
+import reportgenerator.view.UpdateAuthorizedData;
 
 /**
  *
@@ -21,6 +22,7 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
 
     private List<AdvanceAmount> listOfAdvanceAmount=new ArrayList<>();
     
+    private float cashOnHand=0;
     private int keyTypeChecker=0;
     /**
      * Creates new form AdvanceAmountEntry
@@ -73,17 +75,37 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
 
         txtEmpName.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtEmpName.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Emp Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        txtEmpName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEmpNameKeyPressed(evt);
+            }
+        });
 
         txtCashInHand.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtCashInHand.setText("0");
         txtCashInHand.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Cash in hand", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        txtCashInHand.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCashInHandKeyPressed(evt);
+            }
+        });
 
         txtCost.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtCost.setText("0");
         txtCost.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Cost", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        txtCost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCostKeyPressed(evt);
+            }
+        });
 
         btnEdit.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnSave.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         btnSave.setText("Save");
@@ -96,9 +118,19 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
         txtAmount.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtAmount.setText("0");
         txtAmount.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Amount", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        txtAmount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAmountKeyPressed(evt);
+            }
+        });
 
         btnSearch.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -148,6 +180,7 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tblShowAdvenceAmountData.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         tblShowAdvenceAmountData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -155,8 +188,31 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
             new String [] {
                 "ID", "Date", "Emp Name", "Amount", "Cost", "Cash In Hand", "Athorize"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblShowAdvenceAmountData.setRowHeight(25);
+        tblShowAdvenceAmountData.setRowMargin(2);
+        tblShowAdvenceAmountData.setSelectionBackground(new java.awt.Color(0, 102, 102));
+        tblShowAdvenceAmountData.setShowVerticalLines(false);
+        tblShowAdvenceAmountData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblShowAdvenceAmountDataMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblShowAdvenceAmountData);
+        if (tblShowAdvenceAmountData.getColumnModel().getColumnCount() > 0) {
+            tblShowAdvenceAmountData.getColumnModel().getColumn(0).setResizable(false);
+            tblShowAdvenceAmountData.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tblShowAdvenceAmountData.getColumnModel().getColumn(6).setResizable(false);
+            tblShowAdvenceAmountData.getColumnModel().getColumn(6).setPreferredWidth(40);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -175,7 +231,7 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -197,7 +253,7 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
 
             System.out.println(day + "/" + month + "/" + year);
             txtDate.setText(day + "/" + month + "/" + year);
-            txtAmount.requestFocus();
+            txtEmpName.requestFocus();
         }
         keyTypeChecker++;
     }//GEN-LAST:event_txtDateKeyPressed
@@ -224,14 +280,85 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please check Date, Emp Name, Amount",
                     ":: ERROR- WINDOW ADVANCE AMOUNT:: ", JOptionPane.ERROR_MESSAGE);
         }
-        
+        showDataListInTable();
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void txtEmpNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpNameKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            txtAmount.requestFocus();
+        }
+    }//GEN-LAST:event_txtEmpNameKeyPressed
+
+    private void txtAmountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAmountKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            cashOnHand=Float.valueOf(txtAmount.getText());
+            txtCost.requestFocus();
+        }
+    }//GEN-LAST:event_txtAmountKeyPressed
+
+    private void txtCostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER && txtCost.getText().length()>0){
+            cashOnHand=Float.valueOf(txtAmount.getText());
+            if(cashOnHand>=Float.valueOf(txtCost.getText())){
+                 cashOnHand -= Float.valueOf(txtCost.getText());
+            }
+            txtCashInHand.setText(String.valueOf(cashOnHand));
+            txtCashInHand.requestFocus();
+        }
+    }//GEN-LAST:event_txtCostKeyPressed
+
+    private void txtCashInHandKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCashInHandKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            btnSave.requestFocus();
+        }
+    }//GEN-LAST:event_txtCashInHandKeyPressed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        
+        
+        showDataListInTable();
+        
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void tblShowAdvenceAmountDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblShowAdvenceAmountDataMouseClicked
+        // TODO add your handling code here:
+        
+        AdvanceAmount amount=new AdvanceAmount();
+        int selectedRow=tblShowAdvenceAmountData.getSelectedRow();
+        
+        if(evt.getClickCount()==2 && listOfAdvanceAmount.get(selectedRow).getAuthorized().equals("NO")){
+            //System.out.println(listOfAdvanceAmount.get(selectedRow).getId()+"  ==>"+selectedRow);
+            amount.setId(listOfAdvanceAmount.get(selectedRow).getId());
+            amount.setGivenDate(listOfAdvanceAmount.get(selectedRow).getGivenDate());
+            amount.setAdvanceHolderName(listOfAdvanceAmount.get(selectedRow).getAdvanceHolderName());
+            amount.setAmountOfAdvance(listOfAdvanceAmount.get(selectedRow).getAmountOfAdvance());
+            amount.setAmountOfCost(listOfAdvanceAmount.get(selectedRow).getAmountOfCost());
+            amount.setAmountCashOnHand(listOfAdvanceAmount.get(selectedRow).getAmountCashOnHand());
+            amount.setAuthorized(listOfAdvanceAmount.get(selectedRow).getAuthorized());
+            
+            new UpdateAuthorizedData(amount);
+            
+        }
+        
+    }//GEN-LAST:event_tblShowAdvenceAmountDataMouseClicked
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        List<AdvanceAmount> listOfAmount=new AdvanceAmountService().searchByDateAndEmpName(txtDate.getText(), txtEmpName.getText());
+        showDataListInTable(listOfAmount);
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     public void showDataListInTable() {
         
         listOfAdvanceAmount=new AdvanceAmountService().getDataFromAdvanceTable();
         
         DefaultTableModel model = (DefaultTableModel) tblShowAdvenceAmountData.getModel();
+        model.setRowCount(0);
         
         Object row[] = new Object[7];
 
@@ -243,6 +370,26 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
             row[4]=listOfAdvanceAmount.get(i).getAmountOfCost();
             row[5]=listOfAdvanceAmount.get(i).getAmountCashOnHand();
             row[6]=listOfAdvanceAmount.get(i).getAuthorized();
+            
+            model.addRow(row);
+        }
+    }
+    
+    public void showDataListInTable(List<AdvanceAmount> list) {
+        
+        DefaultTableModel model = (DefaultTableModel) tblShowAdvenceAmountData.getModel();
+        model.setRowCount(0);
+        
+        Object row[] = new Object[7];
+
+        for (int i = 0; i < list.size(); i++) {
+            row[0]=list.get(i).getId();
+            row[1]=list.get(i).getGivenDate();
+            row[2]=list.get(i).getAdvanceHolderName();
+            row[3]=list.get(i).getAmountOfAdvance();
+            row[4]=list.get(i).getAmountOfCost();
+            row[5]=list.get(i).getAmountCashOnHand();
+            row[6]=list.get(i).getAuthorized();
             
             model.addRow(row);
         }
