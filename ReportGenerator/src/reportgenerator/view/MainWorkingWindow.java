@@ -7,13 +7,13 @@ package reportgenerator.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import reportgenerator.view.subwindow.AdvanceAmountEntry;
 import reportgenerator.view.subwindow.ReportGenerateHardware;
 import reportgenerator.view.subwindow.ReportGenerateSoftware;
+import reportgenerator.view.subwindow.SubmitedPanddingBill;
 
 /**
  *
@@ -44,6 +44,9 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         
         hightOfMainPen=mainPen.getHeight();
         widthOfMainPen=mainPen.getWidth();
+        
+        lblShowLogo.setLocation(10,this.getHeight()-20);
+        lblCopyRightTeg.setLocation(this.getWidth()-10,this.getHeight()-10);
         //lblShowCompany.setSize(DimMax.width, 80);
 
         //subPenOfReportGenerateSoftware.setLayout(new GridLayout(1,1));
@@ -64,16 +67,22 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         subPenOfReportGenerateHardware = new javax.swing.JPanel();
         penEntryAdvanceAmount = new javax.swing.JInternalFrame();
         subPenOfEntryAdvanceAmount = new javax.swing.JPanel();
+        penSubmitPanddingBill = new javax.swing.JInternalFrame();
+        subPenOfSubmitPanddingBill = new javax.swing.JPanel();
         mainPen = new javax.swing.JPanel();
         lblShowCompany = new javax.swing.JLabel();
         lblCopyRightTeg = new javax.swing.JLabel();
         lblShowLogo = new javax.swing.JLabel();
+        lblShowReord = new javax.swing.JLabel();
+        lblShowReord2 = new javax.swing.JLabel();
+        lblShowReord3 = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
         menuGenerate = new javax.swing.JMenu();
         manuItemMakeSoftwareQutAndBill = new javax.swing.JMenuItem();
         manuItemHardwareQutAndBill = new javax.swing.JMenuItem();
         menuEntry = new javax.swing.JMenu();
         manuItemEntryAdvanceAmount = new javax.swing.JMenuItem();
+        manuItemSubmitPanddingBill = new javax.swing.JMenuItem();
 
         penReportGenerateSoftware.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
         penReportGenerateSoftware.setClosable(true);
@@ -216,6 +225,53 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfEntryAdvanceAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        penSubmitPanddingBill.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 255)));
+        penSubmitPanddingBill.setClosable(true);
+        penSubmitPanddingBill.setMaximizable(true);
+        penSubmitPanddingBill.setResizable(true);
+        penSubmitPanddingBill.setTitle("Make Hardware Qut & Bill");
+        penSubmitPanddingBill.setToolTipText("Make Hardware Qut & Bill");
+        penSubmitPanddingBill.setVisible(true);
+        penSubmitPanddingBill.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                penSubmitPanddingBillInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+
+        javax.swing.GroupLayout subPenOfSubmitPanddingBillLayout = new javax.swing.GroupLayout(subPenOfSubmitPanddingBill);
+        subPenOfSubmitPanddingBill.setLayout(subPenOfSubmitPanddingBillLayout);
+        subPenOfSubmitPanddingBillLayout.setHorizontalGroup(
+            subPenOfSubmitPanddingBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 762, Short.MAX_VALUE)
+        );
+        subPenOfSubmitPanddingBillLayout.setVerticalGroup(
+            subPenOfSubmitPanddingBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 429, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout penSubmitPanddingBillLayout = new javax.swing.GroupLayout(penSubmitPanddingBill.getContentPane());
+        penSubmitPanddingBill.getContentPane().setLayout(penSubmitPanddingBillLayout);
+        penSubmitPanddingBillLayout.setHorizontalGroup(
+            penSubmitPanddingBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(subPenOfSubmitPanddingBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        penSubmitPanddingBillLayout.setVerticalGroup(
+            penSubmitPanddingBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(subPenOfSubmitPanddingBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
 
@@ -235,22 +291,37 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         mainPen.setLayout(mainPenLayout);
         mainPenLayout.setHorizontalGroup(
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(mainPenLayout.createSequentialGroup()
                 .addComponent(lblShowLogo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblCopyRightTeg))
-            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 1011, Short.MAX_VALUE)
         );
         mainPenLayout.setVerticalGroup(
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPenLayout.createSequentialGroup()
-                .addGap(190, 190, 190)
+                .addGap(150, 150, 150)
                 .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(160, 160, 160)
+                .addGap(150, 150, 150)
                 .addGroup(mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblCopyRightTeg)
                     .addComponent(lblShowLogo)))
         );
+
+        lblShowReord.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
+        lblShowReord.setForeground(new java.awt.Color(102, 102, 102));
+        lblShowReord.setText("Record 1/1");
+        lblShowReord.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, null, java.awt.Color.lightGray, java.awt.Color.lightGray));
+
+        lblShowReord2.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
+        lblShowReord2.setForeground(new java.awt.Color(102, 102, 102));
+        lblShowReord2.setText(" ");
+        lblShowReord2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, null, java.awt.Color.lightGray, java.awt.Color.lightGray));
+
+        lblShowReord3.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
+        lblShowReord3.setForeground(new java.awt.Color(102, 102, 102));
+        lblShowReord3.setText(" ");
+        lblShowReord3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, null, java.awt.Color.lightGray, java.awt.Color.lightGray));
 
         mainMenuBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mainMenuBar.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
@@ -300,6 +371,17 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         });
         menuEntry.add(manuItemEntryAdvanceAmount);
 
+        manuItemSubmitPanddingBill.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        manuItemSubmitPanddingBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reportgenerator/view/icon/arrow.png"))); // NOI18N
+        manuItemSubmitPanddingBill.setText("Submit Pandding Bill");
+        manuItemSubmitPanddingBill.setMargin(new java.awt.Insets(0, 0, 10, 0));
+        manuItemSubmitPanddingBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manuItemSubmitPanddingBillActionPerformed(evt);
+            }
+        });
+        menuEntry.add(manuItemSubmitPanddingBill);
+
         mainMenuBar.add(menuEntry);
 
         setJMenuBar(mainMenuBar);
@@ -308,11 +390,24 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblShowReord, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblShowReord2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblShowReord3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 682, Short.MAX_VALUE))
             .addComponent(mainPen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblShowReord)
+                    .addComponent(lblShowReord2)
+                    .addComponent(lblShowReord3)))
         );
 
         pack();
@@ -389,6 +484,28 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
     }//GEN-LAST:event_manuItemEntryAdvanceAmountActionPerformed
 
+    private void penSubmitPanddingBillInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_penSubmitPanddingBillInternalFrameClosed
+        // TODO add your handling code here:
+        mainPen.remove(penSubmitPanddingBill);
+        showLableInMainWindow();
+    }//GEN-LAST:event_penSubmitPanddingBillInternalFrameClosed
+
+    private void manuItemSubmitPanddingBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuItemSubmitPanddingBillActionPerformed
+        // TODO add your handling code here:
+        hideLableInMainWindow();
+        //System.out.println(mainPen.getComponentCount());
+        for (int i = 3, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
+            mainPen.getComponent(i).setBounds(mainPen.getWidth() - (mainPen.getWidth() - j), (mainPen.getHeight() - 50), 100, 50);
+        }
+
+        addPenInpenSubmitPanddingBill();
+        penSubmitPanddingBill.setBounds(10, 10, widthOfMainPen, hightOfMainPen);
+        penSubmitPanddingBill.setVisible(true);
+        mainPen.add(penSubmitPanddingBill, BorderLayout.CENTER);
+        mainPen.revalidate();
+        mainPen.repaint();
+    }//GEN-LAST:event_manuItemSubmitPanddingBillActionPerformed
+
     private void addPenInReportGenerateSoftware() {
         subPenOfReportGenerateSoftware.setLayout(new GridLayout(1, 1));
         subPenOfReportGenerateSoftware.removeAll();
@@ -408,11 +525,21 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private void addPenInEntryAdvanceAmount() {
         subPenOfEntryAdvanceAmount.setLayout(new GridLayout(1,1));
         subPenOfEntryAdvanceAmount.removeAll();
-        subPenOfEntryAdvanceAmount.add(new AdvanceAmountEntry());
+        AdvanceAmountEntry amountEntry=new AdvanceAmountEntry();
+        subPenOfEntryAdvanceAmount.add(amountEntry);
         subPenOfEntryAdvanceAmount.revalidate();
         subPenOfEntryAdvanceAmount.repaint();
     }
-
+    
+    private void addPenInpenSubmitPanddingBill(){
+        subPenOfSubmitPanddingBill.setLayout(new GridLayout(1,1));
+        subPenOfSubmitPanddingBill.removeAll();
+        SubmitedPanddingBill panddingBill=new SubmitedPanddingBill(configComapnyListUrl);
+        subPenOfSubmitPanddingBill.add(panddingBill);
+        subPenOfSubmitPanddingBill.revalidate();
+        subPenOfSubmitPanddingBill.repaint();
+    }
+    
     private void hideLableInMainWindow() {
 
         lblShowCompany.setVisible(false);
@@ -467,18 +594,24 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lblCopyRightTeg;
     private javax.swing.JLabel lblShowCompany;
     private javax.swing.JLabel lblShowLogo;
+    private javax.swing.JLabel lblShowReord;
+    private javax.swing.JLabel lblShowReord2;
+    private javax.swing.JLabel lblShowReord3;
     private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JPanel mainPen;
     private javax.swing.JMenuItem manuItemEntryAdvanceAmount;
     private javax.swing.JMenuItem manuItemHardwareQutAndBill;
     private javax.swing.JMenuItem manuItemMakeSoftwareQutAndBill;
+    private javax.swing.JMenuItem manuItemSubmitPanddingBill;
     private javax.swing.JMenu menuEntry;
     private javax.swing.JMenu menuGenerate;
     private javax.swing.JInternalFrame penEntryAdvanceAmount;
     private javax.swing.JInternalFrame penReportGenerateHardware;
     private javax.swing.JInternalFrame penReportGenerateSoftware;
+    private javax.swing.JInternalFrame penSubmitPanddingBill;
     private javax.swing.JPanel subPenOfEntryAdvanceAmount;
     private javax.swing.JPanel subPenOfReportGenerateHardware;
     private javax.swing.JPanel subPenOfReportGenerateSoftware;
+    private javax.swing.JPanel subPenOfSubmitPanddingBill;
     // End of variables declaration//GEN-END:variables
 }

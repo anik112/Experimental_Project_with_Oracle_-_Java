@@ -20,8 +20,10 @@ import reportgenerator.corefunction.WriteMonthlyBillHardCopy;
 import reportgenerator.corefunction.WriteQutitoin;
 import reportgenerator.corefunction.WriteQutitoinBilHardCopy;
 import reportgenerator.corefunction.WriteQutitoinBill;
+import reportgenerator.dao.EntrySubmitedBillDao;
 import reportgenerator.dao.MonthlyBillComponent;
 import reportgenerator.dao.ReqQutComponent;
+import reportgenerator.service.EntrySubmitedBillService;
 import reportgenerator.view.Confirmation;
 
 /**
@@ -38,6 +40,8 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
     private String recentMonthlyBillFileLoc = "";
     private String recentReqQutFileLoc = "";
     private String recentReqQutBillFileLoc = "";
+    private String monthlyBillType = "MONTHLY-BILL";
+    private String reqBillType = "SOFT-REQ-BILL";
 
     private List<String> companyAndAddressList = new ArrayList<>();
     private List<String> pendingBillList = new ArrayList<>();
@@ -48,10 +52,10 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
      * Creates new form ReportGenerate
      */
     public ReportGenerateSoftware(String savingLoc, String configCompanyLoc, String configPanddingLoc) {
-        this.savingLoc=savingLoc;
-        this.configComapnyListUrl=configCompanyLoc;
-        this.configPendingBillList=configPanddingLoc;
-        
+        this.savingLoc = savingLoc;
+        this.configComapnyListUrl = configCompanyLoc;
+        this.configPendingBillList = configPanddingLoc;
+
         initComponents();
         showCompanyNameInComboBox();
         refPendingBillTable();
@@ -760,6 +764,8 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
 
     private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
 
+        EntrySubmitedBillDao billDao = new EntrySubmitedBillDao();
+
         PrintWriter pw = null;
         if ((txtDate.getText().length() > 9) && (comboCompany.getSelectedIndex() > 0)) {
             try {
@@ -779,6 +785,13 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                 component.setDate(txtDate.getText());
                 component.setBillNo(billNo);
 
+                // set bill information for update
+                billDao.setBillDate(txtDate.getText());
+                billDao.setBillNumber(billNo);
+                billDao.setCompanyName(parts[1]);
+                billDao.setAmount(Float.valueOf(txtAmount.getText()));
+                billDao.setBillType(monthlyBillType);
+
                 if ((!checkBoxMonthlyBillHardcopy.isSelected())) {
                     String url = savingLoc + companyName + "-soft-copy-" + billNo + ".pdf";
                     recentMonthlyBillFileLoc = url;
@@ -787,9 +800,11 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                     if (new WriteMonthlyBill().writeMonthlyBillInPdfFile(component, selectedFile)) {
                         new IOFunction().writeBillNumber(billNo, companyName, configPendingBillList);
                         refPendingBillTable();
-
+                        if (new EntrySubmitedBillService().checkBillNumberAllreadyEntry(billNo, parts[1])) {
+                            new EntrySubmitedBillService().saveData(billDao);
+                        }
                         System.out.println("File is generate");
-                        JOptionPane.showMessageDialog(null, "File Is Generated. Please try.",
+                        JOptionPane.showMessageDialog(null, "File Is Generated.",
                                 ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(null, "Monthly Bill Isn't Generated.",
@@ -803,7 +818,9 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                     if (new WriteMonthlyBillHardCopy().writeMonthlyBillInPdfFile(component, selectedFile)) {
                         new IOFunction().writeBillNumber(billNo, companyName, configPendingBillList);
                         refPendingBillTable();
-
+                        if (new EntrySubmitedBillService().checkBillNumberAllreadyEntry(billNo, parts[1])) {
+                            new EntrySubmitedBillService().saveData(billDao);
+                        }
                         System.out.println("File is generate");
                         JOptionPane.showMessageDialog(null, "File Is Generated.",
                                 ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
@@ -931,6 +948,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
 
     private void btnMakeReqQutBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeReqQutBillActionPerformed
         // TODO add your handling code here:
+        EntrySubmitedBillDao billDao = new EntrySubmitedBillDao();
 
         if ((txtDate.getText().length() > 9) && (comboCompany.getSelectedIndex() > 0)) {
             // split company name and address
@@ -942,11 +960,22 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                 String url = savingLoc + parts[1] + "-Req-Qtnt-Bill-soft-copy" + System.currentTimeMillis() + ".pdf";
                 recentReqQutBillFileLoc = url;
                 File selectedFile = new File(url);
-
-                if (new WriteQutitoinBill().writeReqQtBillInPdfFile(setReqDataInArray(), txtReqQutBillNumber.getText(), selectedFile)) {
+                
+                WriteQutitoinBill qutitoinBill=new WriteQutitoinBill();
+                if (qutitoinBill.writeReqQtBillInPdfFile(setReqDataInArray(), txtReqQutBillNumber.getText(), selectedFile)) {
                     new IOFunction().writeBillNumber(txtReqQutBillNumber.getText(), parts[1], configPendingBillList);
-                    refPendingBillTable();
 
+                    // set bill information for update
+                    billDao.setBillDate(txtDate.getText());
+                    billDao.setBillNumber(txtReqQutBillNumber.getText());
+                    billDao.setCompanyName(parts[1]);
+                    billDao.setAmount(qutitoinBill.getTotalamount());
+                    billDao.setBillType(reqBillType);
+                    
+                    refPendingBillTable();
+                    if (new EntrySubmitedBillService().checkBillNumberAllreadyEntry(txtReqQutBillNumber.getText(), parts[1])) {
+                        new EntrySubmitedBillService().saveData(billDao);
+                    }
                     System.out.println("Qutation Bill make --> ");
                     JOptionPane.showMessageDialog(null, "Qutation Bill Is Generated.",
                             ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
@@ -959,11 +988,22 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                 String url = savingLoc + parts[1] + "-Req-Qtnt-Bill-hard-copy" + System.currentTimeMillis() + ".pdf";
                 recentReqQutBillFileLoc = url;
                 File selectedFile = new File(url);
-
-                if (new WriteQutitoinBilHardCopy().writeReqQtBillInPdfFile(setReqDataInArray(), txtReqQutBillNumber.getText(), selectedFile)) {
+                
+                WriteQutitoinBilHardCopy qutitoinBilHardCopy=new WriteQutitoinBilHardCopy();
+                if (qutitoinBilHardCopy.writeReqQtBillInPdfFile(setReqDataInArray(), txtReqQutBillNumber.getText(), selectedFile)) {
                     new IOFunction().writeBillNumber(txtReqQutBillNumber.getText(), parts[1], configPendingBillList);
+                    
+                    // set bill information for update
+                    billDao.setBillDate(txtDate.getText());
+                    billDao.setBillNumber(txtReqQutBillNumber.getText());
+                    billDao.setCompanyName(parts[1]);
+                    billDao.setAmount(qutitoinBilHardCopy.getTotalamount());
+                    billDao.setBillType(reqBillType);
+                    
                     refPendingBillTable();
-
+                    if (new EntrySubmitedBillService().checkBillNumberAllreadyEntry(txtReqQutBillNumber.getText(), parts[1])) {
+                        new EntrySubmitedBillService().saveData(billDao);
+                    }
                     System.out.println("Qutation Bill make --> ");
                     JOptionPane.showMessageDialog(null, "Qutation Bill Is Generated.",
                             ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);

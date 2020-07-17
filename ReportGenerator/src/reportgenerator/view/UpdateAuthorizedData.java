@@ -14,7 +14,7 @@ import reportgenerator.service.AdvanceAmountService;
  * @author VSI-ANIK
  */
 public class UpdateAuthorizedData extends javax.swing.JFrame {
-    
+
     private float cashOnHand = 0;
     private AdvanceAmount amount = new AdvanceAmount();
 
@@ -25,7 +25,7 @@ public class UpdateAuthorizedData extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.amount = aa;
-        
+
         if (amount.getAmountCashOnHand() >= 0) {
             cashOnHand = amount.getAmountCashOnHand();
             txtCashInHand.setText(String.valueOf(cashOnHand));
@@ -124,7 +124,7 @@ public class UpdateAuthorizedData extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (amount.getAmountOfAdvance() >= Float.valueOf(txtCost.getText())) {
-                cashOnHand = amount.getAmountOfAdvance()-Float.valueOf(txtCost.getText());
+                cashOnHand = amount.getAmountOfAdvance() - Float.valueOf(txtCost.getText());
             }
             txtCashInHand.setText(String.valueOf(cashOnHand));
             txtCashInHand.requestFocus();

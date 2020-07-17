@@ -19,7 +19,9 @@ import reportgenerator.corefunction.IOFunction;
 import reportgenerator.corefunction.WriteHardwareQut;
 import reportgenerator.corefunction.WriteHardwareQutBill;
 import reportgenerator.corefunction.WriteHardwareQutBillHardCopy;
+import reportgenerator.dao.EntrySubmitedBillDao;
 import reportgenerator.dao.HardwareQutComponent;
+import reportgenerator.service.EntrySubmitedBillService;
 
 /**
  *
@@ -47,6 +49,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
     private float totalAmounts = 0;
     private String recentFileLocation;
     private int keyTypeChecker = 0;
+    private String hardwareBillType = "HARD-REQ-BILL";
 
     List<HardwareQutComponent> listOfHarwareQut = new ArrayList<>();
     private List<String> companyAndAddressList = new ArrayList<>();
@@ -700,9 +703,9 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
     private void btnMakeHardwareQutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeHardwareQutActionPerformed
         // TODO add your handling code here:
         showData(setData());
-        
+
         setDateAndCompany();
-        
+
         String tempLoc = companyName.replace(' ', '-');
 
         WriteHardwareQut writeQut = new WriteHardwareQut();
@@ -722,10 +725,17 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
 
     private void btnMakeHardwareQutBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeHardwareQutBillActionPerformed
         // TODO add your handling code here:
-        
+        EntrySubmitedBillDao billDao = new EntrySubmitedBillDao();
         setDateAndCompany();
         String tempLoc = companyName.replace(' ', '-');
-        
+
+        // set bill information for update
+        billDao.setBillDate(txtDate.getText());
+        billDao.setBillNumber(txtHardwareBillNo.getText());
+        billDao.setCompanyName(companyName);
+        billDao.setAmount(Float.valueOf(lblTotalAmount.getText()));
+        billDao.setBillType(hardwareBillType);
+
         if (!checkBoxHardwareQutHardCopy.isSelected()) {
 
             WriteHardwareQutBill writeQutBill = new WriteHardwareQutBill();
@@ -734,7 +744,10 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
             File selectedFile = new File(recentFileLocation);
 
             if (writeQutBill.writeHardwareQutBillInPdfFile(setData(), selectedFile)) {
-
+                // update data in database
+                if (new EntrySubmitedBillService().checkBillNumberAllreadyEntry(txtHardwareBillNo.getText(), companyName)) {
+                    new EntrySubmitedBillService().saveData(billDao);
+                }
                 JOptionPane.showMessageDialog(null, "Qutation Is Generated.",
                         ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -748,7 +761,10 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
             File selectedFile = new File(recentFileLocation);
 
             if (writeHardQutBill.writeHardwareQutBillInPdfFile(setData(), selectedFile)) {
-
+                // update data in database
+                if (new EntrySubmitedBillService().checkBillNumberAllreadyEntry(txtHardwareBillNo.getText(), companyName)) {
+                    new EntrySubmitedBillService().saveData(billDao);
+                }
                 JOptionPane.showMessageDialog(null, "Qutation Is Generated.",
                         ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
             } else {

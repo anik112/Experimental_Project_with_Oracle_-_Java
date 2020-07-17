@@ -44,6 +44,15 @@ public class WriteQutitoinBill {
     private final String sign = "..................................\nAuthorized Signatory";
     private int totalamount = 0;
 
+    public int getTotalamount() {
+        return totalamount;
+    }
+
+    public void setTotalamount(int totalamount) {
+        this.totalamount = totalamount;
+    }
+    
+    
     public boolean writeReqQtBillInPdfFile(List<ReqQutComponent> components, String billNo, File selectedFile) {
 
         try {

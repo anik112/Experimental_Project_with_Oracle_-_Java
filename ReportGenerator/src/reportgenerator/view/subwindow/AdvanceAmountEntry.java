@@ -20,10 +20,13 @@ import reportgenerator.view.UpdateAuthorizedData;
  */
 public class AdvanceAmountEntry extends javax.swing.JPanel {
 
-    private List<AdvanceAmount> listOfAdvanceAmount=new ArrayList<>();
-    
-    private float cashOnHand=0;
-    private int keyTypeChecker=0;
+    private List<AdvanceAmount> listOfAdvanceAmount = new ArrayList<>();
+    private List<AdvanceAmount> searchResult = new ArrayList<>();
+
+    private float cashOnHand = 0;
+    private int keyTypeChecker = 0;
+    private boolean checkSearchBtnIsClecked = false;
+
     /**
      * Creates new form AdvanceAmountEntry
      */
@@ -46,10 +49,13 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
         txtEmpName = new javax.swing.JTextField();
         txtCashInHand = new javax.swing.JTextField();
         txtCost = new javax.swing.JTextField();
-        btnEdit = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         txtAmount = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
+        checkBoxEdit = new javax.swing.JCheckBox();
+        lblID = new javax.swing.JLabel();
+        btnRefresh = new javax.swing.JButton();
+        lblAuthorized = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblShowAdvenceAmountData = new javax.swing.JTable();
 
@@ -99,14 +105,6 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
             }
         });
 
-        btnEdit.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        btnEdit.setText("Edit");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
-            }
-        });
-
         btnSave.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -132,20 +130,41 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
             }
         });
 
+        checkBoxEdit.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
+        checkBoxEdit.setText("Edit?");
+        checkBoxEdit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        checkBoxEdit.setIconTextGap(6);
+
+        lblID.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        lblID.setText(" ");
+        lblID.setBorder(javax.swing.BorderFactory.createTitledBorder("ID"));
+
+        btnRefresh.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
+        lblAuthorized.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        lblAuthorized.setText(" ");
+        lblAuthorized.setBorder(javax.swing.BorderFactory.createTitledBorder("Authorized"));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDate)
-                    .addComponent(txtEmpName, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtDate)
+                        .addComponent(txtEmpName, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
+                    .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(196, 196, 196)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
+                        .addGap(311, 311, 311)
                         .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -155,15 +174,22 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtCashInHand, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtCost))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtCashInHand, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(checkBoxEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblAuthorized, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCost)
@@ -171,13 +197,16 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEmpName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCashInHand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCashInHand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkBoxEdit)
+                    .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(lblAuthorized, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         tblShowAdvenceAmountData.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
@@ -231,7 +260,7 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -264,46 +293,60 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+
+        AdvanceAmount amount = new AdvanceAmount();
         
-        if((!txtDate.getText().isEmpty()) && (!txtEmpName.getText().isEmpty()) && (!txtAmount.getText().isEmpty())){
-            AdvanceAmount amount=new AdvanceAmount();
-            amount.setGivenDate(txtDate.getText());
-            amount.setAdvanceHolderName(txtEmpName.getText());
-            amount.setAmountOfAdvance(Float.valueOf(txtAmount.getText()));
-            amount.setAmountOfCost(Float.valueOf(txtCost.getText()));
-            amount.setAmountCashOnHand(Float.valueOf(txtCashInHand.getText()));
-            
-            new AdvanceAmountService().saveData(amount);
-            JOptionPane.showMessageDialog(null, "Data Save",
-                    ":: DATA SAVE :: ", JOptionPane.INFORMATION_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(null, "Please check Date, Emp Name, Amount",
-                    ":: ERROR- WINDOW ADVANCE AMOUNT:: ", JOptionPane.ERROR_MESSAGE);
+        amount.setGivenDate(txtDate.getText());
+        amount.setAdvanceHolderName(txtEmpName.getText());
+        amount.setAmountOfAdvance(Float.valueOf(txtAmount.getText()));
+        amount.setAmountOfCost(Float.valueOf(txtCost.getText()));
+        amount.setAmountCashOnHand(Float.valueOf(txtCashInHand.getText()));
+        amount.setAuthorized("NO");
+
+        if (checkBoxEdit.isSelected()) {
+            if ((!txtDate.getText().isEmpty()) && (!txtEmpName.getText().isEmpty()) && (!txtAmount.getText().isEmpty())) {
+                amount.setId(Integer.valueOf(lblID.getText()));
+                new AdvanceAmountService().updateData(amount);
+                JOptionPane.showMessageDialog(null, "Data Save",
+                        ":: DATA SAVE :: ", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Please check Date, Emp Name, Amount",
+                        ":: ERROR- WINDOW ADVANCE AMOUNT:: ", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            if ((!txtDate.getText().isEmpty()) && (!txtEmpName.getText().isEmpty()) && (!txtAmount.getText().isEmpty())) {
+                new AdvanceAmountService().saveData(amount);
+                JOptionPane.showMessageDialog(null, "Data Save",
+                        ":: DATA SAVE :: ", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Please check Date, Emp Name, Amount",
+                        ":: ERROR- WINDOW ADVANCE AMOUNT:: ", JOptionPane.ERROR_MESSAGE);
+            }
         }
         showDataListInTable();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtEmpNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpNameKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtAmount.requestFocus();
         }
     }//GEN-LAST:event_txtEmpNameKeyPressed
 
     private void txtAmountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAmountKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            cashOnHand=Float.valueOf(txtAmount.getText());
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            cashOnHand = Float.valueOf(txtAmount.getText());
             txtCost.requestFocus();
         }
     }//GEN-LAST:event_txtAmountKeyPressed
 
     private void txtCostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER && txtCost.getText().length()>0){
-            cashOnHand=Float.valueOf(txtAmount.getText());
-            if(cashOnHand>=Float.valueOf(txtCost.getText())){
-                 cashOnHand -= Float.valueOf(txtCost.getText());
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && txtCost.getText().length() > 0) {
+            cashOnHand = Float.valueOf(txtAmount.getText());
+            if (cashOnHand >= Float.valueOf(txtCost.getText())) {
+                cashOnHand -= Float.valueOf(txtCost.getText());
             }
             txtCashInHand.setText(String.valueOf(cashOnHand));
             txtCashInHand.requestFocus();
@@ -312,99 +355,116 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
 
     private void txtCashInHandKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCashInHandKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnSave.requestFocus();
         }
     }//GEN-LAST:event_txtCashInHandKeyPressed
 
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-        
-        
-        showDataListInTable();
-        
-    }//GEN-LAST:event_btnEditActionPerformed
-
     private void tblShowAdvenceAmountDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblShowAdvenceAmountDataMouseClicked
         // TODO add your handling code here:
-        
-        AdvanceAmount amount=new AdvanceAmount();
-        int selectedRow=tblShowAdvenceAmountData.getSelectedRow();
-        
-        if(evt.getClickCount()==2 && listOfAdvanceAmount.get(selectedRow).getAuthorized().equals("NO")){
+
+        AdvanceAmount amount = new AdvanceAmount();
+        int selectedRow = tblShowAdvenceAmountData.getSelectedRow();
+
+        if (checkSearchBtnIsClecked) {
+            lblID.setText(String.valueOf(searchResult.get(selectedRow).getId()));
+            lblAuthorized.setText(searchResult.get(selectedRow).getAuthorized());
+            txtDate.setText(searchResult.get(selectedRow).getGivenDate());
+            txtEmpName.setText(searchResult.get(selectedRow).getAdvanceHolderName());
+            txtAmount.setText(String.valueOf(searchResult.get(selectedRow).getAmountOfAdvance()));
+            txtCost.setText(String.valueOf(searchResult.get(selectedRow).getAmountOfCost()));
+            txtCashInHand.setText(String.valueOf(searchResult.get(selectedRow).getAmountCashOnHand()));
+            
+        } else {
+            lblID.setText(String.valueOf(listOfAdvanceAmount.get(selectedRow).getId()));
+            lblAuthorized.setText(listOfAdvanceAmount.get(selectedRow).getAuthorized());
+            txtDate.setText(listOfAdvanceAmount.get(selectedRow).getGivenDate());
+            txtEmpName.setText(listOfAdvanceAmount.get(selectedRow).getAdvanceHolderName());
+            txtAmount.setText(String.valueOf(listOfAdvanceAmount.get(selectedRow).getAmountOfAdvance()));
+            txtCost.setText(String.valueOf(listOfAdvanceAmount.get(selectedRow).getAmountOfCost()));
+            txtCashInHand.setText(String.valueOf(listOfAdvanceAmount.get(selectedRow).getAmountCashOnHand()));
+        }
+        // request to update data
+        if (evt.getClickCount() == 2 && lblAuthorized.getText().equals("NO")) {
             //System.out.println(listOfAdvanceAmount.get(selectedRow).getId()+"  ==>"+selectedRow);
-            amount.setId(listOfAdvanceAmount.get(selectedRow).getId());
-            amount.setGivenDate(listOfAdvanceAmount.get(selectedRow).getGivenDate());
-            amount.setAdvanceHolderName(listOfAdvanceAmount.get(selectedRow).getAdvanceHolderName());
-            amount.setAmountOfAdvance(listOfAdvanceAmount.get(selectedRow).getAmountOfAdvance());
-            amount.setAmountOfCost(listOfAdvanceAmount.get(selectedRow).getAmountOfCost());
-            amount.setAmountCashOnHand(listOfAdvanceAmount.get(selectedRow).getAmountCashOnHand());
-            amount.setAuthorized(listOfAdvanceAmount.get(selectedRow).getAuthorized());
+            amount.setId(Integer.valueOf(lblID.getText()));
+            amount.setGivenDate(txtDate.getText());
+            amount.setAdvanceHolderName(txtEmpName.getText());
+            amount.setAmountOfAdvance(Float.valueOf(txtAmount.getText()));
+            amount.setAmountOfCost(Float.valueOf(txtCost.getText()));
+            amount.setAmountCashOnHand(Float.valueOf(txtCashInHand.getText()));
+            amount.setAuthorized("NO");
+            checkSearchBtnIsClecked=false;
             
             new UpdateAuthorizedData(amount);
-            
         }
-        
     }//GEN-LAST:event_tblShowAdvenceAmountDataMouseClicked
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        List<AdvanceAmount> listOfAmount=new AdvanceAmountService().searchByDateAndEmpName(txtDate.getText(), txtEmpName.getText());
-        showDataListInTable(listOfAmount);
+        searchResult = new AdvanceAmountService().searchByDateAndEmpName(txtDate.getText(), txtEmpName.getText());
+        showDataListInTable(searchResult);
+        checkSearchBtnIsClecked = true;
     }//GEN-LAST:event_btnSearchActionPerformed
 
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        showDataListInTable();
+        checkSearchBtnIsClecked=false;
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
     public void showDataListInTable() {
-        
-        listOfAdvanceAmount=new AdvanceAmountService().getDataFromAdvanceTable();
-        
+
+        listOfAdvanceAmount = new AdvanceAmountService().getDataFromAdvanceTable();
+
         DefaultTableModel model = (DefaultTableModel) tblShowAdvenceAmountData.getModel();
         model.setRowCount(0);
-        
+
         Object row[] = new Object[7];
 
         for (int i = 0; i < listOfAdvanceAmount.size(); i++) {
-            row[0]=listOfAdvanceAmount.get(i).getId();
-            row[1]=listOfAdvanceAmount.get(i).getGivenDate();
-            row[2]=listOfAdvanceAmount.get(i).getAdvanceHolderName();
-            row[3]=listOfAdvanceAmount.get(i).getAmountOfAdvance();
-            row[4]=listOfAdvanceAmount.get(i).getAmountOfCost();
-            row[5]=listOfAdvanceAmount.get(i).getAmountCashOnHand();
-            row[6]=listOfAdvanceAmount.get(i).getAuthorized();
-            
+            row[0] = listOfAdvanceAmount.get(i).getId();
+            row[1] = listOfAdvanceAmount.get(i).getGivenDate();
+            row[2] = listOfAdvanceAmount.get(i).getAdvanceHolderName();
+            row[3] = listOfAdvanceAmount.get(i).getAmountOfAdvance();
+            row[4] = listOfAdvanceAmount.get(i).getAmountOfCost();
+            row[5] = listOfAdvanceAmount.get(i).getAmountCashOnHand();
+            row[6] = listOfAdvanceAmount.get(i).getAuthorized();
+
             model.addRow(row);
         }
     }
-    
+
     public void showDataListInTable(List<AdvanceAmount> list) {
-        
+
         DefaultTableModel model = (DefaultTableModel) tblShowAdvenceAmountData.getModel();
         model.setRowCount(0);
-        
+
         Object row[] = new Object[7];
 
         for (int i = 0; i < list.size(); i++) {
-            row[0]=list.get(i).getId();
-            row[1]=list.get(i).getGivenDate();
-            row[2]=list.get(i).getAdvanceHolderName();
-            row[3]=list.get(i).getAmountOfAdvance();
-            row[4]=list.get(i).getAmountOfCost();
-            row[5]=list.get(i).getAmountCashOnHand();
-            row[6]=list.get(i).getAuthorized();
-            
+            row[0] = list.get(i).getId();
+            row[1] = list.get(i).getGivenDate();
+            row[2] = list.get(i).getAdvanceHolderName();
+            row[3] = list.get(i).getAmountOfAdvance();
+            row[4] = list.get(i).getAmountOfCost();
+            row[5] = list.get(i).getAmountCashOnHand();
+            row[6] = list.get(i).getAuthorized();
+
             model.addRow(row);
         }
     }
-        
-        
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnRefresh;
+    public javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JCheckBox checkBoxEdit;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAuthorized;
+    private javax.swing.JLabel lblID;
     private javax.swing.JTable tblShowAdvenceAmountData;
     private javax.swing.JTextField txtAmount;
     private javax.swing.JTextField txtCashInHand;
