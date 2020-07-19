@@ -5,7 +5,8 @@
         <group>
             <file>file:/D:/All_Program/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/view/subwindow/SubmitedPanddingBill.java</file>
             <file>file:/D:/All_Program/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/view/MainWorkingWindow.java</file>
-            <file>file:/D:/All_Program/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/service/EntrySubmitedBillService.java</file>
+            <file>file:/D:/All_Program/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/view/subwindow/EntryIncomeAndCost.java</file>
+            <file>file:/D:/All_Program/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/dao/EntryIncomeAndCostDao.java</file>
             <file>file:/D:/All_Program/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/view/subwindow/ReportGenerateSoftware.java</file>
         </group>
     </open-files>

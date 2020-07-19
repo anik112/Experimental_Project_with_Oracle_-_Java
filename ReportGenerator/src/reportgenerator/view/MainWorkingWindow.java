@@ -26,8 +26,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private String configComapnyListUrl = "setup\\CompanyName.txt";
     private String configPendingBillList = "setup\\PandingList.txt";
 
-    private int hightOfMainPen;
-    private int widthOfMainPen;
+    private int hightOfMainPen=0;
+    private int widthOfMainPen=0;
     
 
     /**
@@ -69,6 +69,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         subPenOfEntryAdvanceAmount = new javax.swing.JPanel();
         penSubmitPanddingBill = new javax.swing.JInternalFrame();
         subPenOfSubmitPanddingBill = new javax.swing.JPanel();
+        penEntryIncomeAndCost = new javax.swing.JInternalFrame();
+        subPenOfEntryIncomeAndCost = new javax.swing.JPanel();
         mainPen = new javax.swing.JPanel();
         lblShowCompany = new javax.swing.JLabel();
         lblCopyRightTeg = new javax.swing.JLabel();
@@ -76,6 +78,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         lblShowReord = new javax.swing.JLabel();
         lblShowReord2 = new javax.swing.JLabel();
         lblShowReord3 = new javax.swing.JLabel();
+        lblShowReord4 = new javax.swing.JLabel();
+        lblShowReord5 = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
         menuGenerate = new javax.swing.JMenu();
         manuItemMakeSoftwareQutAndBill = new javax.swing.JMenuItem();
@@ -272,6 +276,53 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfSubmitPanddingBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        penEntryIncomeAndCost.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 255)));
+        penEntryIncomeAndCost.setClosable(true);
+        penEntryIncomeAndCost.setMaximizable(true);
+        penEntryIncomeAndCost.setResizable(true);
+        penEntryIncomeAndCost.setTitle("Make Hardware Qut & Bill");
+        penEntryIncomeAndCost.setToolTipText("Make Hardware Qut & Bill");
+        penEntryIncomeAndCost.setVisible(true);
+        penEntryIncomeAndCost.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                penEntryIncomeAndCostInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+
+        javax.swing.GroupLayout subPenOfEntryIncomeAndCostLayout = new javax.swing.GroupLayout(subPenOfEntryIncomeAndCost);
+        subPenOfEntryIncomeAndCost.setLayout(subPenOfEntryIncomeAndCostLayout);
+        subPenOfEntryIncomeAndCostLayout.setHorizontalGroup(
+            subPenOfEntryIncomeAndCostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 762, Short.MAX_VALUE)
+        );
+        subPenOfEntryIncomeAndCostLayout.setVerticalGroup(
+            subPenOfEntryIncomeAndCostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 429, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout penEntryIncomeAndCostLayout = new javax.swing.GroupLayout(penEntryIncomeAndCost.getContentPane());
+        penEntryIncomeAndCost.getContentPane().setLayout(penEntryIncomeAndCostLayout);
+        penEntryIncomeAndCostLayout.setHorizontalGroup(
+            penEntryIncomeAndCostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(subPenOfEntryIncomeAndCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        penEntryIncomeAndCostLayout.setVerticalGroup(
+            penEntryIncomeAndCostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(subPenOfEntryIncomeAndCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
 
@@ -291,7 +342,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         mainPen.setLayout(mainPenLayout);
         mainPenLayout.setHorizontalGroup(
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
             .addGroup(mainPenLayout.createSequentialGroup()
                 .addComponent(lblShowLogo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -322,6 +373,16 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         lblShowReord3.setForeground(new java.awt.Color(102, 102, 102));
         lblShowReord3.setText(" ");
         lblShowReord3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, null, java.awt.Color.lightGray, java.awt.Color.lightGray));
+
+        lblShowReord4.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
+        lblShowReord4.setForeground(new java.awt.Color(102, 102, 102));
+        lblShowReord4.setText(" ");
+        lblShowReord4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, null, java.awt.Color.lightGray, java.awt.Color.lightGray));
+
+        lblShowReord5.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
+        lblShowReord5.setForeground(new java.awt.Color(102, 102, 102));
+        lblShowReord5.setText(" ");
+        lblShowReord5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, null, java.awt.Color.lightGray, java.awt.Color.lightGray));
 
         mainMenuBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mainMenuBar.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
@@ -391,12 +452,16 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblShowReord, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblShowReord, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblShowReord2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblShowReord2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblShowReord4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblShowReord5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblShowReord3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 682, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(mainPen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -407,7 +472,9 @@ public class MainWorkingWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblShowReord)
                     .addComponent(lblShowReord2)
-                    .addComponent(lblShowReord3)))
+                    .addComponent(lblShowReord3)
+                    .addComponent(lblShowReord4)
+                    .addComponent(lblShowReord5)))
         );
 
         pack();
@@ -506,6 +573,10 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         mainPen.repaint();
     }//GEN-LAST:event_manuItemSubmitPanddingBillActionPerformed
 
+    private void penEntryIncomeAndCostInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_penEntryIncomeAndCostInternalFrameClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_penEntryIncomeAndCostInternalFrameClosed
+
     private void addPenInReportGenerateSoftware() {
         subPenOfReportGenerateSoftware.setLayout(new GridLayout(1, 1));
         subPenOfReportGenerateSoftware.removeAll();
@@ -597,6 +668,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lblShowReord;
     private javax.swing.JLabel lblShowReord2;
     private javax.swing.JLabel lblShowReord3;
+    private javax.swing.JLabel lblShowReord4;
+    private javax.swing.JLabel lblShowReord5;
     private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JPanel mainPen;
     private javax.swing.JMenuItem manuItemEntryAdvanceAmount;
@@ -606,10 +679,12 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private javax.swing.JMenu menuEntry;
     private javax.swing.JMenu menuGenerate;
     private javax.swing.JInternalFrame penEntryAdvanceAmount;
+    private javax.swing.JInternalFrame penEntryIncomeAndCost;
     private javax.swing.JInternalFrame penReportGenerateHardware;
     private javax.swing.JInternalFrame penReportGenerateSoftware;
     private javax.swing.JInternalFrame penSubmitPanddingBill;
     private javax.swing.JPanel subPenOfEntryAdvanceAmount;
+    private javax.swing.JPanel subPenOfEntryIncomeAndCost;
     private javax.swing.JPanel subPenOfReportGenerateHardware;
     private javax.swing.JPanel subPenOfReportGenerateSoftware;
     private javax.swing.JPanel subPenOfSubmitPanddingBill;

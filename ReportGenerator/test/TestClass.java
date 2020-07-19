@@ -4,13 +4,16 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import reportgenerator.corefunction.WriteHardwareQut;
 import reportgenerator.dao.AdvanceAmount;
+import reportgenerator.dao.EntrySubmitedBillDao;
 import reportgenerator.dao.HardwareQutComponent;
 import reportgenerator.dbConnection.DBConnection;
 import reportgenerator.service.AdvanceAmountService;
@@ -80,7 +83,7 @@ public class TestClass {
 //        }
 //        System.out.println("Amex.".replace(".", ""));
 //        
-        System.out.println(DBConnection.getConnection());
+            System.out.println(DBConnection.getConnection());
 //        
 //        AdvanceAmount aa=new AdvanceAmount();
 //        aa.setGivenDate("12/12/2020");
@@ -95,6 +98,22 @@ public class TestClass {
 //            statement.executeUpdate();
 //            System.out.println("Update::");
 //            System.exit(0);
+
+            Connection connection = DBConnection.getConnection();
+            //PreparedStatement statement = connection.prepareStatement("SELECT * FROM TB_ADVANCE_AMOUNT ORDER BY ID DESC");
+            // + "WHERE COM_NAME='"+comName+"'");
+            //ResultSet rs = statement.executeQuery();
+            PreparedStatement statement=connection.prepareStatement("SELECT * FROM TB_ADVANCE_AMOUNT ORDER BY ID DESC");
+            Statement statement1=connection.createStatement();
+            String qry="SELECT * FROM TB_ADVANCE_AMOUNT ORDER BY ID DESC";
+            ResultSet rs=statement.executeQuery(qry);
+            System.out.println();
+            int i = 0;
+            while (rs.next()) {
+                System.out.println(rs.getString(2));
+                i++;
+            }
+            System.out.println(i);
         } catch (Exception ex) {
             Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
         }

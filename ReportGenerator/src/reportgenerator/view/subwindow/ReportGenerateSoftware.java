@@ -954,6 +954,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
             // split company name and address
             // replace string , replace space to '-' charecter
             String parts[] = comboCompany.getSelectedItem().toString().split("-");
+            String companyName=parts[1];
             parts[1] = parts[1].replace(' ', '-');
 
             if (!checkBoxRequirmentBillHardcopy.isSelected()) {
@@ -968,7 +969,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                     // set bill information for update
                     billDao.setBillDate(txtDate.getText());
                     billDao.setBillNumber(txtReqQutBillNumber.getText());
-                    billDao.setCompanyName(parts[1]);
+                    billDao.setCompanyName(companyName);
                     billDao.setAmount(qutitoinBill.getTotalamount());
                     billDao.setBillType(reqBillType);
                     

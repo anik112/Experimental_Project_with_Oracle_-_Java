@@ -69,11 +69,13 @@ public class EntrySubmitedBillService {
         Connection connection=DBConnection.getConnection();
         List<EntrySubmitedBillDao> listOfBill=new ArrayList<>();
         try{
+            int i=0;
             PreparedStatement statement=connection.prepareStatement("SELECT * FROM TB_SUBMITED_BILL "
                     + "WHERE COM_NAME='"+comName+"'");
             ResultSet rs=statement.executeQuery();
             
-            if(rs.next()){
+            while(rs.next()){
+                i++;
                 EntrySubmitedBillDao billDao=new EntrySubmitedBillDao();
                 
                 billDao.setId(rs.getInt(1));
@@ -86,6 +88,7 @@ public class EntrySubmitedBillService {
                 
                 listOfBill.add(billDao);
             }
+            //System.out.println("=> "+i);
             connection.close();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage(),
