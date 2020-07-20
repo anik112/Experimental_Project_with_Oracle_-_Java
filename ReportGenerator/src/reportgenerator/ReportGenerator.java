@@ -7,7 +7,7 @@ package reportgenerator;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import reportgenerator.view.MainWindow;
+import reportgenerator.view.*;
 
 /**
  *
@@ -39,7 +39,7 @@ public class ReportGenerator extends Application {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainWindow().setVisible(true);
+                new MainWorkingWindow().setVisible(true);
             }
         });
     }

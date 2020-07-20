@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 public class DBConnection {
 
     private final static String BasedUrl = "jdbc:oracle:thin:";
-    private final static String host = "DESKTOP-ICON0GA";//"192.168.1.204";
+    private final static String host = "DESKTOP-KTD50PC";//"192.168.1.204"//"DESKTOP-ICON0GA";
     private final static String port = "1521";
     private final static String dbName = "payroll";
     private final static String userName = "report_generator";
