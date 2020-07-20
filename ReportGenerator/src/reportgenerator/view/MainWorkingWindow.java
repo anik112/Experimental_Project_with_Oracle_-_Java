@@ -28,13 +28,14 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
     private int hightOfMainPen=0;
     private int widthOfMainPen=0;
+    private int componentSize=2;
     
 
     /**
      * Creates new form MainWorkingWindow
      */
     public MainWorkingWindow() {
-
+        
         initComponents();
         mainPen.setLayout(new BorderLayout(50, 50));
 
@@ -45,11 +46,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         hightOfMainPen=mainPen.getHeight();
         widthOfMainPen=mainPen.getWidth();
         
+        lblShowCompany.setLocation(0,(this.getHeight()/2)-20);
         lblShowLogo.setLocation(10,this.getHeight()-20);
-        lblCopyRightTeg.setLocation(this.getWidth()-10,this.getHeight()-10);
-        //lblShowCompany.setSize(DimMax.width, 80);
-
-        //subPenOfReportGenerateSoftware.setLayout(new GridLayout(1,1));
     }
 
     /**
@@ -71,15 +69,17 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         subPenOfSubmitPanddingBill = new javax.swing.JPanel();
         penEntryIncomeAndCost = new javax.swing.JInternalFrame();
         subPenOfEntryIncomeAndCost = new javax.swing.JPanel();
+        penSetupDatabaseInfo = new javax.swing.JInternalFrame();
+        subPenOfSetupDatabaseInfo = new javax.swing.JPanel();
         mainPen = new javax.swing.JPanel();
         lblShowCompany = new javax.swing.JLabel();
-        lblCopyRightTeg = new javax.swing.JLabel();
         lblShowLogo = new javax.swing.JLabel();
         lblShowReord = new javax.swing.JLabel();
         lblShowReord2 = new javax.swing.JLabel();
         lblShowReord3 = new javax.swing.JLabel();
         lblShowReord4 = new javax.swing.JLabel();
         lblShowReord5 = new javax.swing.JLabel();
+        lblCopyRightTeg = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
         menuGenerate = new javax.swing.JMenu();
         manuItemMakeSoftwareQutAndBill = new javax.swing.JMenuItem();
@@ -87,6 +87,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         menuEntry = new javax.swing.JMenu();
         manuItemEntryAdvanceAmount = new javax.swing.JMenuItem();
         manuItemSubmitPanddingBill = new javax.swing.JMenuItem();
+        menuSetupDatabase = new javax.swing.JMenu();
+        manuItemEntrySetupDatabaseInfo = new javax.swing.JMenuItem();
 
         penReportGenerateSoftware.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
         penReportGenerateSoftware.setClosable(true);
@@ -323,18 +325,63 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfEntryIncomeAndCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        penSetupDatabaseInfo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 255)));
+        penSetupDatabaseInfo.setClosable(true);
+        penSetupDatabaseInfo.setMaximizable(true);
+        penSetupDatabaseInfo.setResizable(true);
+        penSetupDatabaseInfo.setTitle("Make Hardware Qut & Bill");
+        penSetupDatabaseInfo.setToolTipText("Make Hardware Qut & Bill");
+        penSetupDatabaseInfo.setVisible(true);
+        penSetupDatabaseInfo.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                penSetupDatabaseInfoInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+
+        javax.swing.GroupLayout subPenOfSetupDatabaseInfoLayout = new javax.swing.GroupLayout(subPenOfSetupDatabaseInfo);
+        subPenOfSetupDatabaseInfo.setLayout(subPenOfSetupDatabaseInfoLayout);
+        subPenOfSetupDatabaseInfoLayout.setHorizontalGroup(
+            subPenOfSetupDatabaseInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 762, Short.MAX_VALUE)
+        );
+        subPenOfSetupDatabaseInfoLayout.setVerticalGroup(
+            subPenOfSetupDatabaseInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 429, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout penSetupDatabaseInfoLayout = new javax.swing.GroupLayout(penSetupDatabaseInfo.getContentPane());
+        penSetupDatabaseInfo.getContentPane().setLayout(penSetupDatabaseInfoLayout);
+        penSetupDatabaseInfoLayout.setHorizontalGroup(
+            penSetupDatabaseInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(subPenOfSetupDatabaseInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        penSetupDatabaseInfoLayout.setVerticalGroup(
+            penSetupDatabaseInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(subPenOfSetupDatabaseInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
 
         mainPen.setBackground(new java.awt.Color(255, 255, 224));
 
-        lblShowCompany.setFont(new java.awt.Font("Lucida Calligraphy", 1, 48)); // NOI18N
+        lblShowCompany.setFont(new java.awt.Font("Lucida Calligraphy", 1, 50)); // NOI18N
         lblShowCompany.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblShowCompany.setText("Vistasoft IT Bangladesh Ltd.");
-
-        lblCopyRightTeg.setFont(new java.awt.Font("Lucida Sans", 1, 10)); // NOI18N
-        lblCopyRightTeg.setForeground(new java.awt.Color(255, 0, 51));
-        lblCopyRightTeg.setText("@copyright: Vistasoft IT Bangladesh Ltd. / Anik paul");
+        lblShowCompany.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize()
+        );
 
         lblShowLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reportgenerator/view/icon/logoWithFooterTxt-app-color02.png"))); // NOI18N
 
@@ -342,21 +389,18 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         mainPen.setLayout(mainPenLayout);
         mainPenLayout.setHorizontalGroup(
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
+            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(mainPenLayout.createSequentialGroup()
                 .addComponent(lblShowLogo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblCopyRightTeg))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         mainPenLayout.setVerticalGroup(
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPenLayout.createSequentialGroup()
                 .addGap(150, 150, 150)
-                .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
                 .addGap(150, 150, 150)
-                .addGroup(mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCopyRightTeg)
-                    .addComponent(lblShowLogo)))
+                .addComponent(lblShowLogo))
         );
 
         lblShowReord.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
@@ -383,6 +427,10 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         lblShowReord5.setForeground(new java.awt.Color(102, 102, 102));
         lblShowReord5.setText(" ");
         lblShowReord5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, null, java.awt.Color.lightGray, java.awt.Color.lightGray));
+
+        lblCopyRightTeg.setFont(new java.awt.Font("Lucida Sans", 1, 10)); // NOI18N
+        lblCopyRightTeg.setForeground(new java.awt.Color(255, 0, 51));
+        lblCopyRightTeg.setText("@copyright: Vistasoft IT Bangladesh Ltd. / Anik paul");
 
         mainMenuBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mainMenuBar.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
@@ -445,6 +493,23 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
         mainMenuBar.add(menuEntry);
 
+        menuSetupDatabase.setText("| Setup");
+        menuSetupDatabase.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
+        menuSetupDatabase.setMargin(new java.awt.Insets(0, 0, 0, 15));
+
+        manuItemEntrySetupDatabaseInfo.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        manuItemEntrySetupDatabaseInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reportgenerator/view/icon/arrow.png"))); // NOI18N
+        manuItemEntrySetupDatabaseInfo.setText("Setup Database Info");
+        manuItemEntrySetupDatabaseInfo.setMargin(new java.awt.Insets(0, 0, 10, 0));
+        manuItemEntrySetupDatabaseInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manuItemEntrySetupDatabaseInfoActionPerformed(evt);
+            }
+        });
+        menuSetupDatabase.add(manuItemEntrySetupDatabaseInfo);
+
+        mainMenuBar.add(menuSetupDatabase);
+
         setJMenuBar(mainMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -461,7 +526,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
                 .addComponent(lblShowReord5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblShowReord3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblCopyRightTeg))
             .addComponent(mainPen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -474,7 +540,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
                     .addComponent(lblShowReord2)
                     .addComponent(lblShowReord3)
                     .addComponent(lblShowReord4)
-                    .addComponent(lblShowReord5)))
+                    .addComponent(lblShowReord5)
+                    .addComponent(lblCopyRightTeg)))
         );
 
         pack();
@@ -486,7 +553,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         hideLableInMainWindow();
         //System.out.println(mainPen.getComponentCount());
 
-        for (int i = 3, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
+        for (int i = componentSize, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
             mainPen.getComponent(i).setBounds(mainPen.getWidth() - (mainPen.getWidth() - j), (mainPen.getHeight() - 50), 100, 50);
         }
 
@@ -504,7 +571,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
         hideLableInMainWindow();
         //System.out.println(mainPen.getComponentCount());
-        for (int i = 3, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
+        for (int i = componentSize, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
             mainPen.getComponent(i).setBounds(mainPen.getWidth() - (mainPen.getWidth() - j), (mainPen.getHeight() - 50), 100, 50);
         }
 
@@ -538,7 +605,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         hideLableInMainWindow();
         //System.out.println(mainPen.getComponentCount());
-        for (int i = 3, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
+        for (int i = componentSize, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
             mainPen.getComponent(i).setBounds(mainPen.getWidth() - (mainPen.getWidth() - j), (mainPen.getHeight() - 50), 100, 50);
         }
 
@@ -561,7 +628,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         hideLableInMainWindow();
         //System.out.println(mainPen.getComponentCount());
-        for (int i = 3, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
+        for (int i = componentSize, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
             mainPen.getComponent(i).setBounds(mainPen.getWidth() - (mainPen.getWidth() - j), (mainPen.getHeight() - 50), 100, 50);
         }
 
@@ -576,6 +643,27 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private void penEntryIncomeAndCostInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_penEntryIncomeAndCostInternalFrameClosed
         // TODO add your handling code here:
     }//GEN-LAST:event_penEntryIncomeAndCostInternalFrameClosed
+
+    private void manuItemEntrySetupDatabaseInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuItemEntrySetupDatabaseInfoActionPerformed
+        // TODO add your handling code here:
+        hideLableInMainWindow();
+        //System.out.println(mainPen.getComponentCount());
+        for (int i = componentSize, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
+            mainPen.getComponent(i).setBounds(mainPen.getWidth() - (mainPen.getWidth() - j), (mainPen.getHeight() - 50), 100, 50);
+        }
+
+        addPenInEntryAdvanceAmount();
+        penEntryAdvanceAmount.setBounds(10, 10, widthOfMainPen, hightOfMainPen);
+        penEntryAdvanceAmount.setVisible(true);
+        mainPen.add(penEntryAdvanceAmount, BorderLayout.CENTER);
+        mainPen.revalidate();
+        mainPen.repaint();
+        
+    }//GEN-LAST:event_manuItemEntrySetupDatabaseInfoActionPerformed
+
+    private void penSetupDatabaseInfoInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_penSetupDatabaseInfoInternalFrameClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_penSetupDatabaseInfoInternalFrameClosed
 
     private void addPenInReportGenerateSoftware() {
         subPenOfReportGenerateSoftware.setLayout(new GridLayout(1, 1));
@@ -611,6 +699,16 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         subPenOfSubmitPanddingBill.repaint();
     }
     
+    
+    private void addPenInSetupDatabaseInfo(){
+        subPenOfSetupDatabaseInfo.setLayout(new GridLayout(1,1));
+        subPenOfSetupDatabaseInfo.removeAll();
+        SubmitedPanddingBill panddingBill=new SubmitedPanddingBill(configComapnyListUrl);
+        subPenOfSubmitPanddingBill.add(panddingBill);
+        subPenOfSubmitPanddingBill.revalidate();
+        subPenOfSubmitPanddingBill.repaint();
+    }
+    
     private void hideLableInMainWindow() {
 
         lblShowCompany.setVisible(false);
@@ -619,7 +717,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     }
 
     private void showLableInMainWindow() {
-        if (mainPen.getComponentCount() == 3) {
+        if (mainPen.getComponentCount() == componentSize) {
             lblShowCompany.setVisible(true);
             lblCopyRightTeg.setVisible(true);
             lblShowLogo.setVisible(true);
@@ -673,20 +771,24 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JPanel mainPen;
     private javax.swing.JMenuItem manuItemEntryAdvanceAmount;
+    private javax.swing.JMenuItem manuItemEntrySetupDatabaseInfo;
     private javax.swing.JMenuItem manuItemHardwareQutAndBill;
     private javax.swing.JMenuItem manuItemMakeSoftwareQutAndBill;
     private javax.swing.JMenuItem manuItemSubmitPanddingBill;
     private javax.swing.JMenu menuEntry;
     private javax.swing.JMenu menuGenerate;
+    private javax.swing.JMenu menuSetupDatabase;
     private javax.swing.JInternalFrame penEntryAdvanceAmount;
     private javax.swing.JInternalFrame penEntryIncomeAndCost;
     private javax.swing.JInternalFrame penReportGenerateHardware;
     private javax.swing.JInternalFrame penReportGenerateSoftware;
+    private javax.swing.JInternalFrame penSetupDatabaseInfo;
     private javax.swing.JInternalFrame penSubmitPanddingBill;
     private javax.swing.JPanel subPenOfEntryAdvanceAmount;
     private javax.swing.JPanel subPenOfEntryIncomeAndCost;
     private javax.swing.JPanel subPenOfReportGenerateHardware;
     private javax.swing.JPanel subPenOfReportGenerateSoftware;
+    private javax.swing.JPanel subPenOfSetupDatabaseInfo;
     private javax.swing.JPanel subPenOfSubmitPanddingBill;
     // End of variables declaration//GEN-END:variables
 }

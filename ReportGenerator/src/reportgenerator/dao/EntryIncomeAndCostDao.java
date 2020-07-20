@@ -14,6 +14,7 @@ public class EntryIncomeAndCostDao {
     private int id;
     private String date;
     private String dtls;
+    private String companyName;
     private float income;
     private float cost;
     private float totalAmount;
@@ -64,6 +65,14 @@ public class EntryIncomeAndCostDao {
 
     public void setTotalAmount(float totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
     
     
