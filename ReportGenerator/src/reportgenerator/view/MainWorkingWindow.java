@@ -11,8 +11,10 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import reportgenerator.view.subwindow.AdvanceAmountEntry;
+import reportgenerator.view.subwindow.EntryIncomeAndCost;
 import reportgenerator.view.subwindow.ReportGenerateHardware;
 import reportgenerator.view.subwindow.ReportGenerateSoftware;
+import reportgenerator.view.subwindow.SetupDatabaseInfo;
 import reportgenerator.view.subwindow.SubmitedPanddingBill;
 
 /**
@@ -25,6 +27,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     //private String savingLoc = "\\\\192.168.1.210\\monthly_online_bill_and_quotation\\";
     private String configComapnyListUrl = "setup\\CompanyName.txt";
     private String configPendingBillList = "setup\\PandingList.txt";
+    private String configSetupDatabase="setup\\ConnectionSetup.properties";
 
     private int hightOfMainPen=0;
     private int widthOfMainPen=0;
@@ -87,6 +90,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         menuEntry = new javax.swing.JMenu();
         manuItemEntryAdvanceAmount = new javax.swing.JMenuItem();
         manuItemSubmitPanddingBill = new javax.swing.JMenuItem();
+        manuItemIncomeAndCost = new javax.swing.JMenuItem();
         menuSetupDatabase = new javax.swing.JMenu();
         manuItemEntrySetupDatabaseInfo = new javax.swing.JMenuItem();
 
@@ -325,7 +329,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfEntryIncomeAndCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        penSetupDatabaseInfo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 255)));
+        penSetupDatabaseInfo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
         penSetupDatabaseInfo.setClosable(true);
         penSetupDatabaseInfo.setMaximizable(true);
         penSetupDatabaseInfo.setResizable(true);
@@ -374,6 +378,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
+        setName("MainFrame"); // NOI18N
 
         mainPen.setBackground(new java.awt.Color(255, 255, 224));
 
@@ -389,7 +394,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         mainPen.setLayout(mainPenLayout);
         mainPenLayout.setHorizontalGroup(
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 951, Short.MAX_VALUE)
             .addGroup(mainPenLayout.createSequentialGroup()
                 .addComponent(lblShowLogo)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -398,9 +403,10 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPenLayout.createSequentialGroup()
                 .addGap(150, 150, 150)
-                .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                .addGap(150, 150, 150)
-                .addComponent(lblShowLogo))
+                .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(139, 139, 139)
+                .addComponent(lblShowLogo)
+                .addContainerGap())
         );
 
         lblShowReord.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
@@ -490,6 +496,17 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             }
         });
         menuEntry.add(manuItemSubmitPanddingBill);
+
+        manuItemIncomeAndCost.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        manuItemIncomeAndCost.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reportgenerator/view/icon/arrow.png"))); // NOI18N
+        manuItemIncomeAndCost.setText("Entry Income And Cost");
+        manuItemIncomeAndCost.setMargin(new java.awt.Insets(0, 0, 10, 0));
+        manuItemIncomeAndCost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manuItemIncomeAndCostActionPerformed(evt);
+            }
+        });
+        menuEntry.add(manuItemIncomeAndCost);
 
         mainMenuBar.add(menuEntry);
 
@@ -642,6 +659,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
     private void penEntryIncomeAndCostInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_penEntryIncomeAndCostInternalFrameClosed
         // TODO add your handling code here:
+        mainPen.remove(penEntryIncomeAndCost);
+        showLableInMainWindow();
     }//GEN-LAST:event_penEntryIncomeAndCostInternalFrameClosed
 
     private void manuItemEntrySetupDatabaseInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuItemEntrySetupDatabaseInfoActionPerformed
@@ -652,10 +671,10 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             mainPen.getComponent(i).setBounds(mainPen.getWidth() - (mainPen.getWidth() - j), (mainPen.getHeight() - 50), 100, 50);
         }
 
-        addPenInEntryAdvanceAmount();
-        penEntryAdvanceAmount.setBounds(10, 10, widthOfMainPen, hightOfMainPen);
-        penEntryAdvanceAmount.setVisible(true);
-        mainPen.add(penEntryAdvanceAmount, BorderLayout.CENTER);
+        addPenInSetupDatabaseInfo();
+        penSetupDatabaseInfo.setBounds(10, 10, widthOfMainPen, hightOfMainPen);
+        penSetupDatabaseInfo.setVisible(true);
+        mainPen.add(penSetupDatabaseInfo, BorderLayout.CENTER);
         mainPen.revalidate();
         mainPen.repaint();
         
@@ -663,7 +682,25 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
     private void penSetupDatabaseInfoInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_penSetupDatabaseInfoInternalFrameClosed
         // TODO add your handling code here:
+        mainPen.remove(penSetupDatabaseInfo);
+        showLableInMainWindow();
     }//GEN-LAST:event_penSetupDatabaseInfoInternalFrameClosed
+
+    private void manuItemIncomeAndCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuItemIncomeAndCostActionPerformed
+        // TODO add your handling code here:
+        hideLableInMainWindow();
+        //System.out.println(mainPen.getComponentCount());
+        for (int i = componentSize, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
+            mainPen.getComponent(i).setBounds(mainPen.getWidth() - (mainPen.getWidth() - j), (mainPen.getHeight() - 50), 100, 50);
+        }
+
+        addPenInEntryIncomeAndCost();
+        penEntryIncomeAndCost.setBounds(10, 10, widthOfMainPen, hightOfMainPen);
+        penEntryIncomeAndCost.setVisible(true);
+        mainPen.add(penEntryIncomeAndCost, BorderLayout.CENTER);
+        mainPen.revalidate();
+        mainPen.repaint();
+    }//GEN-LAST:event_manuItemIncomeAndCostActionPerformed
 
     private void addPenInReportGenerateSoftware() {
         subPenOfReportGenerateSoftware.setLayout(new GridLayout(1, 1));
@@ -703,10 +740,19 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private void addPenInSetupDatabaseInfo(){
         subPenOfSetupDatabaseInfo.setLayout(new GridLayout(1,1));
         subPenOfSetupDatabaseInfo.removeAll();
-        SubmitedPanddingBill panddingBill=new SubmitedPanddingBill(configComapnyListUrl);
-        subPenOfSubmitPanddingBill.add(panddingBill);
-        subPenOfSubmitPanddingBill.revalidate();
-        subPenOfSubmitPanddingBill.repaint();
+        SetupDatabaseInfo databaseInfo=new SetupDatabaseInfo(configSetupDatabase);
+        subPenOfSetupDatabaseInfo.add(databaseInfo);
+        subPenOfSetupDatabaseInfo.revalidate();
+        subPenOfSetupDatabaseInfo.repaint();
+    }
+    
+    private void addPenInEntryIncomeAndCost(){
+        subPenOfEntryIncomeAndCost.setLayout(new GridLayout(1,1));
+        subPenOfEntryIncomeAndCost.removeAll();
+        EntryIncomeAndCost incomeAndCost=new EntryIncomeAndCost();
+        subPenOfEntryIncomeAndCost.add(incomeAndCost);
+        subPenOfEntryIncomeAndCost.revalidate();
+        subPenOfEntryIncomeAndCost.repaint();
     }
     
     private void hideLableInMainWindow() {
@@ -723,7 +769,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             lblShowLogo.setVisible(true);
         }
     }
-
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -773,6 +820,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem manuItemEntryAdvanceAmount;
     private javax.swing.JMenuItem manuItemEntrySetupDatabaseInfo;
     private javax.swing.JMenuItem manuItemHardwareQutAndBill;
+    private javax.swing.JMenuItem manuItemIncomeAndCost;
     private javax.swing.JMenuItem manuItemMakeSoftwareQutAndBill;
     private javax.swing.JMenuItem manuItemSubmitPanddingBill;
     private javax.swing.JMenu menuEntry;

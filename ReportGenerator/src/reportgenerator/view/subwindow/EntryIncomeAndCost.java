@@ -6,6 +6,13 @@
 package reportgenerator.view.subwindow;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import reportgenerator.dao.EntryIncomeAndCostDao;
+import reportgenerator.service.AdvanceAmountService;
+import reportgenerator.service.IncomeAndCostService;
 
 /**
  *
@@ -13,14 +20,16 @@ import java.awt.event.KeyEvent;
  */
 public class EntryIncomeAndCost extends javax.swing.JPanel {
 
-    
-    private int keyTypeChecker=0;
-    
+    private int keyTypeChecker = 0;
+    private float totalAmount=0;
+    private List<EntryIncomeAndCostDao> list = new ArrayList<>();
+
     /**
      * Creates new form EntryIncomeAndCost
      */
     public EntryIncomeAndCost() {
         initComponents();
+        showDataListInTable();
     }
 
     /**
@@ -48,16 +57,12 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        txtDate.setBackground(new java.awt.Color(0, 255, 255));
         txtDate.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtDate.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Date", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
         txtDate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtDateFocusGained(evt);
-            }
-        });
-        txtDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDateActionPerformed(evt);
             }
         });
         txtDate.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -120,10 +125,16 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
         lblTotalAmount.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         lblTotalAmount.setText(" ");
         lblTotalAmount.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Total Amount", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        lblTotalAmount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblTotalAmountMouseEntered(evt);
+            }
+        });
 
+        comboDtls.setBackground(new java.awt.Color(0, 255, 204));
         comboDtls.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
         comboDtls.setMaximumRowCount(100);
-        comboDtls.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Company Name" }));
+        comboDtls.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Resion" }));
         comboDtls.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -184,11 +195,11 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Date", "Emp Name", "Amount", "Cost", "Cash In Hand", "Athorize"
+                "ID", "Date", "Resion", "Income", "Cost", "Total Amount"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -223,7 +234,7 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -233,10 +244,6 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
         txtDate.setText("");
         keyTypeChecker = 0;
     }//GEN-LAST:event_txtDateFocusGained
-
-    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDateActionPerformed
 
     private void txtDateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDateKeyPressed
         // TODO add your handling code here:
@@ -257,6 +264,8 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
     private void txtCostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            totalAmount -= Float.valueOf(txtCost.getText());
+            lblTotalAmount.setText(String.valueOf(totalAmount));
             btnSave.requestFocus();
         }
     }//GEN-LAST:event_txtCostKeyPressed
@@ -264,6 +273,8 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
     private void txtIncomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIncomeKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER && txtIncome.getText().length() > 0) {
+            totalAmount=Float.valueOf(txtIncome.getText());
+            lblTotalAmount.setText(String.valueOf(totalAmount));
             txtCost.requestFocus();
         }
     }//GEN-LAST:event_txtIncomeKeyPressed
@@ -271,36 +282,29 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
 
-//        AdvanceAmount amount = new AdvanceAmount();
-//
-//        amount.setGivenDate(txtDate.getText());
-//        amount.setAdvanceHolderName(txtEmpName.getText());
-//        amount.setAmountOfAdvance(Float.valueOf(txtAmount.getText()));
-//        amount.setAmountOfCost(Float.valueOf(txtIncome.getText()));
-//        amount.setAmountCashOnHand(Float.valueOf(txtCost.getText()));
-//        amount.setAuthorized("NO");
-//
-//        if (checkBoxEdit.isSelected()) {
-//            if ((!txtDate.getText().isEmpty()) && (!txtEmpName.getText().isEmpty()) && (!txtAmount.getText().isEmpty())) {
-//                amount.setId(Integer.valueOf(lblID.getText()));
-//                new AdvanceAmountService().updateData(amount);
-//                JOptionPane.showMessageDialog(null, "Data Save",
-//                    ":: DATA SAVE :: ", JOptionPane.INFORMATION_MESSAGE);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Please check Date, Emp Name, Amount",
-//                    ":: ERROR- WINDOW ADVANCE AMOUNT:: ", JOptionPane.ERROR_MESSAGE);
-//            }
-//        } else {
-//            if ((!txtDate.getText().isEmpty()) && (!txtEmpName.getText().isEmpty()) && (!txtAmount.getText().isEmpty())) {
-//                new AdvanceAmountService().saveData(amount);
-//                JOptionPane.showMessageDialog(null, "Data Save",
-//                    ":: DATA SAVE :: ", JOptionPane.INFORMATION_MESSAGE);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Please check Date, Emp Name, Amount",
-//                    ":: ERROR- WINDOW ADVANCE AMOUNT:: ", JOptionPane.ERROR_MESSAGE);
-//            }
-//        }
-//        showDataListInTable();
+        EntryIncomeAndCostDao costDao = new EntryIncomeAndCostDao();
+
+        costDao.setId(Integer.valueOf(lblID.getText()));
+        costDao.setDate(txtDate.getText());
+        costDao.setDtls(comboDtls.getSelectedItem().toString());
+        costDao.setCompanyName("");
+        costDao.setIncome(Float.valueOf(txtIncome.getText()));
+        costDao.setCost(Float.valueOf(txtCost.getText()));
+        costDao.setTotalAmount(Float.valueOf(lblTotalAmount.getText()));
+
+        if (checkBoxEdit.isSelected()) {
+
+        } else {
+            if ((!txtDate.getText().isEmpty()) && (lblTotalAmount.getText().length() > 1)) {
+                new IncomeAndCostService().saveData(costDao);
+                JOptionPane.showMessageDialog(null, "Data Save",
+                        ":: DATA SAVE :: ", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Please check Date, Amount",
+                        ":: ERROR- WINDOW INCOME & COST :: ", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        showDataListInTable();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -309,6 +313,7 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
+        showDataListInTable();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void tblShowIncomeAndCostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblShowIncomeAndCostMouseClicked
@@ -351,6 +356,32 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
 //        }
     }//GEN-LAST:event_tblShowIncomeAndCostMouseClicked
 
+    private void lblTotalAmountMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTotalAmountMouseEntered
+        // TODO add your handling code here:
+        totalAmount=Float.valueOf(txtIncome.getText())-Float.valueOf(txtCost.getText());
+        lblTotalAmount.setText(String.valueOf(totalAmount));
+    }//GEN-LAST:event_lblTotalAmountMouseEntered
+
+    public void showDataListInTable() {
+
+        list = new IncomeAndCostService().getData();
+
+        DefaultTableModel model = (DefaultTableModel) tblShowIncomeAndCost.getModel();
+        model.setRowCount(0);
+
+        Object row[] = new Object[6];
+
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getId();
+            row[1] = list.get(i).getDate();
+            row[2] = list.get(i).getDtls();
+            row[3] = list.get(i).getIncome();
+            row[4] = list.get(i).getCost();
+            row[5] = list.get(i).getTotalAmount();
+
+            model.addRow(row);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRefresh;

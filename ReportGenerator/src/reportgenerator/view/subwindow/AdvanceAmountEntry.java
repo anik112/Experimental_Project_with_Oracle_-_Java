@@ -61,6 +61,7 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        txtDate.setBackground(new java.awt.Color(0, 255, 255));
         txtDate.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtDate.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Date", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
         txtDate.addFocusListener(new java.awt.event.FocusAdapter() {
