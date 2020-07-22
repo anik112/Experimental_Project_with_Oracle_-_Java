@@ -394,7 +394,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         mainPen.setLayout(mainPenLayout);
         mainPenLayout.setHorizontalGroup(
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 951, Short.MAX_VALUE)
+            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 1108, Short.MAX_VALUE)
             .addGroup(mainPenLayout.createSequentialGroup()
                 .addComponent(lblShowLogo)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -403,10 +403,9 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPenLayout.createSequentialGroup()
                 .addGap(150, 150, 150)
-                .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(139, 139, 139)
-                .addComponent(lblShowLogo)
-                .addContainerGap())
+                .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                .addGap(150, 150, 150)
+                .addComponent(lblShowLogo))
         );
 
         lblShowReord.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
@@ -443,6 +442,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         mainMenuBar.setPreferredSize(new java.awt.Dimension(56, 30));
 
         menuGenerate.setText("| Generate");
+        menuGenerate.setBorderPainted(true);
         menuGenerate.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         menuGenerate.setIconTextGap(5);
         menuGenerate.setMargin(new java.awt.Insets(0, 0, 0, 10));
@@ -450,6 +450,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         manuItemMakeSoftwareQutAndBill.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         manuItemMakeSoftwareQutAndBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reportgenerator/view/icon/arrow.png"))); // NOI18N
         manuItemMakeSoftwareQutAndBill.setText("Make Software Qut & Bill");
+        manuItemMakeSoftwareQutAndBill.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.lightGray));
+        manuItemMakeSoftwareQutAndBill.setBorderPainted(true);
         manuItemMakeSoftwareQutAndBill.setMargin(new java.awt.Insets(0, 0, 10, 0));
         manuItemMakeSoftwareQutAndBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -461,6 +463,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         manuItemHardwareQutAndBill.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         manuItemHardwareQutAndBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reportgenerator/view/icon/arrow.png"))); // NOI18N
         manuItemHardwareQutAndBill.setText("Make Hardware Qut & Bill");
+        manuItemHardwareQutAndBill.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.lightGray));
+        manuItemHardwareQutAndBill.setBorderPainted(true);
         manuItemHardwareQutAndBill.setMargin(new java.awt.Insets(0, 0, 10, 0));
         manuItemHardwareQutAndBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -478,6 +482,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         manuItemEntryAdvanceAmount.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         manuItemEntryAdvanceAmount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reportgenerator/view/icon/arrow.png"))); // NOI18N
         manuItemEntryAdvanceAmount.setText("Entry Advance Amount");
+        manuItemEntryAdvanceAmount.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.lightGray));
+        manuItemEntryAdvanceAmount.setBorderPainted(true);
         manuItemEntryAdvanceAmount.setMargin(new java.awt.Insets(0, 0, 10, 0));
         manuItemEntryAdvanceAmount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -489,6 +495,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         manuItemSubmitPanddingBill.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         manuItemSubmitPanddingBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reportgenerator/view/icon/arrow.png"))); // NOI18N
         manuItemSubmitPanddingBill.setText("Submit Pandding Bill");
+        manuItemSubmitPanddingBill.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.lightGray));
+        manuItemSubmitPanddingBill.setBorderPainted(true);
         manuItemSubmitPanddingBill.setMargin(new java.awt.Insets(0, 0, 10, 0));
         manuItemSubmitPanddingBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -500,6 +508,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         manuItemIncomeAndCost.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         manuItemIncomeAndCost.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reportgenerator/view/icon/arrow.png"))); // NOI18N
         manuItemIncomeAndCost.setText("Entry Income And Cost");
+        manuItemIncomeAndCost.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.lightGray));
+        manuItemIncomeAndCost.setBorderPainted(true);
         manuItemIncomeAndCost.setMargin(new java.awt.Insets(0, 0, 10, 0));
         manuItemIncomeAndCost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -517,6 +527,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         manuItemEntrySetupDatabaseInfo.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         manuItemEntrySetupDatabaseInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reportgenerator/view/icon/arrow.png"))); // NOI18N
         manuItemEntrySetupDatabaseInfo.setText("Setup Database Info");
+        manuItemEntrySetupDatabaseInfo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.lightGray));
+        manuItemEntrySetupDatabaseInfo.setBorderPainted(true);
         manuItemEntrySetupDatabaseInfo.setMargin(new java.awt.Insets(0, 0, 10, 0));
         manuItemEntrySetupDatabaseInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
