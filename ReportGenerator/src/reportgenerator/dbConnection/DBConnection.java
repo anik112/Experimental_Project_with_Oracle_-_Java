@@ -18,12 +18,12 @@ import javax.swing.JOptionPane;
  */
 public class DBConnection {
 
-    private static String basedUrl = "jdbc:oracle:thin:";
-    private static String host = "DESKTOP-KTD50PC";//"192.168.1.204"//"DESKTOP-ICON0GA";
-    private static String port = "1521";
-    private static String dbName = "payroll";
-    private static String userName = "report_generator";
-    private static String password = "report_generator";
+    private static String basedUrl = ""; //jdbc:oracle:thin:
+    private static String host = "";//"192.168.1.204"//"DESKTOP-ICON0GA"//DESKTOP-KTD50PC;
+    private static String port = "";//1521
+    private static String dbName = "";//payroll
+    private static String userName = "";//report_generator
+    private static String password = "";//report_generator
     private final static ConfigKeyList KEY_LIST = new ConfigKeyList();
 
     private static String url = "";
@@ -59,12 +59,12 @@ public class DBConnection {
         setupUtility();
 
         try {
-
             Class.forName("oracle.jdbc.driver.OracleDriver");
             connection = DriverManager.getConnection(url, userName, password);
             System.out.println("::Connected::");
             return connection;
         } catch (Exception /*| ClassNotFoundException */ e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     ":: Error- DB 01 :: ", JOptionPane.INFORMATION_MESSAGE);
         }
