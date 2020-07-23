@@ -108,6 +108,7 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
 
         btnSave.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         btnSave.setText("Save");
+        btnSave.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -125,6 +126,7 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
 
         btnSearch.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         btnSearch.setText("Search");
+        btnSearch.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -142,6 +144,7 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
 
         btnRefresh.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
         btnRefresh.setText("Refresh");
+        btnRefresh.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRefreshActionPerformed(evt);
@@ -310,6 +313,7 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
             if ((!txtDate.getText().isEmpty()) && (!txtEmpName.getText().isEmpty()) && (!txtAmount.getText().isEmpty())) {
                 amount.setId(Integer.valueOf(lblID.getText()));
                 new AdvanceAmountService().updateData(amount);
+                cashOnHand=0;
                 JOptionPane.showMessageDialog(null, "Data Save",
                         ":: DATA SAVE :: ", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -319,6 +323,7 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
         } else {
             if ((!txtDate.getText().isEmpty()) && (!txtEmpName.getText().isEmpty()) && (!txtAmount.getText().isEmpty())) {
                 new AdvanceAmountService().saveData(amount);
+                cashOnHand=0;
                 JOptionPane.showMessageDialog(null, "Data Save",
                         ":: DATA SAVE :: ", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -347,11 +352,11 @@ public class AdvanceAmountEntry extends javax.swing.JPanel {
     private void txtCostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER && txtCost.getText().length() > 0) {
-            cashOnHand = Float.valueOf(txtAmount.getText());
-            if (cashOnHand >= Float.valueOf(txtCost.getText())) {
+            if (Float.valueOf(txtCost.getText())>0) {
+                cashOnHand = Float.valueOf(txtAmount.getText());
                 cashOnHand -= Float.valueOf(txtCost.getText());
+                txtCashInHand.setText(String.valueOf(cashOnHand));
             }
-            txtCashInHand.setText(String.valueOf(cashOnHand));
             txtCashInHand.requestFocus();
         }
     }//GEN-LAST:event_txtCostKeyPressed

@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import reportgenerator.dao.EntryIncomeAndCostDao;
+import reportgenerator.dao.ReasonOfIncomeAndCost;
 import reportgenerator.service.AdvanceAmountService;
 import reportgenerator.service.IncomeAndCostService;
 
@@ -23,6 +24,7 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
     private int keyTypeChecker = 0;
     private float totalAmount=0;
     private List<EntryIncomeAndCostDao> list = new ArrayList<>();
+    private List<ReasonOfIncomeAndCost> roiacs=new ArrayList<>();
 
     /**
      * Creates new form EntryIncomeAndCost
@@ -30,6 +32,7 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
     public EntryIncomeAndCost() {
         initComponents();
         showDataListInTable();
+        showDataInComboBox();
     }
 
     /**
@@ -111,7 +114,7 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
         checkBoxEdit.setIconTextGap(6);
 
         lblID.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        lblID.setText(" ");
+        lblID.setText("0");
         lblID.setBorder(javax.swing.BorderFactory.createTitledBorder("ID"));
 
         btnRefresh.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
@@ -264,7 +267,12 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
     private void txtCostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            totalAmount -= Float.valueOf(txtCost.getText());
+            float cost=Float.valueOf(txtCost.getText());
+            if(totalAmount>cost){
+                totalAmount -= cost;
+            }else{
+                totalAmount=cost;
+            }
             lblTotalAmount.setText(String.valueOf(totalAmount));
             btnSave.requestFocus();
         }
@@ -358,11 +366,13 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
 
     private void lblTotalAmountMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTotalAmountMouseEntered
         // TODO add your handling code here:
-        totalAmount=Float.valueOf(txtIncome.getText())-Float.valueOf(txtCost.getText());
+        totalAmount=Float.valueOf(txtIncome.getText());
+        float cost=Float.valueOf(txtCost.getText());
+        totalAmount=totalAmount>cost?totalAmount-cost:cost;
         lblTotalAmount.setText(String.valueOf(totalAmount));
     }//GEN-LAST:event_lblTotalAmountMouseEntered
 
-    public void showDataListInTable() {
+    private void showDataListInTable() {
 
         list = new IncomeAndCostService().getData();
 
@@ -380,6 +390,16 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
             row[5] = list.get(i).getTotalAmount();
 
             model.addRow(row);
+        }
+    }
+    
+    
+    private void showDataInComboBox(){
+        
+        roiacs=new IncomeAndCostService().getReasonData();
+        
+        for (ReasonOfIncomeAndCost r : roiacs) {
+            comboDtls.addItem(r.getReason());
         }
     }
 

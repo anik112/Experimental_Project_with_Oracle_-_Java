@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import reportgenerator.dao.EntryIncomeAndCostDao;
+import reportgenerator.dao.ReasonOfIncomeAndCost;
 import reportgenerator.dbConnection.DBConnection;
 
 /**
@@ -40,7 +41,7 @@ public class IncomeAndCostService {
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                    ":: ERROR-INCOME AND COST [SAVE DATA] :: ", JOptionPane.INFORMATION_MESSAGE);
+                    ":: ERROR-SERVICE AND COST [SAVE DATA] :: ", JOptionPane.INFORMATION_MESSAGE);
         }
         return true;
     }
@@ -71,7 +72,34 @@ public class IncomeAndCostService {
             connection.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                    ":: ERROR- SERVICE SUBMITE BILL [SELECT DATA] :: ", JOptionPane.INFORMATION_MESSAGE);
+                    ":: ERROR-SERVICE INCOME AND COST [SELECT DATA] :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        return list;
+    }
+    
+    
+    public List<ReasonOfIncomeAndCost> getReasonData() {
+
+        Connection connection = DBConnection.getConnection();
+        List<ReasonOfIncomeAndCost> list = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM TB_REASON_INCOME_COST");
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                ReasonOfIncomeAndCost reasonOfIncomeAndCost=new ReasonOfIncomeAndCost();
+
+                reasonOfIncomeAndCost.setId(rs.getInt(1));
+                reasonOfIncomeAndCost.setReason(rs.getString(2));
+                list.add(reasonOfIncomeAndCost);
+            }
+            //System.out.println("=> "+i);
+            connection.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    ":: ERROR-SERVICE INCOME AND COST [SELECT REASON DATA] :: ", JOptionPane.INFORMATION_MESSAGE);
         }
 
         return list;

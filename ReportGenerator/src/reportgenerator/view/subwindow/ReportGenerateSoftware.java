@@ -184,6 +184,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         });
 
         btnGenerate.setText("Generate");
+        btnGenerate.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnGenerate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenerateActionPerformed(evt);
@@ -191,6 +192,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         });
 
         btnMonthlyBillOpenFile.setText("Open File");
+        btnMonthlyBillOpenFile.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnMonthlyBillOpenFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMonthlyBillOpenFileActionPerformed(evt);
@@ -198,6 +200,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         });
 
         btnMonthlyBillOpenFolder.setText("Open Folder");
+        btnMonthlyBillOpenFolder.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnMonthlyBillOpenFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMonthlyBillOpenFolderActionPerformed(evt);
@@ -526,6 +529,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Make Requirment Qutitoin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
 
         btnMakeRow.setText("Make");
+        btnMakeRow.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnMakeRow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMakeRowActionPerformed(evt);
@@ -533,6 +537,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         });
 
         btnMakeRow1.setText("Open File");
+        btnMakeRow1.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnMakeRow1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMakeRow1ActionPerformed(evt);
@@ -540,6 +545,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         });
 
         btnMonthlyBillOpenFile1.setText("Open File");
+        btnMonthlyBillOpenFile1.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnMonthlyBillOpenFile1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMonthlyBillOpenFile1ActionPerformed(evt);
@@ -572,6 +578,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Make Requirment Bill", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
 
         btnMakeReqQtuBill.setText("Open File");
+        btnMakeReqQtuBill.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnMakeReqQtuBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMakeReqQtuBillActionPerformed(evt);
@@ -579,6 +586,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         });
 
         btnMakeReqQutBill.setText("Make");
+        btnMakeReqQutBill.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnMakeReqQutBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMakeReqQutBillActionPerformed(evt);
@@ -589,6 +597,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         txtReqQutBillNumber.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Bill Number", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
 
         btnRequirmentBillOpenFolder.setText("Open Folder");
+        btnRequirmentBillOpenFolder.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnRequirmentBillOpenFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRequirmentBillOpenFolderActionPerformed(evt);
