@@ -146,6 +146,11 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblBillPendingList = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(255, 255, 224));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 224));
+
         comboMonth.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
         comboMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         comboMonth.setToolTipText("");
@@ -173,6 +178,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
             }
         });
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 224));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Monthly Bill Generate", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
 
         txtAmount.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
@@ -207,11 +213,13 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
             }
         });
 
+        checkBoxMonthlyBillHardcopy.setBackground(new java.awt.Color(255, 255, 224));
         checkBoxMonthlyBillHardcopy.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         checkBoxMonthlyBillHardcopy.setText("Hard Copy");
         checkBoxMonthlyBillHardcopy.setAutoscrolls(true);
         checkBoxMonthlyBillHardcopy.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         checkBoxMonthlyBillHardcopy.setBorderPainted(true);
+        checkBoxMonthlyBillHardcopy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -247,6 +255,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 224));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "No-Detls   -----------------------------------------   Amount", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -526,6 +535,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         jLabel9.setText("Make Rquirment Qutitotin & Bill");
         jLabel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 224));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Make Requirment Qutitoin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
 
         btnMakeRow.setText("Make");
@@ -575,6 +585,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                 .addGap(0, 8, Short.MAX_VALUE))
         );
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 224));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Make Requirment Bill", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
 
         btnMakeReqQtuBill.setText("Open File");
@@ -604,11 +615,13 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
             }
         });
 
+        checkBoxRequirmentBillHardcopy.setBackground(new java.awt.Color(255, 255, 224));
         checkBoxRequirmentBillHardcopy.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         checkBoxRequirmentBillHardcopy.setText("Hard Copy");
         checkBoxRequirmentBillHardcopy.setAutoscrolls(true);
         checkBoxRequirmentBillHardcopy.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         checkBoxRequirmentBillHardcopy.setBorderPainted(true);
+        checkBoxRequirmentBillHardcopy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -725,7 +738,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 932, Short.MAX_VALUE)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 930, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

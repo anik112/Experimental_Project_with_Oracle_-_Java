@@ -94,6 +94,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         menuSetupDatabase = new javax.swing.JMenu();
         manuItemEntrySetupDatabaseInfo = new javax.swing.JMenuItem();
 
+        penReportGenerateSoftware.setBackground(new java.awt.Color(255, 255, 224));
         penReportGenerateSoftware.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
         penReportGenerateSoftware.setClosable(true);
         penReportGenerateSoftware.setMaximizable(true);
@@ -119,6 +120,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             }
         });
 
+        subPenOfReportGenerateSoftware.setBackground(new java.awt.Color(255, 255, 224));
+
         javax.swing.GroupLayout subPenOfReportGenerateSoftwareLayout = new javax.swing.GroupLayout(subPenOfReportGenerateSoftware);
         subPenOfReportGenerateSoftware.setLayout(subPenOfReportGenerateSoftwareLayout);
         subPenOfReportGenerateSoftwareLayout.setHorizontalGroup(
@@ -141,6 +144,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfReportGenerateSoftware, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        penReportGenerateHardware.setBackground(new java.awt.Color(255, 255, 224));
         penReportGenerateHardware.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 255, 51)));
         penReportGenerateHardware.setClosable(true);
         penReportGenerateHardware.setMaximizable(true);
@@ -165,6 +169,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
+
+        subPenOfReportGenerateHardware.setBackground(new java.awt.Color(255, 255, 224));
 
         javax.swing.GroupLayout subPenOfReportGenerateHardwareLayout = new javax.swing.GroupLayout(subPenOfReportGenerateHardware);
         subPenOfReportGenerateHardware.setLayout(subPenOfReportGenerateHardwareLayout);
@@ -213,6 +219,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             }
         });
 
+        subPenOfEntryAdvanceAmount.setBackground(new java.awt.Color(255, 255, 224));
+
         javax.swing.GroupLayout subPenOfEntryAdvanceAmountLayout = new javax.swing.GroupLayout(subPenOfEntryAdvanceAmount);
         subPenOfEntryAdvanceAmount.setLayout(subPenOfEntryAdvanceAmountLayout);
         subPenOfEntryAdvanceAmountLayout.setHorizontalGroup(
@@ -259,6 +267,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
+
+        subPenOfSubmitPanddingBill.setBackground(new java.awt.Color(255, 255, 224));
 
         javax.swing.GroupLayout subPenOfSubmitPanddingBillLayout = new javax.swing.GroupLayout(subPenOfSubmitPanddingBill);
         subPenOfSubmitPanddingBill.setLayout(subPenOfSubmitPanddingBillLayout);
@@ -307,6 +317,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             }
         });
 
+        subPenOfEntryIncomeAndCost.setBackground(new java.awt.Color(255, 255, 224));
+
         javax.swing.GroupLayout subPenOfEntryIncomeAndCostLayout = new javax.swing.GroupLayout(subPenOfEntryIncomeAndCost);
         subPenOfEntryIncomeAndCost.setLayout(subPenOfEntryIncomeAndCostLayout);
         subPenOfEntryIncomeAndCostLayout.setHorizontalGroup(
@@ -353,6 +365,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
+
+        subPenOfSetupDatabaseInfo.setBackground(new java.awt.Color(255, 255, 224));
 
         javax.swing.GroupLayout subPenOfSetupDatabaseInfoLayout = new javax.swing.GroupLayout(subPenOfSetupDatabaseInfo);
         subPenOfSetupDatabaseInfo.setLayout(subPenOfSetupDatabaseInfoLayout);

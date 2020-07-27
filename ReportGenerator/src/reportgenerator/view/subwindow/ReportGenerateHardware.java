@@ -156,6 +156,10 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 224));
+
+        jPanShowList.setBackground(new java.awt.Color(255, 255, 224));
+
         javax.swing.GroupLayout jPanShowListLayout = new javax.swing.GroupLayout(jPanShowList);
         jPanShowList.setLayout(jPanShowListLayout);
         jPanShowListLayout.setHorizontalGroup(
@@ -182,8 +186,14 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Write Divice Info", jPanel4);
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 224));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 224));
+
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 224));
 
         jLabel12.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -580,6 +590,9 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
                         .addComponent(btnMakeHardwareQut, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnMakeHardwareQutBill, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 224));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         comboQtyType1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PCS", "CM", "M" }));
 

@@ -58,6 +58,9 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblShowIncomeAndCost = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(255, 255, 224));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 224));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         txtDate.setBackground(new java.awt.Color(0, 255, 255));
@@ -94,6 +97,7 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
 
         btnSave.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         btnSave.setText("Save");
+        btnSave.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -102,6 +106,7 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
 
         btnSearch.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         btnSearch.setText("Search");
+        btnSearch.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -119,6 +124,7 @@ public class EntryIncomeAndCost extends javax.swing.JPanel {
 
         btnRefresh.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
         btnRefresh.setText("Refresh");
+        btnRefresh.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRefreshActionPerformed(evt);

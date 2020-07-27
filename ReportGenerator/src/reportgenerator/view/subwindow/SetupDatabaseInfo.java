@@ -78,6 +78,10 @@ public class SetupDatabaseInfo extends javax.swing.JPanel {
         lblHostName5 = new javax.swing.JLabel();
         btnEdit = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 224));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 224));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         txtDatabasePassword.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
@@ -133,8 +137,9 @@ public class SetupDatabaseInfo extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        btnSave.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        btnSave.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         btnSave.setText("Save");
+        btnSave.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -355,8 +360,9 @@ public class SetupDatabaseInfo extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        btnEdit.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        btnEdit.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         btnEdit.setText("Edit");
+        btnEdit.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
@@ -388,7 +394,7 @@ public class SetupDatabaseInfo extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
