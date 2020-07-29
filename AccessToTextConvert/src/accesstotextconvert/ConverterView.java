@@ -107,6 +107,11 @@ public class ConverterView extends javax.swing.JFrame {
 
         txtFromDate.setToolTipText("Type Date & Press Enter");
         txtFromDate.setSelectionEnd(10);
+        txtFromDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtFromDateMouseClicked(evt);
+            }
+        });
         txtFromDate.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtFromDateKeyPressed(evt);
@@ -114,6 +119,11 @@ public class ConverterView extends javax.swing.JFrame {
         });
 
         txtToDate.setToolTipText("Type Date & Press Enter");
+        txtToDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtToDateMouseClicked(evt);
+            }
+        });
         txtToDate.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtToDateKeyPressed(evt);
@@ -391,7 +401,7 @@ public class ConverterView extends javax.swing.JFrame {
     private void txtToDateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtToDateKeyPressed
         // TODO add your handling code here:
         // if user press enter then
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if ((evt.getKeyCode() == KeyEvent.VK_ENTER)&&(txtToDate.getText().length()==8)) {
 
             toDate = txtToDate.getText(); // get to date
             // make final string
@@ -406,7 +416,7 @@ public class ConverterView extends javax.swing.JFrame {
     private void txtFromDateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFromDateKeyPressed
         // TODO add your handling code here:
         // when user press enter then we format the date
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if ((evt.getKeyCode() == KeyEvent.VK_ENTER)&&(txtFromDate.getText().length()==8)) {
             fromDate = txtFromDate.getText();
             String finFromDate = fromDate.substring(2, 4) + "/" + fromDate.substring(0, 2) + "/" + fromDate.substring(4, fromDate.length());
             //System.out.println(finFromDate);
@@ -435,8 +445,8 @@ public class ConverterView extends javax.swing.JFrame {
 
                 try {
                     converterCore.txtConverter(
-                            txtFromDate.getText(),
-                            txtToDate.getText(),
+                            txtFromDate.getText().length()>8?txtFromDate.getText():"0",
+                            txtToDate.getText().length()>8?txtToDate.getText():"0",
                             rtaFromDate,
                             rtaToDate,
                             nitgenFromDate,
@@ -445,7 +455,7 @@ public class ConverterView extends javax.swing.JFrame {
                             jCheckRTAserver.isSelected(),
                             jCheckNitgenServer.isSelected()
                     );
-
+                    
                     // lblProgressBar.setText(" ");
                 } catch (IOException ex) {
                     Logger.getLogger(ConverterView.class.getName()).log(Level.SEVERE, null, ex);
@@ -523,6 +533,17 @@ public class ConverterView extends javax.swing.JFrame {
         // TODO add your handling code here:
         new SetupDatabase().setVisible(true);
     }//GEN-LAST:event_btnSetupActionPerformed
+
+    private void txtFromDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFromDateMouseClicked
+        // TODO add your handling code here:
+        txtFromDate.setText("");
+        txtToDate.setText("");
+    }//GEN-LAST:event_txtFromDateMouseClicked
+
+    private void txtToDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtToDateMouseClicked
+        // TODO add your handling code here:
+        txtToDate.setText("");
+    }//GEN-LAST:event_txtToDateMouseClicked
 
     /**
      * @param args the command line arguments

@@ -236,6 +236,7 @@
                 <Property name="selectionEnd" type="int" value="10"/>
               </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtFromDateMouseClicked"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFromDateKeyPressed"/>
               </Events>
             </Component>
@@ -244,6 +245,7 @@
                 <Property name="toolTipText" type="java.lang.String" value="Type Date &amp; Press Enter"/>
               </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtToDateMouseClicked"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtToDateKeyPressed"/>
               </Events>
             </Component>
