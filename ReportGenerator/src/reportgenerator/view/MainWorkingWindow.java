@@ -6,6 +6,7 @@
 package reportgenerator.view;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -194,12 +195,12 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfReportGenerateHardware, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        penEntryAdvanceAmount.setBackground(new java.awt.Color(255, 255, 224));
         penEntryAdvanceAmount.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 255)));
         penEntryAdvanceAmount.setClosable(true);
         penEntryAdvanceAmount.setMaximizable(true);
         penEntryAdvanceAmount.setResizable(true);
-        penEntryAdvanceAmount.setTitle("Make Hardware Qut & Bill");
-        penEntryAdvanceAmount.setToolTipText("Make Hardware Qut & Bill");
+        penEntryAdvanceAmount.setToolTipText("");
         penEntryAdvanceAmount.setVisible(true);
         penEntryAdvanceAmount.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -243,6 +244,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfEntryAdvanceAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        penSubmitPanddingBill.setBackground(new java.awt.Color(255, 255, 224));
         penSubmitPanddingBill.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 255)));
         penSubmitPanddingBill.setClosable(true);
         penSubmitPanddingBill.setMaximizable(true);
@@ -292,6 +294,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfSubmitPanddingBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        penEntryIncomeAndCost.setBackground(new java.awt.Color(255, 255, 224));
         penEntryIncomeAndCost.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 255)));
         penEntryIncomeAndCost.setClosable(true);
         penEntryIncomeAndCost.setMaximizable(true);
@@ -341,6 +344,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfEntryIncomeAndCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        penSetupDatabaseInfo.setBackground(new java.awt.Color(255, 255, 224));
         penSetupDatabaseInfo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
         penSetupDatabaseInfo.setClosable(true);
         penSetupDatabaseInfo.setMaximizable(true);
@@ -731,6 +735,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private void addPenInReportGenerateSoftware() {
         subPenOfReportGenerateSoftware.setLayout(new GridLayout(1, 1));
         subPenOfReportGenerateSoftware.removeAll();
+        subPenOfReportGenerateSoftware.setAlignmentX(Component.CENTER_ALIGNMENT);
         subPenOfReportGenerateSoftware.add(new ReportGenerateSoftware(savingLoc, configComapnyListUrl, configPendingBillList));
         subPenOfReportGenerateSoftware.revalidate();
         subPenOfReportGenerateSoftware.repaint();

@@ -120,6 +120,9 @@
     </Container>
     <Container class="javax.swing.JInternalFrame" name="penEntryAdvanceAmount">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e0" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder>
@@ -130,8 +133,7 @@
         <Property name="closable" type="boolean" value="true"/>
         <Property name="maximizable" type="boolean" value="true"/>
         <Property name="resizable" type="boolean" value="true"/>
-        <Property name="title" type="java.lang.String" value="Make Hardware Qut &amp; Bill"/>
-        <Property name="toolTipText" type="java.lang.String" value="Make Hardware Qut &amp; Bill"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="visible" type="boolean" value="true"/>
       </Properties>
       <Events>
@@ -175,6 +177,9 @@
     </Container>
     <Container class="javax.swing.JInternalFrame" name="penSubmitPanddingBill">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e0" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder>
@@ -230,6 +235,9 @@
     </Container>
     <Container class="javax.swing.JInternalFrame" name="penEntryIncomeAndCost">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e0" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder>
@@ -285,6 +293,9 @@
     </Container>
     <Container class="javax.swing.JInternalFrame" name="penSetupDatabaseInfo">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e0" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder>

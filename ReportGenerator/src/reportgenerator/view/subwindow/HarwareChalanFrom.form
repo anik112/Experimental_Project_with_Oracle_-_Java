@@ -1004,7 +1004,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtDeliveryPerson" min="-2" pref="167" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txtBillNo" min="-2" pref="343" max="-2" attributes="0"/>
+                      <Component id="txtBoxReqChalanNo" min="-2" pref="343" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -1021,7 +1021,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="txtDate" max="32767" attributes="0"/>
-                      <Component id="txtBillNo" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="txtBoxReqChalanNo" min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -1122,7 +1122,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtBillNo">
+        <Component class="javax.swing.JTextField" name="txtBoxReqChalanNo">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Lucida Sans" size="10" style="0"/>

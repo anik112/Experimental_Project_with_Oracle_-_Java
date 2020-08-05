@@ -33,6 +33,7 @@ public class IncomeAndCostService {
             statement.setString(2, costDao.getDtls());
             statement.setString(3, costDao.getCompanyName());
             statement.setFloat(4, costDao.getIncome());
+            System.out.println(costDao.getIncome());
             statement.setFloat(5, costDao.getCost());
             statement.setFloat(6, costDao.getTotalAmount());
 

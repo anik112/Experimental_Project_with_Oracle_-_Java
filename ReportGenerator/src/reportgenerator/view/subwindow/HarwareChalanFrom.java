@@ -97,7 +97,7 @@ public class HarwareChalanFrom extends javax.swing.JPanel {
         txtWorkOrderDate = new javax.swing.JTextField();
         txtDate = new javax.swing.JTextField();
         txtAttention = new javax.swing.JTextField();
-        txtBillNo = new javax.swing.JTextField();
+        txtBoxReqChalanNo = new javax.swing.JTextField();
         btnMakeChalan = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 224));
@@ -532,9 +532,9 @@ public class HarwareChalanFrom extends javax.swing.JPanel {
         txtAttention.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Attention", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
         txtAttention.setPreferredSize(new java.awt.Dimension(10, 30));
 
-        txtBillNo.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
-        txtBillNo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Bill Number", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
-        txtBillNo.setPreferredSize(new java.awt.Dimension(10, 30));
+        txtBoxReqChalanNo.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
+        txtBoxReqChalanNo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Bill Number", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        txtBoxReqChalanNo.setPreferredSize(new java.awt.Dimension(10, 30));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -547,7 +547,7 @@ public class HarwareChalanFrom extends javax.swing.JPanel {
                         .addComponent(txtWorkOrderDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDeliveryPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtBillNo, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBoxReqChalanNo, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtAttention, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -560,7 +560,7 @@ public class HarwareChalanFrom extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtBillNo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBoxReqChalanNo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtWorkOrderDate, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
@@ -663,7 +663,7 @@ public class HarwareChalanFrom extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtAttention;
-    private javax.swing.JTextField txtBillNo;
+    private javax.swing.JTextField txtBoxReqChalanNo;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtDeliveryPerson;
     private javax.swing.JTextField txtDtls1;
