@@ -50,6 +50,8 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
     private String recentFileLocation;
     private int keyTypeChecker = 0;
     private String hardwareBillType = "HARD-REQ-BILL";
+    private String openFolderUrl = "";
+    private String reqBillSavingTeg = "Requirment-Bill-&-Quotation";
 
     List<HardwareQutComponent> listOfHarwareQut = new ArrayList<>();
     private List<String> companyAndAddressList = new ArrayList<>();
@@ -721,11 +723,14 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
 
         setDateAndCompany();
 
-        String tempLoc = companyName.replace(' ', '-');
+        String comName = companyName.replace(' ', '-');
+        comName = comName.replace(".", "");
 
         WriteHardwareQut writeQut = new WriteHardwareQut();
         writeQut.setAmountInWord(txtAmountInWord.getText());
-        recentFileLocation = savingLoc + tempLoc + "-Req-Hardware-Qtnt-" + System.currentTimeMillis() + ".pdf";
+        String url = savingLoc + reqBillSavingTeg + "\\" + comName + "\\";
+        openFolderUrl = url;
+        recentFileLocation = url + comName + "-Req-Hardware-Qtnt-" + System.currentTimeMillis() + ".pdf";
         File selectedFile = new File(recentFileLocation);
 
         if (writeQut.writeHardwareQutInPdfFile(setData(), selectedFile)) {
@@ -742,7 +747,9 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         // TODO add your handling code here:
         EntrySubmitedBillDao billDao = new EntrySubmitedBillDao();
         setDateAndCompany();
-        String tempLoc = companyName.replace(' ', '-');
+
+        String comName = companyName.replace(' ', '-');
+        comName = comName.replace(".", "");
 
         // set bill information for update
         billDao.setBillDate(txtDate.getText());
@@ -751,11 +758,14 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         billDao.setAmount(Float.valueOf(lblTotalAmount.getText()));
         billDao.setBillType(hardwareBillType);
 
+        String url = savingLoc + reqBillSavingTeg + "\\" + comName + "\\";
+        openFolderUrl = url;
+        
         if (!checkBoxHardwareQutHardCopy.isSelected()) {
 
             WriteHardwareQutBill writeQutBill = new WriteHardwareQutBill();
             writeQutBill.setAmountInWord(txtAmountInWord.getText());
-            recentFileLocation = savingLoc + tempLoc + "-Req-Hardware-Qtnt-Bill-soft-copy" + System.currentTimeMillis() + ".pdf";
+            recentFileLocation = url + comName + "-Req-Hardware-Qtnt-Bill-soft-copy" + System.currentTimeMillis() + ".pdf";
             File selectedFile = new File(recentFileLocation);
 
             if (writeQutBill.writeHardwareQutBillInPdfFile(setData(), selectedFile)) {
@@ -772,7 +782,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         } else {
             WriteHardwareQutBillHardCopy writeHardQutBill = new WriteHardwareQutBillHardCopy();
             writeHardQutBill.setAmountInWord(txtAmountInWord.getText());
-            recentFileLocation = savingLoc + tempLoc + "-Req-Hardware-Qtnt-Bill-hard-copy" + System.currentTimeMillis() + ".pdf";
+            recentFileLocation = url + comName + "-Req-Hardware-Qtnt-Bill-hard-copy" + System.currentTimeMillis() + ".pdf";
             File selectedFile = new File(recentFileLocation);
 
             if (writeHardQutBill.writeHardwareQutBillInPdfFile(setData(), selectedFile)) {
@@ -815,8 +825,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             if (!savingLoc.isEmpty()) {
-                String tempLoc = companyName.replace(" ", "-");
-                File file = new File(savingLoc);
+                File file = new File(openFolderUrl);
                 Desktop desktop = Desktop.getDesktop();
                 desktop.open(file);
             }

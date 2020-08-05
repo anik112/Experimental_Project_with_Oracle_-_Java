@@ -1015,9 +1015,9 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnMakeRow" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnMakeRow1" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="btnOpenFile" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnMonthlyBillOpenFile1" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="btnReqBillOpenFolder" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1027,8 +1027,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnMakeRow" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="btnMakeRow1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="btnMonthlyBillOpenFile1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="btnOpenFile" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="btnReqBillOpenFolder" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
                   </Group>
@@ -1052,7 +1052,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMakeRowActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnMakeRow1">
+            <Component class="javax.swing.JButton" name="btnOpenFile">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Open File"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1065,12 +1065,12 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMakeRow1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOpenFileActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnMonthlyBillOpenFile1">
+            <Component class="javax.swing.JButton" name="btnReqBillOpenFolder">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Open File"/>
+                <Property name="text" type="java.lang.String" value="Open Folder"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                     <EtchetBorder>
@@ -1081,7 +1081,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMonthlyBillOpenFile1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReqBillOpenFolderActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
