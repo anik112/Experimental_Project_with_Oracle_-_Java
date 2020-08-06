@@ -99,21 +99,22 @@ public class TestClass {
 //            System.out.println("Update::");
 //            System.exit(0);
 
-            Connection connection = DBConnection.getConnection();
-            //PreparedStatement statement = connection.prepareStatement("SELECT * FROM TB_ADVANCE_AMOUNT ORDER BY ID DESC");
-            // + "WHERE COM_NAME='"+comName+"'");
-            //ResultSet rs = statement.executeQuery();
-            PreparedStatement statement=connection.prepareStatement("SELECT * FROM TB_ADVANCE_AMOUNT ORDER BY ID DESC");
-            Statement statement1=connection.createStatement();
-            String qry="SELECT * FROM TB_ADVANCE_AMOUNT ORDER BY ID DESC";
-            ResultSet rs=statement.executeQuery(qry);
-            System.out.println();
-            int i = 0;
-            while (rs.next()) {
-                System.out.println(rs.getString(2));
-                i++;
-            }
-            System.out.println(i);
+//            Connection connection = DBConnection.getConnection();
+//            //PreparedStatement statement = connection.prepareStatement("SELECT * FROM TB_ADVANCE_AMOUNT ORDER BY ID DESC");
+//            // + "WHERE COM_NAME='"+comName+"'");
+//            //ResultSet rs = statement.executeQuery();
+//            PreparedStatement statement=connection.prepareStatement("SELECT * FROM TB_ADVANCE_AMOUNT ORDER BY ID DESC");
+//            Statement statement1=connection.createStatement();
+//            String qry="SELECT * FROM TB_ADVANCE_AMOUNT ORDER BY ID DESC";
+//            ResultSet rs=statement.executeQuery(qry);
+//            System.out.println();
+//            int i = 0;
+//            while (rs.next()) {
+//                System.out.println(rs.getString(2));
+//                i++;
+//            }
+//            System.out.println(i);
+        
         } catch (Exception ex) {
             Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
         }
