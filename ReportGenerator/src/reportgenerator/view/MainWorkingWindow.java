@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import reportgenerator.reportsParameter.ReportPeraFindAdvanceAmountByAuthorized;
 import reportgenerator.view.subwindow.AdvanceAmountEntry;
 import reportgenerator.view.subwindow.EntryIncomeAndCost;
 import reportgenerator.view.subwindow.ReportGenerateHardware;
@@ -75,6 +76,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         subPenOfEntryIncomeAndCost = new javax.swing.JPanel();
         penSetupDatabaseInfo = new javax.swing.JInternalFrame();
         subPenOfSetupDatabaseInfo = new javax.swing.JPanel();
+        penAdvanceAmountReport = new javax.swing.JInternalFrame();
+        subPenOfAdvanceAmountReport = new javax.swing.JPanel();
         mainPen = new javax.swing.JPanel();
         lblShowCompany = new javax.swing.JLabel();
         lblShowLogo = new javax.swing.JLabel();
@@ -92,6 +95,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         manuItemEntryAdvanceAmount = new javax.swing.JMenuItem();
         manuItemSubmitPanddingBill = new javax.swing.JMenuItem();
         manuItemIncomeAndCost = new javax.swing.JMenuItem();
+        menuReports = new javax.swing.JMenu();
+        manuItemAdvanceAmountReport = new javax.swing.JMenuItem();
         menuSetupDatabase = new javax.swing.JMenu();
         manuItemEntrySetupDatabaseInfo = new javax.swing.JMenuItem();
 
@@ -200,7 +205,8 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         penEntryAdvanceAmount.setClosable(true);
         penEntryAdvanceAmount.setMaximizable(true);
         penEntryAdvanceAmount.setResizable(true);
-        penEntryAdvanceAmount.setToolTipText("");
+        penEntryAdvanceAmount.setTitle("Entry Advance Amounts");
+        penEntryAdvanceAmount.setToolTipText("Entry Advance Amounts");
         penEntryAdvanceAmount.setVisible(true);
         penEntryAdvanceAmount.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -394,7 +400,58 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfSetupDatabaseInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        penAdvanceAmountReport.setBackground(new java.awt.Color(255, 255, 224));
+        penAdvanceAmountReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        penAdvanceAmountReport.setClosable(true);
+        penAdvanceAmountReport.setMaximizable(true);
+        penAdvanceAmountReport.setResizable(true);
+        penAdvanceAmountReport.setTitle("View Advance Amount Report");
+        penAdvanceAmountReport.setToolTipText("View Advance Amount Report");
+        penAdvanceAmountReport.setVisible(true);
+        penAdvanceAmountReport.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                penAdvanceAmountReportInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+
+        subPenOfAdvanceAmountReport.setBackground(new java.awt.Color(255, 255, 224));
+
+        javax.swing.GroupLayout subPenOfAdvanceAmountReportLayout = new javax.swing.GroupLayout(subPenOfAdvanceAmountReport);
+        subPenOfAdvanceAmountReport.setLayout(subPenOfAdvanceAmountReportLayout);
+        subPenOfAdvanceAmountReportLayout.setHorizontalGroup(
+            subPenOfAdvanceAmountReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 762, Short.MAX_VALUE)
+        );
+        subPenOfAdvanceAmountReportLayout.setVerticalGroup(
+            subPenOfAdvanceAmountReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 429, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout penAdvanceAmountReportLayout = new javax.swing.GroupLayout(penAdvanceAmountReport.getContentPane());
+        penAdvanceAmountReport.getContentPane().setLayout(penAdvanceAmountReportLayout);
+        penAdvanceAmountReportLayout.setHorizontalGroup(
+            penAdvanceAmountReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(subPenOfAdvanceAmountReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        penAdvanceAmountReportLayout.setVerticalGroup(
+            penAdvanceAmountReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(subPenOfAdvanceAmountReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Report Generator | VSI");
         setLocationByPlatform(true);
         setName("MainFrame"); // NOI18N
 
@@ -537,6 +594,25 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         menuEntry.add(manuItemIncomeAndCost);
 
         mainMenuBar.add(menuEntry);
+
+        menuReports.setText("| View");
+        menuReports.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
+        menuReports.setMargin(new java.awt.Insets(0, 0, 0, 15));
+
+        manuItemAdvanceAmountReport.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        manuItemAdvanceAmountReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reportgenerator/view/icon/arrow.png"))); // NOI18N
+        manuItemAdvanceAmountReport.setText("Advance Amount Report");
+        manuItemAdvanceAmountReport.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.lightGray));
+        manuItemAdvanceAmountReport.setBorderPainted(true);
+        manuItemAdvanceAmountReport.setMargin(new java.awt.Insets(0, 0, 10, 0));
+        manuItemAdvanceAmountReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manuItemAdvanceAmountReportActionPerformed(evt);
+            }
+        });
+        menuReports.add(manuItemAdvanceAmountReport);
+
+        mainMenuBar.add(menuReports);
 
         menuSetupDatabase.setText("| Setup");
         menuSetupDatabase.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
@@ -732,6 +808,30 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         mainPen.repaint();
     }//GEN-LAST:event_manuItemIncomeAndCostActionPerformed
 
+    private void manuItemAdvanceAmountReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuItemAdvanceAmountReportActionPerformed
+        // TODO add your handling code here:
+        
+        hideLableInMainWindow();
+        //System.out.println(mainPen.getComponentCount());
+        for (int i = componentSize, j = 10; i < mainPen.getComponentCount(); i++, j += 100) {
+            mainPen.getComponent(i).setBounds(mainPen.getWidth() - (mainPen.getWidth() - j), (mainPen.getHeight() - 50), 100, 50);
+        }
+
+        addAdvanceAmountReport();
+        penAdvanceAmountReport.setBounds(10, 10, widthOfMainPen, hightOfMainPen);
+        penAdvanceAmountReport.setVisible(true);
+        mainPen.add(penAdvanceAmountReport, BorderLayout.CENTER);
+        mainPen.revalidate();
+        mainPen.repaint();
+        
+    }//GEN-LAST:event_manuItemAdvanceAmountReportActionPerformed
+
+    private void penAdvanceAmountReportInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_penAdvanceAmountReportInternalFrameClosed
+        // TODO add your handling code here:
+        mainPen.remove(penAdvanceAmountReport);
+        showLableInMainWindow();
+    }//GEN-LAST:event_penAdvanceAmountReportInternalFrameClosed
+
     private void addPenInReportGenerateSoftware() {
         subPenOfReportGenerateSoftware.setLayout(new GridLayout(1, 1));
         subPenOfReportGenerateSoftware.removeAll();
@@ -784,6 +884,16 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         subPenOfEntryIncomeAndCost.add(incomeAndCost);
         subPenOfEntryIncomeAndCost.revalidate();
         subPenOfEntryIncomeAndCost.repaint();
+    }
+    
+    
+    private void addAdvanceAmountReport(){
+        subPenOfAdvanceAmountReport.setLayout(new GridLayout(1,1));
+        subPenOfAdvanceAmountReport.removeAll();
+        ReportPeraFindAdvanceAmountByAuthorized advanceAmountByAuthorized=new ReportPeraFindAdvanceAmountByAuthorized();
+        subPenOfAdvanceAmountReport.add(advanceAmountByAuthorized);
+        subPenOfAdvanceAmountReport.revalidate();
+        subPenOfAdvanceAmountReport.repaint();
     }
     
     private void hideLableInMainWindow() {
@@ -848,6 +958,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lblShowReord5;
     private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JPanel mainPen;
+    private javax.swing.JMenuItem manuItemAdvanceAmountReport;
     private javax.swing.JMenuItem manuItemEntryAdvanceAmount;
     private javax.swing.JMenuItem manuItemEntrySetupDatabaseInfo;
     private javax.swing.JMenuItem manuItemHardwareQutAndBill;
@@ -856,13 +967,16 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem manuItemSubmitPanddingBill;
     private javax.swing.JMenu menuEntry;
     private javax.swing.JMenu menuGenerate;
+    private javax.swing.JMenu menuReports;
     private javax.swing.JMenu menuSetupDatabase;
+    private javax.swing.JInternalFrame penAdvanceAmountReport;
     private javax.swing.JInternalFrame penEntryAdvanceAmount;
     private javax.swing.JInternalFrame penEntryIncomeAndCost;
     private javax.swing.JInternalFrame penReportGenerateHardware;
     private javax.swing.JInternalFrame penReportGenerateSoftware;
     private javax.swing.JInternalFrame penSetupDatabaseInfo;
     private javax.swing.JInternalFrame penSubmitPanddingBill;
+    private javax.swing.JPanel subPenOfAdvanceAmountReport;
     private javax.swing.JPanel subPenOfEntryAdvanceAmount;
     private javax.swing.JPanel subPenOfEntryIncomeAndCost;
     private javax.swing.JPanel subPenOfReportGenerateHardware;

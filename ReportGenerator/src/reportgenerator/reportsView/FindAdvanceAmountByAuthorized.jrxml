@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Find Advance Amount" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5bcfc8af-0821-488b-9770-b73c6409ce68">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="F_AUTH" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT TB_ADVANCE_AMOUNT.*,TB_COMPANY_INFO.* FROM TB_ADVANCE_AMOUNT,TB_COMPANY_INFO WHERE AUTHORIZED=$P{F_AUTH}]]>
+	</queryString>
+	<field name="ID" class="java.math.BigDecimal"/>
+	<field name="SUB_DATE" class="java.lang.String"/>
+	<field name="EMP_NAME" class="java.lang.String"/>
+	<field name="AMOUNT" class="java.lang.Double"/>
+	<field name="COST" class="java.lang.Double"/>
+	<field name="CASH_IN_HAND" class="java.lang.Double"/>
+	<field name="AUTHORIZED" class="java.lang.String"/>
+	<field name="COMID" class="java.math.BigDecimal"/>
+	<field name="COMPANY" class="java.lang.String"/>
+	<field name="ADDRESS" class="java.lang.String"/>
+	<field name="COMLOGO" class="oracle.jdbc.OracleBlob"/>
+	<field name="ISOLOGO" class="oracle.jdbc.OracleBlob"/>
+	<variable name="TOTAL_RECORD" class="java.lang.Integer" incrementType="Group" incrementGroup="ID_LIST" calculation="Count">
+		<variableExpression><![CDATA[$F{ID}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{ID}]]></initialValueExpression>
+	</variable>
+	<group name="ID_LIST">
+		<groupExpression><![CDATA[$F{ID}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="103" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="31" uuid="471b062a-cc45-47f1-9419-e481237f4ee9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COMPANY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="31" width="554" height="20" uuid="b0760412-ed17-4d12-9047-d4d23764038f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ADDRESS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="74" width="211" height="20" uuid="ee575e00-76cc-4f70-a393-b8e9e6cece7f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Advance Amount Report]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="32">
+			<staticText>
+				<reportElement x="288" y="1" width="62" height="20" uuid="9812e6ee-d568-494c-a93f-2da6e5daf91e"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cost]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="47" height="20" uuid="cc87ad04-356c-4338-9181-b3f0423e1d7a"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="351" y="1" width="112" height="20" uuid="3c125da3-5a24-4ace-8797-d3a93c78848b"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cash On Hand]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="228" y="1" width="59" height="20" uuid="76ca85aa-1563-4722-a057-d74e5fe459be"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<line>
+				<reportElement x="350" y="1" width="1" height="22" uuid="a1ef3bad-d572-43e8-9913-2f0d41304cb9"/>
+			</line>
+			<line>
+				<reportElement x="463" y="1" width="1" height="22" uuid="9eb2eb85-d90e-4b26-9794-1c6bc8bc20f7"/>
+			</line>
+			<staticText>
+				<reportElement x="48" y="1" width="87" height="20" uuid="f959d2c4-52cc-4049-9946-4b5ebb31c3c9"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="464" y="1" width="88" height="20" uuid="3d5eae10-0b93-4ced-984a-45d6fdc0ceb5"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Authorized]]></text>
+			</staticText>
+			<line>
+				<reportElement x="287" y="1" width="1" height="22" uuid="62aff32f-5f52-4634-93e6-4510b6495c7c"/>
+			</line>
+			<staticText>
+				<reportElement x="136" y="1" width="93" height="20" uuid="f870e837-41eb-43b4-95a2-d8112d291ae2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<line>
+				<reportElement x="48" y="1" width="1" height="23" uuid="e647827c-125d-42c4-b88a-7829c5a15c67"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="23" uuid="199533b1-8805-433d-b22f-d727aa40c582"/>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="1" height="23" uuid="212189c3-1ad5-46b4-b6ac-16509001e694"/>
+			</line>
+			<line>
+				<reportElement x="1" y="23" width="553" height="1" uuid="307ca9d6-079e-451b-bd80-59d58b5c368e"/>
+			</line>
+			<line>
+				<reportElement x="135" y="1" width="1" height="23" uuid="91a9c591-a604-4678-85c6-4c09c21d93f3"/>
+			</line>
+			<line>
+				<reportElement x="228" y="1" width="1" height="23" uuid="4154e75e-6c1d-4c88-914d-3083c83a7bcd"/>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="555" height="1" uuid="65fddf79-d9f8-4475-8206-f8d2762559fd"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24">
+			<line>
+				<reportElement x="0" y="2" width="554" height="1" uuid="2124d615-95b2-4592-ab2e-6e3c477c61dc"/>
+			</line>
+			<line>
+				<reportElement x="554" y="2" width="1" height="22" uuid="06fb8ed3-e2ba-426d-9d9f-19ad9ad1e2a5"/>
+			</line>
+			<textField>
+				<reportElement x="350" y="3" width="113" height="20" uuid="af715228-755a-48a4-973e-dea203d6d372"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CASH_IN_HAND}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="23" width="554" height="1" uuid="5e11b636-dc55-4185-8629-66f1062bd196"/>
+			</line>
+			<line>
+				<reportElement x="287" y="2" width="1" height="21" uuid="0b083118-1cc1-411e-a3b9-6b1b6e5037d0"/>
+			</line>
+			<textField>
+				<reportElement x="464" y="3" width="89" height="20" uuid="bf8003ef-de99-44c5-8348-4d9ce7b7a575"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AUTHORIZED}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="135" y="2" width="1" height="22" uuid="fba07c46-a4a1-4329-b9b6-b2b593b8d6f5"/>
+			</line>
+			<line>
+				<reportElement x="48" y="2" width="1" height="22" uuid="264af726-723b-45e9-84b2-8aecab56b2d3"/>
+			</line>
+			<line>
+				<reportElement x="0" y="2" width="1" height="22" uuid="61401846-e4b1-438d-8263-6419ed2553ab"/>
+			</line>
+			<textField>
+				<reportElement x="288" y="3" width="62" height="20" uuid="f48deb91-615b-45d5-a0f4-b05986d314df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COST}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="463" y="3" width="1" height="21" uuid="21eab37a-903a-479b-8f1b-f9d718dc9fbb"/>
+			</line>
+			<line>
+				<reportElement x="350" y="2" width="1" height="21" uuid="8fe0fcd5-9809-4a4e-8b0f-83eb9c3d89b9"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="3" width="47" height="20" uuid="7c1db726-305d-4732-9b40-5fd50795c7c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="3" width="59" height="20" uuid="c6fcfefd-a131-4696-acd4-a2d5719a8e1c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="47" y="3" width="88" height="20" uuid="12c1dff7-d849-4d7f-85fa-77e02d3c81d1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SUB_DATE}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="228" y="3" width="1" height="21" uuid="ed57c367-4248-410f-ab0b-c5b628a17255"/>
+			</line>
+			<textField>
+				<reportElement x="136" y="3" width="91" height="20" uuid="0401b583-25ed-4556-b2a6-0b9db252459c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMP_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="35" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="1" y="12" width="554" height="23" backcolor="#CCCCCC" uuid="e6a63846-50b8-4531-b5aa-5f9a0d95642b"/>
+				<textField>
+					<reportElement x="452" y="0" width="100" height="20" uuid="8c385717-0542-44c0-8162-cdeeeceb2ec7"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Lucida Sans" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{TOTAL_RECORD}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="342" y="0" width="100" height="20" uuid="3f6777d8-bf11-4d95-b236-21c7d27016ba"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Lucida Sans" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Record:]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="4ea87074-b4ee-45b2-879f-8b9687ec2b37"/>
+				<text><![CDATA[END OF PAGE]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="455" y="0" width="100" height="20" uuid="912cb38d-6e70-4dc8-a5ca-7ba18ad71591"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="17" splitType="Stretch"/>
+	</summary>
+</jasperReport>

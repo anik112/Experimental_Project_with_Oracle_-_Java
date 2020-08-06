@@ -8,8 +8,25 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="ReportGenerator.jar" size="252894" download="eager" />
+    <jar href="ReportGenerator.jar" size="272876" download="eager" />
+    <jar href="lib\barcode4j-2.1.jar" size="274404" download="eager" />
+    <jar href="lib\com-jaspersoft-ireport-components.jar" size="1910653" download="eager" />
+    <jar href="lib\com-jaspersoft-ireport-jasperserver.jar" size="1459780" download="eager" />
+    <jar href="lib\com-jaspersoft-ireport.jar" size="11848679" download="eager" />
+    <jar href="lib\com-jaspersoft-jrx.jar" size="84368" download="eager" />
+    <jar href="lib\commons-beanutils-1.8.2.jar" size="231891" download="eager" />
+    <jar href="lib\commons-collections-3.2.1.jar" size="575389" download="eager" />
+    <jar href="lib\commons-digester-2.1.jar" size="196768" download="eager" />
+    <jar href="lib\commons-javaflow-20060411.jar" size="96529" download="eager" />
+    <jar href="lib\commons-logging-1.1.jar" size="52592" download="eager" />
+    <jar href="lib\dom4j-1.6.jar" size="313359" download="eager" />
+    <jar href="lib\groovy-all-2.0.1.jar" size="6191960" download="eager" />
+    <jar href="lib\iText-2.1.7.js2.jar" size="1130575" download="eager" />
+    <jar href="lib\iTextAsian.jar" size="331811" download="eager" />
     <jar href="lib\itextpdf-5.5.13.1.jar" size="2330916" download="eager" />
+    <jar href="lib\jasper-compiler-jdt.jar" size="1395272" download="eager" />
+    <jar href="lib\jasperreports-5.0.1.jar" size="4218716" download="eager" />
+    <jar href="lib\log4j-1.2.15.jar" size="391834" download="eager" />
     <jar href="lib\ojdbc6.jar" size="2739670" download="eager" />
     <jar href="lib\pdfbox-2.0.19.jar" size="2715618" download="eager" />
   </resources>

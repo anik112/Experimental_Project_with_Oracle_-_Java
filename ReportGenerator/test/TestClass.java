@@ -1,6 +1,8 @@
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,9 +10,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import reportgenerator.corefunction.WriteHardwareQut;
 import reportgenerator.dao.AdvanceAmount;
 import reportgenerator.dao.EntrySubmitedBillDao;
@@ -114,7 +125,34 @@ public class TestClass {
 //                i++;
 //            }
 //            System.out.println(i);
-        
+            try {
+
+                Connection connection = DBConnection.getConnection();
+
+                JasperReport jasperReport = JasperCompileManager.compileReport("reports\\FindAdvanceAmountByAuthorized.jrxml");
+
+                Map<String, Object> parameters = new HashMap<>();
+                parameters.put("F_AUTH", "NO");
+
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
+                //JasperPrintManager.printReport(jasperPrint, true);
+                JasperViewer jv = new JasperViewer(jasperPrint, true);
+                jv.setVisible(true);
+
+//                JasperExportManager.exportReportToPdfFile(jasperPrint, "report1.pdf");
+//
+//                File f = new File("report1.pdf");
+//                Desktop desktop = Desktop.getDesktop();
+//                try {
+//                    desktop.open(f);
+//                } catch (IOException ex) {
+//                    Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+                System.out.println("Done!");
+            } catch (JRException ex) {
+                Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } catch (Exception ex) {
             Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
         }
