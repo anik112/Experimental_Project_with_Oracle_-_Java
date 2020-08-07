@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="ReportGenerator.jar" size="272876" download="eager" />
+    <jar href="ReportGenerator.jar" size="273037" download="eager" />
     <jar href="lib\barcode4j-2.1.jar" size="274404" download="eager" />
     <jar href="lib\com-jaspersoft-ireport-components.jar" size="1910653" download="eager" />
     <jar href="lib\com-jaspersoft-ireport-jasperserver.jar" size="1459780" download="eager" />
@@ -30,6 +30,9 @@
     <jar href="lib\ojdbc6.jar" size="2739670" download="eager" />
     <jar href="lib\pdfbox-2.0.19.jar" size="2715618" download="eager" />
   </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="ReportGenerator" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
   <jfx:javafx-desc  width="800" height="600" main-class="reportgenerator.ReportGenerator"  name="ReportGenerator" />
   <update check="always"/>
 </jnlp>

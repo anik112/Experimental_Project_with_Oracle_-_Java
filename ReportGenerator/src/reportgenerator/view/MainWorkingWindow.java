@@ -11,6 +11,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import reportgenerator.reportsParameter.ReportPeraFindAdvanceAmountByAuthorized;
 import reportgenerator.view.subwindow.AdvanceAmountEntry;
 import reportgenerator.view.subwindow.EntryIncomeAndCost;
@@ -34,6 +36,10 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private int hightOfMainPen=0;
     private int widthOfMainPen=0;
     private int componentSize=2;
+    private int subPenTopBorder=20;
+    private int subPenBottomBorder=20;
+    private int subPenLeftBorder=0;
+    private int subPenRightBorder=0;
     
 
     /**
@@ -53,6 +59,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         
         lblShowCompany.setLocation(0,(this.getHeight()/2)-20);
         lblShowLogo.setLocation(10,this.getHeight()-20);
+        subPenLeftBorder=(widthOfMainPen/2)-(widthOfMainPen/4);
     }
 
     /**
@@ -835,7 +842,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private void addPenInReportGenerateSoftware() {
         subPenOfReportGenerateSoftware.setLayout(new GridLayout(1, 1));
         subPenOfReportGenerateSoftware.removeAll();
-        subPenOfReportGenerateSoftware.setAlignmentX(Component.CENTER_ALIGNMENT);
+        subPenOfReportGenerateSoftware.setBorder(new EmptyBorder(subPenTopBorder,subPenLeftBorder,subPenBottomBorder, subPenRightBorder));
         subPenOfReportGenerateSoftware.add(new ReportGenerateSoftware(savingLoc, configComapnyListUrl, configPendingBillList));
         subPenOfReportGenerateSoftware.revalidate();
         subPenOfReportGenerateSoftware.repaint();
@@ -844,6 +851,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private void addPenInReportGenerateHardware() {
         subPenOfReportGenerateHardware.setLayout(new GridLayout(1, 1));
         subPenOfReportGenerateHardware.removeAll();
+        subPenOfReportGenerateHardware.setBorder(new EmptyBorder(subPenTopBorder,subPenLeftBorder,subPenBottomBorder, subPenRightBorder));
         subPenOfReportGenerateHardware.add(new ReportGenerateHardware(savingLoc, configComapnyListUrl, configPendingBillList));
         subPenOfReportGenerateHardware.revalidate();
         subPenOfReportGenerateHardware.repaint();
@@ -853,6 +861,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         subPenOfEntryAdvanceAmount.setLayout(new GridLayout(1,1));
         subPenOfEntryAdvanceAmount.removeAll();
         AdvanceAmountEntry amountEntry=new AdvanceAmountEntry();
+        subPenOfEntryAdvanceAmount.setBorder(new EmptyBorder(subPenTopBorder,subPenLeftBorder,subPenBottomBorder, subPenRightBorder));
         subPenOfEntryAdvanceAmount.add(amountEntry);
         subPenOfEntryAdvanceAmount.revalidate();
         subPenOfEntryAdvanceAmount.repaint();
@@ -862,6 +871,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         subPenOfSubmitPanddingBill.setLayout(new GridLayout(1,1));
         subPenOfSubmitPanddingBill.removeAll();
         SubmitedPanddingBill panddingBill=new SubmitedPanddingBill(configComapnyListUrl);
+        subPenOfSubmitPanddingBill.setBorder(new EmptyBorder(subPenTopBorder,subPenLeftBorder, subPenBottomBorder, subPenRightBorder));
         subPenOfSubmitPanddingBill.add(panddingBill);
         subPenOfSubmitPanddingBill.revalidate();
         subPenOfSubmitPanddingBill.repaint();
@@ -872,6 +882,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         subPenOfSetupDatabaseInfo.setLayout(new GridLayout(1,1));
         subPenOfSetupDatabaseInfo.removeAll();
         SetupDatabaseInfo databaseInfo=new SetupDatabaseInfo(configSetupDatabase);
+        subPenOfSetupDatabaseInfo.setBorder(new EmptyBorder(subPenTopBorder,subPenLeftBorder, subPenBottomBorder, subPenRightBorder));
         subPenOfSetupDatabaseInfo.add(databaseInfo);
         subPenOfSetupDatabaseInfo.revalidate();
         subPenOfSetupDatabaseInfo.repaint();
@@ -881,6 +892,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         subPenOfEntryIncomeAndCost.setLayout(new GridLayout(1,1));
         subPenOfEntryIncomeAndCost.removeAll();
         EntryIncomeAndCost incomeAndCost=new EntryIncomeAndCost();
+        subPenOfEntryIncomeAndCost.setBorder(new EmptyBorder(subPenTopBorder, subPenLeftBorder, subPenBottomBorder, subPenRightBorder));
         subPenOfEntryIncomeAndCost.add(incomeAndCost);
         subPenOfEntryIncomeAndCost.revalidate();
         subPenOfEntryIncomeAndCost.repaint();
@@ -888,9 +900,11 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     
     
     private void addAdvanceAmountReport(){
+        //GridLayout gl=new GridLayout(1,1,200,200);
         subPenOfAdvanceAmountReport.setLayout(new GridLayout(1,1));
         subPenOfAdvanceAmountReport.removeAll();
         ReportPeraFindAdvanceAmountByAuthorized advanceAmountByAuthorized=new ReportPeraFindAdvanceAmountByAuthorized();
+        subPenOfAdvanceAmountReport.setBorder(new EmptyBorder(subPenTopBorder, subPenLeftBorder, subPenBottomBorder, subPenRightBorder));
         subPenOfAdvanceAmountReport.add(advanceAmountByAuthorized);
         subPenOfAdvanceAmountReport.revalidate();
         subPenOfAdvanceAmountReport.repaint();
