@@ -6,12 +6,10 @@
 package reportgenerator.view;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import reportgenerator.reportsParameter.ReportPeraFindAdvanceAmountByAuthorized;
 import reportgenerator.view.subwindow.AdvanceAmountEntry;
