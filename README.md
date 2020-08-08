@@ -44,4 +44,5 @@ int main(){
 - jdk-8u231-windows-x64
 - jna-5.5.0
 - ZKFingerReader
+- Jasper Report
 
