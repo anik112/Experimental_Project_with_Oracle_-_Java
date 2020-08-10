@@ -72,7 +72,7 @@ public class ConverterCore {
             if (stateZKT) {
                 getConn = AccessConnection.dbConnection(); // get connection from access database
                 // write SQL for pull data from database
-                String sql02 = "SELECT CHECKINOUT.CHECKTIME,CHECKINOUT.SENSORID,CHECKINOUT.USERID,USERINFO.Badgenumber "
+                String sql02 = "SELECT CHECKINOUT.CHECKTIME,CHECKINOUT.SENSORID,CHECKINOUT.USERID,USERINFO.CardNo "
                         + "FROM CHECKINOUT,USERINFO WHERE "
                         + "DateValue(checktime) BETWEEN  #" + fromDate + "#  AND  #" + toDate + "# "
                         + "AND USERINFO.USERID=CHECKINOUT.USERID";
@@ -124,7 +124,7 @@ public class ConverterCore {
                         onlyTime = onlyTime.replace(":", ""); // remove ':' from time
 
                         // Make string format
-                        String finalText = (rs.getString(2) + ":" + addedStringWithCardnoZkt + rs.getString(4) + ":" + onlyDate + ":" + onlyTime + ":" + "BLANK !!:11");
+                        String finalText = ('"'+rs.getString(2) + ":" + addedStringWithCardnoZkt + rs.getString(4) + ":" + onlyDate + "1:" + onlyTime + ":" + "BLANK !!:11"+'"');
                         printWriter.println(finalText); // write text in file
 
                         System.out.println(finalText);
