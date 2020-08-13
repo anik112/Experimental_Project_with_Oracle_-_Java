@@ -105,7 +105,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         menuSetupDatabase = new javax.swing.JMenu();
         manuItemEntrySetupDatabaseInfo = new javax.swing.JMenuItem();
 
-        penReportGenerateSoftware.setBackground(new java.awt.Color(255, 255, 224));
+        penReportGenerateSoftware.setBackground(new java.awt.Color(204, 204, 204));
         penReportGenerateSoftware.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
         penReportGenerateSoftware.setClosable(true);
         penReportGenerateSoftware.setMaximizable(true);
@@ -131,7 +131,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             }
         });
 
-        subPenOfReportGenerateSoftware.setBackground(new java.awt.Color(255, 255, 224));
+        subPenOfReportGenerateSoftware.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout subPenOfReportGenerateSoftwareLayout = new javax.swing.GroupLayout(subPenOfReportGenerateSoftware);
         subPenOfReportGenerateSoftware.setLayout(subPenOfReportGenerateSoftwareLayout);
@@ -155,7 +155,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfReportGenerateSoftware, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        penReportGenerateHardware.setBackground(new java.awt.Color(255, 255, 224));
+        penReportGenerateHardware.setBackground(new java.awt.Color(204, 204, 204));
         penReportGenerateHardware.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 255, 51)));
         penReportGenerateHardware.setClosable(true);
         penReportGenerateHardware.setMaximizable(true);
@@ -181,7 +181,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             }
         });
 
-        subPenOfReportGenerateHardware.setBackground(new java.awt.Color(255, 255, 224));
+        subPenOfReportGenerateHardware.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout subPenOfReportGenerateHardwareLayout = new javax.swing.GroupLayout(subPenOfReportGenerateHardware);
         subPenOfReportGenerateHardware.setLayout(subPenOfReportGenerateHardwareLayout);
@@ -205,7 +205,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfReportGenerateHardware, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        penEntryAdvanceAmount.setBackground(new java.awt.Color(255, 255, 224));
+        penEntryAdvanceAmount.setBackground(new java.awt.Color(204, 204, 204));
         penEntryAdvanceAmount.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 255)));
         penEntryAdvanceAmount.setClosable(true);
         penEntryAdvanceAmount.setMaximizable(true);
@@ -231,7 +231,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             }
         });
 
-        subPenOfEntryAdvanceAmount.setBackground(new java.awt.Color(255, 255, 224));
+        subPenOfEntryAdvanceAmount.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout subPenOfEntryAdvanceAmountLayout = new javax.swing.GroupLayout(subPenOfEntryAdvanceAmount);
         subPenOfEntryAdvanceAmount.setLayout(subPenOfEntryAdvanceAmountLayout);
@@ -255,7 +255,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfEntryAdvanceAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        penSubmitPanddingBill.setBackground(new java.awt.Color(255, 255, 224));
+        penSubmitPanddingBill.setBackground(new java.awt.Color(204, 204, 204));
         penSubmitPanddingBill.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 255)));
         penSubmitPanddingBill.setClosable(true);
         penSubmitPanddingBill.setMaximizable(true);
@@ -281,7 +281,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             }
         });
 
-        subPenOfSubmitPanddingBill.setBackground(new java.awt.Color(255, 255, 224));
+        subPenOfSubmitPanddingBill.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout subPenOfSubmitPanddingBillLayout = new javax.swing.GroupLayout(subPenOfSubmitPanddingBill);
         subPenOfSubmitPanddingBill.setLayout(subPenOfSubmitPanddingBillLayout);
@@ -305,7 +305,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfSubmitPanddingBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        penEntryIncomeAndCost.setBackground(new java.awt.Color(255, 255, 224));
+        penEntryIncomeAndCost.setBackground(new java.awt.Color(204, 204, 204));
         penEntryIncomeAndCost.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 255)));
         penEntryIncomeAndCost.setClosable(true);
         penEntryIncomeAndCost.setMaximizable(true);
@@ -331,7 +331,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             }
         });
 
-        subPenOfEntryIncomeAndCost.setBackground(new java.awt.Color(255, 255, 224));
+        subPenOfEntryIncomeAndCost.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout subPenOfEntryIncomeAndCostLayout = new javax.swing.GroupLayout(subPenOfEntryIncomeAndCost);
         subPenOfEntryIncomeAndCost.setLayout(subPenOfEntryIncomeAndCostLayout);
@@ -355,7 +355,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfEntryIncomeAndCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        penSetupDatabaseInfo.setBackground(new java.awt.Color(255, 255, 224));
+        penSetupDatabaseInfo.setBackground(new java.awt.Color(204, 204, 204));
         penSetupDatabaseInfo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
         penSetupDatabaseInfo.setClosable(true);
         penSetupDatabaseInfo.setMaximizable(true);
@@ -381,7 +381,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             }
         });
 
-        subPenOfSetupDatabaseInfo.setBackground(new java.awt.Color(255, 255, 224));
+        subPenOfSetupDatabaseInfo.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout subPenOfSetupDatabaseInfoLayout = new javax.swing.GroupLayout(subPenOfSetupDatabaseInfo);
         subPenOfSetupDatabaseInfo.setLayout(subPenOfSetupDatabaseInfoLayout);
@@ -405,7 +405,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             .addComponent(subPenOfSetupDatabaseInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        penAdvanceAmountReport.setBackground(new java.awt.Color(255, 255, 224));
+        penAdvanceAmountReport.setBackground(new java.awt.Color(204, 204, 204));
         penAdvanceAmountReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
         penAdvanceAmountReport.setClosable(true);
         penAdvanceAmountReport.setMaximizable(true);
@@ -431,7 +431,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             }
         });
 
-        subPenOfAdvanceAmountReport.setBackground(new java.awt.Color(255, 255, 224));
+        subPenOfAdvanceAmountReport.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout subPenOfAdvanceAmountReportLayout = new javax.swing.GroupLayout(subPenOfAdvanceAmountReport);
         subPenOfAdvanceAmountReport.setLayout(subPenOfAdvanceAmountReportLayout);
