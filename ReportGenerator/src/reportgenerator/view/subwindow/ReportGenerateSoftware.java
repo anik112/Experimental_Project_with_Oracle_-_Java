@@ -7,7 +7,10 @@ package reportgenerator.view.subwindow;
  */
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -84,8 +87,9 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         txtAmount = new javax.swing.JTextField();
         btnGenerate = new javax.swing.JButton();
         btnMonthlyBillOpenFile = new javax.swing.JButton();
-        btnMonthlyBillOpenFolder = new javax.swing.JButton();
+        btnMonthlyBillDownload = new javax.swing.JButton();
         checkBoxMonthlyBillHardcopy = new javax.swing.JCheckBox();
+        txtAmountInWordMonthlyBill = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         txtReqRow1 = new javax.swing.JTextField();
@@ -138,13 +142,16 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         btnMakeRow = new javax.swing.JButton();
         btnOpenFile = new javax.swing.JButton();
-        btnReqBillOpenFolder = new javax.swing.JButton();
+        btnReqBillDownload = new javax.swing.JButton();
+        txtAmountInWordRegQut = new javax.swing.JTextField();
+        lblShowReqAmount = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnMakeReqQtuBill = new javax.swing.JButton();
         btnMakeReqQutBill = new javax.swing.JButton();
         txtReqQutBillNumber = new javax.swing.JTextField();
-        btnRequirmentBillOpenFolder = new javax.swing.JButton();
+        btnRequirmentBillDownload = new javax.swing.JButton();
         checkBoxRequirmentBillHardcopy = new javax.swing.JCheckBox();
+        txtAmountInWordReqBill = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblBillPendingList = new javax.swing.JTable();
@@ -208,11 +215,12 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
             }
         });
 
-        btnMonthlyBillOpenFolder.setText("Open Folder");
-        btnMonthlyBillOpenFolder.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
-        btnMonthlyBillOpenFolder.addActionListener(new java.awt.event.ActionListener() {
+        btnMonthlyBillDownload.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnMonthlyBillDownload.setText("Download");
+        btnMonthlyBillDownload.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
+        btnMonthlyBillDownload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMonthlyBillOpenFolderActionPerformed(evt);
+                btnMonthlyBillDownloadActionPerformed(evt);
             }
         });
 
@@ -224,6 +232,10 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         checkBoxMonthlyBillHardcopy.setBorderPainted(true);
         checkBoxMonthlyBillHardcopy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        txtAmountInWordMonthlyBill.setEditable(false);
+        txtAmountInWordMonthlyBill.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtAmountInWordMonthlyBill.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Amount in word", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 10))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -233,34 +245,40 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                 .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkBoxMonthlyBillHardcopy, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(checkBoxMonthlyBillHardcopy, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGenerate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtAmountInWordMonthlyBill))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMonthlyBillOpenFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMonthlyBillOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnMonthlyBillOpenFile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMonthlyBillDownload, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                    .addComponent(btnMonthlyBillOpenFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(checkBoxMonthlyBillHardcopy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMonthlyBillOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                            .addComponent(btnMonthlyBillDownload, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(checkBoxMonthlyBillHardcopy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtAmountInWordMonthlyBill)
+                            .addComponent(btnMonthlyBillOpenFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 224));
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "No-Detls   -----------------------------------------   Amount", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "No-Detls   --------------------------------------------------   Amount", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 224));
 
         txtReqRow1.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
 
@@ -557,25 +575,38 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
             }
         });
 
-        btnReqBillOpenFolder.setText("Open Folder");
-        btnReqBillOpenFolder.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
-        btnReqBillOpenFolder.addActionListener(new java.awt.event.ActionListener() {
+        btnReqBillDownload.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnReqBillDownload.setText("Download");
+        btnReqBillDownload.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
+        btnReqBillDownload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReqBillOpenFolderActionPerformed(evt);
+                btnReqBillDownloadActionPerformed(evt);
             }
         });
+
+        txtAmountInWordRegQut.setEditable(false);
+        txtAmountInWordRegQut.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtAmountInWordRegQut.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Amount in word", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 10))); // NOI18N
+
+        lblShowReqAmount.setFont(new java.awt.Font("Lucida Sans", 0, 8)); // NOI18N
+        lblShowReqAmount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblShowReqAmount.setText("0");
+        lblShowReqAmount.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, java.awt.Color.lightGray, java.awt.Color.white, java.awt.Color.gray, java.awt.Color.white));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblShowReqAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtAmountInWordRegQut, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnMakeRow, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnReqBillOpenFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReqBillDownload, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
         );
         jPanel4Layout.setVerticalGroup(
@@ -584,8 +615,13 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMakeRow, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReqBillOpenFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 8, Short.MAX_VALUE))
+                    .addComponent(btnReqBillDownload, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblShowReqAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtAmountInWordRegQut, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 224));
@@ -610,11 +646,12 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         txtReqQutBillNumber.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtReqQutBillNumber.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Bill Number", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
 
-        btnRequirmentBillOpenFolder.setText("Open Folder");
-        btnRequirmentBillOpenFolder.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
-        btnRequirmentBillOpenFolder.addActionListener(new java.awt.event.ActionListener() {
+        btnRequirmentBillDownload.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnRequirmentBillDownload.setText("Download");
+        btnRequirmentBillDownload.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.lightGray));
+        btnRequirmentBillDownload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRequirmentBillOpenFolderActionPerformed(evt);
+                btnRequirmentBillDownloadActionPerformed(evt);
             }
         });
 
@@ -626,35 +663,42 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         checkBoxRequirmentBillHardcopy.setBorderPainted(true);
         checkBoxRequirmentBillHardcopy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        txtAmountInWordReqBill.setEditable(false);
+        txtAmountInWordReqBill.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtAmountInWordReqBill.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Amount in word", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 10))); // NOI18N
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtReqQutBillNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnMakeReqQutBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(checkBoxRequirmentBillHardcopy, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
+                .addComponent(txtReqQutBillNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRequirmentBillOpenFolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtAmountInWordReqBill, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(checkBoxRequirmentBillHardcopy, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMakeReqQutBill, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRequirmentBillDownload, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addComponent(btnMakeReqQtuBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(btnMakeReqQutBill, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnRequirmentBillOpenFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMakeReqQtuBill, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkBoxRequirmentBillHardcopy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnRequirmentBillDownload, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMakeReqQutBill, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkBoxRequirmentBillHardcopy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnMakeReqQtuBill, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(txtAmountInWordReqBill, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(txtReqQutBillNumber)
         );
 
@@ -664,22 +708,23 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboCompany, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboMonth, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDate)
-                            .addComponent(comboYear, 0, 153, Short.MAX_VALUE)))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboYear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 4, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -688,23 +733,22 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(comboCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel9)
+                        .addGap(4, 4, 4)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addGap(4, 4, 4)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -740,12 +784,12 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 930, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator3)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -867,7 +911,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Select Company, Month, Year, Date",
-                    ":: Please Select :: ", JOptionPane.INFORMATION_MESSAGE);
+                    ":: Please Select :: ", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGenerateActionPerformed
 
@@ -884,26 +928,38 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                    ":: Error-03 :: ", JOptionPane.INFORMATION_MESSAGE);
+                    ":: Error-03 :: ", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnMonthlyBillOpenFileActionPerformed
 
-    private void btnMonthlyBillOpenFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyBillOpenFolderActionPerformed
+    private void btnMonthlyBillDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyBillDownloadActionPerformed
         // TODO add your handling code here:
 
         try {
             if (!savingLoc.isEmpty()) {
-                File file = new File(openFolderUrl);
-                Desktop desktop = Desktop.getDesktop();
-                desktop.open(file);
+//                File file = new File(openFolderUrl);
+//                Desktop desktop = Desktop.getDesktop();
+//                desktop.open(file);
+                // copy file in local D:/ drive by File channel
+                File srcFile = new File(recentMonthlyBillFileLoc);
+                File distFile = new File("D:\\" + srcFile.getName());
+                FileChannel srcChannel = new FileInputStream(srcFile).getChannel();
+                FileChannel distChannel = new FileOutputStream(distFile).getChannel();
+
+                distChannel.transferFrom(srcChannel, 0, srcChannel.size());
+                srcChannel.close();
+                distChannel.close();
+                
+                JOptionPane.showMessageDialog(null, "File Download in "+srcFile.getAbsolutePath(),
+                    ":: Download :: ", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                    ":: Error-12 :: ", JOptionPane.INFORMATION_MESSAGE);
+                    ":: Error-12 :: ", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnMonthlyBillOpenFolderActionPerformed
+    }//GEN-LAST:event_btnMonthlyBillDownloadActionPerformed
 
     private void txtReqAmountRow8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReqAmountRow8ActionPerformed
         // TODO add your handling code here:
@@ -959,20 +1015,33 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnOpenFileActionPerformed
 
-    private void btnReqBillOpenFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReqBillOpenFolderActionPerformed
+    private void btnReqBillDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReqBillDownloadActionPerformed
         // TODO add your handling code here:
         try {
             if (!recentReqQutFileLoc.isEmpty()) {
-                File file = new File(openFolderUrl);
-                Desktop desktop = Desktop.getDesktop();
-                desktop.open(file);
+//                File file = new File(openFolderUrl);
+//                Desktop desktop = Desktop.getDesktop();
+//                desktop.open(file);
+
+                // copy file in local D:/ drive by File channel
+                File srcFile = new File(recentReqQutFileLoc);
+                File distFile = new File("D:\\" + srcFile.getName());
+                FileChannel srcChannel = new FileInputStream(srcFile).getChannel();
+                FileChannel distChannel = new FileOutputStream(distFile).getChannel();
+
+                distChannel.transferFrom(srcChannel, 0, srcChannel.size());
+                srcChannel.close();
+                distChannel.close();
+                
+                JOptionPane.showMessageDialog(null, "File Download in "+srcFile.getAbsolutePath(),
+                    ":: Download :: ", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     ":: Error-02 :: ", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_btnReqBillOpenFolderActionPerformed
+    }//GEN-LAST:event_btnReqBillDownloadActionPerformed
 
     private void btnMakeReqQtuBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeReqQtuBillActionPerformed
         // TODO add your handling code here:
@@ -986,7 +1055,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                    ":: Error-04 :: ", JOptionPane.INFORMATION_MESSAGE);
+                    ":: Error-04 :: ", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnMakeReqQtuBillActionPerformed
 
@@ -1029,7 +1098,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                             ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null, "Qutation Bill Isn't Generated.",
-                            ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+                            ":: Success :: ", JOptionPane.ERROR_MESSAGE);
                 }
 
             } else {
@@ -1057,30 +1126,44 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                             ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null, "Qutation Bill Isn't Generated.",
-                            ":: Success :: ", JOptionPane.INFORMATION_MESSAGE);
+                            ":: Success :: ", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
         } else {
             JOptionPane.showMessageDialog(null, "Select Company, Month, Year, Date",
-                    ":: Please Select :: ", JOptionPane.INFORMATION_MESSAGE);
+                    ":: Please Select :: ", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnMakeReqQutBillActionPerformed
 
-    private void btnRequirmentBillOpenFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequirmentBillOpenFolderActionPerformed
+    private void btnRequirmentBillDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequirmentBillDownloadActionPerformed
         // TODO add your handling code here:
         try {
             if (!savingLoc.isEmpty()) {
-                File file = new File(openFolderUrl);
-                Desktop desktop = Desktop.getDesktop();
-                desktop.open(file);
+//                File file = new File(openFolderUrl);
+//                Desktop desktop = Desktop.getDesktop();
+//                desktop.open(file);
+
+                // copy file in local D:/ drive by File channel
+                File srcFile = new File(recentReqQutBillFileLoc);
+                File distFile = new File("D:\\" + srcFile.getName());
+                FileChannel srcChannel = new FileInputStream(srcFile).getChannel();
+                FileChannel distChannel = new FileOutputStream(distFile).getChannel();
+
+                distChannel.transferFrom(srcChannel, 0, srcChannel.size());
+                srcChannel.close();
+                distChannel.close();
+                
+                JOptionPane.showMessageDialog(null, "File Download in "+srcFile.getAbsolutePath(),
+                    ":: Download :: ", JOptionPane.INFORMATION_MESSAGE);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage(),
-                    ":: Error-13 :: ", JOptionPane.INFORMATION_MESSAGE);
+                    ":: Error-13 :: ", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnRequirmentBillOpenFolderActionPerformed
+    }//GEN-LAST:event_btnRequirmentBillDownloadActionPerformed
 
     private void tblBillPendingListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBillPendingListMouseClicked
 
@@ -1254,11 +1337,11 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
     private javax.swing.JButton btnMakeReqQtuBill;
     private javax.swing.JButton btnMakeReqQutBill;
     private javax.swing.JButton btnMakeRow;
+    private javax.swing.JButton btnMonthlyBillDownload;
     private javax.swing.JButton btnMonthlyBillOpenFile;
-    private javax.swing.JButton btnMonthlyBillOpenFolder;
     private javax.swing.JButton btnOpenFile;
-    private javax.swing.JButton btnReqBillOpenFolder;
-    private javax.swing.JButton btnRequirmentBillOpenFolder;
+    private javax.swing.JButton btnReqBillDownload;
+    private javax.swing.JButton btnRequirmentBillDownload;
     private javax.swing.JCheckBox checkBoxMonthlyBillHardcopy;
     private javax.swing.JCheckBox checkBoxRequirmentBillHardcopy;
     private javax.swing.JComboBox<String> comboCompany;
@@ -1290,8 +1373,12 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel lblShowReqAmount;
     private javax.swing.JTable tblBillPendingList;
     private javax.swing.JTextField txtAmount;
+    private javax.swing.JTextField txtAmountInWordMonthlyBill;
+    private javax.swing.JTextField txtAmountInWordRegQut;
+    private javax.swing.JTextField txtAmountInWordReqBill;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtReqAmountRow1;
     private javax.swing.JTextField txtReqAmountRow10;
