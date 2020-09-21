@@ -41,11 +41,16 @@ public class WriteMonthlyBill {
     private final String amountTage = "Amount in word: ";
     private final String noteTxt = "N.B: All payments should be in A/C payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
     private final String sign = "..................................\nAuthorized Signatory";
+    private String amountInWord="";
 
-//    public static void main(String[] arg) {
-//
-//        new WriteMonthlyBill().writeMonthlyBillInPdfFile();
-//    }
+    public String getAmountInWord() {
+        return amountInWord;
+    }
+
+    public void setAmountInWord(String amountInWord) {
+        this.amountInWord = amountInWord;
+    }
+    
     public boolean writeMonthlyBillInPdfFile(MonthlyBillComponent component, File selectedFile) {
 
         try {
@@ -166,8 +171,12 @@ public class WriteMonthlyBill {
 
             Font f3 = FontFactory.getFont("SansSerif", 10);
             document.add(new Paragraph(tableFooterTxt, f3));
-
-            document.add(new Paragraph("\n" + amountTage + (new IOFunction().getNumberInWord(component.getAmount(), configAmountListUrl))+" only.", f1));
+            
+            if(amountInWord.length() < 1){
+                amountInWord=(new IOFunction().getNumberInWord(component.getAmount(), configAmountListUrl));
+            }
+            
+            document.add(new Paragraph("\n" + amountTage + amountInWord +" only.", f1));
             document.add(new Paragraph(noteTxt + "\n\n\n", f1));
 
             Image sirSing = Image.getInstance("img\\Sir-Sign.jpg");

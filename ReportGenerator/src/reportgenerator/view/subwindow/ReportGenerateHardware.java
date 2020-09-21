@@ -9,6 +9,9 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.GridLayout;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -150,7 +153,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         comboQtyType6 = new javax.swing.JComboBox<>();
         comboQtyType5 = new javax.swing.JComboBox<>();
         comboQtyType9 = new javax.swing.JComboBox<>();
-        btnOpenFolder = new javax.swing.JButton();
+        btnDownloadFile = new javax.swing.JButton();
         comboQtyType2 = new javax.swing.JComboBox<>();
         comboQtyType3 = new javax.swing.JComboBox<>();
         comboQtyType8 = new javax.swing.JComboBox<>();
@@ -326,6 +329,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
             }
         });
 
+        checkBoxHardwareQutHardCopy.setBackground(new java.awt.Color(255, 255, 224));
         checkBoxHardwareQutHardCopy.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
         checkBoxHardwareQutHardCopy.setText("Hard Copy");
         checkBoxHardwareQutHardCopy.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -533,7 +537,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jPanel3);
 
         btnMakeHardwareQut.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        btnMakeHardwareQut.setText("Make Qutitoin");
+        btnMakeHardwareQut.setText("Generate Qutitoin");
         btnMakeHardwareQut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMakeHardwareQutActionPerformed(evt);
@@ -544,7 +548,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         txtHardwareBillNo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Bill Number", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
 
         btnMakeHardwareQutBill.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        btnMakeHardwareQutBill.setText("Make Qutitoin Bill");
+        btnMakeHardwareQutBill.setText("Generate Qutitoin Bill");
         btnMakeHardwareQutBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMakeHardwareQutBillActionPerformed(evt);
@@ -602,6 +606,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
 
         comboQtyType7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PCS", "CM", "M" }));
 
+        btnOpenFile.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         btnOpenFile.setText("Open File");
         btnOpenFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -615,10 +620,11 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
 
         comboQtyType9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PCS", "CM", "M" }));
 
-        btnOpenFolder.setText("Open Folder");
-        btnOpenFolder.addActionListener(new java.awt.event.ActionListener() {
+        btnDownloadFile.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
+        btnDownloadFile.setText("Download");
+        btnDownloadFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOpenFolderActionPerformed(evt);
+                btnDownloadFileActionPerformed(evt);
             }
         });
 
@@ -647,7 +653,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
                     .addComponent(comboQtyType8, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(comboQtyType9, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(comboQtyType10, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnOpenFolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDownloadFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnOpenFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -677,7 +683,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnOpenFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnDownloadFile, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -760,7 +766,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
 
         String url = savingLoc + reqBillSavingTeg + "\\" + comName + "\\";
         openFolderUrl = url;
-        
+
         if (!checkBoxHardwareQutHardCopy.isSelected()) {
 
             WriteHardwareQutBill writeQutBill = new WriteHardwareQutBill();
@@ -821,20 +827,32 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnOpenFileActionPerformed
 
-    private void btnOpenFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenFolderActionPerformed
+    private void btnDownloadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadFileActionPerformed
         // TODO add your handling code here:
         try {
             if (!savingLoc.isEmpty()) {
-                File file = new File(openFolderUrl);
-                Desktop desktop = Desktop.getDesktop();
-                desktop.open(file);
+//                File file = new File(openFolderUrl);
+//                Desktop desktop = Desktop.getDesktop();
+//                desktop.open(file);
+
+                File srcFile = new File(recentFileLocation);
+                File distFile = new File("D:\\" + srcFile.getName());
+                FileChannel srcChannel = new FileInputStream(srcFile).getChannel();
+                FileChannel distChannel = new FileOutputStream(distFile).getChannel();
+
+                distChannel.transferFrom(srcChannel, 0, srcChannel.size());
+                srcChannel.close();
+                distChannel.close();
+
+                JOptionPane.showMessageDialog(null, "File Download in " + srcFile.getAbsolutePath(),
+                        ":: Download :: ", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     ":: Error-13 :: ", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_btnOpenFolderActionPerformed
+    }//GEN-LAST:event_btnDownloadFileActionPerformed
 
     private void txtDateFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDateFocusGained
         // TODO add your handling code here:
@@ -1213,10 +1231,10 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDownloadFile;
     private javax.swing.JButton btnMakeHardwareQut;
     private javax.swing.JButton btnMakeHardwareQutBill;
     private javax.swing.JButton btnOpenFile;
-    private javax.swing.JButton btnOpenFolder;
     private javax.swing.JCheckBox checkBoxHardwareQutHardCopy;
     private javax.swing.JComboBox<String> comboCompany;
     private javax.swing.JComboBox<String> comboMonth;

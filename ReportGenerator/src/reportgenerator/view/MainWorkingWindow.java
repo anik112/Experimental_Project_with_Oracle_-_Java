@@ -34,10 +34,10 @@ public class MainWorkingWindow extends javax.swing.JFrame {
     private int hightOfMainPen=0;
     private int widthOfMainPen=0;
     private int componentSize=2;
-    private int subPenTopBorder=20;
-    private int subPenBottomBorder=20;
-    private int subPenLeftBorder=0;
-    private int subPenRightBorder=0;
+    private int subPenTopBorder=10;
+    private int subPenBottomBorder=10;
+    private int subPenLeftBorder=20;
+    private int subPenRightBorder=20;
     
 
     /**
@@ -48,16 +48,16 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         initComponents();
         mainPen.setLayout(new BorderLayout(50, 50));
 
-        Dimension DimMax = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setMaximumSize(DimMax);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        Dimension DimMax = Toolkit.getDefaultToolkit().getScreenSize();
+//        this.setMaximumSize(DimMax);
+//        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         hightOfMainPen=mainPen.getHeight();
         widthOfMainPen=mainPen.getWidth();
         
-        lblShowCompany.setLocation(0,(this.getHeight()/2)-20);
-        lblShowLogo.setLocation(10,this.getHeight()-20);
-        subPenLeftBorder=(widthOfMainPen/2)-(widthOfMainPen/4);
+//        lblShowCompany.setLocation(0,(this.getHeight()/2));
+//        lblShowLogo.setLocation(10,this.getHeight());
+        //subPenLeftBorder=(widthOfMainPen/2)-(widthOfMainPen/4);
     }
 
     /**
@@ -457,8 +457,11 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Report Generator | VSI");
-        setLocationByPlatform(true);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocation(new java.awt.Point(1, 1));
         setName("MainFrame"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1100, 730));
+        setSize(new java.awt.Dimension(1100, 730));
 
         mainPen.setBackground(new java.awt.Color(255, 255, 224));
 
@@ -482,9 +485,9 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         mainPenLayout.setVerticalGroup(
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPenLayout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                .addGap(150, 150, 150)
+                .addGap(137, 137, 137)
+                .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                .addGap(163, 163, 163)
                 .addComponent(lblShowLogo))
         );
 

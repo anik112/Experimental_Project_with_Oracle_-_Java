@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="ReportGenerator.jar" size="275561" download="eager" />
+    <jar href="ReportGenerator.jar" size="277510" download="eager" />
     <jar href="lib\barcode4j-2.1.jar" size="274404" download="eager" />
     <jar href="lib\com-jaspersoft-ireport-components.jar" size="1910653" download="eager" />
     <jar href="lib\com-jaspersoft-ireport-jasperserver.jar" size="1459780" download="eager" />

@@ -51,7 +51,16 @@ public class WriteQutitoinBilHardCopy {
     public void setTotalamount(int totalamount) {
         this.totalamount = totalamount;
     }
+    
+    private String amountInWord="";
+    
+    public String getAmountInWord() {
+        return amountInWord;
+    }
 
+    public void setAmountInWord(String amountInWord) {
+        this.amountInWord = amountInWord;
+    }
         
     public boolean writeReqQtBillInPdfFile(List<ReqQutComponent> components, String billNo, File selectedFile) {
 
@@ -203,8 +212,12 @@ public class WriteQutitoinBilHardCopy {
             // set font style and size
             Font f3 = FontFactory.getFont("SansSerif", 10);
             document.add(new Paragraph(tableFooterTxt, f3));
-
-            document.add(new Paragraph("\n" + amountTage + (new IOFunction().getNumberInWord(totalamount, configAmountListUrl)) + " only.", f1));
+            
+            if(amountInWord.length() < 1){
+                amountInWord = (new IOFunction().getNumberInWord(totalamount, configAmountListUrl));
+            }
+            
+            document.add(new Paragraph("\n" + amountTage + amountInWord + " only.", f1));
             document.add(new Paragraph(noteTxt + "\n\n", f1));
 
             Image sirSing = Image.getInstance("img\\Sir-Sign-Blank.jpg");

@@ -43,6 +43,15 @@ public class WriteQutitoin {
     private final String noteTxt = "N.B: All payments should be in a/c payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
     private final String sign = "..................................\nAuthorized Signatory";
     private int totalamount = 0;
+    private String amountInWord="";
+    
+    public String getAmountInWord() {
+        return amountInWord;
+    }
+
+    public void setAmountInWord(String amountInWord) {
+        this.amountInWord = amountInWord;
+    }
 
     public boolean writeReqQtInPdfFile(List<ReqQutComponent> components, File selectedFile) {
 
@@ -220,7 +229,11 @@ public class WriteQutitoin {
             Font f3 = FontFactory.getFont("SansSerif", 10);
             document.add(new Paragraph(tableFooterTxt, f3));
 
-            document.add(new Paragraph("\n" + amountTage + (new IOFunction().getNumberInWord(totalamount, configAmountListUrl)) + " only.", f1));
+            if(amountInWord.length() < 1){
+                amountInWord=(new IOFunction().getNumberInWord(totalamount, configAmountListUrl));
+            }
+            
+            document.add(new Paragraph("\n" + amountTage + amountInWord + " only.", f1));
             document.add(new Paragraph(noteTxt + "\n\n", f1));
 
             Image sirSing = Image.getInstance("img\\Sir-Sign.jpg");

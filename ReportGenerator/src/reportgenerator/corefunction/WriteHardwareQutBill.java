@@ -46,7 +46,7 @@ public class WriteHardwareQutBill {
     private final String noteTxt = "N.B: All payments should be in A/C payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
     private final String sign = "..................................\nAuthorized Signatory";
     private float totalamount = 0;
-    private String amountInWord;
+    private String amountInWord="";
 
     public WriteHardwareQutBill() {
     }

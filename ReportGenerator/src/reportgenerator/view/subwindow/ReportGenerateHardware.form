@@ -784,6 +784,9 @@
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="checkBoxHardwareQutHardCopy">
                           <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="e0" green="ff" red="ff" type="rgb"/>
+                            </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Lucida Sans" size="12" style="1"/>
                             </Property>
@@ -899,7 +902,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Lucida Sans" size="12" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Make Qutitoin"/>
+                    <Property name="text" type="java.lang.String" value="Generate Qutitoin"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMakeHardwareQutActionPerformed"/>
@@ -927,7 +930,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Lucida Sans" size="12" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Make Qutitoin Bill"/>
+                    <Property name="text" type="java.lang.String" value="Generate Qutitoin Bill"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMakeHardwareQutBillActionPerformed"/>
@@ -986,7 +989,7 @@
                               <Component id="comboQtyType8" alignment="0" max="32767" attributes="0"/>
                               <Component id="comboQtyType9" alignment="0" max="32767" attributes="0"/>
                               <Component id="comboQtyType10" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnOpenFolder" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnDownloadFile" alignment="0" max="32767" attributes="0"/>
                               <Component id="btnOpenFile" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1019,7 +1022,7 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnOpenFile" min="-2" pref="48" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnOpenFolder" min="-2" pref="46" max="-2" attributes="0"/>
+                          <Component id="btnDownloadFile" min="-2" pref="46" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1069,6 +1072,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnOpenFile">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Lucida Sans" size="12" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Open File"/>
                   </Properties>
                   <Events>
@@ -1117,12 +1123,15 @@
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnOpenFolder">
+                <Component class="javax.swing.JButton" name="btnDownloadFile">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Open Folder"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Lucida Sans" size="12" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Download"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOpenFolderActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDownloadFileActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="comboQtyType2">
