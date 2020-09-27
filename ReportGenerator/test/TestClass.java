@@ -1,4 +1,5 @@
 
+import com.sun.net.httpserver.Filter;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,8 +23,10 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import reportgenerator.corefunction.WriteChallanReport;
 import reportgenerator.corefunction.WriteHardwareQut;
 import reportgenerator.dao.AdvanceAmount;
+import reportgenerator.dao.ChallanReportComponent;
 import reportgenerator.dao.EntrySubmitedBillDao;
 import reportgenerator.dao.HardwareQutComponent;
 import reportgenerator.dbConnection.DBConnection;
@@ -125,20 +128,19 @@ public class TestClass {
 //                i++;
 //            }
 //            System.out.println(i);
-            try {
-
-                Connection connection = DBConnection.getConnection();
-
-                JasperReport jasperReport = JasperCompileManager.compileReport("reports\\FindAdvanceAmountByAuthorized.jrxml");
-
-                Map<String, Object> parameters = new HashMap<>();
-                parameters.put("F_AUTH", "NO");
-
-                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
-                //JasperPrintManager.printReport(jasperPrint, true);
-                JasperViewer jv = new JasperViewer(jasperPrint, true);
-                jv.setVisible(true);
-
+//            try {
+//
+//                Connection connection = DBConnection.getConnection();
+//
+//                JasperReport jasperReport = JasperCompileManager.compileReport("reports\\FindAdvanceAmountByAuthorized.jrxml");
+//
+//                Map<String, Object> parameters = new HashMap<>();
+//                parameters.put("F_AUTH", "NO");
+//
+//                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
+//                //JasperPrintManager.printReport(jasperPrint, true);
+//                JasperViewer jv = new JasperViewer(jasperPrint, true);
+//                jv.setVisible(true);
 //                JasperExportManager.exportReportToPdfFile(jasperPrint, "report1.pdf");
 //
 //                File f = new File("report1.pdf");
@@ -148,10 +150,24 @@ public class TestClass {
 //                } catch (IOException ex) {
 //                    Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
 //                }
-                System.out.println("Done!");
-            } catch (JRException ex) {
-                Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//                System.out.println("Done!");
+//            } catch (JRException ex) {
+//                Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+            File f = new File("D:\\test.pdf");
+            List<ChallanReportComponent> components=new ArrayList<>();
+            ChallanReportComponent component=new ChallanReportComponent();
+            component.setCompanyName("9 star Apparels Industries Ltd.");
+            component.setAddress("Plot#56, House#116, Road#05, Nurani Madrasa Road, "
+                    +"Vatulia, Turag, Dhaka");
+            component.setAttention("Mr. Towheed");
+            component.setChallanNo("16-0620200001");
+            component.setWorkOrderDate("June-2020");
+            component.setDeliveryPerson("Pranta");
+            component.setDeliveryDate("16-06-2020");
+            
+            components.add(component);
+            new WriteChallanReport().writeChallanReportInPdfFile(components, f);
 
         } catch (Exception ex) {
             Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
