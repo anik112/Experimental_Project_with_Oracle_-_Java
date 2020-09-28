@@ -31,14 +31,16 @@ import reportgenerator.dao.MonthlyBillComponent;
 public class WriteChallanReport {
     
     private final String headerText = "Challan Report";
-    private String amountInWord = "";
-    
-    public String getAmountInWord() {
-        return amountInWord;
-    }
-    
-    public void setAmountInWord(String amountInWord) {
-        this.amountInWord = amountInWord;
+    private final int bodyTablePadding=5;
+    private final int headerTablePadding = 5;
+    private final float[] colomWidthForHeaderTable = {1f, 3.8f, .2f, 1f, 2f};
+    private final float[] colomWidthForBodyTable = {0.5f, 4f, 1.5f, 2f};  
+    private final Font headerTextFont = FontFactory.getFont("calibri", 20, Font.BOLD);
+    private final Font titleTextFont = FontFactory.getFont("calibri", 10, Font.BOLD);
+    private final Font bodyTextFont = FontFactory.getFont("calibri", 10);
+
+    public WriteChallanReport() {
+        FontFactory.register("font\\calibri.ttf", "calibri");
     }
     
     public boolean writeChallanReportInPdfFile(List<ChallanReportComponent> components, File selectedFile) {
@@ -59,9 +61,8 @@ public class WriteChallanReport {
 
             // Header text
             PdfPTable headerTable = new PdfPTable(1);
-            FontFactory.register("font\\calibri.ttf", "calibri");
-            Font f1 = FontFactory.getFont("calibri", 20, Font.BOLD);
-            PdfPCell cell = new PdfPCell(new Paragraph(headerText, f1));
+            
+            PdfPCell cell = new PdfPCell(new Paragraph(headerText, headerTextFont));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             cell.setBorderColor(BaseColor.WHITE);
@@ -70,26 +71,24 @@ public class WriteChallanReport {
             document.add(new Paragraph("\n"));
 
             // Make info table
-            PdfPTable infoTable = new PdfPTable(4);
+            PdfPTable infoTable = new PdfPTable(5);
             infoTable.setWidthPercentage(100);
             
-            Font titleTextFont = FontFactory.getFont("calibri", 12, Font.BOLD);
-            Font bodyTextFont = FontFactory.getFont("calibri", 12);
+            infoTable.setWidths(colomWidthForHeaderTable);
             
-            float[] colomWidth = {1f, 4f, 1f, 2f};
-            infoTable.setWidths(colomWidth);
-            
-            int headerTablePadding = 5;
             infoTable.addCell(cellProperties("Company Name", titleTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
             infoTable.addCell(cellProperties(components.get(0).getCompanyName(), titleTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
+            infoTable.addCell(cellProperties("", titleTextFont, Element.ALIGN_CENTER, headerTablePadding, false));
             infoTable.addCell(cellProperties("Challan No", titleTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
             infoTable.addCell(cellProperties(components.get(0).getChallanNo(), bodyTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
             infoTable.addCell(cellProperties("Address", titleTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
             infoTable.addCell(cellProperties(components.get(0).getAddress(), bodyTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
+            infoTable.addCell(cellProperties("", titleTextFont, Element.ALIGN_CENTER, headerTablePadding, false));
             infoTable.addCell(cellProperties("Work Order Date", titleTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
             infoTable.addCell(cellProperties(components.get(0).getWorkOrderDate(), bodyTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
             infoTable.addCell(cellProperties("Delivery Person", titleTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
             infoTable.addCell(cellProperties(components.get(0).getDeliveryPerson(), bodyTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
+            infoTable.addCell(cellProperties("", titleTextFont, Element.ALIGN_CENTER, headerTablePadding, false));
             infoTable.addCell(cellProperties("Attention", titleTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
             infoTable.addCell(cellProperties(components.get(0).getAttention(), bodyTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
             infoTable.addCell(cellProperties("Delivery Date", titleTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
@@ -102,16 +101,21 @@ public class WriteChallanReport {
             PdfPTable bodyTable = new PdfPTable(4);
             bodyTable.setWidthPercentage(100);
             
-            float[] colomWidthBody = {0.5f, 4f, 1.5f, 2f};
-            bodyTable.setWidths(colomWidthBody);
             
-            bodyTable.addCell(cellProperties("S/L", titleTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
-            bodyTable.addCell(cellProperties("Product Name", titleTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
-            bodyTable.addCell(cellProperties("Quantity", titleTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
-            bodyTable.addCell(cellProperties("Remarks", titleTextFont, Element.ALIGN_CENTER, headerTablePadding, true));
+            bodyTable.setWidths(colomWidthForBodyTable);
             
+            bodyTable.addCell(cellProperties("S/L", titleTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
+            bodyTable.addCell(cellProperties("Product Name", titleTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
+            bodyTable.addCell(cellProperties("Quantity", titleTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
+            bodyTable.addCell(cellProperties("Remarks", titleTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
+            
+            int sl=1;
             for (ChallanReportComponent crc: components) {
-                
+                bodyTable.addCell(cellProperties(String.valueOf(sl), bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
+                bodyTable.addCell(cellProperties(crc.getProductName(), bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
+                bodyTable.addCell(cellProperties(String.valueOf(crc.getQuantity()), bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
+                bodyTable.addCell(cellProperties(crc.getRemarks(), bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
+                sl++;
             }
             
             document.add(bodyTable);
@@ -142,6 +146,7 @@ public class WriteChallanReport {
         cell.setPaddingTop(padding);
         cell.setPaddingBottom(padding);
         cell.setPaddingRight(padding / 2);
+        
         if (showBorder) {
             cell.setBorderWidth(0.5f);
             cell.setBorderColor(BaseColor.BLACK);

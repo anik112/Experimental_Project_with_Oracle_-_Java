@@ -75,14 +75,14 @@ public class TestClass {
 //                System.out.println(n<i>);
 //            }
 //            List<HardwareQutComponent> components = new ArrayList<>();
-//            HardwareQutComponent component = new HardwareQutComponent();
-//            component.setDate("04/04/2020");
-//            component.setAddress("Dhaka");
-//            component.setAmount(1000);
-//            component.setCompanyName("Vision");
-//            component.setYear("2020");
-//            component.setMonth("May");
-//            components.add(component);
+//            HardwareQutComponent component1 = new HardwareQutComponent();
+//            component1.setDate("04/04/2020");
+//            component1.setAddress("Dhaka");
+//            component1.setAmount(1000);
+//            component1.setCompanyName("Vision");
+//            component1.setYear("2020");
+//            component1.setMonth("May");
+//            components.add(component1);
 //
 //            new WriteHardwareQut().writeHardwareQutInPdfFile(components, selectedFile);
 //
@@ -165,8 +165,51 @@ public class TestClass {
             component.setWorkOrderDate("June-2020");
             component.setDeliveryPerson("Pranta");
             component.setDeliveryDate("16-06-2020");
-            
+            component.setProductName("sst");
+            component.setQuantity(12);
+            component.setRemarks("");
             components.add(component);
+            
+            ChallanReportComponent component1=new ChallanReportComponent();            
+            component1.setCompanyName("9 star Apparels Industries Ltd.");
+            component1.setAddress("Plot#56, House#116, Road#05, Nurani Madrasa Road, "
+                    +"Vatulia, Turag, Dhaka");
+            component1.setAttention("Mr. Towheed");
+            component1.setChallanNo("16-0620200001");
+            component1.setWorkOrderDate("June-2020");
+            component1.setDeliveryPerson("Pranta");
+            component1.setDeliveryDate("16-06-2020");
+            component1.setProductName("Fdsr");
+            component1.setQuantity(10);
+            component1.setRemarks("");
+            components.add(component1);
+            ChallanReportComponent component2=new ChallanReportComponent();
+            component2.setCompanyName("9 star Apparels Industries Ltd.");
+            component2.setAddress("Plot#56, House#116, Road#05, Nurani Madrasa Road, "
+                    +"Vatulia, Turag, Dhaka");
+            component2.setAttention("Mr. Towheed");
+            component2.setChallanNo("16-0620200001");
+            component2.setWorkOrderDate("June-2020");
+            component2.setDeliveryPerson("Pranta");
+            component2.setDeliveryDate("16-06-2020");
+            component2.setProductName("Fdsr");
+            component2.setQuantity(10);
+            component2.setRemarks("");
+            components.add(component2);
+            ChallanReportComponent component3=new ChallanReportComponent();
+            component3.setCompanyName("9 star Apparels Industries Ltd.");
+            component3.setAddress("Plot#56, House#116, Road#05, Nurani Madrasa Road, "
+                    +"Vatulia, Turag, Dhaka");
+            component3.setAttention("Mr. Towheed");
+            component3.setChallanNo("16-0620200001");
+            component3.setWorkOrderDate("June-2020");
+            component3.setDeliveryPerson("Pranta");
+            component3.setDeliveryDate("16-06-2020");
+            component3.setProductName("Fdsr");
+            component3.setQuantity(10);
+            component3.setRemarks("");
+            components.add(component3);
+            
             new WriteChallanReport().writeChallanReportInPdfFile(components, f);
 
         } catch (Exception ex) {
