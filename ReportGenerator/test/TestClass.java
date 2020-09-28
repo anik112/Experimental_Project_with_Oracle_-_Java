@@ -155,61 +155,22 @@ public class TestClass {
 //                Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
 //            }
             File f = new File("D:\\test.pdf");
-            List<ChallanReportComponent> components=new ArrayList<>();
-            ChallanReportComponent component=new ChallanReportComponent();
-            component.setCompanyName("9 star Apparels Industries Ltd.");
-            component.setAddress("Plot#56, House#116, Road#05, Nurani Madrasa Road, "
-                    +"Vatulia, Turag, Dhaka");
-            component.setAttention("Mr. Towheed");
-            component.setChallanNo("16-0620200001");
-            component.setWorkOrderDate("June-2020");
-            component.setDeliveryPerson("Pranta");
-            component.setDeliveryDate("16-06-2020");
-            component.setProductName("sst");
-            component.setQuantity(12);
-            component.setRemarks("");
-            components.add(component);
-            
-            ChallanReportComponent component1=new ChallanReportComponent();            
-            component1.setCompanyName("9 star Apparels Industries Ltd.");
-            component1.setAddress("Plot#56, House#116, Road#05, Nurani Madrasa Road, "
-                    +"Vatulia, Turag, Dhaka");
-            component1.setAttention("Mr. Towheed");
-            component1.setChallanNo("16-0620200001");
-            component1.setWorkOrderDate("June-2020");
-            component1.setDeliveryPerson("Pranta");
-            component1.setDeliveryDate("16-06-2020");
-            component1.setProductName("Fdsr");
-            component1.setQuantity(10);
-            component1.setRemarks("");
-            components.add(component1);
-            ChallanReportComponent component2=new ChallanReportComponent();
-            component2.setCompanyName("9 star Apparels Industries Ltd.");
-            component2.setAddress("Plot#56, House#116, Road#05, Nurani Madrasa Road, "
-                    +"Vatulia, Turag, Dhaka");
-            component2.setAttention("Mr. Towheed");
-            component2.setChallanNo("16-0620200001");
-            component2.setWorkOrderDate("June-2020");
-            component2.setDeliveryPerson("Pranta");
-            component2.setDeliveryDate("16-06-2020");
-            component2.setProductName("Fdsr");
-            component2.setQuantity(10);
-            component2.setRemarks("");
-            components.add(component2);
-            ChallanReportComponent component3=new ChallanReportComponent();
-            component3.setCompanyName("9 star Apparels Industries Ltd.");
-            component3.setAddress("Plot#56, House#116, Road#05, Nurani Madrasa Road, "
-                    +"Vatulia, Turag, Dhaka");
-            component3.setAttention("Mr. Towheed");
-            component3.setChallanNo("16-0620200001");
-            component3.setWorkOrderDate("June-2020");
-            component3.setDeliveryPerson("Pranta");
-            component3.setDeliveryDate("16-06-2020");
-            component3.setProductName("Fdsr");
-            component3.setQuantity(10);
-            component3.setRemarks("");
-            components.add(component3);
-            
+            List<ChallanReportComponent> components = new ArrayList<>();
+            for (int i = 0; i < 13; i++) {
+                ChallanReportComponent component = new ChallanReportComponent();
+                component.setCompanyName("9 star Apparels Industries Ltd.");
+                component.setAddress("Plot#56, House#116, Road#05, Nurani Madrasa Road, "
+                        + "Vatulia, Turag, Dhaka");
+                component.setAttention("Mr. Towheed");
+                component.setChallanNo("16-0620200001");
+                component.setWorkOrderDate("June-2020");
+                component.setDeliveryPerson("Pranta");
+                component.setDeliveryDate("16-06-2020");
+                component.setProductName("sst");
+                component.setQuantity(12);
+                component.setRemarks("");
+                components.add(component);
+            }
             new WriteChallanReport().writeChallanReportInPdfFile(components, f);
 
         } catch (Exception ex) {
