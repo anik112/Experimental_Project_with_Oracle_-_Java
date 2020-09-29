@@ -18,6 +18,27 @@ public class MonthlyBillComponent {
     private String month;
     private String year;
     private int amount;
+    private int vatAmount=0;
+    private int vatPrcn=0;
+
+    public int getVatPrcn() {
+        return vatPrcn;
+    }
+
+    public void setVatPrcn(int vatPrcn) {
+        this.vatPrcn = vatPrcn;
+    }
+    
+
+    public int getVatAmount() {
+        return vatAmount;
+    }
+
+    public void setVatAmount(int vatAmount) {
+        this.vatAmount = vatAmount;
+    }
+
+   
 
     public String getDate() {
         return date;

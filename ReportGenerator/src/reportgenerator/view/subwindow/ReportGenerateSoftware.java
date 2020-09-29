@@ -48,6 +48,8 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
     private String monthlyBillSavingTeg = "Monthly-Bill";
     private String reqBillSavingTeg = "Requirment-Bill-&-Quotation";
     private String openFolderUrl = "";
+    private int vatAmount=0;
+    private int totalAmount=0;
 
     private List<String> companyAndAddressList = new ArrayList<>();
     private List<String> pendingBillList = new ArrayList<>();
@@ -150,6 +152,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         btnRequirmentBillDownload = new javax.swing.JButton();
         lblShowReqAmount = new javax.swing.JLabel();
         txtAmountInWordRegQut = new javax.swing.JTextField();
+        txtVAT = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblBillPendingList = new javax.swing.JTable();
@@ -235,6 +238,11 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         txtAmountInWordMonthlyBill.setBackground(new java.awt.Color(0, 255, 255));
         txtAmountInWordMonthlyBill.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtAmountInWordMonthlyBill.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Amount in word", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 10))); // NOI18N
+        txtAmountInWordMonthlyBill.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtAmountInWordMonthlyBillFocusGained(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -630,6 +638,11 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         txtAmountInWordRegQut.setBackground(new java.awt.Color(0, 255, 255));
         txtAmountInWordRegQut.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtAmountInWordRegQut.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Amount in word", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 10))); // NOI18N
+        txtAmountInWordRegQut.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtAmountInWordRegQutFocusGained(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -678,6 +691,10 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                     .addComponent(txtAmountInWordRegQut, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        txtVAT.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtVAT.setText("0");
+        txtVAT.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Total VAT %", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -691,15 +708,18 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboCompany, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboMonth, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(comboMonth, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(comboCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtVAT, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboYear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -711,8 +731,13 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(comboCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(comboCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(7, 7, 7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtVAT, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(6, 6, 6)))
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -763,7 +788,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -826,9 +851,21 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                 component.setYear(comboYear.getSelectedItem().toString());
                 component.setCompanyName(parts[1]);
                 component.setAddress(companyAndAddressList.get(Integer.parseInt(parts[0]) + 1));
-                component.setAmount(Integer.parseInt(txtAmount.getText()));
+                component.setAmount(Integer.parseInt(txtAmount.getText())-vatAmount);
                 component.setDate(txtDate.getText());
                 component.setBillNo(billNo);
+                try {
+                    if (Integer.valueOf(txtVAT.getText()) > 0) {
+                        component.setVatAmount(vatAmount);
+                        component.setVatPrcn(Integer.valueOf(txtVAT.getText()));
+                    } else {
+                        component.setVatAmount(0);
+                        component.setVatPrcn(0);
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Please type number only.",
+                            ":: Error-VAT :: ", JOptionPane.ERROR_MESSAGE);
+                }
 
                 // set bill information for update
                 billDao.setBillDate(txtDate.getText());
@@ -1154,30 +1191,52 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
 
     private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
         // TODO add your handling code here:
-        try {
-            int amount = 0;
-            amount += (txtReqAmountRow1.getText().length()>1)?Integer.parseInt(txtReqAmountRow1.getText()):0;
-            amount += (txtReqAmountRow2.getText().length()>1)?Integer.parseInt(txtReqAmountRow2.getText()):0;
-            amount += (txtReqAmountRow3.getText().length()>1)?Integer.parseInt(txtReqAmountRow3.getText()):0;
-            amount += (txtReqAmountRow4.getText().length()>1)?Integer.parseInt(txtReqAmountRow4.getText()):0;
-            amount += (txtReqAmountRow5.getText().length()>1)?Integer.parseInt(txtReqAmountRow5.getText()):0;
-            amount += (txtReqAmountRow6.getText().length()>1)?Integer.parseInt(txtReqAmountRow6.getText()):0;
-            amount += (txtReqAmountRow7.getText().length()>1)?Integer.parseInt(txtReqAmountRow7.getText()):0;
-            amount += (txtReqAmountRow8.getText().length()>1)?Integer.parseInt(txtReqAmountRow8.getText()):0;
-            amount += (txtReqAmountRow9.getText().length()>1)?Integer.parseInt(txtReqAmountRow9.getText()):0;
-            amount += (txtReqAmountRow10.getText().length()>1)?Integer.parseInt(txtReqAmountRow10.getText()):0;
-            amount += (txtReqAmountRow11.getText().length()>1)?Integer.parseInt(txtReqAmountRow11.getText()):0;
-            amount += (txtReqAmountRow12.getText().length()>1)?Integer.parseInt(txtReqAmountRow12.getText()):0;
-            amount += (txtReqAmountRow13.getText().length()>1)?Integer.parseInt(txtReqAmountRow13.getText()):0;
-            amount += (txtReqAmountRow14.getText().length()>1)?Integer.parseInt(txtReqAmountRow14.getText()):0;
-            amount += (txtReqAmountRow15.getText().length()>1)?Integer.parseInt(txtReqAmountRow15.getText()):0;
-            
-            lblShowReqAmount.setText(String.valueOf(amount));
-          
-        } catch (Exception e) {
 
-        }
+        int amount = 0;
+        amount += (txtReqAmountRow1.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow1.getText()) : 0;
+        amount += (txtReqAmountRow2.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow2.getText()) : 0;
+        amount += (txtReqAmountRow3.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow3.getText()) : 0;
+        amount += (txtReqAmountRow4.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow4.getText()) : 0;
+        amount += (txtReqAmountRow5.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow5.getText()) : 0;
+        amount += (txtReqAmountRow6.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow6.getText()) : 0;
+        amount += (txtReqAmountRow7.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow7.getText()) : 0;
+        amount += (txtReqAmountRow8.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow8.getText()) : 0;
+        amount += (txtReqAmountRow9.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow9.getText()) : 0;
+        amount += (txtReqAmountRow10.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow10.getText()) : 0;
+        amount += (txtReqAmountRow11.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow11.getText()) : 0;
+        amount += (txtReqAmountRow12.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow12.getText()) : 0;
+        amount += (txtReqAmountRow13.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow13.getText()) : 0;
+        amount += (txtReqAmountRow14.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow14.getText()) : 0;
+        amount += (txtReqAmountRow15.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow15.getText()) : 0;
+        lblShowReqAmount.setText(String.valueOf(amount));
+        
     }//GEN-LAST:event_jPanel3MouseEntered
+
+    private void txtAmountInWordMonthlyBillFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAmountInWordMonthlyBillFocusGained
+        // TODO add your handling code here:
+        try {
+            int amount = Integer.valueOf(txtAmount.getText());
+            vatAmount=(amount * (Integer.valueOf(txtVAT.getText())) / 100);
+            amount += vatAmount;
+            txtAmount.setText(String.valueOf(amount));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    ":: Error-Adding Amount :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_txtAmountInWordMonthlyBillFocusGained
+
+    private void txtAmountInWordRegQutFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAmountInWordRegQutFocusGained
+        // TODO add your handling code here:
+        try {
+            int amount = Integer.valueOf(lblShowReqAmount.getText());
+            vatAmount = (amount * (Integer.valueOf(txtVAT.getText())) / 100);
+            amount += vatAmount;
+            lblShowReqAmount.setText(String.valueOf(amount));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    ":: Error-Adding Amount :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_txtAmountInWordRegQutFocusGained
 
     private void showCompanyNameInComboBox() {
         companyAndAddressList = new IOFunction().getCompanyNameAndAddress(configComapnyListUrl);
@@ -1226,6 +1285,8 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         component1.setBodyContent(txtReqRow1.getText());
         amount = txtReqAmountRow1.getText();
         component1.setAmount(amount);
+        component1.setVatPrcn(Integer.valueOf(txtVAT.getText()));
+        component1.setVatAmount(vatAmount);
         components.add(component1);
 //        
 //        if (!txtReqRow1.getText().isEmpty()) {
@@ -1415,5 +1476,6 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
     private javax.swing.JTextField txtReqRow7;
     private javax.swing.JTextField txtReqRow8;
     private javax.swing.JTextField txtReqRow9;
+    private javax.swing.JTextField txtVAT;
     // End of variables declaration//GEN-END:variables
 }

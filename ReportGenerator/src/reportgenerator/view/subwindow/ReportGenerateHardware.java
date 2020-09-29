@@ -55,6 +55,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
     private String hardwareBillType = "HARD-REQ-BILL";
     private String openFolderUrl = "";
     private String reqBillSavingTeg = "Requirment-Bill-&-Quotation";
+    private float vatAmount = 0;
 
     List<HardwareQutComponent> listOfHarwareQut = new ArrayList<>();
     private List<String> companyAndAddressList = new ArrayList<>();
@@ -141,6 +142,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         comboCompany = new javax.swing.JComboBox<>();
         txtDate = new javax.swing.JTextField();
         comboYear = new javax.swing.JComboBox<>();
+        txtVAT = new javax.swing.JTextField();
         btnMakeHardwareQut = new javax.swing.JButton();
         txtHardwareBillNo = new javax.swing.JTextField();
         btnMakeHardwareQutBill = new javax.swing.JButton();
@@ -322,6 +324,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
 
         lblTotalAmount.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         lblTotalAmount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotalAmount.setText("0");
         lblTotalAmount.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Total Amount", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
         lblTotalAmount.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -361,6 +364,10 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         comboYear.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
         comboYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
         comboYear.setToolTipText("");
+
+        txtVAT.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        txtVAT.setText("0");
+        txtVAT.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Total VAT %", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -404,10 +411,11 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
                             .addComponent(comboYear, 0, 172, Short.MAX_VALUE)
                             .addComponent(txtDate))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkBoxHardwareQutHardCopy, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtVAT)
+                            .addComponent(checkBoxHardwareQutHardCopy, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -437,7 +445,8 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
                                     .addComponent(txtUnitPrice1)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lblTotalAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -518,20 +527,23 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
                             .addComponent(txtMoreDtls6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUnitPrice6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDtls6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblTotalAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                    .addComponent(checkBoxHardwareQutHardCopy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboYear, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(comboMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comboYear, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtVAT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDate)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(5, 5, 5)
-                                .addComponent(comboCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(comboCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(checkBoxHardwareQutHardCopy, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel3);
@@ -558,6 +570,11 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         txtAmountInWord.setBackground(new java.awt.Color(0, 255, 255));
         txtAmountInWord.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtAmountInWord.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Amount In Word", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        txtAmountInWord.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtAmountInWordFocusGained(evt);
+            }
+        });
         txtAmountInWord.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtAmountInWordMouseEntered(evt);
@@ -587,14 +604,16 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtHardwareBillNo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtAmountInWord, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnMakeHardwareQut, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnMakeHardwareQutBill, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtHardwareBillNo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAmountInWord, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnMakeHardwareQut, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnMakeHardwareQutBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 224));
@@ -876,6 +895,20 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         keyTypeChecker++;
     }//GEN-LAST:event_txtDateKeyPressed
 
+    private void txtAmountInWordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAmountInWordFocusGained
+        // TODO add your handling code here:
+        try {
+            float amount = totalAmounts;
+            vatAmount = (amount * (Integer.valueOf(txtVAT.getText())) / 100);
+            amount += vatAmount;
+            lblTotalAmount.setText(String.valueOf(amount));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    ":: Error-Adding Amount :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }//GEN-LAST:event_txtAmountInWordFocusGained
+
     private void showListOfPenel() {
         JPanel pan[] = new JPanel[10];
         jPanShowList.setLayout(new GridLayout(0, 1, 20, 20));
@@ -975,6 +1008,8 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
                 component.setDeviceUnitPrice(dvcUnitPrice);
                 float dvcTotalAmount = dvcUnitPrice * dvcQty;
                 component.setDeviceTotalPrice(dvcTotalAmount);
+                component.setVatPrcn(Integer.valueOf(txtVAT.getText()));
+                component.setVatAmount(vatAmount);
                 // set total amount in label
                 totalAmounts += dvcTotalAmount;
 
@@ -999,6 +1034,8 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
             float totalPrice = (price * qty);
             component.setTotalPrice(totalPrice);
             component.setQtyType(comboQtyType1.getSelectedItem().toString());
+            component.setVatPrcn(Integer.valueOf(txtVAT.getText()));
+            component.setVatAmount(vatAmount);
             totalAmounts += totalPrice;
             listOfComponent.add(component);
         }
@@ -1306,5 +1343,6 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
     private javax.swing.JTextField txtUnitPrice7;
     private javax.swing.JTextField txtUnitPrice8;
     private javax.swing.JTextField txtUnitPrice9;
+    private javax.swing.JTextField txtVAT;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,6 +13,7 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
@@ -172,6 +173,8 @@ public class WriteChallanReport {
             Image footerImage = Image.getInstance("img\\footer.jpg");
             footerImage.setAlignment(footerImage.ALIGN_LEFT);
             footerImage.scaleAbsolute(document.getPageSize().getWidth() - 80, 90);
+            Rectangle rectangle = document.getPageSize();
+            footerImage.setAbsolutePosition(40, rectangle.getBottom());
             document.add(footerImage);
             
             document.close();

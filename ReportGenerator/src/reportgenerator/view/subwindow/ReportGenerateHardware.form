@@ -157,16 +157,19 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="446" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="txtHardwareBillNo" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                                  <Component id="txtAmountInWord" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="txtHardwareBillNo" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                                          <Component id="txtAmountInWord" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="btnMakeHardwareQut" alignment="1" min="-2" pref="42" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="btnMakeHardwareQut" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                                  <Component id="btnMakeHardwareQutBill" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnMakeHardwareQutBill" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -236,13 +239,15 @@
                                               <Component id="txtDate" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="checkBoxHardwareQutHardCopy" min="-2" pref="94" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txtVAT" max="32767" attributes="0"/>
+                                              <Component id="checkBoxHardwareQutHardCopy" pref="94" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblTotalAmount" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                               <Component id="jLabel14" alignment="1" max="32767" attributes="0"/>
                                               <Component id="txtQty2" alignment="0" max="32767" attributes="0"/>
@@ -278,6 +283,7 @@
                                               </Group>
                                           </Group>
                                       </Group>
+                                      <Component id="lblTotalAmount" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -381,25 +387,29 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="lblTotalAmount" alignment="0" pref="74" max="32767" attributes="0"/>
-                                      <Component id="checkBoxHardwareQutHardCopy" alignment="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblTotalAmount" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="comboMonth" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                              <Component id="comboYear" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="comboMonth" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                                  <Component id="comboYear" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="txtVAT" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtDate" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txtDate" alignment="0" max="32767" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
                                                   <Component id="comboCompany" min="-2" pref="31" max="-2" attributes="0"/>
                                               </Group>
+                                              <Component id="checkBoxHardwareQutHardCopy" alignment="0" min="-2" pref="36" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -767,6 +777,7 @@
                               <Font name="Lucida Sans" size="12" style="0"/>
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="text" type="java.lang.String" value="0"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Total Amount">
@@ -893,6 +904,24 @@
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                           </AuxValues>
                         </Component>
+                        <Component class="javax.swing.JTextField" name="txtVAT">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Lucida Sans" size="12" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="0"/>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                                <TitledBorder title="Total VAT %">
+                                  <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                                    <LineBorder/>
+                                  </Border>
+                                  <Font PropertyName="font" name="Lucida Sans" size="12" style="0"/>
+                                </TitledBorder>
+                              </Border>
+                            </Property>
+                          </Properties>
+                        </Component>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -956,6 +985,7 @@
                     </Property>
                   </Properties>
                   <Events>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtAmountInWordFocusGained"/>
                     <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtAmountInWordMouseEntered"/>
                   </Events>
                 </Component>

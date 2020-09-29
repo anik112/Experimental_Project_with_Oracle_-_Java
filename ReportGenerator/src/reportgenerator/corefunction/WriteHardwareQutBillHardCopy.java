@@ -41,7 +41,8 @@ public class WriteHardwareQutBillHardCopy {
     private final String colHeader04="Qty";
     private final String colHeader05="Unit Price";
     private final String colFooterTxt = "Total Amount";
-    private final String tableFooterTxt = "VAT and TAX not included.";
+    private final String tableFooterTxtWithoutVat = "VAT and TAX not included.";
+    private final String tableFooterTxtWithVat = "VAT and TAX included.";
     private final String amountTage = "Amount in word: ";
     private final String noteTxt = "N.B: All payments should be in A/C payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
     private final String sign = "..................................\nAuthorized Signatory";
@@ -69,15 +70,15 @@ public class WriteHardwareQutBillHardCopy {
             Rectangle rectangle = document.getPageSize(); // get total page size in a rectangle
             pw.setBoxSize("rectangle", rectangle); // set rectangle in pdfWriter
 
-            document.setMargins(40, 40, 100, 100); // set document margen
+            document.setMargins(40, 40, 40, 40); // set document margen
             document.open(); // open this doucment
             
             FontFactory.register("font\\calibri.ttf", "calibri"); // call font factory for setup font style
             Font f1 = FontFactory.getFont("calibri", 10);  // set font style and size into font object
 
             // make first text in document
-            Paragraph docHeader = new Paragraph("\nDate: " + components.get(0).getDate()+ "\n\n"
-                    + "Bill No: " + components.get(0).getBillNo()+ "\n\n"
+            Paragraph docHeader = new Paragraph("\nDate: " + components.get(0).getDate()+ "\n"
+                    + "Bill No: " + components.get(0).getBillNo()+ "\n"
                     + to + "\n"
                     + components.get(0).getCompanyName()+ "\n"
                     + components.get(0).getAddress() + "\n\n"
@@ -292,9 +293,21 @@ public class WriteHardwareQutBillHardCopy {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            
+            
+            Paragraph paraOfColFooter;
+            Paragraph paraOfAmount;
+            if(components.get(0).getVatAmount()>0){
+                paraOfColFooter=new Paragraph("VAT "+components.get(0).getVatPrcn()+"% (+)\n\n"+colFooterTxt, f4);
+                float totalAmt=(totalamount+components.get(0).getVatAmount());
+                paraOfAmount=new Paragraph(components.get(0).getVatAmount()+"\n\n"+totalAmt+"", f4);
+            }else{
+                paraOfColFooter=new Paragraph(colFooterTxt, f4);
+                paraOfAmount=new Paragraph(String.valueOf(totalamount), f4);
+            }
 
             // last row body text
-            PdfPCell row02Body = new PdfPCell(new Paragraph(colFooterTxt, f4));
+            PdfPCell row02Body = new PdfPCell(paraOfColFooter);
             row02Body.setPaddingLeft(padding);
             row02Body.setPaddingTop(padding);
             row02Body.setPaddingBottom(padding);
@@ -304,7 +317,7 @@ public class WriteHardwareQutBillHardCopy {
             row02Body.setColspan(5);
 
             // last row footer txt
-            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(totalamount), f4));
+            PdfPCell row02Footer = new PdfPCell(paraOfAmount);
             row02Footer.setPaddingLeft(padding);
             row02Footer.setPaddingTop(padding);
             row02Footer.setPaddingBottom(padding);
@@ -318,8 +331,12 @@ public class WriteHardwareQutBillHardCopy {
             document.add(table); // add table in document
 
             // set font style and size
-            Font f3 = FontFactory.getFont("SansSerif", 8);
-            document.add(new Paragraph(tableFooterTxt, f3));
+            Font f3 = FontFactory.getFont("calibri", 8);
+            if(components.get(0).getVatAmount()>0){
+                document.add(new Paragraph(tableFooterTxtWithVat, f3));
+            }else{
+                document.add(new Paragraph(tableFooterTxtWithoutVat, f3));
+            }
 
             //document.add(new Paragraph("\n" + amountTage + (new IOFunction().getNumberInWord((int) totalamount, configAmountListUrl)) + " only.", f1));
             document.add(new Paragraph("\n" + amountTage + this.getAmountInWord(), f1));            

@@ -38,7 +38,8 @@ public class WriteQutitoin {
     private final String colHeder02 = "Description of the products/Services";
     private final String colHeader03 = "Amount (TK.)";
     private final String colFooterTxt = "Total Amount";
-    private final String tableFooterTxt = "VAT and TAX not included.";
+    private final String tableFooterTxtWithoutVat = "VAT and TAX not included.";
+    private final String tableFooterTxtWithVat = "VAT and TAX included.";
     private final String amountTage = "Amount in word: ";
     private final String noteTxt = "N.B: All payments should be in a/c payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
     private final String sign = "..................................\nAuthorized Signatory";
@@ -200,8 +201,20 @@ public class WriteQutitoin {
                 e.printStackTrace();
             }
 
+            
+            Paragraph paraOfColFooter;
+            Paragraph paraOfAmount;
+            if(components.get(0).getVatAmount()>0){
+                paraOfColFooter=new Paragraph("VAT "+components.get(0).getVatPrcn()+"% (+)\n\n"+colFooterTxt, f4);
+                int totalAmt=(totalamount+components.get(0).getVatAmount());
+                paraOfAmount=new Paragraph(components.get(0).getVatAmount()+".00\n\n"+totalAmt+".00", f4);
+            }else{
+                paraOfColFooter=new Paragraph(colFooterTxt, f4);
+                paraOfAmount=new Paragraph(String.valueOf(totalamount)+".00", f4);
+            }
+                        
             // last row body text
-            PdfPCell row02Body = new PdfPCell(new Paragraph(colFooterTxt, f4));
+            PdfPCell row02Body = new PdfPCell(paraOfColFooter);
             row02Body.setPaddingLeft(padding);
             row02Body.setPaddingTop(padding);
             row02Body.setPaddingBottom(padding);
@@ -212,7 +225,7 @@ public class WriteQutitoin {
             
 
             // last row footer txt
-            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(totalamount)+".00", f4));
+            PdfPCell row02Footer = new PdfPCell(paraOfAmount);
             row02Footer.setPaddingLeft(padding);
             row02Footer.setPaddingTop(padding);
             row02Footer.setPaddingBottom(padding);
@@ -226,12 +239,16 @@ public class WriteQutitoin {
             document.add(table); // add table in document
 
             // set font style and size
-            Font f3 = FontFactory.getFont("SansSerif", 10);
-            document.add(new Paragraph(tableFooterTxt, f3));
-
-            if(amountInWord.length() < 1){
-                amountInWord=(new IOFunction().getNumberInWord(totalamount, configAmountListUrl));
+            Font f3 = FontFactory.getFont("calibri", 10);
+            if(components.get(0).getVatAmount()>0){
+                document.add(new Paragraph(tableFooterTxtWithVat, f3));
+            }else{
+                document.add(new Paragraph(tableFooterTxtWithoutVat, f3));
             }
+
+//            if(amountInWord.length() < 1){
+//                amountInWord=(new IOFunction().getNumberInWord(totalamount, configAmountListUrl));
+//            }
             
             document.add(new Paragraph("\n" + amountTage + amountInWord + " only.", f1));
             document.add(new Paragraph(noteTxt + "\n\n", f1));
@@ -242,13 +259,12 @@ public class WriteQutitoin {
             document.add(sirSing);
 
             document.add(new Paragraph(sign + "\n\n", f1));
-
-            document.add(new Paragraph("\n"));
+            
             Image footerImage = Image.getInstance("img\\footer.jpg");
             footerImage.setAlignment(footerImage.ALIGN_LEFT);
             footerImage.setBottom(1f);
-            footerImage.scaleAbsolute(document.getPageSize().getWidth() - 80, 90);
-            footerImage.setAbsolutePosition(40, rectangle.getBottom());
+            footerImage.scaleAbsolute(document.getPageSize().getWidth() - 80, 60);
+            footerImage.setAbsolutePosition(40, rectangle.getBottom()+10);
             document.add(footerImage);
 
             document.close();
