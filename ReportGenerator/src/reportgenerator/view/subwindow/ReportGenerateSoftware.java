@@ -45,7 +45,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
     private String recentReqQutBillFileLoc = "";
     private String monthlyBillType = "MONTHLY-BILL";
     private String reqBillType = "SOFT-REQ-BILL";
-    private String monthlyBillSavingTeg = "Monthly-Bill";
+    private String monthlyBillSavingTeg = "Chalan";
     private String reqBillSavingTeg = "Requirment-Bill-&-Quotation";
     private String openFolderUrl = "";
     private int vatAmount=0;
@@ -1208,6 +1208,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         amount += (txtReqAmountRow13.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow13.getText()) : 0;
         amount += (txtReqAmountRow14.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow14.getText()) : 0;
         amount += (txtReqAmountRow15.getText().length() > 1) ? Integer.parseInt(txtReqAmountRow15.getText()) : 0;
+        totalAmount=amount;
         lblShowReqAmount.setText(String.valueOf(amount));
         
     }//GEN-LAST:event_jPanel3MouseEntered
@@ -1228,10 +1229,8 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
     private void txtAmountInWordRegQutFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAmountInWordRegQutFocusGained
         // TODO add your handling code here:
         try {
-            int amount = Integer.valueOf(lblShowReqAmount.getText());
-            vatAmount = (amount * (Integer.valueOf(txtVAT.getText())) / 100);
-            amount += vatAmount;
-            lblShowReqAmount.setText(String.valueOf(amount));
+            vatAmount = (totalAmount * (Integer.valueOf(txtVAT.getText())) / 100);
+            lblShowReqAmount.setText(String.valueOf(totalAmount+vatAmount));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     ":: Error-Adding Amount :: ", JOptionPane.INFORMATION_MESSAGE);
