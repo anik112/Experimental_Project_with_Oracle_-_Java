@@ -101,7 +101,7 @@
                       <Component id="txtChalanNo" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                           <Component id="comboMonth" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="comboYear" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="comboYear" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -136,7 +136,6 @@
       <SubComponents>
         <Component class="javax.swing.JComboBox" name="comboMonth">
           <Properties>
-            <Property name="editable" type="boolean" value="true"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Lucida Sans" size="14" style="0"/>
             </Property>
@@ -158,6 +157,7 @@
               </StringArray>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -165,7 +165,6 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="comboYear">
           <Properties>
-            <Property name="editable" type="boolean" value="true"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Lucida Sans" size="14" style="0"/>
             </Property>
@@ -186,6 +185,7 @@
               </StringArray>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -415,9 +415,9 @@
                                       <Component id="comboQtyType4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txtItemRow5" alignment="0" min="-2" pref="21" max="-2" attributes="0"/>
+                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -1396,6 +1396,9 @@
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtAttentionKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDeliveryPerson">
           <Properties>
@@ -1413,6 +1416,9 @@
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDeliveryPersonKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtChalanNo">
           <Properties>
@@ -1430,6 +1436,9 @@
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtChalanNoKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtWorkOrderDate">
           <Properties>

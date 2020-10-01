@@ -115,10 +115,17 @@ public class WriteChallanReport {
 
             int sl = 1;
             for (ChallanReportComponent crc : components) {
-                bodyTable.addCell(cellProperties(String.valueOf(sl), bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
-                bodyTable.addCell(cellProperties(crc.getProductName(), bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
-                bodyTable.addCell(cellProperties(String.valueOf(crc.getQuantity()), bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
-                bodyTable.addCell(cellProperties(crc.getRemarks(), bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
+                if (crc.getProductName().length() > 0) {
+                    bodyTable.addCell(cellProperties(String.valueOf(sl), bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
+                    bodyTable.addCell(cellProperties(crc.getProductName(), bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
+                    bodyTable.addCell(cellProperties(String.valueOf(crc.getQuantity()), bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
+                    bodyTable.addCell(cellProperties(crc.getRemarks(), bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, true));
+                }else{
+                    bodyTable.addCell(cellProperties(" ", bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, false));
+                    bodyTable.addCell(cellProperties(" ", bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, false));
+                    bodyTable.addCell(cellProperties(" ", bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, false));
+                    bodyTable.addCell(cellProperties(" ", bodyTextFont, Element.ALIGN_CENTER, bodyTablePadding, false));
+                }
                 sl++;
             }
             document.add(bodyTable);
@@ -149,7 +156,7 @@ public class WriteChallanReport {
             PdfPCell cusCel4 = cellProperties(" ", signBodyFont, Element.ALIGN_CENTER, signTablePadding, true);
             cusCel4.setPaddingBottom(30);
             signTable.addCell(cusCel4);
-            PdfPCell cusCel5 = cellProperties("\n"+components.get(0).getDeliveryDate(), signBodyFont, Element.ALIGN_CENTER, signTablePadding, true);
+            PdfPCell cusCel5 = cellProperties("\n" + components.get(0).getDeliveryDate(), signBodyFont, Element.ALIGN_CENTER, signTablePadding, true);
             cusCel5.setPaddingBottom(30);
             signTable.addCell(cusCel5);
             document.add(signTable);
@@ -161,15 +168,15 @@ public class WriteChallanReport {
                     + "   • Please check quality and quantity on delivery time.\n"
                     + "   • VSI Bangladesh Ltd. not liable for broken, thunder-burnt, electric & fire-burnt products.\n"
                     + "   • Warranty will void of all products if sticker is removed.",
-                     instructionBodyFont));
+                    instructionBodyFont));
 
             document.add(new Paragraph("\n"));
-            
+
             Image footerImage = Image.getInstance("img\\footer.jpg");
             footerImage.setAlignment(footerImage.ALIGN_LEFT);
             footerImage.scaleAbsolute(document.getPageSize().getWidth() - 80, 60);
             Rectangle rectangle = document.getPageSize();
-            footerImage.setAbsolutePosition(40, rectangle.getBottom()+10);
+            footerImage.setAbsolutePosition(40, rectangle.getBottom() + 10);
             document.add(footerImage);
 
             document.close();

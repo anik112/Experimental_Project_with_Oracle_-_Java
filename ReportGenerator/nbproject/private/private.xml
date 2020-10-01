@@ -13,9 +13,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/F:/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/view/subwindow/ChalanReportGenerator.java</file>
-            <file>file:/F:/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/view/MainWorkingWindow.java</file>
             <file>file:/F:/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/corefunction/WriteChallanReport.java</file>
-            <file>file:/F:/Experimental_Project_with_Oracle_-_Java/ReportGenerator/test/TestClass.java</file>
+            <file>file:/F:/Experimental_Project_with_Oracle_-_Java/ReportGenerator/src/reportgenerator/view/UpdateAuthorizedData.java</file>
         </group>
     </open-files>
 </project-private>

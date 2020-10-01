@@ -6,10 +6,8 @@
 package reportgenerator.view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 import reportgenerator.reportsParameter.ReportPeraFindAdvanceAmountByAuthorized;
 import reportgenerator.view.subwindow.AdvanceAmountEntry;
@@ -514,8 +512,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(1, 1));
         setName("MainFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1100, 730));
-        setSize(new java.awt.Dimension(1100, 730));
+        setSize(new java.awt.Dimension(900, 800));
 
         mainPen.setBackground(new java.awt.Color(255, 255, 224));
 
@@ -531,7 +528,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
         mainPen.setLayout(mainPenLayout);
         mainPenLayout.setHorizontalGroup(
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
+            .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 1050, Short.MAX_VALUE)
             .addGroup(mainPenLayout.createSequentialGroup()
                 .addComponent(lblShowLogo)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -540,7 +537,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
             mainPenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPenLayout.createSequentialGroup()
                 .addGap(137, 137, 137)
-                .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                .addComponent(lblShowCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                 .addGap(163, 163, 163)
                 .addComponent(lblShowLogo))
         );
@@ -557,7 +554,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
         lblShowReord3.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
         lblShowReord3.setForeground(new java.awt.Color(102, 102, 102));
-        lblShowReord3.setText(" ");
+        lblShowReord3.setText(" < Server IP: 192.168.1.210 >");
         lblShowReord3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, null, java.awt.Color.lightGray, java.awt.Color.lightGray));
 
         lblShowReord4.setFont(new java.awt.Font("Lucida Sans", 0, 10)); // NOI18N
@@ -612,7 +609,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 
         manuItemMakeChallanReport.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         manuItemMakeChallanReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reportgenerator/view/icon/arrow.png"))); // NOI18N
-        manuItemMakeChallanReport.setText("Make Challan");
+        manuItemMakeChallanReport.setText("Make Challan Report");
         manuItemMakeChallanReport.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.lightGray));
         manuItemMakeChallanReport.setBorderPainted(true);
         manuItemMakeChallanReport.setMargin(new java.awt.Insets(0, 0, 10, 0));

@@ -11,7 +11,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.nio.channels.FileChannel;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +52,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
     private String openFolderUrl = "";
     private int vatAmount=0;
     private int totalAmount=0;
+    private String currentDate="";
 
     private List<String> companyAndAddressList = new ArrayList<>();
     private List<String> pendingBillList = new ArrayList<>();
@@ -64,6 +67,9 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
         this.configComapnyListUrl = configCompanyLoc;
         this.configPendingBillList = configPanddingLoc;
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyy-HHmmss");
+        currentDate = simpleDateFormat.format(new Date());
+        
         initComponents();
         showCompanyNameInComboBox();
         refPendingBillTable();
@@ -965,7 +971,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                 srcChannel.close();
                 distChannel.close();
 
-                JOptionPane.showMessageDialog(null, "File Download in " + srcFile.getAbsolutePath(),
+                JOptionPane.showMessageDialog(null, "File Download in " + distFile.getAbsolutePath(),
                         ":: Download :: ", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
@@ -990,7 +996,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
             parts[1] = parts[1].replace(".", "");
             String url = savingLoc + reqBillSavingTeg + "\\" + parts[1] + "\\";
             openFolderUrl = url;
-            url += parts[1] + "-Req-Qtnt-" + System.currentTimeMillis() + ".pdf";
+            url += parts[1] + "-Req-Qtnt-" + currentDate + ".pdf";
 
             recentReqQutFileLoc = url;
 
@@ -1048,7 +1054,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                 srcChannel.close();
                 distChannel.close();
 
-                JOptionPane.showMessageDialog(null, "File Download in " + srcFile.getAbsolutePath(),
+                JOptionPane.showMessageDialog(null, "File Download in " + distFile.getAbsolutePath(),
                         ":: Download :: ", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
@@ -1088,7 +1094,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
             openFolderUrl = url;
 
             if (!checkBoxRequirmentBillHardcopy.isSelected()) {
-                url += companyName + "-Req-Qtnt-Bill-soft-copy" + System.currentTimeMillis() + ".pdf";
+                url += companyName + "-Req-Qtnt-Bill-soft-copy" + currentDate + ".pdf";
                 recentReqQutBillFileLoc = url;
                 File selectedFile = new File(url);
 
@@ -1117,7 +1123,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                 }
 
             } else {
-                url += companyName + "-Req-Qtnt-Bill-hard-copy" + System.currentTimeMillis() + ".pdf";
+                url += companyName + "-Req-Qtnt-Bill-hard-copy" + currentDate + ".pdf";
                 recentReqQutBillFileLoc = url;
                 File selectedFile = new File(url);
 
@@ -1170,7 +1176,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
                 srcChannel.close();
                 distChannel.close();
 
-                JOptionPane.showMessageDialog(null, "File Download in " + srcFile.getAbsolutePath(),
+                JOptionPane.showMessageDialog(null, "File Download in " + distFile.getAbsolutePath(),
                         ":: Download :: ", JOptionPane.INFORMATION_MESSAGE);
 
             }

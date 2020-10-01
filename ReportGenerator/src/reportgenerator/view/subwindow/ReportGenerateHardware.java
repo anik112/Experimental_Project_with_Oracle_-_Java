@@ -12,7 +12,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -56,7 +58,8 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
     private String openFolderUrl = "";
     private String reqBillSavingTeg = "Requirment-Bill-&-Quotation";
     private float vatAmount = 0;
-
+    private String currentDate="";
+    
     List<HardwareQutComponent> listOfHarwareQut = new ArrayList<>();
     private List<String> companyAndAddressList = new ArrayList<>();
 
@@ -69,7 +72,10 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         this.savingLoc = savingLoc;
         this.configComapnyListUrl = configCompanyLoc;
         this.configPendingBillList = configPanddingLoc;
-
+        
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyy-HHmmss");
+        currentDate = simpleDateFormat.format(new Date());
+        
         initComponents();
         showListOfPenel();
         showCompanyNameInComboBox();
@@ -755,7 +761,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         writeQut.setAmountInWord(txtAmountInWord.getText());
         String url = savingLoc + reqBillSavingTeg + "\\" + comName + "\\";
         openFolderUrl = url;
-        recentFileLocation = url + comName + "-Req-Hardware-Qtnt-" + System.currentTimeMillis() + ".pdf";
+        recentFileLocation = url + comName + "-Req-Hardware-Qtnt-" + currentDate + ".pdf";
         File selectedFile = new File(recentFileLocation);
 
         if (writeQut.writeHardwareQutInPdfFile(setData(), selectedFile)) {
@@ -790,7 +796,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
 
             WriteHardwareQutBill writeQutBill = new WriteHardwareQutBill();
             writeQutBill.setAmountInWord(txtAmountInWord.getText());
-            recentFileLocation = url + comName + "-Req-Hardware-Qtnt-Bill-soft-copy" + System.currentTimeMillis() + ".pdf";
+            recentFileLocation = url + comName + "-Req-Hardware-Qtnt-Bill-soft-copy" + currentDate + ".pdf";
             File selectedFile = new File(recentFileLocation);
 
             if (writeQutBill.writeHardwareQutBillInPdfFile(setData(), selectedFile)) {
@@ -863,7 +869,7 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
                 srcChannel.close();
                 distChannel.close();
 
-                JOptionPane.showMessageDialog(null, "File Download in " + srcFile.getAbsolutePath(),
+                JOptionPane.showMessageDialog(null, "File Download in " + distFile.getAbsolutePath(),
                         ":: Download :: ", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {

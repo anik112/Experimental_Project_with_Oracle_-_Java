@@ -51,6 +51,7 @@ public class UpdateAuthorizedData extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Update Data");
+        setLocation(new java.awt.Point(200, 80));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 224));
 

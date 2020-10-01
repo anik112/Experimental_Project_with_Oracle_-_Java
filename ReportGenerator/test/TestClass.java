@@ -10,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -154,25 +156,28 @@ public class TestClass {
 //            } catch (JRException ex) {
 //                Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
 //            }
-            File f = new File("D:\\test.pdf");
-            List<ChallanReportComponent> components = new ArrayList<>();
-            for (int i = 0; i < 14; i++) {
-                ChallanReportComponent component = new ChallanReportComponent();
-                component.setCompanyName("9 star Apparels Industries Ltd.");
-                component.setAddress("Plot#56, House#116, Road#05, Nurani Madrasa Road, "
-                        + "Vatulia, Turag, Dhaka");
-                component.setAttention("Mr. Towheed");
-                component.setChallanNo("16-0620200001");
-                component.setWorkOrderDate("June-2020");
-                component.setDeliveryPerson("Pranta");
-                component.setDeliveryDate("16-06-2020");
-                component.setProductName("sst");
-                component.setQuantity(12);
-                component.setRemarks("");
-                components.add(component);
-            }
-            new WriteChallanReport().writeChallanReportInPdfFile(components, f);
-
+//            File f = new File("D:\\test.pdf");
+//            List<ChallanReportComponent> components = new ArrayList<>();
+//            for (int i = 0; i < 14; i++) {
+//                ChallanReportComponent component = new ChallanReportComponent();
+//                component.setCompanyName("9 star Apparels Industries Ltd.");
+//                component.setAddress("Plot#56, House#116, Road#05, Nurani Madrasa Road, "
+//                        + "Vatulia, Turag, Dhaka");
+//                component.setAttention("Mr. Towheed");
+//                component.setChallanNo("16-0620200001");
+//                component.setWorkOrderDate("June-2020");
+//                component.setDeliveryPerson("Pranta");
+//                component.setDeliveryDate("16-06-2020");
+//                component.setProductName("sst");
+//                component.setQuantity(12);
+//                component.setRemarks("");
+//                components.add(component);
+//            }
+//            new WriteChallanReport().writeChallanReportInPdfFile(components, f);
+            String pattern = "ddMMyyyy-HH:mm:ss";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyy-HH:mm:ss");
+            String date = simpleDateFormat.format(new Date());
+            System.out.println(date);
         } catch (Exception ex) {
             Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
         }

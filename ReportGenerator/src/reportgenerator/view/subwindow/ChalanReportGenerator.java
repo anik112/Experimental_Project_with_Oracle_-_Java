@@ -6,11 +6,14 @@ package reportgenerator.view.subwindow;
  * and open the template in the editor.
  */
 import java.awt.Desktop;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import reportgenerator.corefunction.IOFunction;
@@ -27,9 +30,7 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
     //private String savingLoc = "\\\\192.168.1.210\\monthly_online_bill_and_quotation\\";
     private String configComapnyListUrl;
     private String configPendingBillList;
-    private String billNo = "";
-    private String recentMonthlyBillFileLoc = "";
-    private String recentReqQutFileLoc = "";
+    private String recentFileLoc = "";
     private String recentReqQutBillFileLoc = "";
     private String monthlyBillType = "MONTHLY-BILL";
     private String reqBillType = "SOFT-REQ-BILL";
@@ -38,9 +39,9 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
     private String openFolderUrl = "";
     private int vatAmount = 0;
     private int totalAmount = 0;
+    private String currentDate="";
 
     private List<String> companyAndAddressList = new ArrayList<>();
-    private List<String> pendingBillList = new ArrayList<>();
 
     private int keyTypeChecker = 0;
 
@@ -51,7 +52,10 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
         this.savingLoc = savingLoc;
         this.configComapnyListUrl = configCompanyLoc;
         this.configPendingBillList = configPanddingLoc;
-
+        
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyy-HHmmss");
+        currentDate = simpleDateFormat.format(new Date());
+        
         initComponents();
         showCompanyNameInComboBox();
     }
@@ -164,15 +168,15 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 224));
 
-        comboMonth.setEditable(true);
         comboMonth.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
         comboMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         comboMonth.setToolTipText("");
+        comboMonth.setEnabled(false);
 
-        comboYear.setEditable(true);
         comboYear.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
         comboYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
         comboYear.setToolTipText("");
+        comboYear.setEnabled(false);
 
         comboCompany.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
         comboCompany.setMaximumRowCount(100);
@@ -543,9 +547,9 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
                             .addComponent(txtRemarks4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboQtyType4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtItemRow5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtItemRow5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -688,12 +692,27 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
 
         txtAttention.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtAttention.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Attention", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        txtAttention.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAttentionKeyPressed(evt);
+            }
+        });
 
         txtDeliveryPerson.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtDeliveryPerson.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Delivery Person", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        txtDeliveryPerson.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDeliveryPersonKeyPressed(evt);
+            }
+        });
 
         txtChalanNo.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         txtChalanNo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Challan No", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 12))); // NOI18N
+        txtChalanNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtChalanNoKeyPressed(evt);
+            }
+        });
 
         txtWorkOrderDate.setBackground(new java.awt.Color(0, 255, 255));
         txtWorkOrderDate.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
@@ -746,7 +765,7 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
                     .addComponent(txtChalanNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(comboMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(comboYear, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(comboYear, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(9, 9, 9)
@@ -808,8 +827,10 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
             String year = date.substring(4, 8);
             System.out.println(day + "/" + month + "/" + year);
             txtDate.setText(day + "/" + month + "/" + year);
+            txtWorkOrderDate.requestFocus();
         }
         keyTypeChecker++;
+        
     }//GEN-LAST:event_txtDateKeyPressed
 
     private void txtAmountRow8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountRow8ActionPerformed
@@ -819,8 +840,8 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
     private void btnOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenActionPerformed
         // TODO add your handling code here:
         try {
-            if (!recentReqQutBillFileLoc.isEmpty()) {
-                File file = new File(recentReqQutBillFileLoc);
+            if (!recentFileLoc.isEmpty()) {
+                File file = new File(recentFileLoc);
                 Desktop desktop = Desktop.getDesktop();
                 desktop.open(file);
             }
@@ -834,10 +855,10 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
     private void btnDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadActionPerformed
         // TODO add your handling code here:
         try {
-            if (!savingLoc.isEmpty()) {
+            if (!recentFileLoc.isEmpty()) {
 
                 // copy file in local D:/ drive by File channel
-                File srcFile = new File(recentReqQutBillFileLoc);
+                File srcFile = new File(recentFileLoc);
                 File distFile = new File("D:\\" + srcFile.getName());
                 FileChannel srcChannel = new FileInputStream(srcFile).getChannel();
                 FileChannel distChannel = new FileOutputStream(distFile).getChannel();
@@ -846,7 +867,7 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
                 srcChannel.close();
                 distChannel.close();
 
-                JOptionPane.showMessageDialog(null, "File Download in " + srcFile.getAbsolutePath(),
+                JOptionPane.showMessageDialog(null, "File Download in " + distFile.getAbsolutePath(),
                         ":: Download :: ", JOptionPane.INFORMATION_MESSAGE);
 
             }
@@ -872,12 +893,13 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         if (keyTypeChecker == 8) {
-            String date = txtDate.getText();
+            String date = txtWorkOrderDate.getText();
             String day = date.substring(0, 2);
             String month = date.substring(2, 4);
             String year = date.substring(4, 8);
             System.out.println(day + "/" + month + "/" + year);
             txtWorkOrderDate.setText(day + "/" + month + "/" + year);
+            txtAttention.requestFocus();
         }
         keyTypeChecker++;
     }//GEN-LAST:event_txtWorkOrderDateKeyPressed
@@ -896,9 +918,9 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
             parts[1] = parts[1].replace(".", "");
             String url = savingLoc + reqBillSavingTeg + "\\" + parts[1] + "\\";
             openFolderUrl = url;
-            url += parts[1] + "-Chalan-Report-" + String.format("MMddyyyy", System.currentTimeMillis()) + ".pdf";
-
-            recentReqQutFileLoc = url;
+            
+            url += parts[1] + "-Chalan-Report-" + currentDate + ".pdf";
+            recentFileLoc = url;
 
             File selectedFile = new File(url);
             
@@ -917,6 +939,27 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_btnMakeChalanActionPerformed
+
+    private void txtAttentionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAttentionKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            txtDeliveryPerson.requestFocus();
+        }
+    }//GEN-LAST:event_txtAttentionKeyPressed
+
+    private void txtDeliveryPersonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDeliveryPersonKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            btnMakeChalan.requestFocus();
+        }
+    }//GEN-LAST:event_txtDeliveryPersonKeyPressed
+
+    private void txtChalanNoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChalanNoKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            txtDate.requestFocus();
+        }
+    }//GEN-LAST:event_txtChalanNoKeyPressed
 
     private void showCompanyNameInComboBox() {
         companyAndAddressList = new IOFunction().getCompanyNameAndAddress(configComapnyListUrl);
@@ -1029,6 +1072,21 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
         component12.setRemarks(txtRemarks12.getText());
         component12.setUnit(comboQtyType12.getSelectedItem().toString());
         components.add(component12);
+        
+        ChallanReportComponent component13 = new ChallanReportComponent();
+        component13.setProductName(txtItemRow13.getText());
+        component13.setQuantity(Integer.valueOf(txtAmountRow13.getText()));
+        component13.setRemarks(txtRemarks13.getText());
+        component13.setUnit(comboQtyType13.getSelectedItem().toString());
+        components.add(component13);
+        
+        
+        ChallanReportComponent component14 = new ChallanReportComponent();
+        component14.setProductName(txtItemRow14.getText());
+        component14.setQuantity(Integer.valueOf(txtAmountRow14.getText()));
+        component14.setRemarks(txtRemarks14.getText());
+        component14.setUnit(comboQtyType14.getSelectedItem().toString());
+        components.add(component14);
         
         return components;
     }
