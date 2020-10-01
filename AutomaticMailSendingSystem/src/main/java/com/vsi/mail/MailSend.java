@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -82,6 +83,8 @@ public class MailSend {
                     return new PasswordAuthentication(username, password);
                 }
             });
+            
+            
 
             String folderPath = "D:\\MailSendingFile\\"; // write file folder path
             File connectFolder = new File(folderPath); // connect with folder location
