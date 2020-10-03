@@ -47,7 +47,7 @@ public class ReportGenerateSoftware extends javax.swing.JPanel {
     private String recentReqQutBillFileLoc = "";
     private String monthlyBillType = "MONTHLY-BILL";
     private String reqBillType = "SOFT-REQ-BILL";
-    private String monthlyBillSavingTeg = "Chalan";
+    private String monthlyBillSavingTeg = "Monthly-Bill";
     private String reqBillSavingTeg = "Requirment-Bill-&-Quotation";
     private String openFolderUrl = "";
     private int vatAmount=0;

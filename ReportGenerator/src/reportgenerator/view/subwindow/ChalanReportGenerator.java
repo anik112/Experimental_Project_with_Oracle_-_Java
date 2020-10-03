@@ -34,7 +34,7 @@ public class ChalanReportGenerator extends javax.swing.JPanel {
     private String recentReqQutBillFileLoc = "";
     private String monthlyBillType = "MONTHLY-BILL";
     private String reqBillType = "SOFT-REQ-BILL";
-    private String monthlyBillSavingTeg = "Monthly-Bill";
+    private String monthlyBillSavingTeg = "Chalan";
     private String reqBillSavingTeg = "Chalan";
     private String openFolderUrl = "";
     private int vatAmount = 0;

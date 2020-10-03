@@ -42,7 +42,7 @@ public class MailSend {
      * not accepted. ]
      */
     private static final String username = "engr.mahitul.cse1@gmail.com";
-    private static final String password = "ieb@19_12";
+    private static final String password = "ieb@19_12@";
     private static final String reciverMailAddress = "care.vistasoft@gmail.com";
 
     // Main Function throws InterruptedException
