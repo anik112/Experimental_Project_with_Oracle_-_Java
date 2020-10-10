@@ -150,47 +150,7 @@ public class OtHoursDuct {
         }
     }
 
-    /**
-     * This method helps us to get all section name from database and push
-     * result in view class.
-     *
-     * @return set of section name
-     */
-    public ResultSet getSectionName() {
-        try {
-            dataConnect = OraDbConnection.connection();
-            PreparedStatement statement = dataConnect.prepareStatement("SELECT SECTIONNM FROM TB_SECTION_INFO");
-            ResultSet rs = statement.executeQuery();
-            return rs;
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, " No Section In Database",
-                    ":: Class: OtHoursDuct :: ", JOptionPane.INFORMATION_MESSAGE);
-        }
-        return null;
-    }
-
-    /**
-     * This method helps us to get all section name from database and push
-     * result in view class.
-     *
-     * @return set of section name
-     */
-    public ResultSet getLineNo() {
-        try {
-            dataConnect = OraDbConnection.connection();
-            PreparedStatement statement = dataConnect.prepareStatement(""
-                    + "SELECT DISTINCT LINENO FROM TB_PERSONAL_INFO ORDER BY LINENO ASC"
-                    + "");
-            ResultSet rs = statement.executeQuery();
-            return rs;
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, " No Line no In Database",
-                    ":: Class: OtHoursDuct :: ", JOptionPane.INFORMATION_MESSAGE);
-        }
-        return null;
-    }
+    
 
 }
 

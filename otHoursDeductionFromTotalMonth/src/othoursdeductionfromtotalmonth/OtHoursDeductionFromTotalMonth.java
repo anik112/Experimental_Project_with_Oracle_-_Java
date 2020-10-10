@@ -6,6 +6,7 @@
 package othoursdeductionfromtotalmonth;
 
 import dataDuctCore.DuctOT;
+import dataView.MonthlyOtHoursDuctView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -17,8 +18,7 @@ public class OtHoursDeductionFromTotalMonth extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        new DuctOT()._OtDuct(2020, "September", 16, 2);
-        System.exit(0);
+        new MonthlyOtHoursDuctView().setVisible(true);
     }
 
     /**

@@ -31,6 +31,10 @@ public class InOutClculate extends javax.swing.JFrame {
         label2 = new java.awt.Label();
         btnCalculate = new java.awt.Button();
         lblMsg = new java.awt.Label();
+        lblMsg1 = new java.awt.Label();
+        lblMsg2 = new java.awt.Label();
+        lblMsg3 = new java.awt.Label();
+        lblMsg4 = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,6 +53,22 @@ public class InOutClculate extends javax.swing.JFrame {
         lblMsg.setBackground(new java.awt.Color(255, 255, 51));
         lblMsg.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        lblMsg1.setAlignment(java.awt.Label.CENTER);
+        lblMsg1.setBackground(new java.awt.Color(255, 255, 51));
+        lblMsg1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        lblMsg2.setAlignment(java.awt.Label.CENTER);
+        lblMsg2.setBackground(new java.awt.Color(255, 255, 51));
+        lblMsg2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        lblMsg3.setAlignment(java.awt.Label.CENTER);
+        lblMsg3.setBackground(new java.awt.Color(255, 255, 51));
+        lblMsg3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        lblMsg4.setAlignment(java.awt.Label.CENTER);
+        lblMsg4.setBackground(new java.awt.Color(255, 255, 51));
+        lblMsg4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -56,8 +76,8 @@ public class InOutClculate extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(lblMsg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtInTime, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -65,7 +85,11 @@ public class InOutClculate extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnCalculate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(txtOutTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblMsg1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMsg2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMsg3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMsg4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -81,8 +105,16 @@ public class InOutClculate extends javax.swing.JFrame {
                     .addComponent(txtInTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
+                .addComponent(lblMsg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblMsg1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblMsg2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblMsg4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblMsg3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -105,24 +137,32 @@ public class InOutClculate extends javax.swing.JFrame {
         System.out.println(outTimeMin);
         int outTimeSec = Integer.valueOf(txtOutTime.getText().substring(4, 6));
         System.out.println(outTimeSec);
-        
+
         int tempDurMin;
-        if(inTimeHur>outTimeHur){
-            tempDurMin=(inTimeHur-outTimeHur)*60;
-        }else{
-            tempDurMin=(outTimeHur-inTimeHur)*60;
+        if (inTimeHur > outTimeHur) {
+            tempDurMin = (inTimeHur - outTimeHur) * 60;
+        } else {
+            tempDurMin = (outTimeHur - inTimeHur) * 60;
         }
-        
+
         tempDurMin -= inTimeMin;
         tempDurMin += outTimeMin;
-        
-        int durHur=0;
-        int durMin=0;
-        int durSec=0;
-        
-        durHur=(int)Math.floor(tempDurMin/60);
-        durMin=tempDurMin-((int)Math.floor(durHur*60));
-        
+
+        int durHur = 0;
+        int durMin = 0;
+
+        durHur = (int) Math.floor(tempDurMin / 60);
+        durMin = tempDurMin - (durHur * 60);
+
+        int totalOtH = (durHur - 9);
+        int comOT = (totalOtH > 2) ? 2 : totalOtH;
+        int extraOt = (totalOtH - 2) > 0 ? (totalOtH - 2) : 0;
+
+        lblMsg.setText("Total D: " + durHur + ":" + durMin);
+        lblMsg2.setText("Total OT H: " + totalOtH);
+        lblMsg3.setText("Com OT H: " + comOT);
+        lblMsg4.setText("Extra OT H: " + extraOt);
+        lblMsg1.setText("Working H: 9");
 
     }//GEN-LAST:event_btnCalculateActionPerformed
 
@@ -166,6 +206,10 @@ public class InOutClculate extends javax.swing.JFrame {
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label lblMsg;
+    private java.awt.Label lblMsg1;
+    private java.awt.Label lblMsg2;
+    private java.awt.Label lblMsg3;
+    private java.awt.Label lblMsg4;
     private java.awt.TextField txtInTime;
     private java.awt.TextField txtOutTime;
     // End of variables declaration//GEN-END:variables
