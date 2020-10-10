@@ -6,7 +6,6 @@
 package dataView;
 
 import dataDuctCore.DuctOT;
-import dataDuctCore.OtHoursDuct;
 import dataDuctModel.OtDuctParameters;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -19,7 +18,7 @@ import java.sql.SQLException;
  */
 public class MonthlyOtHoursDuctView extends javax.swing.JFrame {
 
-    private OtHoursDuct otHoursDuct = new OtHoursDuct();
+    private DuctOT otHoursDuct = new DuctOT();
     private String msg = "";
 
     /**
@@ -29,6 +28,7 @@ public class MonthlyOtHoursDuctView extends javax.swing.JFrame {
         initComponents();
         setSectionNm();
         setLineNo();
+        showCompany();
     }
 
     /**
@@ -355,6 +355,9 @@ public class MonthlyOtHoursDuctView extends javax.swing.JFrame {
     private void btnInitialProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInitialProcessActionPerformed
 
         OtDuctParameters parameters=new OtDuctParameters();
+        String selectCompany=comboComapny.getSelectedItem().toString();
+        String[] parts=selectCompany.split("-");
+        
         parameters.setComId(NORMAL);
         
         try {
@@ -374,29 +377,23 @@ public class MonthlyOtHoursDuctView extends javax.swing.JFrame {
 
     private void btnProcessStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessStartActionPerformed
         // TODO add your handling code here:
-        otHoursDuct.dataProcess(Integer.valueOf(textDuctionAmount.getText()),
-                Integer.valueOf(textFinYear.getText()),
-                String.valueOf(comboMonth.getSelectedItem()),
-                checkBokCoplience.isSelected(),
-                txtShowMsg.getText()
-        );
     }//GEN-LAST:event_btnProcessStartActionPerformed
 
     private void setSectionNm() {
-        otHoursDuct = new OtHoursDuct();
+        otHoursDuct = new DuctOT();
         try {
-            ResultSet rs = otHoursDuct.getSectionName();
-            while (rs.next()) {
-                comboSectionNm.addItem(rs.getString(1));
+            ResultSet rs1 = otHoursDuct.getSectionName();
+            while (rs1.next()) {
+                comboSectionNm.addItem(rs1.getString(1));
             }
-            rs.close();
+            rs1.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     private void setLineNo() {
-        otHoursDuct = new OtHoursDuct();
+        otHoursDuct = new DuctOT();
         try {
             ResultSet rs = otHoursDuct.getLineNo();
             while (rs.next()) {
@@ -409,7 +406,16 @@ public class MonthlyOtHoursDuctView extends javax.swing.JFrame {
     }
     
     private void showCompany(){
-        
+        otHoursDuct = new DuctOT();
+        try {
+            ResultSet rs = otHoursDuct.getCompany();
+            while (rs.next()) {
+                comboComapny.addItem(rs.getInt("ID")+"-"+rs.getString("COMPANYNAME"));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

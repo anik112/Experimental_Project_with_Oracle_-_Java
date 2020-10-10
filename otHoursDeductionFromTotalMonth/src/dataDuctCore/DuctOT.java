@@ -235,8 +235,6 @@ public class DuctOT extends SwingWorker<Void, String> {
             Connection dataConnect= OraDbConnection.connection();
             PreparedStatement statement = dataConnect.prepareStatement("SELECT SECTIONNM FROM TB_SECTION_INFO");
             ResultSet rs = statement.executeQuery();
-            statement.close();
-            dataConnect.close();
             return rs;
         } catch (Exception e) {
             e.printStackTrace();
@@ -259,8 +257,6 @@ public class DuctOT extends SwingWorker<Void, String> {
                     + "SELECT DISTINCT LINENO FROM TB_PERSONAL_INFO ORDER BY LINENO ASC"
                     + "");
             ResultSet rs = statement.executeQuery();
-            dataConnect.close();
-            statement.close();
             return rs;
         } catch (Exception e) {
             e.printStackTrace();
@@ -275,17 +271,14 @@ public class DuctOT extends SwingWorker<Void, String> {
      * This method helps us to get all section name from database and push
      * result in view class.
      *
-     * @return set of section name
+     * @return set of company name
      */
     public ResultSet getCompany() {
         try {
             Connection dataConnect = OraDbConnection.connection();
             PreparedStatement statement = dataConnect.prepareStatement(""
-                    + "SELECT DISTINCT LINENO FROM TB_PERSONAL_INFO ORDER BY LINENO ASC"
-                    + "");
+                    + "SELECT ID, COMPANYNAME FROM TB_COMPANY_NAME ORDER BY ID ASC");
             ResultSet rs = statement.executeQuery();
-            dataConnect.close();
-            statement.close();
             return rs;
         } catch (Exception e) {
             e.printStackTrace();
