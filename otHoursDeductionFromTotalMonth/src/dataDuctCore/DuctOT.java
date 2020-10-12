@@ -26,6 +26,15 @@ import javax.swing.SwingWorker;
  */
 public class DuctOT extends SwingWorker<Void, String> {
 
+    private OtDuctParameters odp;
+
+    public DuctOT() {
+    }
+
+    public DuctOT(OtDuctParameters odp) {
+        this.odp = odp;
+    }
+
     public void _OtDuct(OtDuctParameters parameters) {
 
         List<OtHoursDuctModel> modelData = new ArrayList<>();
@@ -34,7 +43,7 @@ public class DuctOT extends SwingWorker<Void, String> {
 
             ResultSet rs = null;
             Connection dataConnect = OraDbConnection.connection();
-            String sqlStatement = "SELECT CARDNO,SECRETENO,EMPID FROM TB_PERSONAL_INFO WHERE OTORG='Y' AND OTCOM='Y' AND ACTIVE=0 "
+            String sqlStatement = "SELECT CARDNO, SECRETENO, EMPID FROM TB_PERSONAL_INFO WHERE OTORG='Y' AND OTCOM='Y' AND ACTIVE=0 "
                     + "AND SECTIONNM='" + parameters.getSection() + "'";
             PreparedStatement statement = dataConnect.prepareStatement(sqlStatement);
             rs = statement.executeQuery();
@@ -69,7 +78,7 @@ public class DuctOT extends SwingWorker<Void, String> {
             Connection connection3 = OraDbConnection.connection();
             for (OtHoursDuctModel ductModel : modelData) {
                 PreparedStatement ps = connection2.prepareStatement("SELECT CARDNO, PDATE, OTMIN, OTPART, "
-                        + "substr(duration,1,instr(duration,':')-1) dur_hr, substr(duration,instr(duration,':')+1) dur_min, INTIME, OUTTIME "
+                        + "substr(duration,1,instr(duration,':')-1) dur_hr, substr(duration,instr(duration,':')+1) dur_min, INTIME, OUTTIME, "
                         + "substr(intime,1,2) intm_hr, substr(intime,4,2) intm_min, substr(intime,7,2) intm_sec, "
                         + "substr(outtime,1,2) outtm_hr, substr(outtime,4,2) outtm_min, substr(outtime,7,2) outtm_sec "
                         + "FROM TB_DATA_MASTER WHERE FINYEAR=" + parameters.getYear() + " AND FINMONTH='" + parameters.getMonth() + "' AND CARDNO='" + ductModel.getCardno() + "' "
@@ -84,10 +93,15 @@ public class DuctOT extends SwingWorker<Void, String> {
                 int totalHr = parameters.getDuctHours();
                 while (rs.next()) {
 
+                    if (Integer.valueOf(rs.getString("dur_hr")) > 0) {
+                        System.out.println("-> " + rs.getString("dur_hr"));
+                        System.out.println("-> " + rs.getString("dur_min"));
+                    }
+
                     SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
                     String date = format.format(rs.getDate("PDATE"));
                     firePropertyChange(null, null, "\n$ " + date + " TOT-OT: " + (rs.getInt("OTMIN") + rs.getInt("OTPART")));
-                    //System.out.println("-> " + date + " OT: " + (rs.getInt("OTMIN") + rs.getInt("OTPART")));
+                    System.out.println("-> " + date + " OT: " + (rs.getInt("OTMIN") + rs.getInt("OTPART")));
 
                     int otCom = rs.getInt("OTMIN");
                     int exOt = rs.getInt("OTPART");
@@ -133,20 +147,20 @@ public class DuctOT extends SwingWorker<Void, String> {
 //                            psCom.executeUpdate();
 //                            psCom.close();
 //                        }
-
                         totalHr -= ductHur;
                         count++;
                         //psOrg.close();
 
                     } else if (ductHur > totalHr) {
 
-                        int durationMin=0;
-                        
-                        if(rs.getInt("dur_hr")>0){
-                            System.out.println("-> "+rs.getInt("dur_hr"));
+                        int durationMin = 0;
+
+                        if (rs.getInt("dur_hr") > 0) {
+                            System.out.println("-> " + rs.getInt("dur_hr"));
+                            System.out.println("-> " + rs.getInt("dur_min"));
                         }
-                        
-                        
+//                      
+
                         int otOrg2 = 0;
                         int otEx2 = 0;
 
@@ -192,7 +206,6 @@ public class DuctOT extends SwingWorker<Void, String> {
 //                            psCom.executeUpdate();
 //                            psCom.close();
 //                        }
-
                         System.out.println("ELS -> duct: " + totalHr + " Main duthr: " + ductHur + " OT: " + otOrg2);
                         totalHr -= ductHur;
                         count++;
@@ -218,11 +231,12 @@ public class DuctOT extends SwingWorker<Void, String> {
     @Override
     protected Void doInBackground() throws Exception {
 
-        firePropertyChange(null, null, "\n$ Start Database Backup Processing ...\n");
+        firePropertyChange(null, null, "\n$ Start Duction Processing ...\n");
+        _OtDuct(odp);
 
         return null;
     }
-    
+
     /**
      * This method helps us to get all section name from database and push
      * result in view class.
@@ -230,9 +244,9 @@ public class DuctOT extends SwingWorker<Void, String> {
      * @return set of section name
      */
     public ResultSet getSectionName() {
-        
+
         try {
-            Connection dataConnect= OraDbConnection.connection();
+            Connection dataConnect = OraDbConnection.connection();
             PreparedStatement statement = dataConnect.prepareStatement("SELECT SECTIONNM FROM TB_SECTION_INFO");
             ResultSet rs = statement.executeQuery();
             return rs;
@@ -265,8 +279,7 @@ public class DuctOT extends SwingWorker<Void, String> {
         }
         return null;
     }
-    
-    
+
     /**
      * This method helps us to get all section name from database and push
      * result in view class.
@@ -277,7 +290,7 @@ public class DuctOT extends SwingWorker<Void, String> {
         try {
             Connection dataConnect = OraDbConnection.connection();
             PreparedStatement statement = dataConnect.prepareStatement(""
-                    + "SELECT ID, COMPANYNAME FROM TB_COMPANY_NAME ORDER BY ID ASC");
+                    + "SELECT COMID, COMPANY FROM TB_COMPANY_INFO ORDER BY COMID ASC");
             ResultSet rs = statement.executeQuery();
             return rs;
         } catch (Exception e) {
@@ -287,8 +300,7 @@ public class DuctOT extends SwingWorker<Void, String> {
         }
         return null;
     }
-    
-    
+
 }
 
 //                    String sql = "update tb_data_master set \n"
