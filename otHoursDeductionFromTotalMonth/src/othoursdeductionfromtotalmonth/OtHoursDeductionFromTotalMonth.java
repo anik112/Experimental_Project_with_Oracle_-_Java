@@ -5,7 +5,6 @@
  */
 package othoursdeductionfromtotalmonth;
 
-import dataDuctCore.DuctOT;
 import dataView.MonthlyOtHoursDuctView;
 import javafx.application.Application;
 import javafx.stage.Stage;

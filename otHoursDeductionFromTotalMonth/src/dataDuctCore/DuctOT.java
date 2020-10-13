@@ -54,9 +54,9 @@ public class DuctOT extends SwingWorker<Void, String> {
                     //System.out.println(rs.getString(1));
 
                     OtHoursDuctModel model = new OtHoursDuctModel();
-                    model.setCardno(rs.getString(1));
-                    model.setSecreteno(rs.getString(2));
-                    model.setEmpID(rs.getInt(3));
+                    model.setCardno(rs.getString("CARDNO"));
+                    model.setSecreteno(rs.getString("SECRETENO"));
+                    model.setEmpID(rs.getInt("EMPID"));
 
                     modelData.add(model);
                 }
@@ -76,44 +76,42 @@ public class DuctOT extends SwingWorker<Void, String> {
         try {
             Connection connection2 = OraDbConnection.connection();
             Connection connection3 = OraDbConnection.connection();
+
+            /// Problem in this block 
             for (OtHoursDuctModel ductModel : modelData) {
                 PreparedStatement ps = connection2.prepareStatement("SELECT CARDNO, PDATE, OTMIN, OTPART, "
                         + "substr(duration,1,instr(duration,':')-1) dur_hr, substr(duration,instr(duration,':')+1) dur_min, INTIME, OUTTIME, "
                         + "substr(intime,1,2) intm_hr, substr(intime,4,2) intm_min, substr(intime,7,2) intm_sec, "
                         + "substr(outtime,1,2) outtm_hr, substr(outtime,4,2) outtm_min, substr(outtime,7,2) outtm_sec "
-                        + "FROM TB_DATA_MASTER WHERE FINYEAR=" + parameters.getYear() + " AND FINMONTH='" + parameters.getMonth() + "' AND CARDNO='" + ductModel.getCardno() + "' "
-                        + "AND OTMIN > 0 AND COMPANY=" + parameters.getComId());
+                        + "FROM TB_DATA_MASTER WHERE FINYEAR=? AND FINMONTH=? AND CARDNO=? "
+                        + "AND OTMIN > 0 AND COMPANY=?");
+                ps.setInt(1, parameters.getYear());
+                ps.setString(2, parameters.getMonth());
+                ps.setString(3, ductModel.getCardno());
+                ps.setInt(4, parameters.getComId());
 
-                ResultSet rs = ps.executeQuery();
+                ResultSet rsData = ps.executeQuery();
                 int count = 0;
 
                 firePropertyChange(null, null, "\nCardno: " + ductModel.getCardno() + " =======");
-                //System.out.println("Cardno: " + ductModel.getCardno());
+                System.out.println("Cardno: " + ductModel.getCardno());
 
-                int totalHr = parameters.getDuctHours();
-                while (rs.next()) {
-
-                    if (Integer.valueOf(rs.getString("dur_hr")) > 0) {
-                        System.out.println("-> " + rs.getString("dur_hr"));
-                        System.out.println("-> " + rs.getString("dur_min"));
-                    }
+                int totalDucOTHur = parameters.getDuctHours();
+                while (rsData.next()) {
 
                     SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
-                    String date = format.format(rs.getDate("PDATE"));
-                    firePropertyChange(null, null, "\n$ " + date + " TOT-OT: " + (rs.getInt("OTMIN") + rs.getInt("OTPART")));
-                    System.out.println("-> " + date + " OT: " + (rs.getInt("OTMIN") + rs.getInt("OTPART")));
-
-                    int otCom = rs.getInt("OTMIN");
-                    int exOt = rs.getInt("OTPART");
+                    String date = format.format(rsData.getDate("PDATE"));
+                    int otCom = rsData.getInt("OTMIN");
+                    int exOt = rsData.getInt("OTPART");
                     int totalOt = otCom + exOt;
 
-                    int ductHur = Math.round(totalOt / 60);
+                    int totalOTHur = Math.round(totalOt / 60);
 
-                    if (totalHr <= 0) {
+                    if (totalDucOTHur <= 0) {
                         break;
                     }
 
-                    if (ductHur <= totalHr) {
+                    if (totalOTHur <= totalDucOTHur) {
 
 //                        String sqlOrg = "update tb_data_master set \n"
 //                                + "outtime='17'||substr(outtime,3), \n"
@@ -147,24 +145,20 @@ public class DuctOT extends SwingWorker<Void, String> {
 //                            psCom.executeUpdate();
 //                            psCom.close();
 //                        }
-                        totalHr -= ductHur;
+                        totalDucOTHur -= totalOTHur;
                         count++;
+
+                        firePropertyChange(null, null, "\n$ " + date + " TOT-OT: " + (rsData.getInt("OTMIN") + rsData.getInt("OTPART")));
+                        System.out.println("-> " + date + " OT: " + totalOTHur + "  On hand: " + totalDucOTHur);
                         //psOrg.close();
 
-                    } else if (ductHur > totalHr) {
-
-                        int durationMin = 0;
-
-                        if (rs.getInt("dur_hr") > 0) {
-                            System.out.println("-> " + rs.getInt("dur_hr"));
-                            System.out.println("-> " + rs.getInt("dur_min"));
-                        }
-//                      
-
+                    } else if (totalOTHur > totalDucOTHur) {
+                        
+                        int currentDurMin=rsData.getInt("dur_min");
                         int otOrg2 = 0;
                         int otEx2 = 0;
 
-                        int tempHr = ductHur - totalHr;
+                        int tempHr = totalOTHur - totalDucOTHur;
 
                         if (tempHr > 2) {
                             otOrg2 = 120;
@@ -173,7 +167,13 @@ public class DuctOT extends SwingWorker<Void, String> {
                             otOrg2 = (tempHr * 60);
                             otEx2 = 0;
                         }
-
+                        
+                        int duration=(9+tempHr)*60;
+                        duration = (duration-currentDurMin);
+                        duration -= (9*60);
+                        System.out.println("Du: "+duration);
+                        tempHr = (int) Math.floor(duration/60);
+                        
 //                        String sqlOrg = "update tb_data_master set \n"
 //                                + "outtime='" + (17 + tempHr) + "'||substr(outtime,3), \n"
 //                                + "duration='" + (9 + tempHr) + "'||substr(duration,instr(duration,':')), \n"
@@ -206,10 +206,13 @@ public class DuctOT extends SwingWorker<Void, String> {
 //                            psCom.executeUpdate();
 //                            psCom.close();
 //                        }
-                        System.out.println("ELS -> duct: " + totalHr + " Main duthr: " + ductHur + " OT: " + otOrg2);
-                        totalHr -= ductHur;
+                        totalDucOTHur -= totalOTHur;
                         count++;
                         //psOrg.close();
+
+                        System.out.println("Date: " + date + " Outtime: " + (17 + tempHr) + ":"+rsData.getString("outtm_min")+":"
+                                +rsData.getString("outtm_sec")+" Dur: " + (9 + tempHr)+":"+currentDurMin+ " ComOT: " + otOrg2 
+                                + " ExOT: " + otEx2 + " On hand: " + totalDucOTHur);
 
                     }
 
