@@ -20,6 +20,15 @@ public class OtDuctParameters {
     private boolean complience=false;
     private boolean hAndm=false;
     private boolean halfHourOtCalculation=false;
+    private boolean otpart=false;
+
+    public boolean isOtpart() {
+        return otpart;
+    }
+
+    public void setOtpart(boolean otpart) {
+        this.otpart = otpart;
+    }
 
     public int getComId() {
         return comId;

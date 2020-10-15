@@ -103,7 +103,13 @@ public class DuctOT extends SwingWorker<Void, String> {
                     String date = format.format(rsData.getDate("PDATE"));
                     int otCom = rsData.getInt("OTMIN");
                     int exOt = rsData.getInt("OTPART");
-                    int totalOt = otCom + exOt;
+                    int totalOt = 0;
+
+                    if (parameters.isOtpart()) {
+                        totalOt = otCom + exOt;
+                    } else {
+                        totalOt = otCom;
+                    }
 
                     int totalOTHur = Math.round(totalOt / 60);
 
@@ -153,27 +159,27 @@ public class DuctOT extends SwingWorker<Void, String> {
                         //psOrg.close();
 
                     } else if (totalOTHur > totalDucOTHur) {
-                        
-                        int currentDurMin=rsData.getInt("dur_min");
+
+                        int currentDurMin = rsData.getInt("dur_min");
                         int otOrg2 = 0;
                         int otEx2 = 0;
 
                         int tempHr = totalOTHur - totalDucOTHur;
 
+                        int duration = (9 + tempHr) * 60;
+                        duration = (duration - currentDurMin);
+                        duration -= (9 * 60);
+                        System.out.println("Du: " + duration);
+                        tempHr = (int) Math.floor(duration / 60);
+
                         if (tempHr > 2) {
                             otOrg2 = 120;
-                            otEx2 = (tempHr * 60) - 120;
+                            otEx2 = duration - 120;
                         } else {
-                            otOrg2 = (tempHr * 60);
+                            otOrg2 = duration;
                             otEx2 = 0;
                         }
-                        
-                        int duration=(9+tempHr)*60;
-                        duration = (duration-currentDurMin);
-                        duration -= (9*60);
-                        System.out.println("Du: "+duration);
-                        tempHr = (int) Math.floor(duration/60);
-                        
+
 //                        String sqlOrg = "update tb_data_master set \n"
 //                                + "outtime='" + (17 + tempHr) + "'||substr(outtime,3), \n"
 //                                + "duration='" + (9 + tempHr) + "'||substr(duration,instr(duration,':')), \n"
@@ -210,8 +216,8 @@ public class DuctOT extends SwingWorker<Void, String> {
                         count++;
                         //psOrg.close();
 
-                        System.out.println("Date: " + date + " Outtime: " + (17 + tempHr) + ":"+rsData.getString("outtm_min")+":"
-                                +rsData.getString("outtm_sec")+" Dur: " + (9 + tempHr)+":"+currentDurMin+ " ComOT: " + otOrg2 
+                        System.out.println("Date: " + date + " Outtime: " + (17 + tempHr) + ":" + rsData.getString("outtm_min") + ":"
+                                + rsData.getString("outtm_sec") + " Dur: " + (9 + tempHr) + ":" + currentDurMin + " ComOT: " + otOrg2
                                 + " ExOT: " + otEx2 + " On hand: " + totalDucOTHur);
 
                     }
