@@ -58,8 +58,8 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
     private String openFolderUrl = "";
     private String reqBillSavingTeg = "Requirment-Bill-&-Quotation";
     private float vatAmount = 0;
-    private String currentDate="";
-    
+    private String currentDate = "";
+
     List<HardwareQutComponent> listOfHarwareQut = new ArrayList<>();
     private List<String> companyAndAddressList = new ArrayList<>();
 
@@ -72,10 +72,10 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
         this.savingLoc = savingLoc;
         this.configComapnyListUrl = configCompanyLoc;
         this.configPendingBillList = configPanddingLoc;
-        
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyy-HHmmss");
         currentDate = simpleDateFormat.format(new Date());
-        
+
         initComponents();
         showListOfPenel();
         showCompanyNameInComboBox();
@@ -832,9 +832,17 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
 
     private void txtAmountInWordMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAmountInWordMouseEntered
         // TODO add your handling code here:
-        totalAmounts = 0;
-        setData();
-        lblTotalAmount.setText(String.valueOf(totalAmounts));
+        try {
+            totalAmounts = 0;
+            setData();
+            float amount = totalAmounts;
+            vatAmount = (amount * (Integer.valueOf(txtVAT.getText())) / 100);
+            amount += vatAmount;
+            lblTotalAmount.setText(String.valueOf(amount));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    ":: Error-Adding Amount :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_txtAmountInWordMouseEntered
 
     private void btnOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenFileActionPerformed
@@ -904,6 +912,8 @@ public class ReportGenerateHardware extends javax.swing.JPanel {
     private void txtAmountInWordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAmountInWordFocusGained
         // TODO add your handling code here:
         try {
+            totalAmounts = 0;
+            setData();
             float amount = totalAmounts;
             vatAmount = (amount * (Integer.valueOf(txtVAT.getText())) / 100);
             amount += vatAmount;

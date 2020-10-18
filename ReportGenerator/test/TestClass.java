@@ -177,6 +177,12 @@ public class TestClass {
             String pattern = "ddMMyyyy-HH:mm:ss";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyy-HH:mm:ss");
             String date = simpleDateFormat.format(new Date());
+            
+            float a=2.0f;
+            String str = String.format("%.02f", a);
+            
+            System.out.println(str);
+            
             System.out.println(date);
         } catch (Exception ex) {
             Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);

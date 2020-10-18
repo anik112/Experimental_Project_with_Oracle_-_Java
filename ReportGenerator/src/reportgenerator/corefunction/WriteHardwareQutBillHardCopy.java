@@ -33,7 +33,7 @@ public class WriteHardwareQutBillHardCopy {
 
     private final String to = "To";
     private final String greetingtextHead = "Dear Sir/Madam,";
-    private final String greetingtextBody = "Thank you for using our software. Please pay the bill as follows:";
+    private final String greetingtextBody = "Thank you for choosing us. Please pay the bill as follows:";
     private final String colHeader01 = "S/L";
     private final String colHeader02="Name of the products";
     private final String colHeader03 = "Description of the products";
@@ -217,16 +217,20 @@ public class WriteHardwareQutBillHardCopy {
                             +components.get(i).getCommunicationWay(),f4
                         ));
                         row4[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getDeviceQty()+" PCS"),f4));
-                        row5[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getDeviceUnitPrice()),f4));
-                        row6[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getDeviceTotalPrice()),f4));
+                        String amountUnit=String.format("%.02f", components.get(i).getDeviceUnitPrice());
+                        row5[i].setPhrase(new Paragraph(amountUnit,f4));
+                        String amount=String.format("%.02f", components.get(i).getDeviceTotalPrice());
+                        row6[i].setPhrase(new Paragraph(amount,f4));
                         totalamount += components.get(i).getDeviceTotalPrice();
                     }else{
                         row1[i].setPhrase(new Paragraph(count,f4));
                         row2[i].setPhrase(new Paragraph(components.get(i).getDtls01(),f4));
                         row3[i].setPhrase(new Paragraph(components.get(i).getDtls02(),f4));
                         row4[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getQty())+" "+components.get(i).getQtyType(),f4));
-                        row5[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getUnitPrice()),f4));
-                        row6[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getTotalPrice()),f4));
+                        String amountUnit=String.format("%.02f", components.get(i).getUnitPrice());
+                        row5[i].setPhrase(new Paragraph(amountUnit,f4));
+                        String amount=String.format("%.02f", components.get(i).getTotalPrice());
+                        row6[i].setPhrase(new Paragraph(amount,f4));
                         totalamount += components.get(i).getTotalPrice();
                     }
                     
@@ -300,10 +304,13 @@ public class WriteHardwareQutBillHardCopy {
             if(components.get(0).getVatAmount()>0){
                 paraOfColFooter=new Paragraph("VAT "+components.get(0).getVatPrcn()+"% (+)\n\n"+colFooterTxt, f4);
                 float totalAmt=(totalamount+components.get(0).getVatAmount());
-                paraOfAmount=new Paragraph(components.get(0).getVatAmount()+"\n\n"+totalAmt+"", f4);
+                String amount=String.format("%.02f", totalAmt);
+                String vatAmount=String.format("%.02f", components.get(0).getVatAmount());
+                paraOfAmount=new Paragraph(vatAmount+"\n\n"+amount+"", f4);
             }else{
+                String amount=String.format("%.02f", totalamount);
                 paraOfColFooter=new Paragraph(colFooterTxt, f4);
-                paraOfAmount=new Paragraph(String.valueOf(totalamount), f4);
+                paraOfAmount=new Paragraph(amount, f4);
             }
 
             // last row body text
