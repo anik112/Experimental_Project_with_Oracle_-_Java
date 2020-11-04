@@ -37,10 +37,21 @@ public class WriteMonthlyBillHardCopy {
     private final String colHeader03 = "Amount (TK.)";
     private final String rowBody = "Monthly software support bill for the month of ";
     private final String colFooterTxt = "Total Amount";
-    private final String tableFooterTxt = "VAT and TAX not included.";
+    private final String tableFooterTxtWithoutVat = "VAT and TAX not included.";
+    private final String tableFooterTxtWithVat = "VAT and TAX included.";
     private final String amountTage = "Amount in word: ";
     private final String noteTxt = "N.B: All payments should be in A/C payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
     private final String sign = "..................................\nAuthorized Signatory";
+    private String amountInWord="";
+
+    public String getAmountInWord() {
+        return amountInWord;
+    }
+
+    public void setAmountInWord(String amountInWord) {
+        this.amountInWord = amountInWord;
+    }
+    
 
     public boolean writeMonthlyBillInPdfFile(MonthlyBillComponent component, File selectedFile) {
 
@@ -126,7 +137,23 @@ public class WriteMonthlyBillHardCopy {
             row01Footer.setHorizontalAlignment(Element.ALIGN_CENTER);
             row01Footer.setVerticalAlignment(Element.ALIGN_TOP);
 
-            PdfPCell row02Body = new PdfPCell(new Paragraph(colFooterTxt, f2));
+            
+            Paragraph paraOfColFooter=new Paragraph();
+            Paragraph paraOfAmount=new Paragraph();
+            if(component.getVatAmount()>0){
+                paraOfColFooter.add("VAT "+component.getVatPrcn()+"% (+)\n\n"+colFooterTxt);
+                paraOfColFooter.setFont(f2);
+                int totalAmt=(component.getAmount()+component.getVatAmount());
+                paraOfAmount.add(component.getVatAmount()+".00\n\n"+totalAmt+".00");
+                paraOfAmount.setFont(f2);
+            }else{
+                paraOfColFooter.add(colFooterTxt);
+                paraOfColFooter.setFont(f2);
+                paraOfAmount.add(String.valueOf(component.getAmount())+".00");
+                paraOfAmount.setFont(f2);
+            }
+            
+            PdfPCell row02Body = new PdfPCell(paraOfColFooter);
             row02Body.setPaddingLeft(padding);
             row02Body.setPaddingTop(padding);
             row02Body.setPaddingBottom(padding);
@@ -135,7 +162,7 @@ public class WriteMonthlyBillHardCopy {
             row02Body.setVerticalAlignment(Element.ALIGN_TOP);
             row02Body.setColspan(2);
 
-            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(component.getAmount()) + ".00", f2));
+            PdfPCell row02Footer = new PdfPCell(paraOfAmount);
             row02Footer.setPaddingLeft(padding);
             row02Footer.setPaddingTop(padding);
             row02Footer.setPaddingBottom(padding);
@@ -154,10 +181,18 @@ public class WriteMonthlyBillHardCopy {
 
             document.add(table);
 
-            Font f3 = FontFactory.getFont("SansSerif", 10);
-            document.add(new Paragraph(tableFooterTxt, f3));
+            Font f3 = FontFactory.getFont("calibri", 10);
+            if(component.getVatAmount()>0){
+                document.add(new Paragraph(tableFooterTxtWithVat, f3));
+            }else{
+                document.add(new Paragraph(tableFooterTxtWithoutVat, f3));
+            }
 
-            document.add(new Paragraph("\n" + amountTage + (new IOFunction().getNumberInWord(component.getAmount(), configAmountListUrl))+" only.", f1));
+            if(amountInWord.length() < 1){
+                amountInWord=(new IOFunction().getNumberInWord(component.getAmount(), configAmountListUrl));
+            }
+            
+            document.add(new Paragraph("\n" + amountTage + amountInWord + " only.", f1));
             document.add(new Paragraph(noteTxt + "\n\n\n", f1));
 
             Image sirSing = Image.getInstance("img\\Sir-Sign-Blank.jpg");

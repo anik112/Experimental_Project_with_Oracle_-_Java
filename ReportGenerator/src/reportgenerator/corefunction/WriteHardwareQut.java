@@ -33,7 +33,7 @@ public class WriteHardwareQut {
 
     private final String to = "To";
     private final String greetingtextHead = "Dear Sir/Madam,";
-    private final String greetingtextBody = "Thank you for using our software. Please pay the bill as follows:";
+    private final String greetingtextBody = "Thank you for choosing us. Please pay the bill as follows:";
     private final String colHeader01 = "S/L";
     private final String colHeader02="Name of the products";
     private final String colHeader03 = "Description of the products";
@@ -41,12 +41,13 @@ public class WriteHardwareQut {
     private final String colHeader04="Qty";
     private final String colHeader05="Unit Price";
     private final String colFooterTxt = "Total Amount";
-    private final String tableFooterTxt = "VAT and TAX not included.";
+    private final String tableFooterTxtWithoutVat = "VAT and TAX not included.";
+    private final String tableFooterTxtWithVat = "VAT and TAX included.";
     private final String amountTage = "Amount in word: ";
-    private final String noteTxt = "N.B: All payments should be in A/C payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
+    private final String noteTxt = "N.B: All payments should be in A/C payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.” and price will change with the market situation.";
     private final String sign = "..................................\nAuthorized Signatory";
     private float totalamount = 0;
-    private String amountInWord;
+    private String amountInWord="";    
 
     public WriteHardwareQut() {
     }
@@ -222,16 +223,20 @@ public class WriteHardwareQut {
                             +components.get(i).getCommunicationWay(),f4
                         ));
                         row4[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getDeviceQty()+" PCS"),f4));
-                        row5[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getDeviceUnitPrice()),f4));
-                        row6[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getDeviceTotalPrice()),f4));
+                        String amountUnit=String.format("%.02f", components.get(i).getDeviceUnitPrice());
+                        row5[i].setPhrase(new Paragraph(amountUnit,f4));
+                        String amount=String.format("%.02f", components.get(i).getDeviceTotalPrice());
+                        row6[i].setPhrase(new Paragraph(amount,f4));
                         totalamount += components.get(i).getDeviceTotalPrice();
                     }else{
                         row1[i].setPhrase(new Paragraph(count,f4));
                         row2[i].setPhrase(new Paragraph(components.get(i).getDtls01(),f4));
                         row3[i].setPhrase(new Paragraph(components.get(i).getDtls02(),f4));
                         row4[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getQty())+" "+components.get(i).getQtyType(),f4));
-                        row5[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getUnitPrice()),f4));
-                        row6[i].setPhrase(new Paragraph(String.valueOf(components.get(i).getTotalPrice()),f4));
+                        String amountUnit=String.format("%.02f", components.get(i).getUnitPrice());
+                        row5[i].setPhrase(new Paragraph(amountUnit,f4));
+                        String amount=String.format("%.02f", components.get(i).getTotalPrice());
+                        row6[i].setPhrase(new Paragraph(amount,f4));
                         totalamount += components.get(i).getTotalPrice();
                     }
                     
@@ -299,8 +304,22 @@ public class WriteHardwareQut {
                 e.printStackTrace();
             }
 
+            Paragraph paraOfColFooter;
+            Paragraph paraOfAmount;
+            if(components.get(0).getVatAmount()>0){
+                paraOfColFooter=new Paragraph("VAT "+components.get(0).getVatPrcn()+"% (+)\n\n"+colFooterTxt, f4);
+                float totalAmt=(totalamount+components.get(0).getVatAmount());
+                String amount=String.format("%.02f", totalAmt);
+                String vatAmount=String.format("%.02f", components.get(0).getVatAmount());
+                paraOfAmount=new Paragraph(vatAmount+"\n\n"+amount+"", f4);
+            }else{
+                String amount=String.format("%.02f", totalamount);
+                paraOfColFooter=new Paragraph(colFooterTxt, f4);
+                paraOfAmount=new Paragraph(amount, f4);
+            }
+            
             // last row body text
-            PdfPCell row02Body = new PdfPCell(new Paragraph(colFooterTxt, f4));
+            PdfPCell row02Body = new PdfPCell(paraOfColFooter);
             row02Body.setPaddingLeft(padding);
             row02Body.setPaddingTop(padding);
             row02Body.setPaddingBottom(padding);
@@ -310,7 +329,7 @@ public class WriteHardwareQut {
             row02Body.setColspan(5);
 
             // last row footer txt
-            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(totalamount), f4));
+            PdfPCell row02Footer = new PdfPCell(paraOfAmount);
             row02Footer.setPaddingLeft(padding);
             row02Footer.setPaddingTop(padding);
             row02Footer.setPaddingBottom(padding);
@@ -324,12 +343,16 @@ public class WriteHardwareQut {
             document.add(table); // add table in document
 
             // set font style and size
-            Font f3 = FontFactory.getFont("SansSerif", 8);
-            document.add(new Paragraph(tableFooterTxt, f3));
+            Font f3 = FontFactory.getFont("calibri", 8);
+            if(components.get(0).getVatAmount()>0){
+                document.add(new Paragraph(tableFooterTxtWithVat, f3));
+            }else{
+                document.add(new Paragraph(tableFooterTxtWithoutVat, f3));
+            }
 
             //document.add(new Paragraph("\n" + amountTage + (new IOFunction().getNumberInWord((int) totalamount, configAmountListUrl)) + " only.", f1));
             
-            document.add(new Paragraph("\n" + amountTage + this.getAmountInWord(), f1));
+            document.add(new Paragraph("\n" + amountTage + this.getAmountInWord()+" only.", f1));
             document.add(new Paragraph(noteTxt + "\n\n", f2));
 
             Image sirSing = Image.getInstance("img\\Sir-Sign.jpg");
@@ -338,13 +361,12 @@ public class WriteHardwareQut {
             document.add(sirSing);
 
             document.add(new Paragraph(sign + "\n\n", f2));
-
-            document.add(new Paragraph("\n"));
+            
             Image footerImage = Image.getInstance("img\\footer.jpg");
             footerImage.setAlignment(footerImage.ALIGN_LEFT);
             footerImage.setBottom(1f);
-            footerImage.scaleAbsolute(document.getPageSize().getWidth() - 80, 90);
-            footerImage.setAbsolutePosition(40, rectangle.getBottom());
+            footerImage.scaleAbsolute(document.getPageSize().getWidth() - 80, 60);
+            footerImage.setAbsolutePosition(40, rectangle.getBottom()+10);
             document.add(footerImage);
 
             document.close();

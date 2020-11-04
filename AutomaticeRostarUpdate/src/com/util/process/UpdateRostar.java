@@ -42,11 +42,7 @@ public class UpdateRostar {
             Logger.getLogger(UpdateRostar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public static void main(String[] args) {
-
-    }
-
+    
     public String formatedDayName(int year, int month, int day) {
 
         LocalDate ld = LocalDate.of(year, month, day);

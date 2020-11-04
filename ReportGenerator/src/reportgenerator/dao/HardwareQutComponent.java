@@ -36,6 +36,9 @@ public class HardwareQutComponent {
     private float deviceUnitPrice;
     private float deviceTotalPrice;
     private String qtyType;
+    private int vatPrcn=0;
+    private float vatAmount=0;
+    
 
     public String getQtyType() {
         return qtyType;
@@ -43,6 +46,22 @@ public class HardwareQutComponent {
 
     public void setQtyType(String qtyType) {
         this.qtyType = qtyType;
+    }
+
+    public int getVatPrcn() {
+        return vatPrcn;
+    }
+
+    public void setVatPrcn(int vatPrcn) {
+        this.vatPrcn = vatPrcn;
+    }
+
+    public float getVatAmount() {
+        return vatAmount;
+    }
+
+    public void setVatAmount(float vatAmount) {
+        this.vatAmount = vatAmount;
     }
 
     public int getDeviceQty() {

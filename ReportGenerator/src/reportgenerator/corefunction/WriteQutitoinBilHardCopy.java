@@ -38,7 +38,8 @@ public class WriteQutitoinBilHardCopy {
     private final String colHeder02 = "Description of the products/Services";
     private final String colHeader03 = "Amount (TK.)";
     private final String colFooterTxt = "Total Amount";
-    private final String tableFooterTxt = "VAT and TAX not included.";
+    private final String tableFooterTxtWithoutVat = "VAT and TAX not included.";
+    private final String tableFooterTxtWithVat = "VAT and TAX included.";
     private final String amountTage = "Amount in word: ";
     private final String noteTxt = "N.B: All payments should be in A/C payee cheque in favour of “ Vistasoft IT Bangladesh Ltd.”";
     private final String sign = "..................................\nAuthorized Signatory";
@@ -51,7 +52,16 @@ public class WriteQutitoinBilHardCopy {
     public void setTotalamount(int totalamount) {
         this.totalamount = totalamount;
     }
+    
+    private String amountInWord="";
+    
+    public String getAmountInWord() {
+        return amountInWord;
+    }
 
+    public void setAmountInWord(String amountInWord) {
+        this.amountInWord = amountInWord;
+    }
         
     public boolean writeReqQtBillInPdfFile(List<ReqQutComponent> components, String billNo, File selectedFile) {
 
@@ -176,8 +186,21 @@ public class WriteQutitoinBilHardCopy {
                     ":: Error-07 :: ", JOptionPane.INFORMATION_MESSAGE);
             }
 
+            
+            Paragraph paraOfColFooter;
+            Paragraph paraOfAmount;
+            if(components.get(0).getVatAmount()>0){
+                paraOfColFooter=new Paragraph("VAT "+components.get(0).getVatPrcn()+"% (+)\n\n"+colFooterTxt, f4);
+                int totalAmt=(totalamount+components.get(0).getVatAmount());
+                paraOfAmount=new Paragraph(components.get(0).getVatAmount()+".00\n\n"+totalAmt+".00", f4);
+            }else{
+                paraOfColFooter=new Paragraph(colFooterTxt, f4);
+                paraOfAmount=new Paragraph(String.valueOf(totalamount)+".00", f4);
+            }
+            
+            
             // last row body text
-            PdfPCell row02Body = new PdfPCell(new Paragraph(colFooterTxt, f4));
+            PdfPCell row02Body = new PdfPCell(paraOfColFooter);
             row02Body.setPaddingLeft(padding);
             row02Body.setPaddingTop(padding);
             row02Body.setPaddingBottom(padding);
@@ -187,7 +210,7 @@ public class WriteQutitoinBilHardCopy {
             row02Body.setColspan(2);
 
             // last row footer txt
-            PdfPCell row02Footer = new PdfPCell(new Paragraph(String.valueOf(totalamount) + ".00", f4));
+            PdfPCell row02Footer = new PdfPCell(paraOfAmount);
             row02Footer.setPaddingLeft(padding);
             row02Footer.setPaddingTop(padding);
             row02Footer.setPaddingBottom(padding);
@@ -201,10 +224,18 @@ public class WriteQutitoinBilHardCopy {
             document.add(table); // add table in document
 
             // set font style and size
-            Font f3 = FontFactory.getFont("SansSerif", 10);
-            document.add(new Paragraph(tableFooterTxt, f3));
-
-            document.add(new Paragraph("\n" + amountTage + (new IOFunction().getNumberInWord(totalamount, configAmountListUrl)) + " only.", f1));
+            Font f3 = FontFactory.getFont("calibri", 10);
+            if(components.get(0).getVatAmount()>0){
+                document.add(new Paragraph(tableFooterTxtWithVat, f3));
+            }else{
+                document.add(new Paragraph(tableFooterTxtWithoutVat, f3));
+            }
+            
+//            if(amountInWord.length() < 1){
+//                amountInWord = (new IOFunction().getNumberInWord(totalamount, configAmountListUrl));
+//            }
+            
+            document.add(new Paragraph("\n" + amountTage + amountInWord + " only.", f1));
             document.add(new Paragraph(noteTxt + "\n\n", f1));
 
             Image sirSing = Image.getInstance("img\\Sir-Sign-Blank.jpg");

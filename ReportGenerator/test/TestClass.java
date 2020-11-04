@@ -1,4 +1,5 @@
 
+import com.sun.net.httpserver.Filter;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +25,10 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import reportgenerator.corefunction.WriteChallanReport;
 import reportgenerator.corefunction.WriteHardwareQut;
 import reportgenerator.dao.AdvanceAmount;
+import reportgenerator.dao.ChallanReportComponent;
 import reportgenerator.dao.EntrySubmitedBillDao;
 import reportgenerator.dao.HardwareQutComponent;
 import reportgenerator.dbConnection.DBConnection;
@@ -72,14 +77,14 @@ public class TestClass {
 //                System.out.println(n<i>);
 //            }
 //            List<HardwareQutComponent> components = new ArrayList<>();
-//            HardwareQutComponent component = new HardwareQutComponent();
-//            component.setDate("04/04/2020");
-//            component.setAddress("Dhaka");
-//            component.setAmount(1000);
-//            component.setCompanyName("Vision");
-//            component.setYear("2020");
-//            component.setMonth("May");
-//            components.add(component);
+//            HardwareQutComponent component1 = new HardwareQutComponent();
+//            component1.setDate("04/04/2020");
+//            component1.setAddress("Dhaka");
+//            component1.setAmount(1000);
+//            component1.setCompanyName("Vision");
+//            component1.setYear("2020");
+//            component1.setMonth("May");
+//            components.add(component1);
 //
 //            new WriteHardwareQut().writeHardwareQutInPdfFile(components, selectedFile);
 //
@@ -125,20 +130,19 @@ public class TestClass {
 //                i++;
 //            }
 //            System.out.println(i);
-            try {
-
-                Connection connection = DBConnection.getConnection();
-
-                JasperReport jasperReport = JasperCompileManager.compileReport("reports\\FindAdvanceAmountByAuthorized.jrxml");
-
-                Map<String, Object> parameters = new HashMap<>();
-                parameters.put("F_AUTH", "NO");
-
-                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
-                //JasperPrintManager.printReport(jasperPrint, true);
-                JasperViewer jv = new JasperViewer(jasperPrint, true);
-                jv.setVisible(true);
-
+//            try {
+//
+//                Connection connection = DBConnection.getConnection();
+//
+//                JasperReport jasperReport = JasperCompileManager.compileReport("reports\\FindAdvanceAmountByAuthorized.jrxml");
+//
+//                Map<String, Object> parameters = new HashMap<>();
+//                parameters.put("F_AUTH", "NO");
+//
+//                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
+//                //JasperPrintManager.printReport(jasperPrint, true);
+//                JasperViewer jv = new JasperViewer(jasperPrint, true);
+//                jv.setVisible(true);
 //                JasperExportManager.exportReportToPdfFile(jasperPrint, "report1.pdf");
 //
 //                File f = new File("report1.pdf");
@@ -148,11 +152,38 @@ public class TestClass {
 //                } catch (IOException ex) {
 //                    Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
 //                }
-                System.out.println("Done!");
-            } catch (JRException ex) {
-                Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+//                System.out.println("Done!");
+//            } catch (JRException ex) {
+//                Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            File f = new File("D:\\test.pdf");
+//            List<ChallanReportComponent> components = new ArrayList<>();
+//            for (int i = 0; i < 14; i++) {
+//                ChallanReportComponent component = new ChallanReportComponent();
+//                component.setCompanyName("9 star Apparels Industries Ltd.");
+//                component.setAddress("Plot#56, House#116, Road#05, Nurani Madrasa Road, "
+//                        + "Vatulia, Turag, Dhaka");
+//                component.setAttention("Mr. Towheed");
+//                component.setChallanNo("16-0620200001");
+//                component.setWorkOrderDate("June-2020");
+//                component.setDeliveryPerson("Pranta");
+//                component.setDeliveryDate("16-06-2020");
+//                component.setProductName("sst");
+//                component.setQuantity(12);
+//                component.setRemarks("");
+//                components.add(component);
+//            }
+//            new WriteChallanReport().writeChallanReportInPdfFile(components, f);
+            String pattern = "ddMMyyyy-HH:mm:ss";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyy-HH:mm:ss");
+            String date = simpleDateFormat.format(new Date());
+            
+            float a=2.0f;
+            String str = String.format("%.02f", a);
+            
+            System.out.println(str);
+            
+            System.out.println(date);
         } catch (Exception ex) {
             Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
         }

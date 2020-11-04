@@ -19,7 +19,25 @@ public class ReqQutComponent {
     private String bodyContent;
     private String amount;
     private String billNo;
+    private int vatPrcn=0;
+    private int vatAmount=0;
 
+    public int getVatPrcn() {
+        return vatPrcn;
+    }
+
+    public void setVatPrcn(int vatPrcn) {
+        this.vatPrcn = vatPrcn;
+    }
+
+    public int getVatAmount() {
+        return vatAmount;
+    }
+
+    public void setVatAmount(int vatAmount) {
+        this.vatAmount = vatAmount;
+    }
+    
     public String getBillNo() {
         return billNo;
     }

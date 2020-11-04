@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -41,7 +42,7 @@ public class MailSend {
      * not accepted. ]
      */
     private static final String username = "engr.mahitul.cse1@gmail.com";
-    private static final String password = "ieb@19_12";
+    private static final String password = "ieb@19_12@";
     private static final String reciverMailAddress = "care.vistasoft@gmail.com";
 
     // Main Function throws InterruptedException
@@ -82,6 +83,8 @@ public class MailSend {
                     return new PasswordAuthentication(username, password);
                 }
             });
+            
+            
 
             String folderPath = "D:\\MailSendingFile\\"; // write file folder path
             File connectFolder = new File(folderPath); // connect with folder location
