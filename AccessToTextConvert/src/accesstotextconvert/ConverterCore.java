@@ -97,6 +97,7 @@ public class ConverterCore {
             Connection getNitgerConn = null;
             ResultSet resultSetNitgen = null;
             PreparedStatement nitgenStatement = null;
+            
             if (stateNITGEN) {
                 getNitgerConn = AccessConnection.dbNITGENconnection();
                 String sql04 = "select [TerminalID],[UserID],[TransactionTime] from "
@@ -110,7 +111,7 @@ public class ConverterCore {
                 fileWriter = new FileWriter(filePath + fileName); // call fileWriter for get file or create file in system
                 printWriter = new PrintWriter(fileWriter); // call printWriter for write text in file
 
-                // check ZKT are aviable
+                // check ZKT are available
                 if (stateZKT) {
                     System.out.println("================= From ZKT =================");
                     // loop for push data in txt file
@@ -136,7 +137,7 @@ public class ConverterCore {
                     getConn.close();
                 }
 
-                // check RTA are aviable
+                // check RTA are available
                 if (stateRTA) {
                     System.out.println("=================== From RTA =====================");
                     // "00"+STRING(NODE_NO)+":"+CARD_NO+":"+D_CARD+":"+T_CARD+":"+"BLANK !!"+":"+"11"
@@ -153,7 +154,7 @@ public class ConverterCore {
                     getRtaConn.close(); // close
                 }
 
-                // check NITGEN are aviable
+                // check NITGEN are available
                 if (stateNITGEN) {
                     System.out.println("================= From Nitgen ==================");
                     while (resultSetNitgen.next()) {

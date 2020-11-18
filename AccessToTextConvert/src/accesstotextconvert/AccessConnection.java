@@ -130,5 +130,34 @@ public class AccessConnection {
 
         return null;
     }
+    
+    
+    // UNIS database conneciton for SQL Server
+    public static Connection dbUNISconnectionOfSQLServer(){
+        
+        setupUtility();
+        Connection connNitgen;
+        try {
+            // ==========================================================
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            int portNumber = 1433;
+
+            // jdbc:sqlserver://DESKTOP-NSLL7T5\\SQLEXPRESS:1433;databaseName=NitgenAccessManager;user=admin;password=admin
+            String conntectionURL = "jdbc:sqlserver://" + serverNameTrim + ":" + portNumber + ";databaseName=" + dbNameTrim + ";user=" + userNameTrim + ";password=" + passwordTrim;
+            connNitgen = DriverManager.getConnection(conntectionURL);
+            // connNitgen=DriverManager.getConnection(url, userName, password);
+            System.out.println("== Connected with NITGEN server ==");
+            return connNitgen;
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(
+                    null, e.getMessage(),
+                    ":: Connection Error NITGEN server :: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        return null;
+        
+    }
 
 }
