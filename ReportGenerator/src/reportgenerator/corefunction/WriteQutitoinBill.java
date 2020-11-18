@@ -32,10 +32,10 @@ public class WriteQutitoinBill {
     private String configAmountListUrl = "setup\\NumberInWord.txt";
 
     private final String to = "To";
-    private final String greetingtextHead = "Dear Sir/Madam,";
+    private final String greetingtextHead = "Dear Sir,";
     private final String greetingtextBody = "Thank you for using our software. Please pay the bill as follows:";
     private final String colHeder01 = "S/L";
-    private final String colHeder02 = "Description of the products/Services";
+    private final String colHeder02 = "Description";
     private final String colHeader03 = "Amount (TK.)";
     private final String colFooterTxt = "Total Amount";
     private final String tableFooterTxtWithoutVat = "VAT and TAX not included.";

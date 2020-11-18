@@ -32,11 +32,11 @@ public class WriteHardwareQut {
     private String configAmountListUrl = "setup\\NumberInWord.txt";
 
     private final String to = "To";
-    private final String greetingtextHead = "Dear Sir/Madam,";
+    private final String greetingtextHead = "Dear Sir,";
     private final String greetingtextBody = "Thank you for choosing us. Please pay the bill as follows:";
     private final String colHeader01 = "S/L";
     private final String colHeader02="Name of the products";
-    private final String colHeader03 = "Description of the products";
+    private final String colHeader03 = "Description";
     private final String colHeader06 = "Amount (TK.)";
     private final String colHeader04="Qty";
     private final String colHeader05="Unit Price";
