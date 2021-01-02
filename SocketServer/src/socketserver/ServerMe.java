@@ -10,8 +10,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -21,6 +19,7 @@ public class ServerMe {
 
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
+    private Socket sot;
 
     public ServerMe() {
 
@@ -50,12 +49,15 @@ public class ServerMe {
         try {
             ServerMe me = new ServerMe();
             ServerSocket serverSocket = new ServerSocket(8080);
-            Socket socket = serverSocket.accept();
-            System.out.println(me.getDataFromClient(socket));
-            socket.close();
-            serverSocket.close();
+
+            while (true) {
+                Socket socket = serverSocket.accept();
+                ClientHandelar ch=new ClientHandelar(socket);
+                Thread t=new Thread(ch);
+                t.start();
+            }
         } catch (IOException ex) {
-            Logger.getLogger(ServerMe.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 

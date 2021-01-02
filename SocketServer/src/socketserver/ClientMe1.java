@@ -15,7 +15,7 @@ import java.util.Scanner;
  *
  * @author VSI-ANIK
  */
-public class ClientMe {
+public class ClientMe1 {
 
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
@@ -43,7 +43,7 @@ public class ClientMe {
     
     public static void main(String args[]) {
         try {
-            ClientMe me=new ClientMe();
+            ClientMe1 me=new ClientMe1();
             Socket socket = new Socket("localhost", 8080);
             me.sendDataToServer("Client 182056", socket);
             while(true){
