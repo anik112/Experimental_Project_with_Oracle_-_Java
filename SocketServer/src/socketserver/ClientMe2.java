@@ -8,23 +8,19 @@ package socketserver;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 /**
  *
  * @author VSI-ANIK
  */
-public class ServerMe {
+public class ClientMe2 {
 
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
-    private Socket sot;
-
-    public ServerMe() {
-    }
-
-    private String getDataFromClient(Socket s) {
+    
+    private String getDataFromServer(Socket s) {
         try {
             dataInputStream = new DataInputStream(s.getInputStream());
             return dataInputStream.readUTF();
@@ -34,7 +30,7 @@ public class ServerMe {
         return "";
     }
 
-    private void sendDataToClient(String data, Socket s) {
+    private void sendDataToServer(String data, Socket s) {
         try {
             dataOutputStream = new DataOutputStream(s.getOutputStream());
             dataOutputStream.writeUTF(data);
@@ -43,22 +39,25 @@ public class ServerMe {
             e.printStackTrace();
         }
     }
-
-    public static void main(String arg[]) {
+    
+    
+    public static void main(String args[]) {
         try {
-            ServerMe me = new ServerMe();
-            ServerSocket serverSocket = new ServerSocket(8080);
-            int i=1;
-            while (true) {
-                Socket socket = serverSocket.accept();
-                ClientHandelar ch=new ClientHandelar(socket,i);
-                Thread t=new Thread(ch);
-                t.start();
-                i++;
+            ClientMe2 me=new ClientMe2();
+            Socket socket = new Socket("localhost", 8080);
+            me.sendDataToServer("Client 182056-3", socket);
+            while(true){
+                System.out.println(me.getDataFromServer(socket));
+                System.out.print("Rep: ");
+                Scanner scanner=new Scanner(System.in);
+                String str=scanner.nextLine();
+                me.sendDataToServer(str, socket);
+                if(str.equals("exit")){
+                    break;
+                }
             }
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
 }

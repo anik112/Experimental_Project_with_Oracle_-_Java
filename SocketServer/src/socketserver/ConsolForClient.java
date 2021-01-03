@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author VSI-ANIK
  */
-public class Consol extends javax.swing.JFrame {
+public class ConsolForClient extends javax.swing.JFrame {
 
     private ServerSocket serverSocket;
     private Socket socket;
@@ -26,7 +26,7 @@ public class Consol extends javax.swing.JFrame {
     /**
      * Creates new form Consol
      */
-    public Consol(String windowName, Socket s) {
+    public ConsolForClient(String windowName, Socket s) {
         initComponents();
         lblName.setText(windowName);
         this.socket = s;
@@ -115,7 +115,7 @@ public class Consol extends javax.swing.JFrame {
             dataOutputStream.writeUTF(msg.getText());
             dataOutputStream.flush();
         } catch (IOException ex) {
-            Logger.getLogger(Consol.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsolForClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

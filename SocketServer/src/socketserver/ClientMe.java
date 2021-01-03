@@ -43,15 +43,24 @@ public class ClientMe {
     
     public static void main(String args[]) {
         try {
+            
             ClientMe me=new ClientMe();
             Socket socket = new Socket("localhost", 8080);
-            me.sendDataToServer("Client 182056", socket);
+            me.sendDataToServer("Client 182056-1", socket);
+            Consol c=new Consol("Client1",socket);
+            c.setVisible(true);
+            c.txtAreaConsol.setText(me.getDataFromServer(socket));
             while(true){
-                System.out.println(me.getDataFromServer(socket));
+                String str2=me.getDataFromServer(socket);
+                c.txtAreaConsol.setText(c.txtAreaConsol.getText()+"\n"
+                +str2+"\n=====================\n");
+                System.out.println(str2);
+                
                 System.out.print("Rep: ");
-                Scanner scanner=new Scanner(System.in);
-                String str=scanner.nextLine();
-                me.sendDataToServer(str, socket);
+                //Scanner scanner=new Scanner(System.in);
+                //String str=scanner.nextLine();
+                String str=c.returnSeverData();
+                me.sendDataToServer(c.msg.getText(), socket);
                 if(str.equals("exit")){
                     break;
                 }
@@ -59,5 +68,21 @@ public class ClientMe {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public DataInputStream getDataInputStream() {
+        return dataInputStream;
+    }
+
+    public void setDataInputStream(DataInputStream dataInputStream) {
+        this.dataInputStream = dataInputStream;
+    }
+
+    public DataOutputStream getDataOutputStream() {
+        return dataOutputStream;
+    }
+
+    public void setDataOutputStream(DataOutputStream dataOutputStream) {
+        this.dataOutputStream = dataOutputStream;
     }
 }

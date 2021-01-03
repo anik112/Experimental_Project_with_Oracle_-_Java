@@ -9,7 +9,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Scanner;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -19,7 +20,7 @@ public class ClientMe1 {
 
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
-    
+
     private String getDataFromServer(Socket s) {
         try {
             dataInputStream = new DataInputStream(s.getInputStream());
@@ -39,20 +40,30 @@ public class ClientMe1 {
             e.printStackTrace();
         }
     }
-    
-    
+
     public static void main(String args[]) {
         try {
-            ClientMe1 me=new ClientMe1();
+            ClientMe1 me = new ClientMe1();
             Socket socket = new Socket("localhost", 8080);
-            me.sendDataToServer("Client 182056", socket);
-            while(true){
-                System.out.println(me.getDataFromServer(socket));
-                System.out.print("Rep: ");
-                Scanner scanner=new Scanner(System.in);
-                String str=scanner.nextLine();
-                me.sendDataToServer(str, socket);
-                if(str.equals("exit")){
+            ConsolForClient cfc = new ConsolForClient("Client 182056-2", socket);
+            cfc.setVisible(true);
+            me.sendDataToServer("Client 182056-2", socket);
+            String str2 = me.getDataFromServer(socket);
+            cfc.txtAreaConsol.setText(cfc.txtAreaConsol.getText() + "\n"
+                    + str2 + "\n=====================\n");
+
+            while (true) {
+                //System.out.println(me.getDataFromServer(socket));
+                //System.out.print("Rep: ");
+                str2 = me.getDataFromServer(socket);
+                Date d = new Date(System.currentTimeMillis());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyy hh:mm");
+                String currentTime = dateFormat.format(d);
+                cfc.txtAreaConsol.setText(cfc.txtAreaConsol.getText() + "\n" + currentTime + "  " + str2);
+//                Scanner scanner=new Scanner(System.in);
+//                String str=scanner.nextLine();
+//                me.sendDataToServer(str, socket);
+                if(str2.equals("close")){
                     break;
                 }
             }

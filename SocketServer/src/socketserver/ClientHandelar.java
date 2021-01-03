@@ -9,8 +9,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Scanner;
-import java.util.logging.Logger;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 
 /**
  *
@@ -21,9 +22,11 @@ public class ClientHandelar implements Runnable {
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
     private Socket socket;
+    private int id;
 
-    public ClientHandelar(Socket s) {
+    public ClientHandelar(Socket s, int id) {
         socket = s;
+        this.id=id;
     }
 
     private String getDataFromClient(Socket s) {
@@ -48,16 +51,28 @@ public class ClientHandelar implements Runnable {
 
     @Override
     public void run() {
+        Consol c=new Consol("Handeler-"+id,socket);
+        c.setVisible(true);
         System.out.println(socket);
-        System.out.println(getDataFromClient(socket));
         sendDataToClient("Hi i am Server. What you want? ", socket);
+        String str2=getDataFromClient(socket);
+        System.out.println(str2);
+        c.txtAreaConsol.setText(c.txtAreaConsol.getText()+"\n"
+                +str2+"\n=====================\n");
+        
         while (true) {
-            System.out.println(getDataFromClient(socket));
-            System.out.print("Rep: ");
-            Scanner scanner = new Scanner(System.in);
-            String str = scanner.nextLine();
-            sendDataToClient(str, socket);
-            if (str.equals("exit")) {
+            str2=getDataFromClient(socket);
+            System.out.println(str2);
+            Date d=new Date(System.currentTimeMillis());
+            SimpleDateFormat dateFormat=new SimpleDateFormat("dd/mm/yyy hh:mm");
+            String currentTime=dateFormat.format(d);
+            c.txtAreaConsol.setText(c.txtAreaConsol.getText()+"\n"+currentTime+"  "+str2);
+            //System.out.print("Rep: ");
+            //Scanner scanner = new Scanner(System.in);
+            //String str = scanner.nextLine();
+//            String str=c.returnSeverData();
+//            sendDataToClient(str, socket);
+            if (str2.equals("close")) {
                 break;
             }
         }
