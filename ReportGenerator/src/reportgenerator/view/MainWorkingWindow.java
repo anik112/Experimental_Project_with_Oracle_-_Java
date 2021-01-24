@@ -57,6 +57,7 @@ public class MainWorkingWindow extends javax.swing.JFrame {
 //        lblShowCompany.setLocation(0,(this.getHeight()/2));
 //        lblShowLogo.setLocation(10,this.getHeight());
         //subPenLeftBorder=(widthOfMainPen/2)-(widthOfMainPen/4);
+        
     }
 
     /**

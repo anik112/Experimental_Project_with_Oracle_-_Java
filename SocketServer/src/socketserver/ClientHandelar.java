@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 public class ClientHandelar implements Runnable {
 
     private DataInputStream dataInputStream;
+    
     private DataOutputStream dataOutputStream;
     private Socket socket;
     private int id;
