@@ -99,7 +99,7 @@ public class TestClass {
 //        }
 //        System.out.println("Amex.".replace(".", ""));
 //        
-            System.out.println(DBConnection.getConnection());
+//            System.out.println(DBConnection.getConnection());
 //        
 //        AdvanceAmount aa=new AdvanceAmount();
 //        aa.setGivenDate("12/12/2020");
@@ -114,7 +114,6 @@ public class TestClass {
 //            statement.executeUpdate();
 //            System.out.println("Update::");
 //            System.exit(0);
-
 //            Connection connection = DBConnection.getConnection();
 //            //PreparedStatement statement = connection.prepareStatement("SELECT * FROM TB_ADVANCE_AMOUNT ORDER BY ID DESC");
 //            // + "WHERE COM_NAME='"+comName+"'");
@@ -174,16 +173,29 @@ public class TestClass {
 //                components.add(component);
 //            }
 //            new WriteChallanReport().writeChallanReportInPdfFile(components, f);
-            String pattern = "ddMMyyyy-HH:mm:ss";
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyy-HH:mm:ss");
-            String date = simpleDateFormat.format(new Date());
+//            String pattern = "ddMMyyyy-HH:mm:ss";
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyy-HH:mm:ss");
+//            String date = simpleDateFormat.format(new Date());
+//            
+//            float a=2.0f;
+//            String str = String.format("%.02f", a);
+//            
+//            System.out.println(str);
+//            
+//            System.out.println(date);
             
-            float a=2.0f;
-            String str = String.format("%.02f", a);
+            Connection connection = DBConnection.getConnection();
+            String sql = "select id, sub_date, emp_name, amount from TB_ADVANCE_AMOUNT"
+                    + "where authorized='NO'";
+            PreparedStatement statement=connection.prepareStatement(sql);
+            ResultSet rs=statement.executeQuery();
             
-            System.out.println(str);
             
-            System.out.println(date);
+            while(rs.next()){
+                System.out.println("\nId: "+rs.getInt("id"));
+                System.out.println("Name: "+rs.getString("emp_name"));
+            }
+            
         } catch (Exception ex) {
             Logger.getLogger(TestClass.class.getName()).log(Level.SEVERE, null, ex);
         }
