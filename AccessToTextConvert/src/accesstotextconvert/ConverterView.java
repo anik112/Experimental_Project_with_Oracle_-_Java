@@ -158,6 +158,7 @@ public class ConverterView extends javax.swing.JFrame {
 
         jCheckNitgenServer.setBackground(new java.awt.Color(255, 255, 192));
         jCheckNitgenServer.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jCheckNitgenServer.setSelected(true);
         jCheckNitgenServer.setText("NITGEN");
 
         jCheckNitgenServer1.setBackground(new java.awt.Color(255, 255, 192));
@@ -553,7 +554,7 @@ public class ConverterView extends javax.swing.JFrame {
 
     private void btnSetupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetupActionPerformed
         // TODO add your handling code here:
-        new SetupDatabase().setVisible(true);
+       // new SetupDatabase().setVisible(true);
     }//GEN-LAST:event_btnSetupActionPerformed
 
     private void txtFromDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFromDateMouseClicked

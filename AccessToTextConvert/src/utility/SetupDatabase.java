@@ -559,7 +559,7 @@ public class SetupDatabase extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -581,7 +581,7 @@ public class SetupDatabase extends javax.swing.JFrame {
 
                 properties.setProperty(keyList.KEY_SERVER_NAME, jTxtServerName.getText());
                 properties.setProperty(keyList.KEY_USER_NAME, jTxtUserName.getText());
-                properties.setProperty(keyList.KEY_USER_PASSWORD, enqDnq.passwordEnq(jTxtPassword.getText()));
+                properties.setProperty(keyList.KEY_USER_PASSWORD, jTxtPassword.getText());
                 properties.setProperty(keyList.KEY_DATABSE_NAME, jTxtDbName.getText());
                 properties.setProperty(keyList.KEY_CARDNO_EXTRA_ADDED_ZKT, jTxtExtraStringForCardnoZKT.getText());
                 properties.setProperty(keyList.KEY_CARDNO_EXTRA_ADDED_RTA, jTxtExtraStringForCardnoRTA.getText());
@@ -613,6 +613,7 @@ public class SetupDatabase extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(
                         null, " Data Save ",
                         ":: Date Converting Success :: ", JOptionPane.INFORMATION_MESSAGE);
+                
 
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(

@@ -31,7 +31,7 @@ public class ConverterCore {
 
     private String filePath;
     private String dateForFileName;
-    private String fileName;
+    private String fileName = "000.txt";
     private String addedStringWithCardnoZkt;
     private String addedStringWithCardnoRta;
     private String addedStringWithCardnoNitgen;
@@ -48,7 +48,15 @@ public class ConverterCore {
         Random random = new Random(); // generat random number
         filePath = "D:\\DATA\\"; // file location
         dateForFileName = toDate.replace("/", ""); // resize date
-        fileName = dateForFileName + random.nextInt(9) + ".txt"; // file name
+
+        if (stateZKT) {
+            fileName = dateForFileName + "-ZKT" + random.nextInt(9) + ".txt"; // file name
+        } else if (stateRTA) {
+            fileName = dateForFileName + "-RTA" + random.nextInt(9) + ".txt"; // file name
+        } else {
+            fileName = dateForFileName + "-NITGEN" + random.nextInt(9) + ".txt"; // file name
+        }
+
         KeyList key = new KeyList();
 
         try (InputStream input = new FileInputStream("config.properties")) {
@@ -97,7 +105,7 @@ public class ConverterCore {
             Connection getNitgerConn = null;
             ResultSet resultSetNitgen = null;
             PreparedStatement nitgenStatement = null;
-            
+
             if (stateNITGEN) {
                 getNitgerConn = AccessConnection.dbNITGENconnection();
                 String sql04 = "select [TerminalID],[UserID],[TransactionTime] from "
@@ -123,13 +131,16 @@ public class ConverterCore {
                         String onlyTime = strDate.substring(11, 22); // get only time form (date/time)
                         onlyTime = onlyTime.substring(0, 8); // resize time
                         onlyTime = onlyTime.replace(":", ""); // remove ':' from time
+                        String secrateNo = addedStringWithCardnoZkt + rs.getString(4);
 
                         // Make string format
-                        String finalText = ('"'+rs.getString(2) + ":" + addedStringWithCardnoZkt + rs.getString(4) + ":" + onlyDate + "1:" + onlyTime + ":" + "BLANK !!:11"+'"');
-                        printWriter.println(finalText); // write text in file
-
-                        System.out.println(finalText);
-                        rowCount++; // row count
+                        String finalText = "";
+                        if (secrateNo.length() > addedStringWithCardnoZkt.length()) {
+                            finalText = (rs.getString(2) + ":" + secrateNo + ":" + onlyDate + "1:" + onlyTime + ":11");
+                            printWriter.println(finalText); // write text in file
+                            System.out.println(finalText);
+                            rowCount++; // row count
+                        }
                     }
 
                     statement.close();
@@ -142,12 +153,17 @@ public class ConverterCore {
                     System.out.println("=================== From RTA =====================");
                     // "00"+STRING(NODE_NO)+":"+CARD_NO+":"+D_CARD+":"+T_CARD+":"+"BLANK !!"+":"+"11"
                     while (rtaSet.next()) {
-                        // Make string format
-                        String finalText = ("0" + rtaSet.getString(1) + ":" + addedStringWithCardnoRta + rtaSet.getString(2) + ":" + rtaSet.getString(3) + ":" + rtaSet.getString(4) + ":" + "BLANK !!:11");
-                        printWriter.println(finalText); // write text in file
+                        String secrateNo = addedStringWithCardnoRta + rtaSet.getString(2);
 
-                        System.out.println(finalText);
-                        rowCount++; // row count
+                        String finalText = "";
+                        if (secrateNo.length() > addedStringWithCardnoRta.length()) {
+                            // Make string format
+                            finalText = ("0" + rtaSet.getString(1) + ":" + secrateNo + ":" + rtaSet.getString(3) + ":" + rtaSet.getString(4) + ":11");
+                            printWriter.println(finalText); // write text in file
+
+                            System.out.println(finalText);
+                            rowCount++; // row count
+                        }
                     }
                     rtaStatement.close(); // close
                     rtaSet.close(); // close
@@ -170,10 +186,13 @@ public class ConverterCore {
                         String finDate = timeAndDate.substring(0, 4) + timeAndDate.substring(5, 7) + timeAndDate.substring(8, 10);
                         String finTime = timeAndDate.substring(11, 13) + timeAndDate.substring(14, 16) + timeAndDate.substring(17, 19);
 
-                        String finalText = (terminalId + ":" + secrateNo + ":" + finDate + ":" + finTime + ":" + "BLANK !!:11");
-                        printWriter.println(finalText); // write text in file
-                        System.out.println(finalText);
-                        rowCount++;
+                        String finalText = "";
+                        if (secrateNo.length() > addedStringWithCardnoNitgen.length()) {
+                            finalText = (terminalId + ":" + secrateNo + ":" + finDate + ":" + finTime + ":11");
+                            printWriter.println(finalText); // write text in file
+                            System.out.println(finalText);
+                            rowCount++;
+                        }
                     }
 
                     getNitgerConn.close();
@@ -211,7 +230,7 @@ public class ConverterCore {
 }
 
 
-/* SQL Document MS Access*/
+/* SQL Document MS Access */
 //"SELECT CHECKINOUT.CHECKTIME,CHECKINOUT.SENSORID,CHECKINOUT.USERID,USERINFO.Badgenumber "
 //                    + "FROM CHECKINOUT,USERINFO WHERE "
 //                    + "(CHECKINOUT.CHECKTIME) between (#" + fromDate + " 7:00:00 AM#) and (#" + toDate + " 7:00:00 AM#)"
