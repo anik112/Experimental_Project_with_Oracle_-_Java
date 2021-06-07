@@ -127,12 +127,12 @@ public class Test {
 //        } catch (FileNotFoundException ex) {
 //            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-
-
-        Date date=new Date(System.currentTimeMillis());
-        System.out.println(date.getDate());
-        Calendar calendar=Calendar.getInstance();
-        calendar.setTime(date);
-        System.out.println();
+//
+//
+//        Date date=new Date(System.currentTimeMillis());
+//        System.out.println(date.getDate());
+//        Calendar calendar=Calendar.getInstance();
+//        calendar.setTime(date);
+        System.out.println(String.format("%012d", Integer.parseInt("1020")));
     }
 }

@@ -451,6 +451,8 @@ public class ConverterView extends javax.swing.JFrame {
 
     private void btnProcessStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessStartActionPerformed
         if (jCheckNitgenServer.isSelected() || jCheckRTAserver.isSelected() || jCheckZKTserver.isSelected()) {
+            
+            btnProcessStart.setEnabled(false);
             // TODO add your handling code here:
             // create object
             ConverterCore converterCore = new ConverterCore();
@@ -491,6 +493,7 @@ public class ConverterView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please Select Any Option",
                     "Select Option", JOptionPane.INFORMATION_MESSAGE);
         }
+        btnProcessStart.setEnabled(true);
     }//GEN-LAST:event_btnProcessStartActionPerformed
 
     private void btnDeleteAttendenceDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAttendenceDataActionPerformed
@@ -554,7 +557,7 @@ public class ConverterView extends javax.swing.JFrame {
 
     private void btnSetupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetupActionPerformed
         // TODO add your handling code here:
-       // new SetupDatabase().setVisible(true);
+       new SetupDatabase().setVisible(true);
     }//GEN-LAST:event_btnSetupActionPerformed
 
     private void txtFromDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFromDateMouseClicked

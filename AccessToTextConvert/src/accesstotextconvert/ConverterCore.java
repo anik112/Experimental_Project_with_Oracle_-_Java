@@ -182,13 +182,12 @@ public class ConverterCore {
                         } else if (terminalId.length() == 2) {
                             terminalId = "0" + terminalId;
                         }
-                        String secrateNo = addedStringWithCardnoNitgen + resultSetNitgen.getString(2);
-                        String finDate = timeAndDate.substring(0, 4) + timeAndDate.substring(5, 7) + timeAndDate.substring(8, 10);
-                        String finTime = timeAndDate.substring(11, 13) + timeAndDate.substring(14, 16) + timeAndDate.substring(17, 19);
+                        if (!resultSetNitgen.getString(2).isEmpty()) {
+                            String secrateNo = String.format("%010d", Integer.parseInt(resultSetNitgen.getString(2)));
+                            String finDate = timeAndDate.substring(0, 4) + timeAndDate.substring(5, 7) + timeAndDate.substring(8, 10);
+                            String finTime = timeAndDate.substring(11, 13) + timeAndDate.substring(14, 16) + timeAndDate.substring(17, 19);
 
-                        String finalText = "";
-                        if (secrateNo.length() > addedStringWithCardnoNitgen.length()) {
-                            finalText = (terminalId + ":" + secrateNo + ":" + finDate + ":" + finTime + ":11");
+                            String finalText = (terminalId + ":" + secrateNo + ":" + finDate + ":" + finTime + ":11");
                             printWriter.println(finalText); // write text in file
                             System.out.println(finalText);
                             rowCount++;

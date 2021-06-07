@@ -64,14 +64,18 @@ public class SetupDatabase extends javax.swing.JFrame {
         initComponents();     
         holdOldData();
         
-        PasswordEnqDnq enqDnq=new PWS();
+        //PasswordEnqDnq enqDnq=new PWS();
+        //jTxtPassword.setText(enqDnq.passwordDnq(passwordFile));
+        
         jTxtDbName.setText(dbName);
-        jTxtPassword.setText(enqDnq.passwordDnq(passwordFile));
+        jTxtPassword.setText(passwordFile);
         jTxtServerName.setText(serverFile);
         jTxtUserName.setText(userNameFile);
         jTxtExtraStringForCardnoRTA.setText(extraCardnoAddedRta);
         jTxtExtraStringForCardnoZKT.setText(extraCardnoAddedZkt);
         jTxtExtraStringForCardnoNITGEN.setText(extraCardnoAddedNitgen);
+        lblShowRTAurl.setText(rtaPath);
+        lblShowZKTurl.setText(zktPath);
     }
 
     private void holdOldData() {
@@ -90,9 +94,15 @@ public class SetupDatabase extends javax.swing.JFrame {
             extraCardnoAddedZkt = properties.getProperty(keyList.KEY_CARDNO_EXTRA_ADDED_ZKT);
             extraCardnoAddedRta = properties.getProperty(keyList.KEY_CARDNO_EXTRA_ADDED_RTA);
             extraCardnoAddedNitgen = properties.getProperty(keyList.KEY_CARDNO_EXTRA_ADDED_NTGEN);
+            unisSQLServerName = properties.getProperty(keyList.KEY_CARDNO_EXTRA_ADDED_NTGEN);
+            unisUserNameSQLServer = properties.getProperty(keyList.KEY_CARDNO_EXTRA_ADDED_NTGEN);
+            unisPasswordSQLServer = properties.getProperty(keyList.KEY_CARDNO_EXTRA_ADDED_NTGEN);
+            unisPath = properties.getProperty(keyList.KEY_CARDNO_EXTRA_ADDED_NTGEN);
+            unisUserNameAccess = properties.getProperty(keyList.KEY_CARDNO_EXTRA_ADDED_NTGEN);
+            unisPasswordAccess = properties.getProperty(keyList.KEY_CARDNO_EXTRA_ADDED_NTGEN);
+            extraCardnoAddedUnis = properties.getProperty(keyList.KEY_CARDNO_EXTRA_ADDED_NTGEN);
 
             properties.clear();
-
         } catch (IOException e) {
             JOptionPane.showMessageDialog(
                     null, "Check File Exists? Or Save Information",
@@ -110,7 +120,30 @@ public class SetupDatabase extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jTxtServerName = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jTxtUserName = new javax.swing.JTextField();
+        jTxtExtraStringForCardnoNITGEN = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTxtPassword = new javax.swing.JPasswordField();
+        jTxtDbName = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jTxtExtraStringForCardnoRTA = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        btnChoseRTAdatabaseLink = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        lblFileNameRta = new javax.swing.JLabel();
+        lblShowRTAurl = new javax.swing.JLabel();
+        jTxtExtraStringForCardnoZKT = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        lblShowZKTurl = new javax.swing.JLabel();
+        lblFileNameZkt = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        btnChoseZktDatabaseLink = new javax.swing.JButton();
         jBtnSave = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -128,292 +161,12 @@ public class SetupDatabase extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         lblFileNameUnis = new javax.swing.JLabel();
         txtUserNameUnisAccess = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
-        jTxtExtraStringForCardnoRTA = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        btnChoseRTAdatabaseLink = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        lblFileNameRta = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        lblFileNameZkt = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        btnChoseZktDatabaseLink = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jTxtExtraStringForCardnoZKT = new javax.swing.JTextField();
-        jPanel5 = new javax.swing.JPanel();
-        jTxtServerName = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jTxtUserName = new javax.swing.JTextField();
-        jTxtExtraStringForCardnoNITGEN = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTxtPassword = new javax.swing.JPasswordField();
-        jTxtDbName = new javax.swing.JTextField();
 
         setTitle("Setup");
-        setLocation(new java.awt.Point(100, 100));
+        setLocation(new java.awt.Point(50, 50));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 224));
-
-        jBtnSave.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jBtnSave.setText("Save");
-        jBtnSave.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(255, 204, 51), null, null));
-        jBtnSave.setContentAreaFilled(false);
-        jBtnSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jBtnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnSaveActionPerformed(evt);
-            }
-        });
-
-        jLabel15.setText("UNIS Database Link (Access)");
-
-        btnChoseUnisDatabaseLink.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
-        btnChoseUnisDatabaseLink.setText("Chose");
-        btnChoseUnisDatabaseLink.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChoseUnisDatabaseLinkActionPerformed(evt);
-            }
-        });
-
-        txtServerNameUnis.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtServerNameUnisKeyPressed(evt);
-            }
-        });
-
-        txtPasswordUnisAccess.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPasswordUnisAccessKeyPressed(evt);
-            }
-        });
-
-        jLabel17.setText("UNIS DB Password (Access)");
-
-        jLabel12.setText("SQL Server Name [UNIS]:");
-
-        jLabel10.setText("SQL Server Password[UNIS]:");
-
-        jTxtExtraStringForCardnoUNIS.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTxtExtraStringForCardnoUNISKeyPressed(evt);
-            }
-        });
-
-        txtPasswordUnis.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPasswordUnisKeyPressed(evt);
-            }
-        });
-
-        jLabel14.setText("Extra String Cardno [UNIS]:");
-
-        jLabel16.setText("UNIS DB Username (Access)");
-
-        txtUserNameUnis.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtUserNameUnisKeyPressed(evt);
-            }
-        });
-
-        jLabel11.setText("SQL Server UserName [UNIS]:");
-
-        lblFileNameUnis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txtUserNameUnisAccess.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtUserNameUnisAccessKeyPressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTxtExtraStringForCardnoUNIS, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(174, 174, 174))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtServerNameUnis, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPasswordUnis, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUserNameUnis, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtPasswordUnisAccess, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUserNameUnisAccess, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(2, 2, 2)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(lblFileNameUnis, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnChoseUnisDatabaseLink))))
-                        .addGap(8, 8, 8))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(114, 114, 114)
-                                .addComponent(txtPasswordUnisAccess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFileNameUnis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnChoseUnisDatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(txtUserNameUnisAccess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel16))
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel17)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtExtraStringForCardnoUNIS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(6, 6, 6)
-                        .addComponent(txtServerNameUnis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUserNameUnis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel10)
-                        .addGap(6, 6, 6)
-                        .addComponent(txtPasswordUnis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-
-        jTxtExtraStringForCardnoRTA.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTxtExtraStringForCardnoRTAKeyPressed(evt);
-            }
-        });
-
-        jLabel5.setText("RTA Database Link (Access)");
-
-        btnChoseRTAdatabaseLink.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
-        btnChoseRTAdatabaseLink.setText("Chose");
-        btnChoseRTAdatabaseLink.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChoseRTAdatabaseLinkActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("Extra String Cardno RTA");
-
-        lblFileNameRta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTxtExtraStringForCardnoRTA, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(lblFileNameRta, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnChoseRTAdatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addGap(6, 6, 6)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFileNameRta, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnChoseRTAdatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTxtExtraStringForCardnoRTA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        lblFileNameZkt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel8.setText("Extra String Cardno ZKT");
-
-        btnChoseZktDatabaseLink.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
-        btnChoseZktDatabaseLink.setText("Chose");
-        btnChoseZktDatabaseLink.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChoseZktDatabaseLinkActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("ZKT Database Link (Access)");
-
-        jTxtExtraStringForCardnoZKT.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTxtExtraStringForCardnoZKTKeyPressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblFileNameZkt, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnChoseZktDatabaseLink))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtExtraStringForCardnoZKT, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addGap(6, 6, 6)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFileNameZkt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnChoseZktDatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addComponent(jLabel8)
-                .addGap(4, 4, 4)
-                .addComponent(jTxtExtraStringForCardnoZKT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jTxtServerName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -433,6 +186,7 @@ public class SetupDatabase extends javax.swing.JFrame {
             }
         });
 
+        jTxtExtraStringForCardnoNITGEN.setEnabled(false);
         jTxtExtraStringForCardnoNITGEN.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTxtExtraStringForCardnoNITGENKeyPressed(evt);
@@ -462,167 +216,341 @@ public class SetupDatabase extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtServerName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jTxtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTxtExtraStringForCardnoNITGEN, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3)
+                    .addComponent(jTxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(jTxtServerName)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jTxtDbName)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTxtExtraStringForCardnoNITGEN))))
-                .addContainerGap())
+                            .addComponent(jLabel9)
+                            .addComponent(jTxtDbName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtServerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTxtDbName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(6, 6, 6)
-                        .addComponent(jTxtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtExtraStringForCardnoNITGEN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel9))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTxtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtExtraStringForCardnoNITGEN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(6, 6, 6)
                 .addComponent(jTxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jTxtExtraStringForCardnoRTA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtExtraStringForCardnoRTAKeyPressed(evt);
+            }
+        });
+
+        jLabel5.setText("RTA Database Link (Access)");
+
+        btnChoseRTAdatabaseLink.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        btnChoseRTAdatabaseLink.setText("Chose");
+        btnChoseRTAdatabaseLink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChoseRTAdatabaseLinkActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Extra String Cardno RTA");
+
+        lblFileNameRta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblShowRTAurl.setForeground(new java.awt.Color(204, 0, 0));
+        lblShowRTAurl.setText("URL:");
+
+        jTxtExtraStringForCardnoZKT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtExtraStringForCardnoZKTKeyPressed(evt);
+            }
+        });
+
+        jLabel8.setText("Extra String Cardno ZKT");
+
+        lblShowZKTurl.setForeground(new java.awt.Color(204, 0, 0));
+        lblShowZKTurl.setText("URL:");
+
+        lblFileNameZkt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel6.setText("ZKT Database Link (Access)");
+
+        btnChoseZktDatabaseLink.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        btnChoseZktDatabaseLink.setText("Chose");
+        btnChoseZktDatabaseLink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChoseZktDatabaseLinkActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(203, 203, 203))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblFileNameRta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTxtExtraStringForCardnoRTA, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnChoseRTAdatabaseLink)
+                        .addComponent(lblShowRTAurl, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnChoseZktDatabaseLink)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblFileNameZkt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblShowZKTurl, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTxtExtraStringForCardnoZKT, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFileNameRta, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFileNameZkt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnChoseZktDatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChoseRTAdatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblShowZKTurl)
+                    .addComponent(lblShowRTAurl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTxtExtraStringForCardnoZKT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtExtraStringForCardnoRTA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jBtnSave.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jBtnSave.setText("Save");
+        jBtnSave.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, java.awt.Color.black, java.awt.Color.darkGray));
+        jBtnSave.setContentAreaFilled(false);
+        jBtnSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBtnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSaveActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setEnabled(false);
+
+        jLabel15.setText("UNIS Database Link (Access)");
+
+        btnChoseUnisDatabaseLink.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        btnChoseUnisDatabaseLink.setText("Chose");
+        btnChoseUnisDatabaseLink.setEnabled(false);
+        btnChoseUnisDatabaseLink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChoseUnisDatabaseLinkActionPerformed(evt);
+            }
+        });
+
+        txtServerNameUnis.setEnabled(false);
+        txtServerNameUnis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtServerNameUnisKeyPressed(evt);
+            }
+        });
+
+        txtPasswordUnisAccess.setEnabled(false);
+        txtPasswordUnisAccess.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordUnisAccessKeyPressed(evt);
+            }
+        });
+
+        jLabel17.setText("UNIS DB Password (Access)");
+
+        jLabel12.setText("SQL Server Name [UNIS]:");
+
+        jLabel10.setText("SQL Server Password[UNIS]:");
+
+        jTxtExtraStringForCardnoUNIS.setEnabled(false);
+        jTxtExtraStringForCardnoUNIS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtExtraStringForCardnoUNISKeyPressed(evt);
+            }
+        });
+
+        txtPasswordUnis.setEnabled(false);
+        txtPasswordUnis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordUnisKeyPressed(evt);
+            }
+        });
+
+        jLabel14.setText("Extra String Cardno [UNIS]:");
+
+        jLabel16.setText("UNIS DB Username (Access)");
+
+        txtUserNameUnis.setEnabled(false);
+        txtUserNameUnis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserNameUnisKeyPressed(evt);
+            }
+        });
+
+        jLabel11.setText("SQL Server UserName [UNIS]:");
+
+        lblFileNameUnis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblFileNameUnis.setEnabled(false);
+
+        txtUserNameUnisAccess.setEnabled(false);
+        txtUserNameUnisAccess.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserNameUnisAccessKeyPressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTxtExtraStringForCardnoUNIS)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtServerNameUnis, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPasswordUnis, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUserNameUnis, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtUserNameUnisAccess, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblFileNameUnis, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnChoseUnisDatabaseLink, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtPasswordUnisAccess, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(6, 6, 6)
+                        .addComponent(txtServerNameUnis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtUserNameUnis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel10)
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPasswordUnis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPasswordUnisAccess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblFileNameUnis, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnChoseUnisDatabaseLink, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(txtUserNameUnisAccess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel16))
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel17)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTxtExtraStringForCardnoUNIS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSaveActionPerformed
-        // TODO add your handling code here:
-        PasswordEnqDnq enqDnq = new PWS();
-
-        if (jTxtServerName.getText() != null) {
-
-            try (OutputStream out = new FileOutputStream("config.properties")) {
-
-                Properties properties = new Properties();
-
-                properties.setProperty(keyList.KEY_SERVER_NAME, jTxtServerName.getText());
-                properties.setProperty(keyList.KEY_USER_NAME, jTxtUserName.getText());
-                properties.setProperty(keyList.KEY_USER_PASSWORD, jTxtPassword.getText());
-                properties.setProperty(keyList.KEY_DATABSE_NAME, jTxtDbName.getText());
-                properties.setProperty(keyList.KEY_CARDNO_EXTRA_ADDED_ZKT, jTxtExtraStringForCardnoZKT.getText());
-                properties.setProperty(keyList.KEY_CARDNO_EXTRA_ADDED_RTA, jTxtExtraStringForCardnoRTA.getText());
-                properties.setProperty(keyList.KEY_CARDNO_EXTRA_ADDED_NTGEN, jTxtExtraStringForCardnoNITGEN.getText());
-                properties.setProperty(keyList.KEY_SQL_SERVER_NAME_UNIS, txtServerNameUnis.getText());
-                properties.setProperty(keyList.KEY_USER_NAME_SQLSERVER_UNIS, txtUserNameUnis.getText());
-                properties.setProperty(keyList.KEY_PASSWORD_SQLSERVER_UNIS, txtPasswordUnis.getText());
-                properties.setProperty(keyList.KEY_USER_NAME_ACCESS_UNIS, txtUserNameUnisAccess.getText());
-                properties.setProperty(keyList.KEY_PASSWORD_ACCESS_UNIS, txtPasswordUnisAccess.getText());
-                
-
-                if (zktDatabaseLink == null) {
-                    properties.setProperty(keyList.KEY_ZKT_LINK, zktPath);
-                } else {
-                    properties.setProperty(keyList.KEY_ZKT_LINK, zktDatabaseLink);
-                }
-                if (rtaDatabaseLink == null) {
-                    properties.setProperty(keyList.KEY_RTA_LINK, rtaPath);
-                } else {
-                    properties.setProperty(keyList.KEY_RTA_LINK, rtaDatabaseLink);
-                }
-                if(unisDatabaseLinkAccess == null){
-                   properties.setProperty(keyList.KEY_UNIS_ACCESS_DB_LINK, unisDatabaseLinkAccess);
-                }
-
-                properties.store(out, "Update-Database-Info");
-                properties.clear();
-
-                JOptionPane.showMessageDialog(
-                        null, " Data Save ",
-                        ":: Date Converting Success :: ", JOptionPane.INFORMATION_MESSAGE);
-                
-
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(
-                        null, "Check File Exists? " + e.getMessage(),
-                        ":: File Not Found :: ", JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
-
-    }//GEN-LAST:event_jBtnSaveActionPerformed
 
     private void jTxtServerNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtServerNameKeyPressed
         // TODO add your handling code here:
@@ -746,6 +674,58 @@ public class SetupDatabase extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserNameUnisAccessKeyPressed
 
+    private void jBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSaveActionPerformed
+        // TODO add your handling code here:
+        //PasswordEnqDnq enqDnq = new PWS();
+
+        //if (jTxtServerName.getText() != null) {
+
+            try (OutputStream out = new FileOutputStream("config.properties")) {
+
+                Properties properties = new Properties();
+
+                properties.setProperty(keyList.KEY_SERVER_NAME, jTxtServerName.getText());
+                properties.setProperty(keyList.KEY_USER_NAME, jTxtUserName.getText());
+                properties.setProperty(keyList.KEY_USER_PASSWORD, jTxtPassword.getText());
+                properties.setProperty(keyList.KEY_DATABSE_NAME, jTxtDbName.getText());
+                properties.setProperty(keyList.KEY_CARDNO_EXTRA_ADDED_ZKT, jTxtExtraStringForCardnoZKT.getText());
+                properties.setProperty(keyList.KEY_CARDNO_EXTRA_ADDED_RTA, jTxtExtraStringForCardnoRTA.getText());
+                properties.setProperty(keyList.KEY_CARDNO_EXTRA_ADDED_NTGEN, jTxtExtraStringForCardnoNITGEN.getText());
+                properties.setProperty(keyList.KEY_SQL_SERVER_NAME_UNIS, txtServerNameUnis.getText());
+//                properties.setProperty(keyList.KEY_USER_NAME_SQLSERVER_UNIS, txtUserNameUnis.getText());
+//                properties.setProperty(keyList.KEY_PASSWORD_SQLSERVER_UNIS, txtPasswordUnis.getText());
+//                properties.setProperty(keyList.KEY_USER_NAME_ACCESS_UNIS, txtUserNameUnisAccess.getText());
+//                properties.setProperty(keyList.KEY_PASSWORD_ACCESS_UNIS, txtPasswordUnisAccess.getText());
+
+                if (zktDatabaseLink == null) {
+                    properties.setProperty(keyList.KEY_ZKT_LINK, zktPath);
+                } else {
+                    properties.setProperty(keyList.KEY_ZKT_LINK, zktDatabaseLink);
+                }
+                if (rtaDatabaseLink == null) {
+                    properties.setProperty(keyList.KEY_RTA_LINK, rtaPath);
+                } else {
+                    properties.setProperty(keyList.KEY_RTA_LINK, rtaDatabaseLink);
+                }
+//                if(unisDatabaseLinkAccess == null){
+//                    properties.setProperty(keyList.KEY_UNIS_ACCESS_DB_LINK, unisDatabaseLinkAccess);
+//                }
+
+                properties.store(out, "Update-Database-Info");
+                properties.clear();
+
+                JOptionPane.showMessageDialog(
+                    null, " Data Save ",
+                    ":: Date Converting Success :: ", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(
+                    null, "Check File Exists? " + e.getMessage(),
+                    ":: File Not Found :: ", JOptionPane.INFORMATION_MESSAGE);
+            }
+        //}
+    }//GEN-LAST:event_jBtnSaveActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -802,9 +782,7 @@ public class SetupDatabase extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField jTxtDbName;
@@ -818,6 +796,8 @@ public class SetupDatabase extends javax.swing.JFrame {
     private javax.swing.JLabel lblFileNameRta;
     private javax.swing.JLabel lblFileNameUnis;
     private javax.swing.JLabel lblFileNameZkt;
+    private javax.swing.JLabel lblShowRTAurl;
+    private javax.swing.JLabel lblShowZKTurl;
     private javax.swing.JPasswordField txtPasswordUnis;
     private javax.swing.JTextField txtPasswordUnisAccess;
     private javax.swing.JTextField txtServerNameUnis;

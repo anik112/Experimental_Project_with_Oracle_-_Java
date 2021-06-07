@@ -58,8 +58,8 @@ public class AccessConnection {
                     null, "Check File Exists? " + e.getMessage(),
                     ":: File Not Found :: ", JOptionPane.INFORMATION_MESSAGE);
         }
-        PasswordEnqDnq ped = new PWS(); // call boj for password deque
-        passwordTrim = ped.passwordDnq(passwordTrim); // call deque method
+        //PasswordEnqDnq ped = new PWS(); // call boj for password deque
+        //passwordTrim = ped.passwordDnq(passwordTrim); // call deque method
 
     }
 
