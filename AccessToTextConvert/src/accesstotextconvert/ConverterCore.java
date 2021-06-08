@@ -47,7 +47,7 @@ public class ConverterCore {
 
         Random random = new Random(); // generat random number
         filePath = "D:\\DATA\\"; // file location
-        dateForFileName = toDate.replace("/", ""); // resize date
+        dateForFileName = nitgenToDate.replace("-", ""); // resize date
 
         if (stateZKT) {
             fileName = dateForFileName + "-ZKT" + random.nextInt(9) + ".txt"; // file name
@@ -109,7 +109,7 @@ public class ConverterCore {
             if (stateNITGEN) {
                 getNitgerConn = AccessConnection.dbNITGENconnection();
                 String sql04 = "select [TerminalID],[UserID],[TransactionTime] from "
-                        + "NGAC_AUTHLOG where NGAC_AUTHLOG.TransactionTime between '" + nitgenFromDate + " 10:00:00' and '" + nitgenToDate + " 10:00:00'";
+                        + "NGAC_AUTHLOG where convert(varchar, TransactionTime, 23) between '" + nitgenFromDate + "' and '" + nitgenToDate + "'";
                 nitgenStatement = getNitgerConn.prepareCall(sql04);
                 resultSetNitgen = nitgenStatement.executeQuery();
             }
