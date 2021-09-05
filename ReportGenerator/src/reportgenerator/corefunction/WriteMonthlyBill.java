@@ -36,7 +36,7 @@ public class WriteMonthlyBill {
     private final String colHeder01 = "S/L";
     private final String colHeder02 = "Description";
     private final String colHeader03 = "Amount (TK.)";
-    private final String rowBody = "Monthly software requirement modification & support bill for the month of ";
+    private final String rowBody = "Monthly software requirement add, modification & support bill for the month of ";
     private final String colFooterTxt = "Total Amount";
     private final String tableFooterTxtWithoutVat = "VAT and TAX not included.";
     private final String tableFooterTxtWithVat = "VAT and TAX included.";
