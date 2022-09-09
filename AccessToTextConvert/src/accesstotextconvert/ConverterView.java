@@ -92,7 +92,7 @@ public class ConverterView extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial", 3, 10)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel5.setText("Copyright @2012 Vistasoft IT Bangladesh Ltd.");
+        jLabel5.setText("Copyright @2009 Data DSS.");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 224));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
@@ -158,7 +158,6 @@ public class ConverterView extends javax.swing.JFrame {
 
         jCheckNitgenServer.setBackground(new java.awt.Color(255, 255, 192));
         jCheckNitgenServer.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jCheckNitgenServer.setSelected(true);
         jCheckNitgenServer.setText("NITGEN");
 
         jCheckNitgenServer1.setBackground(new java.awt.Color(255, 255, 192));
@@ -171,6 +170,7 @@ public class ConverterView extends javax.swing.JFrame {
 
         jCheckZKTserver.setBackground(new java.awt.Color(255, 255, 192));
         jCheckZKTserver.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jCheckZKTserver.setSelected(true);
         jCheckZKTserver.setText("ZKT");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -287,6 +287,11 @@ public class ConverterView extends javax.swing.JFrame {
 
         txtFromDateDelete.setToolTipText("Type Date & Press Enter");
         txtFromDateDelete.setSelectionEnd(10);
+        txtFromDateDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFromDateDeleteActionPerformed(evt);
+            }
+        });
         txtFromDateDelete.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtFromDateDeleteKeyPressed(evt);
@@ -345,33 +350,33 @@ public class ConverterView extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel5))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 11, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabel5))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 192));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         jLabel6.setFont(new java.awt.Font("Lucida Calligraphy", 1, 16)); // NOI18N
-        jLabel6.setText(" Data Converter ( VSI )");
+        jLabel6.setText(" Data Converter");
+        jLabel6.setToolTipText("");
         jLabel6.setPreferredSize(new java.awt.Dimension(222, 27));
 
         btnSetup.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -570,6 +575,10 @@ public class ConverterView extends javax.swing.JFrame {
         // TODO add your handling code here:
         txtToDate.setText("");
     }//GEN-LAST:event_txtToDateMouseClicked
+
+    private void txtFromDateDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFromDateDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFromDateDeleteActionPerformed
 
     /**
      * @param args the command line arguments

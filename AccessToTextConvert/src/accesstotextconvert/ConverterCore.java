@@ -80,7 +80,7 @@ public class ConverterCore {
             if (stateZKT) {
                 getConn = AccessConnection.dbConnection(); // get connection from access database
                 // write SQL for pull data from database
-                String sql02 = "SELECT CHECKINOUT.CHECKTIME,CHECKINOUT.SENSORID,CHECKINOUT.USERID,USERINFO.CardNo "
+                String sql02 = "SELECT CHECKINOUT.CHECKTIME,CHECKINOUT.SENSORID,CHECKINOUT.USERID,USERINFO.Badgenumber "
                         + "FROM CHECKINOUT,USERINFO WHERE "
                         + "DateValue(checktime) BETWEEN  #" + fromDate + "#  AND  #" + toDate + "# "
                         + "AND USERINFO.USERID=CHECKINOUT.USERID";
@@ -136,9 +136,13 @@ public class ConverterCore {
                         // Make string format
                         String finalText = "";
                         if (secrateNo.length() > addedStringWithCardnoZkt.length()) {
-                            finalText = (rs.getString(2) + ":" + secrateNo + ":" + onlyDate + "1:" + onlyTime + ":11");
+                            try{
+                            finalText = (rs.getString(2) + ":" + String.format("%010d", Integer.parseInt(secrateNo)) + ":" + onlyDate + ":" + onlyTime + ":11");
                             printWriter.println(finalText); // write text in file
                             System.out.println(finalText);
+                            }catch(Exception e){
+                                continue;
+                            }
                             rowCount++; // row count
                         }
                     }

@@ -1,0 +1,5 @@
+step 01:
+copy all need libs file into main executable jar file without any file or META-INF folder replace.
+
+step 02:
+remove class path from META-INF file.

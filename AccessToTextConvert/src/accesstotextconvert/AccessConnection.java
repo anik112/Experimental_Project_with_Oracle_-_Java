@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import utility.KeyList;
 import utility.PWS;
 import utility.PasswordEnqDnq;
-
 /**
  *
  * @author VSI-ANIK
@@ -71,7 +70,9 @@ public class AccessConnection {
 
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            //Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
             connAccess = DriverManager.getConnection("jdbc:ucanaccess://" + zktFileName);
+            //connAccess = DriverManager.getConnection("jdbc:odbc:zkt");
             System.out.println("== Connected with ZKT server ==");
             return connAccess;
         } catch (ClassNotFoundException | SQLException e) {
